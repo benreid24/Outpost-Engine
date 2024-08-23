@@ -1,0 +1,32 @@
+name: windows-verify
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  verify:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+
+    - name: configure
+      run: cmake -DON_CI=On -S . -B ./build
+
+    - name: make
+      run: |
+        cd build && cmake --build . -j 2
+        cp ../lib/BLIB/lib/SFML/extlibs/bin/x64/openal32.dll ./tests
+
+    - name: test
+      run: build/tests/Debug/ProjectName.t
+
+    - name: bundle verify
+      run: |
+        cp lib/BLIB/lib/SFML/extlibs/bin/x64/openal32.dll ./
+        ./Bundler

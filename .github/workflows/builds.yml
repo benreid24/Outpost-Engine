@@ -1,0 +1,139 @@
+on:
+  repository_dispatch:
+    types: [builds]
+
+name: Build Game Binaries
+
+env:
+  PROJECT_NAME: ProjectName
+
+jobs:
+  windows_build:
+    name: Windows Build
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+
+      - name: Configure Build
+        run: cmake -DBUILD_TESTS=Off -DCMAKE_BUILD_TYPE=Release -S . -B ./build
+
+      - name: Build ${{ env.PROJECT_NAME }}
+        run: cd build && cmake --build . --config Release -j 2
+
+      - name: Bundle Resources
+        run: |
+          cp lib/BLIB/lib/SFML/extlibs/bin/x64/openal32.dll ./
+          ./Bundler
+
+      - name: Package Project
+        run: |
+          mkdir ${{ env.PROJECT_NAME }}
+          mv data ${{ env.PROJECT_NAME }}
+          mv ${{ env.PROJECT_NAME }}Release.exe ${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.exe
+          cp lib/BLIB/lib/SFML/extlibs/bin/x64/openal32.dll ./${{ env.PROJECT_NAME }}
+          Compress-Archive -Path ${{ env.PROJECT_NAME }} -DestinationPath Windows.zip
+
+      - name: Upload Game Package
+        id: upload-release-game
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.client_payload.release_url }}
+          asset_path: ./Windows.zip
+          asset_name: Windows.zip
+          asset_content_type: application/zip
+
+  linux_build:
+    name: Linux Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --fix-missing libx11-dev xorg-dev freeglut3-dev libudev-dev libopenal-dev libvorbis-dev libflac-dev
+
+      - name: Configure Build
+        run: cmake -DBUILD_TESTS=Off -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -S . -B ./build
+
+      - name: Build ${{ env.PROJECT_NAME }}
+        run: cd build && cmake --build . --config Release
+
+      - name: Bundle Resources
+        run: |
+          export DISPLAY=:99
+          sudo Xvfb -ac :99 -screen 0 1280x1024x24 &
+          ./Bundler
+
+      - name: Package Project
+        run: |
+          mkdir ${{ env.PROJECT_NAME }}
+          mv data ${{ env.PROJECT_NAME }}
+          mv ${{ env.PROJECT_NAME }}Release ${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}
+          zip -r Linux.zip ${{ env.PROJECT_NAME }}
+
+      - name: Upload Game Package
+        id: upload-release-game
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.client_payload.release_url }}
+          asset_path: ./Linux.zip
+          asset_name: Linux.zip
+          asset_content_type: application/zip
+
+  macos_build:
+    name: MacOS Build
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+
+      - name: Configure Build
+        run: cmake -DBUILD_TESTS=Off -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles" -S . -B ./build
+
+      - name: Build ${{ env.PROJECT_NAME }}
+        run: cd build && cmake --build . --config Release
+
+      - name: Bundle Resources
+        run: ./Bundler
+
+      - name: Package Project
+        run: |
+          mkdir ${{ env.PROJECT_NAME }}.app
+          mkdir ${{ env.PROJECT_NAME }}.app/Contents
+          mkdir ${{ env.PROJECT_NAME }}.app/Contents/Resources
+          mkdir ${{ env.PROJECT_NAME }}.app/Contents/MacOS
+
+          # TODO - SETUP_TASK - update macos bundle info for your project
+          cp macos/Info.plist ${{ env.PROJECT_NAME }}.app/Contents
+          cp macos/${{ env.PROJECT_NAME }}.icns ${{ env.PROJECT_NAME }}.app/Contents/Resources
+
+          mv data ${{ env.PROJECT_NAME }}.app/Contents/MacOS
+          mv ${{ env.PROJECT_NAME }}Release ${{ env.PROJECT_NAME }}.app/Contents/MacOS/${{ env.PROJECT_NAME }}
+          zip -vr MacOS.zip ${{ env.PROJECT_NAME }}.app
+
+      - name: Upload Game Package
+        id: upload-release-game
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.client_payload.release_url }}
+          asset_path: ./MacOS.zip
+          asset_name: MacOS.zip
+          asset_content_type: application/zip
