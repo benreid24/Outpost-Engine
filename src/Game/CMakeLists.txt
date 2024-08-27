@@ -1,3 +1,3 @@
-target_sources(ProjectName PRIVATE
+target_sources(OutpostEngine PRIVATE
     Game.cpp
 )

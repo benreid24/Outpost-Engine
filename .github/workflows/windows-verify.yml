@@ -24,7 +24,7 @@ jobs:
         cp ../lib/BLIB/lib/SFML/extlibs/bin/x64/openal32.dll ./tests
 
     - name: test
-      run: build/tests/Debug/ProjectName.t
+      run: build/tests/Debug/OutpostEngine.t
 
     - name: bundle verify
       run: |

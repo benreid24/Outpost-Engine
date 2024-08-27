@@ -22,7 +22,7 @@ jobs:
       run: cd build && cmake --build .
     
     - name: test
-      run: build/tests/ProjectName.t 
+      run: build/tests/OutpostEngine.t 
 
     - name: bundle verify
       run: ./Bundler

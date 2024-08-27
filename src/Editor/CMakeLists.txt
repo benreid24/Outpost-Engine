@@ -1,3 +1,3 @@
-target_sources(ProjectNameEditor PRIVATE
+target_sources(OutpostEngineEditor PRIVATE
     Editor.cpp
 )
