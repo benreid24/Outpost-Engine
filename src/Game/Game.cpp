@@ -1,8 +1,8 @@
 #include <Game/Game.hpp>
 
-#include <Core/DemoEngineState.hpp>
 #include <Core/Properties.hpp>
 #include <Game/ConstantsGame.hpp>
+#include <Game/States/CombatDemo.hpp>
 #include <iostream>
 
 namespace game
@@ -13,7 +13,7 @@ namespace
 Game game;
 } // namespace
 
-bool Game::performEarlyStartup(int argc, char** argv) {
+bool Game::performEarlyStartup(int, char**) {
     if (!performSharedEarlyStartup(ConstantsGame::ConfigFilePath)) { return false; }
 
 #ifdef BLIB_DEBUG
@@ -45,7 +45,7 @@ bl::engine::Settings Game::createStartupParameters() {
                 core::Properties.WindowWidth.get(), core::Properties.WindowHeight.get(), 32))
             .fromConfig()
             .withStyle(sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize)
-            .withTitle("BLIB Game") // TODO - SETUP_TASK - set window title
+            .withTitle("Outpost Engine")
             .withLetterBoxOnResize(true)
             .withInitialViewSize(
                 sf::Vector2f(ConstantsGame::WindowWidth, ConstantsGame::WindowHeight)));
@@ -61,7 +61,7 @@ bool Game::completeStartup(bl::engine::Engine& engine) {
 
 bl::engine::State::Ptr Game::createInitialEngineState() {
     // TODO - SETUP_TASK - create actual initial state
-    return core::DemoEngineState::create();
+    return std::make_shared<state::CombatDemo>();
 }
 
 } // namespace game

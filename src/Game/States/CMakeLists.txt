@@ -1,5 +1,3 @@
 target_sources(OutpostEngine PRIVATE
-    Game.cpp
+    CombatDemo.cpp
 )
-
-add_subdirectory(States)

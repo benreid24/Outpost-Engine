@@ -10,8 +10,8 @@ namespace game
  */
 struct ConstantsGame {
     static constexpr const char* ConfigFilePath = "config.cfg";
-    static constexpr unsigned int WindowWidth   = 800;
-    static constexpr unsigned int WindowHeight  = 600;
+    static constexpr unsigned int WindowWidth   = 1920;
+    static constexpr unsigned int WindowHeight  = 1080;
 };
 
 } // namespace game

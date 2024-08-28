@@ -3,6 +3,8 @@
 
 #include <BLIB/Game.hpp>
 
+#include <Core/Systems/Render.hpp>
+
 /**
  * @defgroup Core
  * @brief Shared library containing code used by both the game and editor
@@ -13,7 +15,10 @@ namespace core
 {
 class Game : public bl::game::Game {
 public:
-    // TODO - SETUP_TASK - provide common interface here for systems etc
+    /**
+     * @brief Returns the game render system
+     */
+    sys::Render& renderSystem() { return *render; }
 
 protected:
     /**
@@ -41,6 +46,9 @@ protected:
      * @brief Called at the end of main() after the engine instance is destroyed
      */
     virtual void completeShutdown() override;
+
+private:
+    sys::Render* render;
 };
 
 } // namespace core

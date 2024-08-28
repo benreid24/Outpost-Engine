@@ -24,7 +24,6 @@ bool Game::performSharedEarlyStartup(const char* configFilename) {
 
     // TODO - SETUP_TASK - setup resource loaders for custom resource types
 
-    // TODO - SETUP_TASK - keep or remove window size persistence
     windowSizePersister.configFilename = configFilename;
 
     Properties.save(configFilename);
@@ -35,9 +34,10 @@ bool Game::performSharedEarlyStartup(const char* configFilename) {
 bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
     input::configureInputSystem(engine.inputSystem());
 
-    // TODO - SETUP_TASK - register shared engine systems here
+    using Stage = bl::engine::FrameStage;
+    using Mask  = bl::engine::StateMask::V;
+    render = &engine.systems().registerSystem<sys::Render>(Stage::RenderEarlyRefresh, Mask::All);
 
-    // TODO - SETUP_TASK - keep or remove window size persistence
     bl::event::Dispatcher::subscribe(&windowSizePersister);
 
     return true;
@@ -46,7 +46,6 @@ bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
 void Game::startShutdown() {
     // TODO - SETUP_TASK - any early shutdown tasks
 
-    // TODO - SETUP_TASK - keep or remove window size persistence
     bl::event::Dispatcher::unsubscribe(&windowSizePersister);
 }
 
