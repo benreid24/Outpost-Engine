@@ -15,7 +15,7 @@ void Render::addTestGraphicsToEntity(bl::ecs::Entity entity, glm::vec2 size, sf:
 
     bl::gfx::Circle circle;
     circle.deleteEntityOnDestroy(false);
-    circle.create(*engine, entity, Radius);
+    circle.create(*engine->getWorld(entity.getWorldIndex()), entity, Radius);
     circle.setFillColor(color);
     circle.scaleToSize(size);
     circle.getTransform().setOrigin(Radius, Radius);
