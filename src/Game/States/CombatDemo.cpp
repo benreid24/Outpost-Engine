@@ -15,12 +15,12 @@ CombatDemo::CombatDemo()
 const char* CombatDemo::name() const { return "CombatDemo"; }
 
 void CombatDemo::activate(bl::engine::Engine& engine) {
-    auto& game  = bl::game::Game::getInstance<core::Game>();
-    auto& world = engine.getPlayer().enterWorld<bl::engine::World2D>();
-    auto scene  = world.scene();
+    auto& game = bl::game::Game::getInstance<core::Game>();
+    auto world = engine.getPlayer().enterWorld<bl::engine::World2D>();
+    auto scene = world->scene();
     engine.renderer().getObserver().setClearColor({0.9f, 0.9f, 1.f, 1.f});
 
-    const auto testEntity = world.createEntity();
+    const auto testEntity = world->createEntity();
     game.renderSystem().addTestGraphicsToEntity(testEntity, {30.f, 30.f}, sf::Color::Red);
 }
 
