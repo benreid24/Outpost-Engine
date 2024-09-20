@@ -3,6 +3,7 @@
 
 #include <BLIB/Game.hpp>
 
+#include <Core/Systems/Damage.hpp>
 #include <Core/Systems/Render.hpp>
 
 /**
@@ -19,6 +20,11 @@ public:
      * @brief Returns the game render system
      */
     sys::Render& renderSystem() { return *render; }
+
+    /**
+     * @brief Returns the damage system
+     */
+    sys::Damage& damageSystem() { return damage; }
 
 protected:
     /**
@@ -48,6 +54,7 @@ protected:
     virtual void completeShutdown() override;
 
 private:
+    sys::Damage damage;
     sys::Render* render;
 };
 

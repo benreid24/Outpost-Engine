@@ -5,5 +5,6 @@ target_sources(Core PUBLIC
     Properties.hpp
 )
 
+add_subdirectory(Components)
 add_subdirectory(Input)
 add_subdirectory(Systems)
