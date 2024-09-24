@@ -61,7 +61,7 @@ bool Game::completeStartup(bl::engine::Engine& engine) {
 
 bl::engine::State::Ptr Game::createInitialEngineState() {
     // TODO - SETUP_TASK - create actual initial state
-    return std::make_shared<state::CombatDemo>();
+    return std::make_shared<state::CombatDemo>(engine());
 }
 
 } // namespace game

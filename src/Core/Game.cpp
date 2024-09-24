@@ -36,6 +36,7 @@ bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
 
     using Stage = bl::engine::FrameStage;
     using Mask  = bl::engine::StateMask::V;
+    enginePtr   = &engine;
     render = &engine.systems().registerSystem<sys::Render>(Stage::RenderEarlyRefresh, Mask::All);
     damage.init(engine);
 

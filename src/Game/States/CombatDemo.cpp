@@ -9,8 +9,9 @@ namespace game
 {
 namespace state
 {
-CombatDemo::CombatDemo()
-: State(bl::engine::StateMask::Running) {}
+CombatDemo::CombatDemo(bl::engine::Engine& engine)
+: State(bl::engine::StateMask::Running)
+, engine(engine) {}
 
 const char* CombatDemo::name() const { return "CombatDemo"; }
 
@@ -20,13 +21,30 @@ void CombatDemo::activate(bl::engine::Engine& engine) {
     auto scene = world->scene();
     engine.renderer().getObserver().setClearColor({0.9f, 0.9f, 1.f, 1.f});
 
-    const auto testEntity = world->createEntity();
-    game.renderSystem().addTestGraphicsToEntity(testEntity, {30.f, 30.f}, sf::Color::Red);
+    bl::event::Dispatcher::subscribe(this);
 }
 
-void CombatDemo::deactivate(bl::engine::Engine& engine) { engine.getPlayer().leaveWorld(); }
+void CombatDemo::deactivate(bl::engine::Engine& engine) {
+    bl::event::Dispatcher::unsubscribe(this);
+    engine.getPlayer().leaveWorld();
+}
 
 void CombatDemo::update(bl::engine::Engine&, float, float) {}
+
+void CombatDemo::observe(const sf::Event& event) {
+    if (event.type == sf::Event::MouseButtonPressed) {
+        auto& game   = bl::game::Game::getInstance<core::Game>();
+        auto& ecs    = engine.ecs();
+        auto& player = engine.getPlayer();
+
+        const auto newEntity = player.getCurrentWorld().createEntity();
+
+        const auto worldPos = player.getRenderObserver().transformToWorldSpace(
+            {event.mouseButton.x, event.mouseButton.y});
+        ecs.emplaceComponent<bl::com::Transform2D>(newEntity, worldPos);
+        game.renderSystem().addTestGraphicsToEntity(newEntity, {30.f, 30.f}, sf::Color::Blue);
+    }
+}
 
 } // namespace state
 } // namespace game

@@ -17,6 +17,11 @@ namespace core
 class Game : public bl::game::Game {
 public:
     /**
+     * @brief Returns the game engine instance
+     */
+    bl::engine::Engine& engine() { return *enginePtr; }
+
+    /**
      * @brief Returns the game render system
      */
     sys::Render& renderSystem() { return *render; }
@@ -54,6 +59,7 @@ protected:
     virtual void completeShutdown() override;
 
 private:
+    bl::engine::Engine* enginePtr;
     sys::Damage damage;
     sys::Render* render;
 };
