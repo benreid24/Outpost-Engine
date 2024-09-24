@@ -1,6 +1,7 @@
 #ifndef GAME_STATES_COMBATDEMO_HPP
 #define GAME_STATES_COMBATDEMO_HPP
 
+#include <BLIB/Components/Physics2D.hpp>
 #include <BLIB/Engine/State.hpp>
 #include <BLIB/Events.hpp>
 #include <SFML/Window/Event.hpp>
@@ -19,6 +20,7 @@ public:
 
 private:
     bl::engine::Engine& engine;
+    bl::com::Physics2D* object;
 
     const char* name() const override;
     void activate(bl::engine::Engine& engine) override;

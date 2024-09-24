@@ -3,6 +3,7 @@
 
 #include <BLIB/Game.hpp>
 
+#include <BLIB/Systems/Physics2D.hpp>
 #include <Core/Systems/Damage.hpp>
 #include <Core/Systems/Render.hpp>
 
@@ -30,6 +31,11 @@ public:
      * @brief Returns the damage system
      */
     sys::Damage& damageSystem() { return damage; }
+
+    /**
+     * @brief Returns the physics system
+     */
+    bl::sys::Physics2D& physicsSystem() { return *physics; }
 
 protected:
     /**
@@ -62,6 +68,7 @@ private:
     bl::engine::Engine* enginePtr;
     sys::Damage damage;
     sys::Render* render;
+    bl::sys::Physics2D* physics;
 };
 
 } // namespace core

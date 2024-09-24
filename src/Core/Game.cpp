@@ -39,6 +39,7 @@ bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
     enginePtr   = &engine;
     render = &engine.systems().registerSystem<sys::Render>(Stage::RenderEarlyRefresh, Mask::All);
     damage.init(engine);
+    physics = &engine.systems().getSystem<bl::sys::Physics2D>();
 
     bl::event::Dispatcher::subscribe(&windowSizePersister);
 

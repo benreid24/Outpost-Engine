@@ -11,14 +11,15 @@ namespace state
 {
 CombatDemo::CombatDemo(bl::engine::Engine& engine)
 : State(bl::engine::StateMask::Running)
-, engine(engine) {}
+, engine(engine)
+, object(nullptr) {}
 
 const char* CombatDemo::name() const { return "CombatDemo"; }
 
 void CombatDemo::activate(bl::engine::Engine& engine) {
     auto& game = bl::game::Game::getInstance<core::Game>();
     auto world = engine.getPlayer().enterWorld<bl::engine::World2D>();
-    auto scene = world->scene();
+    // world->setLengthUnitScale(60.f / 1920.f);
     engine.renderer().getObserver().setClearColor({0.9f, 0.9f, 1.f, 1.f});
 
     bl::event::Dispatcher::subscribe(this);
@@ -29,9 +30,28 @@ void CombatDemo::deactivate(bl::engine::Engine& engine) {
     engine.getPlayer().leaveWorld();
 }
 
-void CombatDemo::update(bl::engine::Engine&, float, float) {}
+void CombatDemo::update(bl::engine::Engine&, float, float) {
+    constexpr float Force = 1000000.f;
+    if (object) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+            object->applyForceToCenter({0.f, -Force});
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+            object->applyForceToCenter({0.f, Force});
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+            object->applyForceToCenter({-Force, 0.f});
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+            object->applyForceToCenter({Force, 0.f});
+        }
+        else { object->setVelocity({0.f, 0.f}); }
+    }
+}
 
 void CombatDemo::observe(const sf::Event& event) {
+    constexpr float Radius = 30.f;
+
     if (event.type == sf::Event::MouseButtonPressed) {
         auto& game   = bl::game::Game::getInstance<core::Game>();
         auto& ecs    = engine.ecs();
@@ -41,8 +61,16 @@ void CombatDemo::observe(const sf::Event& event) {
 
         const auto worldPos = player.getRenderObserver().transformToWorldSpace(
             {event.mouseButton.x, event.mouseButton.y});
-        ecs.emplaceComponent<bl::com::Transform2D>(newEntity, worldPos);
-        game.renderSystem().addTestGraphicsToEntity(newEntity, {30.f, 30.f}, sf::Color::Blue);
+        auto* transform = ecs.emplaceComponent<bl::com::Transform2D>(newEntity, worldPos);
+        game.renderSystem().addTestGraphicsToEntity(newEntity, Radius, sf::Color::Blue);
+
+        auto bodyDef          = b2DefaultBodyDef();
+        auto shapeDef         = b2DefaultShapeDef();
+        bodyDef.type          = b2_dynamicBody;
+        bodyDef.fixedRotation = true;
+
+        ecs.emplaceComponent<bl::com::Hitbox2D>(newEntity, transform, Radius);
+        object = game.physicsSystem().addPhysicsToEntity(newEntity, bodyDef, shapeDef);
     }
 }
 

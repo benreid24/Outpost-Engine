@@ -3,7 +3,7 @@
 
 #include <BLIB/ECS/Entity.hpp>
 #include <BLIB/Engine/System.hpp>
-#include <SFML/Graphics/Color.hpp>
+#include <BLIB/Render/Color.hpp>
 #include <glm/glm.hpp>
 
 /**
@@ -41,7 +41,16 @@ public:
      * @param size The size of the entity to render
      * @param color The color to make the test graphics
      */
-    void addTestGraphicsToEntity(bl::ecs::Entity entity, glm::vec2 size, sf::Color color);
+    void addTestGraphicsToEntity(bl::ecs::Entity entity, glm::vec2 size, bl::rc::Color color);
+
+    /**
+     * @brief Adds basic testing graphics to the given entity
+     *
+     * @param entity The entity to add the graphical components to
+     * @param size The size of the entity to render
+     * @param color The color to make the test graphics
+     */
+    void addTestGraphicsToEntity(bl::ecs::Entity entity, float radius, bl::rc::Color color);
 
 private:
     bl::engine::Engine* engine;
