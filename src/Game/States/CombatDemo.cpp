@@ -2,6 +2,7 @@
 
 #include <BLIB/Engine.hpp>
 #include <BLIB/Game.hpp>
+#include <BLIB/Math.hpp>
 #include <BLIB/Render/Scenes/Scene2D.hpp>
 #include <Core/Game.hpp>
 
@@ -30,26 +31,38 @@ void CombatDemo::deactivate(bl::engine::Engine& engine) {
     engine.getPlayer().leaveWorld();
 }
 
-void CombatDemo::update(bl::engine::Engine&, float, float) {
-    constexpr float Force = 100.f;
+void CombatDemo::update(bl::engine::Engine&, float dt, float) {
+    constexpr float Force   = 100.f;
+    const float RotateSpeed = 120.f;
     if (object) {
+        const float r = bl::math::degreesToRadians(object->getTransform().getRotation());
+        const float c = std::cos(r);
+        const float s = std::sin(r);
+        const glm::vec2 force{c * Force, s * Force};
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
             object->setLinearDamping(0.f);
-            object->applyForceToCenter({0.f, -Force});
+            object->applyForceToCenter(force);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
             object->setLinearDamping(0.f);
-            object->applyForceToCenter({0.f, Force});
+            object->applyForceToCenter(-force);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
             object->setLinearDamping(0.f);
-            object->applyForceToCenter({-Force, 0.f});
+            object->applyForceToCenter({force.y, -force.x});
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             object->setLinearDamping(0.f);
-            object->applyForceToCenter({Force, 0.f});
+            object->applyForceToCenter({-force.y, force.x});
         }
         else { object->setLinearDamping(8.f); }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+            object->getTransform().rotate(-RotateSpeed * dt);
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
+            object->getTransform().rotate(RotateSpeed * dt);
+        }
     }
 }
 
