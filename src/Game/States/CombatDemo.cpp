@@ -32,36 +32,25 @@ void CombatDemo::deactivate(bl::engine::Engine& engine) {
 }
 
 void CombatDemo::update(bl::engine::Engine&, float dt, float) {
-    constexpr float Force   = 100.f;
-    const float RotateSpeed = 120.f;
     if (object) {
-        const float r = bl::math::degreesToRadians(object->getTransform().getRotation());
-        const float c = std::cos(r);
-        const float s = std::sin(r);
-        const glm::vec2 force{c * Force, s * Force};
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-            object->setLinearDamping(0.f);
-            object->applyForceToCenter(force);
+            object->move(core::com::Moveable::Forward);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-            object->setLinearDamping(0.f);
-            object->applyForceToCenter(-force);
+            object->move(core::com::Moveable::Backward);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-            object->setLinearDamping(0.f);
-            object->applyForceToCenter({force.y, -force.x});
+            object->move(core::com::Moveable::Left);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            object->setLinearDamping(0.f);
-            object->applyForceToCenter({-force.y, force.x});
+            object->move(core::com::Moveable::Right);
         }
-        else { object->setLinearDamping(8.f); }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-            object->getTransform().rotate(-RotateSpeed * dt);
+            object->rotate(core::com::Moveable::CounterClockwise);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
-            object->getTransform().rotate(RotateSpeed * dt);
+            object->rotate(core::com::Moveable::Clockwise);
         }
     }
 }
@@ -70,6 +59,7 @@ void CombatDemo::observe(const sf::Event& event) {
     constexpr float Radius = 30.f;
 
     if (event.type == sf::Event::MouseButtonPressed) {
+        // TODO - move spawn methods into helpers/system?
         auto& game   = bl::game::Game::getInstance<core::Game>();
         auto& ecs    = engine.ecs();
         auto& player = engine.getPlayer();
@@ -87,7 +77,9 @@ void CombatDemo::observe(const sf::Event& event) {
         bodyDef.fixedRotation = true;
 
         ecs.emplaceComponent<bl::com::Hitbox2D>(newEntity, transform, Radius);
-        object = game.physicsSystem().addPhysicsToEntity(newEntity, bodyDef, shapeDef);
+        auto physics = game.physicsSystem().addPhysicsToEntity(newEntity, bodyDef, shapeDef);
+        object       = ecs.emplaceComponent<core::com::Moveable>(
+            newEntity, *physics, 320.f, 120.f, 1920.f / 6.f);
     }
 }
 

@@ -3,5 +3,6 @@ target_sources(Core PRIVATE
     Properties.cpp
 )
 
+add_subdirectory(Components)
 add_subdirectory(Input)
 add_subdirectory(Systems)

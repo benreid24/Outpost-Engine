@@ -5,6 +5,7 @@
 
 #include <BLIB/Systems/Physics2D.hpp>
 #include <Core/Systems/Damage.hpp>
+#include <Core/Systems/Movement.hpp>
 #include <Core/Systems/Render.hpp>
 
 /**
@@ -36,6 +37,11 @@ public:
      * @brief Returns the physics system
      */
     bl::sys::Physics2D& physicsSystem() { return *physics; }
+
+    /**
+     * @brief Returns the movement system
+     */
+    sys::Movement& movementSystem() { return *movement; }
 
 protected:
     /**
@@ -69,6 +75,7 @@ private:
     sys::Damage damage;
     sys::Render* render;
     bl::sys::Physics2D* physics;
+    sys::Movement* movement;
 };
 
 } // namespace core
