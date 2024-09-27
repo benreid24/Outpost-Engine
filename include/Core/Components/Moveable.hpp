@@ -30,11 +30,13 @@ public:
      *
      * @param physics The physics component of the entity to move
      * @param acceleration The rate of acceleration for movement, in world space units
+     * @param maxSpeed The maximum movement speed to enforce, in world space units
      * @param rotateRate The rotation speed in degrees per second
-     * @param maxSpeed The maximum movement speed to enforce
+     * @param directionAdjustSpeed How quickly the entity velocity changes direction. In range [0,1]
+     * @param damping The damping factor to use to stop the entity when not moving
      */
-    Moveable(bl::com::Physics2D& physics, float acceleration, float rotateRate,
-             float maxSpeed = 0.f);
+    Moveable(bl::com::Physics2D& physics, float acceleration, float maxSpeed, float rotateRate,
+             float directionAdjustSpeed, float damping = 10.f);
 
     /**
      * @brief Moves the entity in the given direction. Only the last call to this method in a frame
@@ -62,9 +64,12 @@ public:
     void setRotation(float degrees);
 
 private:
+    const float mass;
     const float maxSpeed;
     const float rotateRate;
     const float force;
+    const float dirCorrectionFactor;
+    const float damping;
     bl::com::Physics2D& physics;
     MoveDirection moveDir;
     float moveFactor;

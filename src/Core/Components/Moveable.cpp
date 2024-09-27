@@ -6,11 +6,15 @@ namespace core
 {
 namespace com
 {
-Moveable::Moveable(bl::com::Physics2D& physics, float accel, float rotate, float maxVel)
+Moveable::Moveable(bl::com::Physics2D& physics, float accel, float maxVel, float rotate,
+                   float dirFactor, float damp)
 : physics(physics)
+, mass(physics.getMass())
 , maxSpeed(maxVel)
 , rotateRate(rotate)
-, force(physics.scaleWorldToPhysics(accel) * physics.getMass())
+, dirCorrectionFactor(dirFactor)
+, damping(damp)
+, force(physics.scaleWorldToPhysics(accel) * mass)
 , moveDir(NoMove)
 , moveFactor(1.f)
 , rotateDir(NoRotate)
@@ -39,24 +43,32 @@ void Moveable::apply(float dt) {
         const float radians = bl::math::degreesToRadians(physics.getTransform().getRotation());
         const float c       = std::cos(radians);
         const float s       = std::sin(radians);
-        const glm::vec2 vec = glm::vec2(c, s) * force * moveFactor;
+
+        const glm::vec2 vel = physics.getLinearVelocity();
+        const float velMag  = glm::length(vel);
+        if (velMag > 0.f) {
+            const glm::vec2 diff = (glm::vec2(c, s) - glm::normalize(vel)) * velMag;
+            physics.applyImpulseToCenter(diff * mass * dirCorrectionFactor);
+        }
+
+        const glm::vec2 f = glm::vec2(c, s) * force * moveFactor;
         switch (moveDir) {
         case Forward:
-            physics.applyForceToCenter(vec);
+            physics.applyForceToCenter(f);
             break;
         case Right:
-            physics.applyForceToCenter({-vec.y, vec.x});
+            physics.applyForceToCenter({-f.y, f.x});
             break;
         case Left:
-            physics.applyForceToCenter({vec.y, -vec.x});
+            physics.applyForceToCenter({f.y, -f.x});
             break;
         case Backward:
         default:
-            physics.applyForceToCenter(-vec);
+            physics.applyForceToCenter(-f);
         }
         moveDir = NoMove;
     }
-    else { physics.setLinearDamping(8.f); }
+    else { physics.setLinearDamping(damping); }
 
     if (maxSpeed > 0.f) { physics.clampLinearVelocity(maxSpeed); }
 }
