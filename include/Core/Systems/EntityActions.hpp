@@ -4,6 +4,7 @@
 #include <BLIB/ECS/ComponentPool.hpp>
 #include <BLIB/Engine/System.hpp>
 #include <Core/Components/Moveable.hpp>
+#include <Core/Components/Shooter.hpp>
 
 namespace core
 {
@@ -27,7 +28,9 @@ public:
     virtual ~EntityActions() = default;
 
 private:
-    bl::ecs::ComponentPool<com::Moveable>* pool;
+    bl::engine::Engine* engine;
+    bl::ecs::ComponentPool<com::Moveable>* movers;
+    bl::ecs::ComponentPool<com::Shooter>* shooters;
 
     void init(bl::engine::Engine& engine) override;
     void update(std::mutex&, float dt, float, float, float) override;

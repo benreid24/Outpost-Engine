@@ -80,6 +80,9 @@ void CombatDemo::observe(const sf::Event& event) {
         auto physics = game.physicsSystem().addPhysicsToEntity(newEntity, bodyDef, shapeDef);
         object       = ecs.emplaceComponent<core::com::Moveable>(
             newEntity, *physics, 320.f, 1920.f / 6.f, 120.f, 0.9f, 10.f);
+
+        ecs.emplaceComponent<core::com::Mortal>(newEntity, 100.f);
+        shooter = ecs.emplaceComponent<core::com::Shooter>(newEntity, 1.f, 20.f, Radius * 1.25f);
     }
 }
 

@@ -4,6 +4,7 @@
 #include <BLIB/Engine/State.hpp>
 #include <BLIB/Events.hpp>
 #include <Core/Components/Moveable.hpp>
+#include <Core/Components/Shooter.hpp>
 #include <SFML/Window/Event.hpp>
 
 namespace game
@@ -21,6 +22,7 @@ public:
 private:
     bl::engine::Engine& engine;
     core::com::Moveable* object;
+    core::com::Shooter* shooter;
 
     const char* name() const override;
     void activate(bl::engine::Engine& engine) override;
