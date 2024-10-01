@@ -1,5 +1,5 @@
 target_sources(Core PUBLIC
     Damage.hpp
-    Movement.hpp
+    EntityActions.hpp
     Render.hpp
 )

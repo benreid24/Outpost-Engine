@@ -3,31 +3,31 @@
 
 #include <BLIB/ECS/ComponentPool.hpp>
 #include <BLIB/Engine/System.hpp>
-#include <Core/Components/Moveable.hpp>
+#include <Core/Components/Controllable.hpp>
 
 namespace core
 {
 namespace sys
 {
 /**
- * @brief Movement system. Processes entity move commands
+ * @brief Entity actions system. Processes entity control commands
  *
  * @ingroup Systems
  */
-class Movement : public bl::engine::System {
+class EntityActions : public bl::engine::System {
 public:
     /**
      * @brief Creates the system
      */
-    Movement();
+    EntityActions();
 
     /**
      * @brief Destroys the system
      */
-    virtual ~Movement() = default;
+    virtual ~EntityActions() = default;
 
 private:
-    bl::ecs::ComponentPool<com::Moveable>* pool;
+    bl::ecs::ComponentPool<com::Controllable>* pool;
 
     void init(bl::engine::Engine& engine) override;
     void update(std::mutex&, float dt, float, float, float) override;

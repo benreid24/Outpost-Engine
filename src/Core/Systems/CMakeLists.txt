@@ -1,5 +1,5 @@
 target_sources(Core PRIVATE
     Damage.cpp
-    Movement.cpp
+    EntityActions.cpp
     Render.cpp
 )

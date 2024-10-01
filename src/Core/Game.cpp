@@ -39,8 +39,9 @@ bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
     enginePtr   = &engine;
     render = &engine.systems().registerSystem<sys::Render>(Stage::RenderEarlyRefresh, Mask::All);
     damage.init(engine);
-    physics  = &engine.systems().getSystem<bl::sys::Physics2D>();
-    movement = &engine.systems().registerSystem<sys::Movement>(Stage::Update1, Mask::Running);
+    physics = &engine.systems().getSystem<bl::sys::Physics2D>();
+    entityActions =
+        &engine.systems().registerSystem<sys::EntityActions>(Stage::Update1, Mask::Running);
 
     bl::event::Dispatcher::subscribe(&windowSizePersister);
 

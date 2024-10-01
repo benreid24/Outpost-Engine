@@ -5,7 +5,7 @@
 
 #include <BLIB/Systems/Physics2D.hpp>
 #include <Core/Systems/Damage.hpp>
-#include <Core/Systems/Movement.hpp>
+#include <Core/Systems/EntityActions.hpp>
 #include <Core/Systems/Render.hpp>
 
 /**
@@ -39,9 +39,9 @@ public:
     bl::sys::Physics2D& physicsSystem() { return *physics; }
 
     /**
-     * @brief Returns the movement system
+     * @brief Returns the entity actions system
      */
-    sys::Movement& movementSystem() { return *movement; }
+    sys::EntityActions& entityActionsSystem() { return *entityActions; }
 
 protected:
     /**
@@ -75,7 +75,7 @@ private:
     sys::Damage damage;
     sys::Render* render;
     bl::sys::Physics2D* physics;
-    sys::Movement* movement;
+    sys::EntityActions* entityActions;
 };
 
 } // namespace core

@@ -1,5 +1,5 @@
-#ifndef CORE_COMPONENTS_MOVEABLE_HPP
-#define CORE_COMPONENTS_MOVEABLE_HPP
+#ifndef CORE_COMPONENTS_CONTROLLABLE_HPP
+#define CORE_COMPONENTS_CONTROLLABLE_HPP
 
 #include <BLIB/Components/Physics2D.hpp>
 
@@ -7,7 +7,7 @@ namespace core
 {
 namespace sys
 {
-class Movement;
+class EntityActions;
 }
 
 namespace com
@@ -17,7 +17,7 @@ namespace com
  *
  * @ingroup Components
  */
-class Moveable {
+class Controllable {
 public:
     /// The direction to move in, relative to the direction the entity is facing
     enum MoveDirection { NoMove, Forward, Right, Left, Backward };
@@ -35,8 +35,8 @@ public:
      * @param directionAdjustSpeed How quickly the entity velocity changes direction. In range [0,1]
      * @param damping The damping factor to use to stop the entity when not moving
      */
-    Moveable(bl::com::Physics2D& physics, float acceleration, float maxSpeed, float rotateRate,
-             float directionAdjustSpeed, float damping = 10.f);
+    Controllable(bl::com::Physics2D& physics, float acceleration, float maxSpeed, float rotateRate,
+                 float directionAdjustSpeed, float damping = 10.f);
 
     /**
      * @brief Moves the entity in the given direction. Only the last call to this method in a frame
@@ -78,7 +78,7 @@ private:
 
     void apply(float dt);
 
-    friend class sys::Movement;
+    friend class sys::EntityActions;
 };
 
 } // namespace com
