@@ -3,7 +3,7 @@
 
 #include <BLIB/Engine/State.hpp>
 #include <BLIB/Events.hpp>
-#include <Core/Components/Controllable.hpp>
+#include <Core/Components/Moveable.hpp>
 #include <SFML/Window/Event.hpp>
 
 namespace game
@@ -20,7 +20,7 @@ public:
 
 private:
     bl::engine::Engine& engine;
-    core::com::Controllable* object;
+    core::com::Moveable* object;
 
     const char* name() const override;
     void activate(bl::engine::Engine& engine) override;

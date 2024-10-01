@@ -3,7 +3,7 @@
 
 #include <BLIB/ECS/ComponentPool.hpp>
 #include <BLIB/Engine/System.hpp>
-#include <Core/Components/Controllable.hpp>
+#include <Core/Components/Moveable.hpp>
 
 namespace core
 {
@@ -27,7 +27,7 @@ public:
     virtual ~EntityActions() = default;
 
 private:
-    bl::ecs::ComponentPool<com::Controllable>* pool;
+    bl::ecs::ComponentPool<com::Moveable>* pool;
 
     void init(bl::engine::Engine& engine) override;
     void update(std::mutex&, float dt, float, float, float) override;

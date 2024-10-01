@@ -1,4 +1,4 @@
-#include <Core/Components/Controllable.hpp>
+#include <Core/Components/Moveable.hpp>
 
 #include <BLIB/Math.hpp>
 
@@ -6,8 +6,8 @@ namespace core
 {
 namespace com
 {
-Controllable::Controllable(bl::com::Physics2D& physics, float accel, float maxVel, float rotate,
-                           float dirFactor, float damp)
+Moveable::Moveable(bl::com::Physics2D& physics, float accel, float maxVel, float rotate,
+                   float dirFactor, float damp)
 : physics(physics)
 , mass(physics.getMass())
 , maxSpeed(maxVel)
@@ -20,19 +20,19 @@ Controllable::Controllable(bl::com::Physics2D& physics, float accel, float maxVe
 , rotateDir(NoRotate)
 , rotateFactor(1.f) {}
 
-void Controllable::move(MoveDirection direction, float factor) {
+void Moveable::move(MoveDirection direction, float factor) {
     moveDir    = direction;
     moveFactor = factor;
 }
 
-void Controllable::rotate(RotateDirection direction, float factor) {
+void Moveable::rotate(RotateDirection direction, float factor) {
     rotateDir    = direction;
     rotateFactor = factor;
 }
 
-void Controllable::setRotation(float degrees) { physics.getTransform().setRotation(degrees); }
+void Moveable::setRotation(float degrees) { physics.getTransform().setRotation(degrees); }
 
-void Controllable::apply(float dt) {
+void Moveable::apply(float dt) {
     if (rotateDir != NoRotate) {
         const float sign = rotateDir == Clockwise ? 1.f : -1.f;
         physics.getTransform().rotate(sign * rotateRate * rotateFactor * dt);

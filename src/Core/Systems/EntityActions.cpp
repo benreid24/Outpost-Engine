@@ -10,11 +10,11 @@ EntityActions::EntityActions()
 : pool(nullptr) {}
 
 void EntityActions::init(bl::engine::Engine& engine) {
-    pool = &engine.ecs().getAllComponents<com::Controllable>();
+    pool = &engine.ecs().getAllComponents<com::Moveable>();
 }
 
 void EntityActions::update(std::mutex&, float dt, float, float, float) {
-    pool->forEach([dt](bl::ecs::Entity, com::Controllable& m) { m.apply(dt); });
+    pool->forEach([dt](bl::ecs::Entity, com::Moveable& m) { m.apply(dt); });
 }
 
 } // namespace sys

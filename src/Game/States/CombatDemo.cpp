@@ -34,23 +34,23 @@ void CombatDemo::deactivate(bl::engine::Engine& engine) {
 void CombatDemo::update(bl::engine::Engine&, float dt, float) {
     if (object) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-            object->move(core::com::Controllable::Forward);
+            object->move(core::com::Moveable::Forward);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-            object->move(core::com::Controllable::Backward);
+            object->move(core::com::Moveable::Backward);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-            object->move(core::com::Controllable::Left);
+            object->move(core::com::Moveable::Left);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            object->move(core::com::Controllable::Right);
+            object->move(core::com::Moveable::Right);
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-            object->rotate(core::com::Controllable::CounterClockwise);
+            object->rotate(core::com::Moveable::CounterClockwise);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
-            object->rotate(core::com::Controllable::Clockwise);
+            object->rotate(core::com::Moveable::Clockwise);
         }
     }
 }
@@ -78,7 +78,7 @@ void CombatDemo::observe(const sf::Event& event) {
 
         ecs.emplaceComponent<bl::com::Hitbox2D>(newEntity, transform, Radius);
         auto physics = game.physicsSystem().addPhysicsToEntity(newEntity, bodyDef, shapeDef);
-        object       = ecs.emplaceComponent<core::com::Controllable>(
+        object       = ecs.emplaceComponent<core::com::Moveable>(
             newEntity, *physics, 320.f, 1920.f / 6.f, 120.f, 0.9f, 10.f);
     }
 }
