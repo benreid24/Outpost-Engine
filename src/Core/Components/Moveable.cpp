@@ -6,6 +6,23 @@ namespace core
 {
 namespace com
 {
+namespace
+{
+glm::vec2 changeVectorDirection(glm::vec2 forward, Moveable::MoveDirection dir) {
+    switch (dir) {
+    case Moveable::MoveDirection::Forward:
+        return forward;
+    case Moveable::MoveDirection::Right:
+        return {-forward.y, forward.x};
+    case Moveable::MoveDirection::Left:
+        return {forward.y, -forward.x};
+    case Moveable::MoveDirection::Backward:
+    default:
+        return -forward;
+    }
+}
+} // namespace
+
 Moveable::Moveable(bl::com::Physics2D& physics, float accel, float maxVel, float rotate,
                    float dirFactor, float damp)
 : physics(physics)
@@ -47,25 +64,13 @@ void Moveable::apply(float dt) {
         const glm::vec2 vel = physics.getLinearVelocity();
         const float velMag  = glm::length(vel);
         if (velMag > 0.f) {
-            const glm::vec2 diff = (glm::vec2(c, s) - glm::normalize(vel)) * velMag;
+            const glm::vec2 diff =
+                (changeVectorDirection({c, s}, moveDir) - glm::normalize(vel)) * velMag;
             physics.applyImpulseToCenter(diff * mass * dirCorrectionFactor);
         }
 
         const glm::vec2 f = glm::vec2(c, s) * force * moveFactor;
-        switch (moveDir) {
-        case Forward:
-            physics.applyForceToCenter(f);
-            break;
-        case Right:
-            physics.applyForceToCenter({-f.y, f.x});
-            break;
-        case Left:
-            physics.applyForceToCenter({f.y, -f.x});
-            break;
-        case Backward:
-        default:
-            physics.applyForceToCenter(-f);
-        }
+        physics.applyForceToCenter(changeVectorDirection(f, moveDir));
         moveDir = NoMove;
     }
     else { physics.setLinearDamping(damping); }
