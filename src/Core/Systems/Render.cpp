@@ -13,7 +13,7 @@ Render::Render()
 void Render::addTestGraphicsToEntity(bl::ecs::Entity entity, glm::vec2 size, bl::rc::Color color) {
     bl::gfx::Rectangle box;
     box.deleteEntityOnDestroy(false);
-    box.create(*engine->getWorld(entity.getWorldIndex()), size);
+    box.create(*engine->getWorld(entity.getWorldIndex()), entity, size);
     box.setFillColor(color);
     box.getTransform().setOrigin(size * 0.5f);
     box.commit();

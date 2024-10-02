@@ -44,6 +44,7 @@ bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
         &engine.systems().registerSystem<sys::EntityActions>(Stage::Update1, Mask::Running);
 
     bl::event::Dispatcher::subscribe(&windowSizePersister);
+    bl::event::Dispatcher::subscribe(&damage);
 
     return true;
 }
@@ -52,6 +53,7 @@ void Game::startShutdown() {
     // TODO - SETUP_TASK - any early shutdown tasks
 
     bl::event::Dispatcher::unsubscribe(&windowSizePersister);
+    bl::event::Dispatcher::unsubscribe(&damage);
 }
 
 void Game::completeShutdown() {

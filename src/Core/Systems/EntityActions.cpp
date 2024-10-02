@@ -34,8 +34,8 @@ void EntityActions::update(std::mutex&, float dt, float, float, float) {
     movers->forEach([dt](bl::ecs::Entity, com::Moveable& m) { m.apply(dt); });
 
     shooters->forEach([this, dt](bl::ecs::Entity entity, com::Shooter& shooter) {
-        constexpr float Velocity = 60.f;
-        constexpr glm::vec2 Size(2.f, 6.f);
+        constexpr float Velocity = 30.f;
+        constexpr glm::vec2 Size(8.f, 3.f);
 
         shooter.timeSinceLastFire += dt;
         if (shooter.isFiring) {

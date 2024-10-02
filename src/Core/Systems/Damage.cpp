@@ -17,7 +17,7 @@ void Damage::makeDamager(bl::ecs::Entity entity, float damage) {
     engine->ecs().emplaceComponent<com::Damager>(entity, damage);
 }
 
-void Damage::observe(const bl::sys::Physics2D::EntityCollisionHitEvent& collision) {
+void Damage::observe(const bl::sys::Physics2D::EntityCollisionBeginEvent& collision) {
     using namespace bl::ecs;
     Transaction tx(engine->ecs());
 

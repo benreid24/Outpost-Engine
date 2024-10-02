@@ -52,6 +52,8 @@ void CombatDemo::update(bl::engine::Engine&, float dt, float) {
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
             object->rotate(core::com::Moveable::Clockwise);
         }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) { shooter->fire(); }
     }
 }
 
@@ -82,7 +84,7 @@ void CombatDemo::observe(const sf::Event& event) {
             newEntity, *physics, 320.f, 1920.f / 6.f, 120.f, 0.9f, 10.f);
 
         ecs.emplaceComponent<core::com::Mortal>(newEntity, 100.f);
-        shooter = ecs.emplaceComponent<core::com::Shooter>(newEntity, 1.f, 20.f, Radius * 1.25f);
+        shooter = ecs.emplaceComponent<core::com::Shooter>(newEntity, 3.f, 20.f, Radius * 2.f);
     }
 }
 

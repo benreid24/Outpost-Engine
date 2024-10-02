@@ -17,7 +17,7 @@ namespace sys
  *
  * @ingroup Systems
  */
-class Damage : public bl::event::Listener<bl::sys::Physics2D::EntityCollisionHitEvent> {
+class Damage : public bl::event::Listener<bl::sys::Physics2D::EntityCollisionBeginEvent> {
 public:
     /**
      * @brief Creates the system
@@ -62,7 +62,7 @@ private:
 
     void applyDamage(bl::ecs::Entity mortalEntity, com::Mortal& victim,
                      bl::ecs::Entity damagerEntity, com::Damager& damager, Transaction& tx);
-    virtual void observe(const bl::sys::Physics2D::EntityCollisionHitEvent& event) override;
+    virtual void observe(const bl::sys::Physics2D::EntityCollisionBeginEvent& event) override;
 };
 
 } // namespace sys
