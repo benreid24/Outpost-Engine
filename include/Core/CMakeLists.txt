@@ -8,3 +8,4 @@ target_sources(Core PUBLIC
 add_subdirectory(Components)
 add_subdirectory(Input)
 add_subdirectory(Systems)
+add_subdirectory(World)
