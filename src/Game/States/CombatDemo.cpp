@@ -5,6 +5,7 @@
 #include <BLIB/Math.hpp>
 #include <BLIB/Render/Scenes/Scene2D.hpp>
 #include <Core/Game.hpp>
+#include <Core/World/Collisions.hpp>
 
 namespace game
 {
@@ -77,6 +78,7 @@ void CombatDemo::observe(const sf::Event& event) {
         auto shapeDef         = b2DefaultShapeDef();
         bodyDef.type          = b2_dynamicBody;
         bodyDef.fixedRotation = true;
+        shapeDef.filter       = core::world::Collisions::getUnitFilter();
 
         ecs.emplaceComponent<bl::com::Hitbox2D>(newEntity, transform, Radius);
         auto physics = game.physicsSystem().addPhysicsToEntity(newEntity, bodyDef, shapeDef);

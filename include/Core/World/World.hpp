@@ -24,7 +24,34 @@ namespace world
  */
 class World : public bl::engine::World2D {
 public:
-    // TODO - interface
+    /**
+     * @brief Creates the world
+     *
+     * @param engine The game engine instance
+     */
+    World(bl::engine::Engine& engine);
+
+    /**
+     * @brief Destroys the world
+     */
+    virtual ~World() = default;
+
+    /**
+     * @brief Adds a node to the world
+     *
+     * @param type The type of node to add
+     * @param position The position to add the node at
+     */
+    void addNode(Node::Type type, glm::vec2 position);
+
+    /**
+     * @brief Adds a section of cover (as a rotated rectangle) to the world
+     *
+     * @param pos The position to add the cover at. Center of the rectangle
+     * @param size The side of the cover
+     * @param angle The rotation of the cover in degrees
+     */
+    void addCover(glm::vec2 pos, glm::vec2 size, float angle);
 
 private:
     std::vector<Cover> covers;

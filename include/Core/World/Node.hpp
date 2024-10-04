@@ -2,6 +2,7 @@
 #define CORE_WORLD_NODE_HPP
 
 #include <BLIB/ECS/Entity.hpp>
+#include <glm/glm.hpp>
 
 namespace core
 {
@@ -16,12 +17,31 @@ class World;
  */
 class Node {
 public:
+    /// The maximum distance to cover that is queried, in world space
+    static constexpr float MaxCoverDistance = 250.f;
+
+    /// The types of nodes
     enum Type { Path, Cover };
 
-    // TODO - interface
+    /**
+     * @brief Constructs the node from a type and position
+     *
+     * @param type The type of node to be
+     * @param pos The position of the node in world space
+     */
+    Node(Type type, glm::vec2 pos);
+
+    /**
+     * @brief Returns the distance to the nearest cover from this node facing the given angle
+     *
+     * @param degrees The angle to query, in degrees
+     * @return The distance to the nearest cover, or MaxCoverDistance if not near cover
+     */
+    float getDistanceToCover(float degrees) const;
 
 private:
     Type type;
+    glm::vec2 position;
     float distanceToCover[12];
     bl::ecs::Entity occupiedBy;
     bl::ecs::Entity targetedBy;

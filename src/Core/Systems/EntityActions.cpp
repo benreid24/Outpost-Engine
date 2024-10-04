@@ -7,6 +7,7 @@
 #include <BLIB/Math.hpp>
 #include <Core/Components/Damager.hpp>
 #include <Core/Game.hpp>
+#include <Core/World/Collisions.hpp>
 
 namespace core
 {
@@ -72,7 +73,6 @@ void EntityActions::update(std::mutex&, float dt, float, float, float) {
                     bullet, tx, 2.f, bl::engine::StateMask::Running);
                 game.renderSystem().addTestGraphicsToEntity(bullet, Size, sf::Color::Black);
 
-                // TODO - think about collision filters
                 auto bodyDef             = b2DefaultBodyDef();
                 auto shapeDef            = b2DefaultShapeDef();
                 bodyDef.type             = b2_dynamicBody;
@@ -81,6 +81,7 @@ void EntityActions::update(std::mutex&, float dt, float, float, float) {
                 bodyDef.linearVelocity.x = c * Velocity;
                 bodyDef.linearVelocity.y = s * Velocity;
                 bodyDef.linearDamping    = 0.f;
+                shapeDef.filter          = world::Collisions::getBulletFilter();
                 ecs.emplaceComponentWithTx<bl::com::Hitbox2D>(bullet, tx, bulletTransform, Size);
                 game.physicsSystem().addPhysicsToEntity(bullet, bodyDef, shapeDef);
             }
