@@ -19,7 +19,7 @@ void World::addNode(Node::Type type, glm::vec2 pos) {
     for (int angle = 0; angle < 360; angle += 30, ++i) {
         const float r = bl::math::degreesToRadians(static_cast<float>(angle));
         const float c = std::cos(r);
-        const float s = std::cos(r);
+        const float s = std::sin(r);
         // TODO - consider casting a circle?
         const auto result =
             b2World_CastRayClosest(getBox2dWorldId(),
@@ -33,7 +33,8 @@ void World::addNode(Node::Type type, glm::vec2 pos) {
         else { node.distanceToCover[i] = Node::MaxCoverDistance; }
     }
 
-    // TODO - add test graphics
+    Game& game = Game::getInstance<Game>();
+    game.renderSystem().addDebugGraphicsToNode(node);
 }
 
 void World::addCover(glm::vec2 pos, glm::vec2 size, float angle) {

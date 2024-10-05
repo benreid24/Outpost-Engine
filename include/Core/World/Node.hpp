@@ -18,7 +18,7 @@ class World;
 class Node {
 public:
     /// The maximum distance to cover that is queried, in world space
-    static constexpr float MaxCoverDistance = 250.f;
+    static constexpr float MaxCoverDistance = 175.f;
 
     /// The types of nodes
     enum Type { Path, Cover };
@@ -32,12 +32,22 @@ public:
     Node(Type type, glm::vec2 pos);
 
     /**
+     * @brief Returns the type of node this is
+     */
+    Type getType() const { return type; }
+
+    /**
      * @brief Returns the distance to the nearest cover from this node facing the given angle
      *
      * @param degrees The angle to query, in degrees
      * @return The distance to the nearest cover, or MaxCoverDistance if not near cover
      */
     float getDistanceToCover(float degrees) const;
+
+    /**
+     * @brief Returns the position of the node in world space
+     */
+    const glm::vec2& getPosition() const { return position; }
 
 private:
     Type type;

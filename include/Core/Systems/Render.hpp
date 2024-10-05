@@ -4,6 +4,7 @@
 #include <BLIB/ECS/Entity.hpp>
 #include <BLIB/Engine/System.hpp>
 #include <BLIB/Render/Color.hpp>
+#include <Core/World/Node.hpp>
 #include <glm/glm.hpp>
 
 /**
@@ -51,6 +52,13 @@ public:
      * @param color The color to make the test graphics
      */
     void addTestGraphicsToEntity(bl::ecs::Entity entity, float radius, bl::rc::Color color);
+
+    /**
+     * @brief Adds debug graphics for the given world node
+     *
+     * @param node The node to add debug graphics to
+     */
+    void addDebugGraphicsToNode(const world::Node& node);
 
 private:
     bl::engine::Engine* engine;

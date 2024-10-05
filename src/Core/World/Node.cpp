@@ -19,7 +19,7 @@ float Node::getDistanceToCover(float a) const {
 
     const unsigned int i = a / 30.f;
     const float weight   = std::fmod(a, 30.f) / 30.f;
-    return distanceToCover[i] * weight + distanceToCover[(i + 1) % 12] * (1.f - weight);
+    return distanceToCover[i] * (1.f - weight) + distanceToCover[(i + 1) % 12] * weight;
 }
 
 } // namespace world

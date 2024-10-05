@@ -74,14 +74,14 @@ void CombatDemo::observe(const sf::Event& event) {
     core::world::World& world = static_cast<core::world::World&>(player.getCurrentWorld());
 
     if (event.type == sf::Event::MouseButtonPressed) {
+        const auto worldPos = player.getRenderObserver().transformToWorldSpace(
+            {event.mouseButton.x, event.mouseButton.y});
+
         if (event.mouseButton.button == sf::Mouse::Left) {
             // TODO - move spawn methods into helpers/system?
 
             const auto newEntity = player.getCurrentWorld().createEntity();
-
-            const auto worldPos = player.getRenderObserver().transformToWorldSpace(
-                {event.mouseButton.x, event.mouseButton.y});
-            auto* transform = ecs.emplaceComponent<bl::com::Transform2D>(newEntity, worldPos);
+            auto* transform      = ecs.emplaceComponent<bl::com::Transform2D>(newEntity, worldPos);
             game.renderSystem().addTestGraphicsToEntity(newEntity, Radius, sf::Color::Blue);
 
             auto bodyDef          = b2DefaultBodyDef();
@@ -99,10 +99,15 @@ void CombatDemo::observe(const sf::Event& event) {
             shooter = ecs.emplaceComponent<core::com::Shooter>(newEntity, 3.f, 20.f, Radius * 2.f);
         }
         else if (event.mouseButton.button == sf::Mouse::Right) {
-            clickStart.x = event.mouseButton.x;
-            clickStart.y = event.mouseButton.y;
+            clickStart = worldPos;
             dragBox.setHidden(false);
             dragBox.getTransform().setPosition(clickStart);
+        }
+        else if (event.mouseButton.button == sf::Mouse::XButton1) {
+            world.addNode(core::world::Node::Cover, worldPos);
+        }
+        else if (event.mouseButton.button == sf::Mouse::XButton2) {
+            world.addNode(core::world::Node::Path, worldPos);
         }
     }
     else if (event.type == sf::Event::MouseMoved) {
