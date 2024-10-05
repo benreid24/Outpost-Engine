@@ -1,6 +1,7 @@
 #include <Core/World/World.hpp>
 
 #include <BLIB/Math.hpp>
+#include <Core/Game.hpp>
 #include <Core/World/Collisions.hpp>
 
 namespace core
@@ -36,9 +37,20 @@ void World::addNode(Node::Type type, glm::vec2 pos) {
 }
 
 void World::addCover(glm::vec2 pos, glm::vec2 size, float angle) {
+    Game& game = Game::getInstance<Game>();
     covers.emplace_back(pos, size, angle);
-    // TODO - add test graphics & physics body
-    // TODO - think about collision filters
+
+    auto entity     = createEntity();
+    auto* transform = engine().ecs().emplaceComponent<bl::com::Transform2D>(entity, pos, angle);
+    game.renderSystem().addTestGraphicsToEntity(entity, size, sf::Color::Black);
+
+    auto bodyDef      = b2DefaultBodyDef();
+    auto shapeDef     = b2DefaultShapeDef();
+    bodyDef.type      = b2_staticBody;
+    shapeDef.filter   = Collisions::getCoverFilter();
+    shapeDef.friction = 0.f;
+    engine().ecs().emplaceComponent<bl::com::Hitbox2D>(entity, transform, size);
+    game.physicsSystem().addPhysicsToEntity(entity, bodyDef, shapeDef);
 }
 
 } // namespace world
