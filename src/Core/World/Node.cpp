@@ -11,8 +11,7 @@ Node::Node(Type type, glm::vec2 pos)
 , position(pos)
 , distanceToCover{}
 , occupiedBy(bl::ecs::InvalidEntity)
-, targetedBy(bl::ecs::InvalidEntity)
-, debugEntity(bl::ecs::InvalidEntity) {}
+, targetedBy(bl::ecs::InvalidEntity) {}
 
 float Node::getDistanceToCover(float a) const {
     a = std::fmod(a, 360.f);

@@ -25,6 +25,8 @@ namespace sys
  */
 class Render : public bl::engine::System {
 public:
+    static constexpr std::uint32_t NodeEdgesPipelineId = 1000;
+
     /**
      * @brief Creates the system
      */
@@ -52,13 +54,6 @@ public:
      * @param color The color to make the test graphics
      */
     void addTestGraphicsToEntity(bl::ecs::Entity entity, float radius, bl::rc::Color color);
-
-    /**
-     * @brief Adds debug graphics for the given world node
-     *
-     * @param node The node to add debug graphics to
-     */
-    void addDebugGraphicsToNode(world::Node& node);
 
 private:
     bl::engine::Engine* engine;

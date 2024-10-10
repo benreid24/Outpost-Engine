@@ -3,14 +3,10 @@
 
 #include <BLIB/ECS/Entity.hpp>
 #include <glm/glm.hpp>
+#include <vector>
 
 namespace core
 {
-namespace sys
-{
-class Render;
-}
-
 namespace world
 {
 class World;
@@ -60,12 +56,9 @@ private:
     float distanceToCover[12];
     bl::ecs::Entity occupiedBy;
     bl::ecs::Entity targetedBy;
-
-    // debug data
-    bl::ecs::Entity debugEntity;
+    std::vector<const Node*> connectsTo;
 
     friend class World;
-    friend class sys::Render;
 };
 
 } // namespace world

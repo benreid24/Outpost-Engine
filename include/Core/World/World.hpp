@@ -2,8 +2,10 @@
 #define CORE_WORLD_WORLD_HPP
 
 #include <BLIB/Engine/Worlds/World2D.hpp>
+#include <BLIB/Graphics/VertexBuffer2D.hpp>
 #include <Core/World/Cover.hpp>
 #include <Core/World/Node.hpp>
+#include <list>
 #include <vector>
 
 /**
@@ -55,15 +57,19 @@ public:
 
 private:
     std::vector<Cover> covers;
-    std::vector<Node> nodes;
-    // TODO - box2d sensors for node occupation?
+    std::list<Node> nodes;
+    // TODO - box2d sensors for node occupation? & node connections!
     // TODO - spatial partitions?
 
     // debug data
-    // TODO - node edge debug draw
+    bl::gfx::VertexBuffer2D debugNodes;
+    bl::gfx::VertexBuffer2D debugNodeEdges;
 
+    void addDebugGraphicsToNode(Node& node);
     void recomputeNodeDistances();
     void computeNodeDistances(Node& node);
+    void populateNodeEdges(Node& node);
+    void repopulateAllNodeEdges();
 };
 
 } // namespace world
