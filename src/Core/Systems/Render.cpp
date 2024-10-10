@@ -41,7 +41,7 @@ void Render::addTestGraphicsToEntity(bl::ecs::Entity entity, float radius, bl::r
                       bl::rc::UpdateSpeed::Dynamic);
 }
 
-void Render::addDebugGraphicsToNode(const world::Node& node) {
+void Render::addDebugGraphicsToNode(world::Node& node) {
     constexpr unsigned int CircleTriangleCount = 100;
     constexpr unsigned int CircleVertexCount   = CircleTriangleCount * 3;
     constexpr unsigned int ArrowCount          = 12;
@@ -52,12 +52,17 @@ void Render::addDebugGraphicsToNode(const world::Node& node) {
     constexpr float Radius     = 10.f;
     constexpr float ArrowWidth = 6.f;
 
+    if (node.debugEntity != bl::ecs::InvalidEntity) {
+        engine->ecs().destroyEntity(node.debugEntity);
+    }
+
     bl::gfx::VertexBuffer2D vb;
     vb.create(engine->getPlayer().getCurrentWorld(), VertexCount);
     vb.deleteEntityOnDestroy(false);
     vb.getTransform().setOrigin(Radius * 0.5f, Radius * 0.5f);
     vb.getTransform().setPosition(node.getPosition());
     vb.getTransform().setDepth(1.f);
+    node.debugEntity = vb.entity();
 
     // create circle
     const bl::rc::Color circleColor =

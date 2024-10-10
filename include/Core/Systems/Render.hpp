@@ -58,7 +58,7 @@ public:
      *
      * @param node The node to add debug graphics to
      */
-    void addDebugGraphicsToNode(const world::Node& node);
+    void addDebugGraphicsToNode(world::Node& node);
 
 private:
     bl::engine::Engine* engine;

@@ -56,7 +56,14 @@ public:
 private:
     std::vector<Cover> covers;
     std::vector<Node> nodes;
+    // TODO - box2d sensors for node occupation?
     // TODO - spatial partitions?
+
+    // debug data
+    // TODO - node edge debug draw
+
+    void recomputeNodeDistances();
+    void computeNodeDistances(Node& node);
 };
 
 } // namespace world

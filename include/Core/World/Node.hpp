@@ -6,6 +6,11 @@
 
 namespace core
 {
+namespace sys
+{
+class Render;
+}
+
 namespace world
 {
 class World;
@@ -56,7 +61,11 @@ private:
     bl::ecs::Entity occupiedBy;
     bl::ecs::Entity targetedBy;
 
+    // debug data
+    bl::ecs::Entity debugEntity;
+
     friend class World;
+    friend class sys::Render;
 };
 
 } // namespace world
