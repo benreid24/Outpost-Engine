@@ -98,8 +98,8 @@ void World::populateNodeEdges(Node& node) {
                                    {otherNodePos.x - nodePos.x, otherNodePos.y - nodePos.y},
                                    Collisions::getCoverQueryFilter());
         if (!cast.hit) {
-            node.connectsTo.emplace_back(&otherNode);
-            otherNode.connectsTo.emplace_back(&node);
+            node.connectsTo.emplace_back(&otherNode - nodes.data());
+            otherNode.connectsTo.emplace_back(&node - nodes.data());
 
             // debug gfx
             debugNodeEdges.resize(debugNodeEdges.getSize() + 2);

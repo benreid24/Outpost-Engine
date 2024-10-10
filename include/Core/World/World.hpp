@@ -57,7 +57,7 @@ public:
 
 private:
     std::vector<Cover> covers;
-    std::list<Node> nodes;
+    std::vector<Node> nodes;
     // TODO - box2d sensors for node occupation? & node connections!
     // TODO - spatial partitions?
 

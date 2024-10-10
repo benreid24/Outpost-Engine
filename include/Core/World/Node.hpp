@@ -56,7 +56,7 @@ private:
     float distanceToCover[12];
     bl::ecs::Entity occupiedBy;
     bl::ecs::Entity targetedBy;
-    std::vector<const Node*> connectsTo;
+    std::vector<std::uint32_t> connectsTo;
 
     friend class World;
 };
