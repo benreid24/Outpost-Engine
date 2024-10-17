@@ -57,6 +57,7 @@ private:
     bl::ecs::Entity occupiedBy;
     bl::ecs::Entity targetedBy;
     std::vector<std::uint32_t> connectsTo;
+    bl::ecs::Entity sensorEntity;
 
     friend class World;
 };

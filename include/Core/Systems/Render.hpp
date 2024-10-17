@@ -55,6 +55,14 @@ public:
      */
     void addTestGraphicsToEntity(bl::ecs::Entity entity, float radius, bl::rc::Color color);
 
+    /**
+     * @brief Sets the test graphics for the given entity to the new color
+     *
+     * @param entity The entity to update the color of
+     * @param color The new color
+     */
+    void updateTestGraphicsColor(bl::ecs::Entity entity, bl::rc::Color color);
+
 private:
     bl::engine::Engine* engine;
 

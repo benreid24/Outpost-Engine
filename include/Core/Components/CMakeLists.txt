@@ -3,4 +3,5 @@ target_sources(Core PUBLIC
     Mortal.hpp
     Moveable.hpp
     Shooter.hpp
+    WorldNode.hpp
 )

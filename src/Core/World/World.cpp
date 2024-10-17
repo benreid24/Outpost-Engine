@@ -1,6 +1,7 @@
 #include <Core/World/World.hpp>
 
 #include <BLIB/Math.hpp>
+#include <Core/Components/WorldNode.hpp>
 #include <Core/Game.hpp>
 #include <Core/World/Collisions.hpp>
 
@@ -8,10 +9,18 @@ namespace core
 {
 namespace world
 {
+namespace
+{
+const bl::rc::Color NodeFreeColor     = sf::Color(20, 230, 65);
+const bl::rc::Color NodeOccupiedColor = sf::Color(230, 65, 20);
+} // namespace
+
 World::World(bl::engine::Engine& e)
 : World2D(e) {}
 
 void World::addNode(Node::Type type, glm::vec2 pos) {
+    Game& game = Game::getInstance<Game>();
+
     if (!debugNodes.exists()) {
         debugNodes.create(*this, 1024);
         debugNodes.resize(0, false);
@@ -30,6 +39,15 @@ void World::addNode(Node::Type type, glm::vec2 pos) {
     computeNodeDistances(node);
     populateNodeEdges(node);
     addDebugGraphicsToNode(node);
+
+    const float radius = 1.f / getWorldToBoxScale();
+    auto entity        = createEntity();
+    auto* transform    = engine().ecs().emplaceComponent<bl::com::Transform2D>(entity, pos);
+    engine().ecs().emplaceComponent<bl::com::Hitbox2D>(entity, transform, radius);
+    game.renderSystem().addTestGraphicsToEntity(entity, radius, NodeFreeColor);
+    game.physicsSystem().createSensorForEntity(entity, Collisions::getSensorFilter());
+    node.sensorEntity = entity;
+    engine().ecs().emplaceComponent<com::WorldNode>(entity, this, nodes.size() - 1);
 }
 
 void World::addCover(glm::vec2 pos, glm::vec2 size, float angle) {
@@ -50,6 +68,34 @@ void World::addCover(glm::vec2 pos, glm::vec2 size, float angle) {
 
     recomputeNodeDistances();
     repopulateAllNodeEdges();
+}
+
+void World::handleSensorEnter(std::size_t i, bl::ecs::Entity entity) {
+    auto& node = nodes[i];
+    if (node.occupiedBy == bl::ecs::InvalidEntity) {
+        Game& game = Game::getInstance<Game>();
+        game.renderSystem().updateTestGraphicsColor(node.sensorEntity, NodeOccupiedColor);
+
+        node.occupiedBy = entity;
+    }
+    else {
+        BL_LOG_WARN
+            << "Node entered by second entity. Make an actual heuristic to decide occupation";
+    }
+}
+
+void World::handleSensorExit(std::size_t i, bl::ecs::Entity entity) {
+    auto& node = nodes[i];
+    if (node.occupiedBy == entity) {
+        Game& game = Game::getInstance<Game>();
+        game.renderSystem().updateTestGraphicsColor(node.sensorEntity, NodeFreeColor);
+
+        node.occupiedBy = bl::ecs::InvalidEntity;
+    }
+    else {
+        BL_LOG_WARN
+            << "Node exited by different entity. Make an actual heuristic to decide occupation";
+    }
 }
 
 void World::recomputeNodeDistances() {
@@ -96,17 +142,20 @@ void World::populateNodeEdges(Node& node) {
             b2World_CastRayClosest(getBox2dWorldId(),
                                    nodePos,
                                    {otherNodePos.x - nodePos.x, otherNodePos.y - nodePos.y},
-                                   Collisions::getCoverQueryFilter());
-        if (!cast.hit) {
-            node.connectsTo.emplace_back(&otherNode - nodes.data());
-            otherNode.connectsTo.emplace_back(&node - nodes.data());
+                                   Collisions::getNodeConnectionFilter());
+        if (cast.hit) {
+            if (bl::sys::Physics2D::getEntityFromShape(cast.shapeId) == otherNode.sensorEntity) {
+                node.connectsTo.emplace_back(&otherNode - nodes.data());
+                otherNode.connectsTo.emplace_back(&node - nodes.data());
 
-            // debug gfx
-            debugNodeEdges.resize(debugNodeEdges.getSize() + 2);
-            debugNodeEdges[debugNodeEdges.getSize() - 2].pos   = glm::vec3(node.position, 0.f);
-            debugNodeEdges[debugNodeEdges.getSize() - 2].color = {0.25f, 0.05f, 0.05f, 1.f};
-            debugNodeEdges[debugNodeEdges.getSize() - 1].pos   = glm::vec3(otherNode.position, 0.f);
-            debugNodeEdges[debugNodeEdges.getSize() - 1].color = {0.25f, 0.05f, 0.05f, 1.f};
+                // debug gfx
+                debugNodeEdges.resize(debugNodeEdges.getSize() + 2);
+                debugNodeEdges[debugNodeEdges.getSize() - 2].pos   = glm::vec3(node.position, 0.f);
+                debugNodeEdges[debugNodeEdges.getSize() - 2].color = {0.25f, 0.05f, 0.05f, 1.f};
+                debugNodeEdges[debugNodeEdges.getSize() - 1].pos =
+                    glm::vec3(otherNode.position, 0.f);
+                debugNodeEdges[debugNodeEdges.getSize() - 1].color = {0.25f, 0.05f, 0.05f, 1.f};
+            }
         }
     }
 }

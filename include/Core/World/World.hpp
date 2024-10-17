@@ -55,10 +55,25 @@ public:
      */
     void addCover(glm::vec2 pos, glm::vec2 size, float angle);
 
+    /**
+     * @brief Called when sensors are triggered by entities
+     *
+     * @param node The index of the node whose sensor was triggered
+     * @param entity The entity that triggered the sensor
+     */
+    void handleSensorEnter(std::size_t node, bl::ecs::Entity entity);
+
+    /**
+     * @brief Called when sensors are triggered by entities
+     *
+     * @param node The index of the node whose sensor was triggered
+     * @param entity The entity that triggered the sensor
+     */
+    void handleSensorExit(std::size_t node, bl::ecs::Entity entity);
+
 private:
     std::vector<Cover> covers;
     std::vector<Node> nodes;
-    // TODO - box2d sensors for node occupation? & node connections!
     // TODO - spatial partitions?
 
     // debug data

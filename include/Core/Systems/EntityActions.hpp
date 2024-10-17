@@ -1,5 +1,5 @@
-#ifndef CORE_SYSTEMS_MOVEMENT_HPP
-#define CORE_SYSTEMS_MOVEMENT_HPP
+#ifndef CORE_SYSTEMS_ENTITYACTIONS_HPP
+#define CORE_SYSTEMS_ENTITYACTIONS_HPP
 
 #include <BLIB/ECS/ComponentPool.hpp>
 #include <BLIB/Engine/System.hpp>

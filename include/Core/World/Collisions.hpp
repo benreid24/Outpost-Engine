@@ -31,6 +31,12 @@ struct Collisions {
         /// Virtual category for world queries
         CoverQueryRay = 0x1 << 3,
 
+        /// Sensors that do not interact with bullets or cover
+        WorldSensor = 0x1 << 4,
+
+        /// Virtual category for sensor connection queries
+        SensorQueryRay = 0x1 << 5,
+
         /// Helper value for masks that should collide with all categories
         All = std::numeric_limits<std::uint32_t>::max()
     };
@@ -51,9 +57,19 @@ struct Collisions {
     static b2Filter getBulletFilter();
 
     /**
+     * @brief Returns the filter to use for sensors
+     */
+    static b2Filter getSensorFilter();
+
+    /**
      * @brief Returns the filter to use for world cover queries
      */
     static b2QueryFilter getCoverQueryFilter();
+
+    /**
+     * @brief Returns the filter to use for world node connection queries
+     */
+    static b2QueryFilter getNodeConnectionFilter();
 };
 
 } // namespace world

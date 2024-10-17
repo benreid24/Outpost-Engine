@@ -6,6 +6,7 @@
 #include <BLIB/Systems/Physics2D.hpp>
 #include <Core/Systems/Damage.hpp>
 #include <Core/Systems/EntityActions.hpp>
+#include <Core/Systems/Movement.hpp>
 #include <Core/Systems/Render.hpp>
 
 /**
@@ -43,6 +44,11 @@ public:
      */
     sys::EntityActions& entityActionsSystem() { return *entityActions; }
 
+    /**
+     * @brief Returns the movement system
+     */
+    sys::Movement& movementSystem() { return *movement; }
+
 protected:
     /**
      * @brief Early startup tasks shared by both editor and game go in here
@@ -76,6 +82,7 @@ private:
     sys::Render* render;
     bl::sys::Physics2D* physics;
     sys::EntityActions* entityActions;
+    sys::Movement* movement;
 };
 
 } // namespace core

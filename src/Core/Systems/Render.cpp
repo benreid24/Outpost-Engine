@@ -1,5 +1,6 @@
 #include <Core/Systems/Render.hpp>
 
+#include <BLIB/Components/Shape2D.hpp>
 #include <BLIB/Graphics/Circle.hpp>
 #include <BLIB/Graphics/Rectangle.hpp>
 #include <BLIB/Graphics/VertexBuffer2D.hpp>
@@ -68,6 +69,14 @@ void Render::init(bl::engine::Engine& e) {
             .addDescriptorSet<bl::rc::ds::Scene2DFactory>()
             .addDescriptorSet<bl::rc::ds::Object2DFactory>()
             .build());
+}
+
+void Render::updateTestGraphicsColor(bl::ecs::Entity entity, bl::rc::Color color) {
+    bl::com::Shape2D* shape = engine->ecs().getComponent<bl::com::Shape2D>(entity);
+    if (shape) {
+        for (auto& v : shape->indexBuffer.vertices()) { v.color = color; }
+        shape->indexBuffer.queueTransfer();
+    }
 }
 
 void Render::update(std::mutex&, float, float, float, float) {}
