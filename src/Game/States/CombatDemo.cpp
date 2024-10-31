@@ -93,7 +93,7 @@ void CombatDemo::observe(const sf::Event& event) {
             ecs.emplaceComponent<bl::com::Hitbox2D>(newEntity, transform, Radius);
             auto physics = game.physicsSystem().addPhysicsToEntity(newEntity, bodyDef, shapeDef);
             object       = ecs.emplaceComponent<core::com::Moveable>(
-                newEntity, *physics, 320.f, 1920.f / 6.f, 120.f, 0.9f, 10.f);
+                newEntity, *physics, 320.f, 1920.f / 6.f, 270.f, 0.9f, 10.f);
 
             ecs.emplaceComponent<core::com::Mortal>(newEntity, 100.f);
             shooter = ecs.emplaceComponent<core::com::Shooter>(newEntity, 3.f, 20.f, Radius * 2.f);

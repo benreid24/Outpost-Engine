@@ -2,6 +2,7 @@
 
 #include <BLIB/Events.hpp>
 #include <Core/Input/Control.hpp>
+#include <Core/Player/Player.hpp>
 #include <Core/Properties.hpp>
 
 namespace core
@@ -32,6 +33,7 @@ bool Game::performSharedEarlyStartup(const char* configFilename) {
 }
 
 bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
+    engine.addPlayer<player::Player>();
     input::configureInputSystem(engine.inputSystem());
 
     using Stage = bl::engine::FrameStage;

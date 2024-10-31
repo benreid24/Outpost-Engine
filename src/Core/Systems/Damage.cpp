@@ -27,26 +27,31 @@ void Damage::observe(const bl::sys::Physics2D::EntityCollisionBeginEvent& collis
         collision.entityB, tx);
     tx.unlock();
 
-    if (setA.get<com::Mortal>() && setB.get<com::Damager>()) {
-        applyDamage(collision.entityA,
-                    *setA.get<com::Mortal>(),
-                    collision.entityB,
-                    *setB.get<com::Damager>(),
-                    tx);
+    if (setB.get<com::Damager>()) {
+        if (setA.get<com::Mortal>()) {
+            applyDamage(collision.entityA,
+                        *setA.get<com::Mortal>(),
+                        collision.entityB,
+                        *setB.get<com::Damager>(),
+                        tx);
+        }
+        engine->ecs().destroyEntity(setB.entity(), tx);
     }
-    if (setB.get<com::Mortal>() && setA.get<com::Damager>()) {
-        applyDamage(collision.entityB,
-                    *setB.get<com::Mortal>(),
-                    collision.entityA,
-                    *setA.get<com::Damager>(),
-                    tx);
+    if (setA.get<com::Damager>()) {
+        if (setB.get<com::Mortal>()) {
+            applyDamage(collision.entityB,
+                        *setB.get<com::Mortal>(),
+                        collision.entityA,
+                        *setA.get<com::Damager>(),
+                        tx);
+        }
+        engine->ecs().destroyEntity(setA.entity(), tx);
     }
 }
 
 void Damage::applyDamage(bl::ecs::Entity mortalEntity, com::Mortal& victim,
                          bl::ecs::Entity damagerEntity, com::Damager& damager, Transaction& tx) {
     victim.health -= damager.damage;
-    engine->ecs().destroyEntity(damagerEntity, tx);
     if (victim.health <= 0.f) {
         if (victim.deathTime > 0.f) {
             engine->ecs().emplaceComponentWithTx<bl::com::MarkedForDeath>(
