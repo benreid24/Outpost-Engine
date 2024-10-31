@@ -33,6 +33,10 @@ bool Game::performEarlyStartup(int, char**) {
         core::Properties.WindowHeight.set(ConstantsGame::WindowHeight);
     }
 
+    // we will use a virtual coordinate space for now
+    bl::cam::OverlayCamera::setOverlayCoordinateSpace(ConstantsGame::WindowWidth,
+                                                      ConstantsGame::WindowHeight);
+
     // TODO - SETUP_TASK - any other game specific early setup steps
 
     return true;

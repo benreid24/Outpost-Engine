@@ -11,6 +11,7 @@ HUD::HUD(Player& owner)
 
 void HUD::addToOverlay() {
     gui = bl::gui::GUI::create(owner.getCurrentWorld(), owner, bl::gui::LinePacker::create());
+    debugMenu.init(*gui);
     gui->addToOverlay();
 }
 

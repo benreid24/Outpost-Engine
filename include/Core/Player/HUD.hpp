@@ -2,6 +2,7 @@
 #define CORE_PLAYER_HUD_HPP
 
 #include <BLIB/Interfaces/GUI.hpp>
+#include <Core/Player/HUD/DebugMenu.hpp>
 
 namespace core
 {
@@ -36,6 +37,7 @@ public:
 private:
     Player& owner;
     bl::gui::GUI::Ptr gui;
+    hud::DebugMenu debugMenu;
 };
 
 } // namespace player
