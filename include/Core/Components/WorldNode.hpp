@@ -20,6 +20,23 @@ namespace com
 struct WorldNode {
     world::World* world;
     std::size_t node;
+
+    /**
+     * @brief Creates an empty node component
+     */
+    WorldNode()
+    : world(nullptr)
+    , node(0) {}
+
+    /**
+     * @brief Creates the node component for the given world and index
+     *
+     * @param world The world the node belongs to
+     * @param node The index of the node in the world
+     */
+    WorldNode(world::World* world, std::size_t node)
+    : world(world)
+    , node(node) {}
 };
 
 } // namespace com
