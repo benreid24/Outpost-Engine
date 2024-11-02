@@ -12,9 +12,7 @@ namespace game
 {
 namespace state
 {
-class CombatDemo
-: public bl::engine::State
-, public bl::event::Listener<sf::Event> {
+class CombatDemo : public bl::engine::State {
 public:
     CombatDemo(bl::engine::Engine& engine);
 
@@ -22,18 +20,11 @@ public:
 
 private:
     bl::engine::Engine& engine;
-    core::com::Moveable* object;
-    core::com::Shooter* shooter;
-
-    bl::gfx::Rectangle dragBox;
-    glm::vec2 clickStart;
 
     const char* name() const override;
     void activate(bl::engine::Engine& engine) override;
     void deactivate(bl::engine::Engine& engine) override;
     void update(bl::engine::Engine& engine, float dt, float realDt) override;
-
-    virtual void observe(const sf::Event& event) override;
 };
 
 } // namespace state

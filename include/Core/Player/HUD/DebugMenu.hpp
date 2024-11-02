@@ -1,7 +1,10 @@
 #ifndef CORE_PLAYER_HUD_DEBUGMENU_HPP
 #define CORE_PLAYER_HUD_DEBUGMENU_HPP
 
+#include <BLIB/Graphics/Rectangle.hpp>
 #include <BLIB/Interfaces/GUI.hpp>
+#include <Core/Components/Moveable.hpp>
+#include <Core/Components/Shooter.hpp>
 
 namespace core
 {
@@ -17,6 +20,18 @@ namespace hud
  */
 class DebugMenu {
 public:
+    /**
+     * @brief Initializes some default state
+     */
+    DebugMenu();
+
+    /**
+     * @brief Updates the debug menu
+     *
+     * @param dt Time elapsed in seconds
+     */
+    void update(float dt);
+
     /**
      * @brief Creates the GUI components in the hidden state
      *
@@ -34,8 +49,21 @@ public:
      */
     void hide();
 
+    /**
+     * @brief Processes the window event
+     *
+     * @param event The event to process
+     * @return True if the event was used, false if no effect
+     */
+    bool processEvent(const sf::Event& event);
+
 private:
     bl::gui::Window::Ptr window;
+
+    core::com::Moveable* object;
+    core::com::Shooter* shooter;
+    bl::gfx::Rectangle dragBox;
+    glm::vec2 clickStart;
 };
 
 } // namespace hud

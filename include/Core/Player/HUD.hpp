@@ -1,6 +1,7 @@
 #ifndef CORE_PLAYER_HUD_HPP
 #define CORE_PLAYER_HUD_HPP
 
+#include <BLIB/Events.hpp>
 #include <BLIB/Interfaces/GUI.hpp>
 #include <Core/Player/HUD/DebugMenu.hpp>
 
@@ -15,7 +16,7 @@ class Player;
  *
  * @ingroup Player
  */
-class HUD {
+class HUD : public bl::event::Listener<sf::Event> {
 public:
     /**
      * @brief Creates the HUD
@@ -45,6 +46,8 @@ private:
     Player& owner;
     bl::gui::GUI::Ptr gui;
     hud::DebugMenu debugMenu;
+
+    virtual void observe(const sf::Event& event);
 };
 
 } // namespace player
