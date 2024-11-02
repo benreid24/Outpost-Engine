@@ -9,6 +9,8 @@ namespace player
 HUD::HUD(Player& owner)
 : owner(owner) {}
 
+void HUD::update(float dt) { gui->update(dt); }
+
 void HUD::addToOverlay() {
     gui = bl::gui::GUI::create(owner.getCurrentWorld(), owner, bl::gui::LinePacker::create());
     debugMenu.init(*gui);

@@ -25,6 +25,13 @@ public:
     HUD(Player& owner);
 
     /**
+     * @brief Updates the HUD
+     *
+     * @param dt Elapsed time in seconds
+     */
+    void update(float dt);
+
+    /**
      * @brief Adds the HUD to the players current overlay
      */
     void addToOverlay();

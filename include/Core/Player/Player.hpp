@@ -36,6 +36,11 @@ public:
      */
     virtual ~Player() = default;
 
+    /**
+     * @brief Returns the HUD for this player
+     */
+    HUD& getHud() { return hud; }
+
 private:
     HUD hud;
 

@@ -6,6 +6,7 @@
 #include <BLIB/Render/Scenes/Scene2D.hpp>
 #include <BLIB/Util/Random.hpp>
 #include <Core/Game.hpp>
+#include <Core/Player/Player.hpp>
 #include <Core/World/Collisions.hpp>
 #include <Core/World/World.hpp>
 
@@ -39,7 +40,9 @@ void CombatDemo::deactivate(bl::engine::Engine& engine) {
     engine.getPlayer().leaveWorld();
 }
 
-void CombatDemo::update(bl::engine::Engine&, float dt, float) {
+void CombatDemo::update(bl::engine::Engine& engine, float dt, float) {
+    engine.getPlayer<core::player::Player>().getHud().update(dt);
+
     if (object) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
             object->move(core::com::Moveable::Forward);

@@ -12,8 +12,15 @@ void DebugMenu::init(GUI& gui) {
     window = Window::create(LinePacker::create(), "Debug", Window::Default, {0.f, 0.f});
 
     // TODO - create menu
+    auto tabs = Notebook::create();
 
-    gui.pack(window);
+    auto worldTabs = Notebook::create();
+    worldTabs->addPage("nodes", "Nodes", Button::create("Node page here"));
+    tabs->addPage("world", "World", worldTabs);
+
+    window->pack(tabs, true, true);
+    gui.pack(window, true, true);
+    // hide();
 }
 
 void DebugMenu::show() { window->setVisible(true); }
