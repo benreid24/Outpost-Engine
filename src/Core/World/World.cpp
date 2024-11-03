@@ -100,7 +100,6 @@ void World::handleSensorExit(std::size_t i, bl::ecs::Entity entity) {
 
 void World::recomputeNodeDistances() {
     if (!nodes.empty()) {
-        Game& game = Game::getInstance<Game>();
         debugNodes.resize(0, false);
         for (auto& node : nodes) {
             computeNodeDistances(node);
