@@ -29,5 +29,7 @@ void HUD::observe(const sf::Event& event) {
     if (debugMenu.processEvent(event)) { return; }
 }
 
+void HUD::toggleDebugMenu() { debugMenu.toggle(); }
+
 } // namespace player
 } // namespace core

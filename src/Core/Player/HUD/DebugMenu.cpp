@@ -19,6 +19,9 @@ DebugMenu::DebugMenu()
 
 void DebugMenu::init(GUI& gui) {
     window = Window::create(LinePacker::create(), "Debug", Window::Default, {0.f, 0.f});
+    window->getCloseButton()
+        ->getSignal(Event::LeftClicked)
+        .willCall([this](const Event&, Element*) { window->setVisible(false); });
 
     // TODO - create menu
     auto tabs = Notebook::create();
@@ -29,8 +32,7 @@ void DebugMenu::init(GUI& gui) {
 
     window->pack(tabs, true, true);
     gui.pack(window, true, true);
-    // TODO - show & hide
-    // hide();
+    window->setVisible(false);
 
     auto& game   = bl::game::Game::getInstance<core::Game>();
     auto& engine = game.engine();
@@ -42,9 +44,7 @@ void DebugMenu::init(GUI& gui) {
     dragBox.setHidden(true);
 }
 
-void DebugMenu::show() { window->setVisible(true); }
-
-void DebugMenu::hide() { window->setVisible(false); }
+void DebugMenu::toggle() { window->setVisible(!window->visible()); }
 
 bool DebugMenu::processEvent(const sf::Event& event) {
     constexpr float Radius = 30.f;

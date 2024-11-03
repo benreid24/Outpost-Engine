@@ -42,6 +42,11 @@ public:
      */
     void removeFromOverlay();
 
+    /**
+     * @brief Toggles the debug menu
+     */
+    void toggleDebugMenu();
+
 private:
     Player& owner;
     bl::gui::GUI::Ptr gui;

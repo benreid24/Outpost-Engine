@@ -40,14 +40,9 @@ public:
     void init(bl::gui::GUI& gui);
 
     /**
-     * @brief Shows the debug menu window
+     * @brief Shows or hides the debug menu window
      */
-    void show();
-
-    /**
-     * @brief Hides the debug menu window
-     */
-    void hide();
+    void toggle();
 
     /**
      * @brief Processes the window event
