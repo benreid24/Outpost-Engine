@@ -125,8 +125,6 @@ void DebugMenu::toggle() { window->setVisible(!window->visible()); }
 bool DebugMenu::processEvent(const sf::Event& event) {
     if (!window->visible()) { return false; }
 
-    constexpr float Radius = 30.f;
-
     auto& game                = bl::game::Game::getInstance<core::Game>();
     auto& engine              = game.engine();
     auto& ecs                 = engine.ecs();
@@ -135,8 +133,9 @@ bool DebugMenu::processEvent(const sf::Event& event) {
     const auto worldPos       = player.getRenderObserver().getMousePosInWorldSpace();
 
     const auto createEntity = [this, &player, &worldPos, &ecs, &game]() {
-        const auto newEntity = player.getCurrentWorld().createEntity();
-        auto* transform      = ecs.emplaceComponent<bl::com::Transform2D>(newEntity, worldPos);
+        constexpr float Radius = 30.f;
+        const auto newEntity   = player.getCurrentWorld().createEntity();
+        auto* transform        = ecs.emplaceComponent<bl::com::Transform2D>(newEntity, worldPos);
         game.renderSystem().addTestGraphicsToEntity(newEntity, Radius, sf::Color::Blue);
 
         auto bodyDef          = b2DefaultBodyDef();
@@ -209,8 +208,11 @@ bool DebugMenu::processEvent(const sf::Event& event) {
                 break;
 
             case NodeTool::Remove:
-                // TODO - query world & remove node
-                break;
+                if (event.type == sf::Event::MouseButtonPressed) {
+                    if (event.mouseButton.button == sf::Mouse::Left) {
+                        return world.removeNodeAtPosition(worldPos);
+                    }
+                }
             }
             break; // WorldTab::Nodes
 

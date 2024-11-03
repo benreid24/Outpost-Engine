@@ -56,6 +56,15 @@ public:
     void addCover(glm::vec2 pos, glm::vec2 size, float angle);
 
     /**
+     * @brief Removes the node closest to the given position
+     *
+     * @param pos The world position to query and remove from
+     * @param threshold Minimum distance a node must be within to be removed
+     * @return Whether a node was removed or not
+     */
+    bool removeNodeAtPosition(const glm::vec2& pos, float threshold = 30.f);
+
+    /**
      * @brief Called when sensors are triggered by entities
      *
      * @param node The index of the node whose sensor was triggered
@@ -85,6 +94,7 @@ private:
     void computeNodeDistances(Node& node);
     void populateNodeEdges(Node& node);
     void repopulateAllNodeEdges();
+    void regenNodeGraphics();
 };
 
 } // namespace world

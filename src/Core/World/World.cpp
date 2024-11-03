@@ -70,6 +70,31 @@ void World::addCover(glm::vec2 pos, glm::vec2 size, float angle) {
     repopulateAllNodeEdges();
 }
 
+bool World::removeNodeAtPosition(const glm::vec2& pos, float thresh) {
+    Node* node = nullptr;
+    float md   = 0.f;
+    for (Node& n : nodes) {
+        const float d = glm::distance(n.position, pos);
+        if (d <= thresh) {
+            if (!node || d < md) {
+                node = &n;
+                md   = d;
+            }
+        }
+    }
+
+    if (node) {
+        Game& game = Game::getInstance<Game>();
+        game.engine().ecs().destroyEntity(node->sensorEntity);
+        const auto i = node - nodes.data();
+        nodes.erase(nodes.begin() + i);
+        regenNodeGraphics();
+        repopulateAllNodeEdges();
+        return true;
+    }
+    return false;
+}
+
 void World::handleSensorEnter(std::size_t i, bl::ecs::Entity entity) {
     auto& node = nodes[i];
     if (node.occupiedBy == bl::ecs::InvalidEntity) {
@@ -237,6 +262,11 @@ void World::addDebugGraphicsToNode(Node& node) {
         p2.pos.y = ArrowWidth * -c + centerPos.y;
         p2.pos.z = 0.f;
     }
+}
+
+void World::regenNodeGraphics() {
+    debugNodes.resize(0, false);
+    for (auto& node : nodes) { addDebugGraphicsToNode(node); }
 }
 
 } // namespace world
