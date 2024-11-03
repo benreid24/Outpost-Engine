@@ -53,12 +53,43 @@ public:
     bool processEvent(const sf::Event& event);
 
 private:
+    enum struct TopTab {
+        Console,
+        World,
+        Entity,
+    } currentTopTab;
+
+    enum struct WorldTab { Nodes, Cover } currentWorldTab;
+
+    enum struct NodeTool { CreatePath, CreateCover, Remove };
+    bl::gui::RadioButton::Group* nodeRadioGroup;
+    NodeTool getCurrentNodeTool() const;
+
+    enum struct CoverTool { Create, Remove };
+    bl::gui::RadioButton::Group* coverRadioGroup;
+    CoverTool getCurrentCoverTool() const;
+
+    enum struct EntityTool { Create, Control, Kill };
+    bl::gui::RadioButton::Group* entityRadioGroup;
+    EntityTool getCurrentEntityTool() const;
+
     bl::gui::Window::Ptr window;
+
+    bl::gui::Label::Ptr coverAngleLabel;
+    bl::gui::Slider::Ptr coverAngle;
+    void onCoverAngleChange();
+    float getCoverAngle() const;
+
+    bl::gui::Label::Ptr controlNameLabel;
 
     core::com::Moveable* object;
     core::com::Shooter* shooter;
     bl::gfx::Rectangle dragBox;
     glm::vec2 clickStart;
+
+    bl::gui::Element::Ptr createConsoleTab();
+    bl::gui::Element::Ptr createWorldTab();
+    bl::gui::Element::Ptr createEntityTab();
 };
 
 } // namespace hud
