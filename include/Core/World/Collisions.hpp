@@ -70,6 +70,11 @@ struct Collisions {
      * @brief Returns the filter to use for world node connection queries
      */
     static b2QueryFilter getNodeConnectionFilter();
+
+    /**
+     * @brief Returns the filter to use when querying for units
+     */
+    static b2QueryFilter getUnitQueryFilter();
 };
 
 } // namespace world

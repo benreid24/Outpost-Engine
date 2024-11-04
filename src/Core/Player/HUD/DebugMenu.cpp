@@ -19,8 +19,7 @@ Box::Ptr makeBoxV() { return Box::create(LinePacker::create(LinePacker::Vertical
 Box::Ptr makeBoxH() { return Box::create(LinePacker::create(LinePacker::Horizontal, 4.f)); }
 } // namespace
 
-DebugMenu::DebugMenu()
-: object(nullptr) {}
+DebugMenu::DebugMenu() {}
 
 void DebugMenu::init(GUI& gui) {
     window = Window::create(LinePacker::create(), "Debug", Window::Default, {0.f, 0.f});
@@ -120,7 +119,16 @@ Element::Ptr DebugMenu::createEntityTab() {
     return entityBox;
 }
 
-void DebugMenu::toggle() { window->setVisible(!window->visible()); }
+void DebugMenu::toggle() {
+    if (window->visible()) {
+        window->setVisible(false);
+        bl::event::Dispatcher::unsubscribe(this);
+    }
+    else {
+        window->setVisible(true);
+        bl::event::Dispatcher::subscribe(this);
+    }
+}
 
 bool DebugMenu::processEvent(const sf::Event& event) {
     if (!window->visible()) { return false; }
@@ -145,12 +153,15 @@ bool DebugMenu::processEvent(const sf::Event& event) {
         shapeDef.filter       = core::world::Collisions::getUnitFilter();
 
         ecs.emplaceComponent<bl::com::Hitbox2D>(newEntity, transform, Radius);
-        auto physics = game.physicsSystem().addPhysicsToEntity(newEntity, bodyDef, shapeDef);
-        object       = ecs.emplaceComponent<core::com::Moveable>(
+        auto physics       = game.physicsSystem().addPhysicsToEntity(newEntity, bodyDef, shapeDef);
+        controlling.object = ecs.emplaceComponent<core::com::Moveable>(
             newEntity, *physics, 320.f, 1920.f / 6.f, 270.f, 0.9f, 10.f);
 
         ecs.emplaceComponent<core::com::Mortal>(newEntity, 100.f);
-        shooter = ecs.emplaceComponent<core::com::Shooter>(newEntity, 3.f, 20.f, Radius * 2.f);
+        controlling.shooter =
+            ecs.emplaceComponent<core::com::Shooter>(newEntity, 3.f, 20.f, Radius * 2.f);
+
+        onEntityControl(newEntity);
     };
 
     const auto createCover = [this, &event, &worldPos, &world]() -> bool {
@@ -181,6 +192,35 @@ bool DebugMenu::processEvent(const sf::Event& event) {
                 if (event.mouseWheelScroll.delta > 0.f) { coverAngle->incrementValue(1.f); }
                 else { coverAngle->incrementValue(-1.f); }
             }
+        }
+        return false;
+    };
+
+    const auto controlEntity = [this, &worldPos, &game, &engine, &world]() -> bool {
+        auto* phys = game.physicsSystem().findEntityAtPosition(
+            world, worldPos, world::Collisions::getUnitQueryFilter());
+        if (phys) {
+            auto coms =
+                engine.ecs()
+                    .getComponentSet<bl::ecs::Require<core::com::Moveable, core::com::Shooter>>(
+                        phys->getOwner());
+            if (coms.isValid()) {
+                controlling.object  = coms.get<core::com::Moveable>();
+                controlling.shooter = coms.get<core::com::Shooter>();
+                onEntityControl(phys->getOwner());
+                return true;
+            }
+        }
+        return false;
+    };
+
+    const auto killEntity = [this, &worldPos, &game, &engine, &world]() -> bool {
+        auto* phys = game.physicsSystem().findEntityAtPosition(
+            world, worldPos, world::Collisions::getUnitQueryFilter());
+        if (phys) {
+            // TODO - other filter before destroy?
+            engine.ecs().destroyEntity(phys->getOwner());
+            return true;
         }
         return false;
     };
@@ -243,11 +283,13 @@ bool DebugMenu::processEvent(const sf::Event& event) {
             }
             break;
         case EntityTool::Control:
-            // TODO - query world & set component pointers
-            break;
+            if (event.type == sf::Event::MouseButtonPressed) {
+                if (event.mouseButton.button == sf::Mouse::Left) { return controlEntity(); }
+            }
         case EntityTool::Kill:
-            // TODO - query world & destroy found entity
-            break;
+            if (event.type == sf::Event::MouseButtonPressed) {
+                if (event.mouseButton.button == sf::Mouse::Left) { return killEntity(); }
+            }
         }
         break; // TopTab::Entity
 
@@ -262,28 +304,28 @@ bool DebugMenu::processEvent(const sf::Event& event) {
 void DebugMenu::update(float) {
     if (!window->visible()) { return; }
 
-    if (object) {
+    if (controlling.object) {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-            object->move(core::com::Moveable::Forward);
+            controlling.object->move(core::com::Moveable::Forward);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-            object->move(core::com::Moveable::Backward);
+            controlling.object->move(core::com::Moveable::Backward);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-            object->move(core::com::Moveable::Left);
+            controlling.object->move(core::com::Moveable::Left);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            object->move(core::com::Moveable::Right);
+            controlling.object->move(core::com::Moveable::Right);
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-            object->rotate(core::com::Moveable::CounterClockwise);
+            controlling.object->rotate(core::com::Moveable::CounterClockwise);
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
-            object->rotate(core::com::Moveable::Clockwise);
+            controlling.object->rotate(core::com::Moveable::Clockwise);
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) { shooter->fire(); }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) { controlling.shooter->fire(); }
     }
 }
 
@@ -313,6 +355,18 @@ void DebugMenu::onCoverAngleChange() {
 }
 
 float DebugMenu::getCoverAngle() const { return std::floor(coverAngle->getValue() * 360.f); }
+
+void DebugMenu::onEntityControl(bl::ecs::Entity ent) {
+    controlling.entity = ent;
+    controlNameLabel->setText(std::to_string(ent.getIndex()));
+}
+
+void DebugMenu::observe(const bl::ecs::event::EntityDestroyed& event) {
+    if (event.entity == controlling.entity) {
+        controlling.reset();
+        controlNameLabel->setText("<none>");
+    }
+}
 
 } // namespace hud
 } // namespace player

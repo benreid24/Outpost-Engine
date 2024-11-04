@@ -46,5 +46,12 @@ b2QueryFilter Collisions::getNodeConnectionFilter() {
     return filter;
 }
 
+b2QueryFilter Collisions::getUnitQueryFilter() {
+    b2QueryFilter filter = b2DefaultQueryFilter();
+    filter.categoryBits  = Category::Unit;
+    filter.maskBits      = Category::Unit;
+    return filter;
+}
+
 } // namespace world
 } // namespace core

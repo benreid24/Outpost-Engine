@@ -18,12 +18,17 @@ namespace hud
  *
  * @ingroup Player
  */
-class DebugMenu {
+class DebugMenu : public bl::event::Listener<bl::ecs::event::EntityDestroyed> {
 public:
     /**
      * @brief Initializes some default state
      */
     DebugMenu();
+
+    /**
+     * @brief Destroys the debug menu
+     */
+    virtual ~DebugMenu() = default;
 
     /**
      * @brief Updates the debug menu
@@ -81,15 +86,32 @@ private:
     float getCoverAngle() const;
 
     bl::gui::Label::Ptr controlNameLabel;
+    void onEntityControl(bl::ecs::Entity control);
 
-    core::com::Moveable* object;
-    core::com::Shooter* shooter;
+    struct Controlling {
+        bl::ecs::Entity entity;
+        core::com::Moveable* object;
+        core::com::Shooter* shooter;
+
+        Controlling()
+        : entity(bl::ecs::InvalidEntity)
+        , object(nullptr)
+        , shooter(nullptr) {}
+
+        void reset() {
+            entity  = bl::ecs::InvalidEntity;
+            object  = nullptr;
+            shooter = nullptr;
+        }
+    } controlling;
     bl::gfx::Rectangle dragBox;
     glm::vec2 clickStart;
 
     bl::gui::Element::Ptr createConsoleTab();
     bl::gui::Element::Ptr createWorldTab();
     bl::gui::Element::Ptr createEntityTab();
+
+    virtual void observe(const bl::ecs::event::EntityDestroyed& event) override;
 };
 
 } // namespace hud
