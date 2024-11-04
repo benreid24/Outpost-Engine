@@ -52,9 +52,9 @@ void World::addNode(Node::Type type, glm::vec2 pos) {
 
 void World::addCover(glm::vec2 pos, glm::vec2 size, float angle) {
     Game& game = Game::getInstance<Game>();
-    covers.emplace_back(pos, size, angle);
 
-    auto entity     = createEntity();
+    auto entity = createEntity();
+    covers.emplace_back(entity, pos, size, angle);
     auto* transform = engine().ecs().emplaceComponent<bl::com::Transform2D>(entity, pos, angle);
     game.renderSystem().addTestGraphicsToEntity(entity, size, sf::Color::Black);
 
@@ -90,6 +90,23 @@ bool World::removeNodeAtPosition(const glm::vec2& pos, float thresh) {
         nodes.erase(nodes.begin() + i);
         regenNodeGraphics();
         repopulateAllNodeEdges();
+        return true;
+    }
+    return false;
+}
+
+bool World::removeCoverAtPosition(const glm::vec2& pos) {
+    Game& game = Game::getInstance<Game>();
+    bl::com::Physics2D* phys =
+        game.physicsSystem().findEntityAtPosition(*this, pos, Collisions::getCoverQueryFilter());
+    if (phys) {
+        for (auto it = covers.begin(); it != covers.end(); ++it) {
+            if (it->entity == phys->getOwner()) {
+                covers.erase(it);
+                break;
+            }
+        }
+        game.engine().ecs().destroyEntity(phys->getOwner());
         return true;
     }
     return false;

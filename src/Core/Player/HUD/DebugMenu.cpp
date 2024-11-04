@@ -222,8 +222,11 @@ bool DebugMenu::processEvent(const sf::Event& event) {
                 return createCover();
 
             case CoverTool::Remove:
-                // TODO - query world & remove cover
-                break;
+                if (event.type == sf::Event::MouseButtonPressed) {
+                    if (event.mouseButton.button == sf::Mouse::Left) {
+                        return world.removeCoverAtPosition(worldPos);
+                    }
+                }
             }
             break; // WorldTab::Cover
         }

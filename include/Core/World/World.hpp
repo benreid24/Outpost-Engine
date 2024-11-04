@@ -47,6 +47,15 @@ public:
     void addNode(Node::Type type, glm::vec2 position);
 
     /**
+     * @brief Removes the node closest to the given position
+     *
+     * @param pos The world position to query and remove from
+     * @param threshold Minimum distance a node must be within to be removed
+     * @return Whether a node was removed or not
+     */
+    bool removeNodeAtPosition(const glm::vec2& pos, float threshold = 30.f);
+
+    /**
      * @brief Adds a section of cover (as a rotated rectangle) to the world
      *
      * @param pos The position to add the cover at. Center of the rectangle
@@ -56,13 +65,12 @@ public:
     void addCover(glm::vec2 pos, glm::vec2 size, float angle);
 
     /**
-     * @brief Removes the node closest to the given position
+     * @brief Removes the cover that contains the given position, if any
      *
-     * @param pos The world position to query and remove from
-     * @param threshold Minimum distance a node must be within to be removed
-     * @return Whether a node was removed or not
+     * @param pos The position to remove the cover at
+     * @return Whether a cover was removed or not
      */
-    bool removeNodeAtPosition(const glm::vec2& pos, float threshold = 30.f);
+    bool removeCoverAtPosition(const glm::vec2& pos);
 
     /**
      * @brief Called when sensors are triggered by entities
