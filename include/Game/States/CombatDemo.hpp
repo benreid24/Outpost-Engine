@@ -3,9 +3,6 @@
 
 #include <BLIB/Engine/State.hpp>
 #include <BLIB/Events.hpp>
-#include <BLIB/Graphics/Rectangle.hpp>
-#include <Core/Components/Moveable.hpp>
-#include <Core/Components/Shooter.hpp>
 #include <SFML/Window/Event.hpp>
 
 namespace game

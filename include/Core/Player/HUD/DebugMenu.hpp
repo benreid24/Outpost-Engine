@@ -3,8 +3,7 @@
 
 #include <BLIB/Graphics/Rectangle.hpp>
 #include <BLIB/Interfaces/GUI.hpp>
-#include <Core/Components/Moveable.hpp>
-#include <Core/Components/Shooter.hpp>
+#include <Core/Components/Unit.hpp>
 
 namespace core
 {
@@ -90,18 +89,15 @@ private:
 
     struct Controlling {
         bl::ecs::Entity entity;
-        core::com::Moveable* object;
-        core::com::Shooter* shooter;
+        core::com::Unit* unit;
 
         Controlling()
         : entity(bl::ecs::InvalidEntity)
-        , object(nullptr)
-        , shooter(nullptr) {}
+        , unit(nullptr) {}
 
         void reset() {
-            entity  = bl::ecs::InvalidEntity;
-            object  = nullptr;
-            shooter = nullptr;
+            entity = bl::ecs::InvalidEntity;
+            unit   = nullptr;
         }
     } controlling;
     bl::gfx::Rectangle dragBox;

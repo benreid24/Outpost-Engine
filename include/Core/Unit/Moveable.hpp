@@ -1,5 +1,5 @@
-#ifndef CORE_COMPONENTS_MOVEABLE_HPP
-#define CORE_COMPONENTS_MOVEABLE_HPP
+#ifndef CORE_UNIT_MOVEABLE_HPP
+#define CORE_UNIT_MOVEABLE_HPP
 
 #include <BLIB/Components/Physics2D.hpp>
 
@@ -7,15 +7,15 @@ namespace core
 {
 namespace sys
 {
-class EntityActions;
+class Unit;
 }
 
-namespace com
+namespace unit
 {
 /**
- * @brief Component that allows an entity to be moved and controlled
+ * @brief Component that allows a unit to be moved
  *
- * @ingroup Components
+ * @ingroup Unit
  */
 class Moveable {
 public:
@@ -28,7 +28,7 @@ public:
     /**
      * @brief Creates the moveable component
      *
-     * @param physics The physics component of the entity to move
+     * @param physics The physics component of the unit
      * @param acceleration The rate of acceleration for movement, in world space units
      * @param maxSpeed The maximum movement speed to enforce, in world space units
      * @param rotateRate The rotation speed in degrees per second
@@ -64,24 +64,22 @@ public:
     void setRotation(float degrees);
 
 private:
+    bl::com::Physics2D& physics;
     const float mass;
     const float maxSpeed;
     const float rotateRate;
     const float force;
     const float dirCorrectionFactor;
     const float damping;
-    bl::com::Physics2D& physics;
     MoveDirection moveDir;
     float moveFactor;
     RotateDirection rotateDir;
     float rotateFactor;
 
-    void apply(float dt);
-
-    friend class sys::EntityActions;
+    friend class sys::Unit;
 };
 
-} // namespace com
+} // namespace unit
 } // namespace core
 
 #endif

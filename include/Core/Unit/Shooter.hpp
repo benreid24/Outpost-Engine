@@ -1,19 +1,20 @@
-#ifndef CORE_COMPONENTS_SHOOTER_HPP
-#define CORE_COMPONENTS_SHOOTER_HPP
+#ifndef CORE_UNIT_SHOOTER_HPP
+#define CORE_UNIT_SHOOTER_HPP
 
 namespace core
 {
 namespace sys
 {
-class EntityActions;
+class Unit;
 }
 
-namespace com
+/// Collection of functionality and behaviors for units
+namespace unit
 {
 /**
- * @brief Component that allows an entity to fire bullets
+ * @brief Component that allows a unit to fire bullets
  *
- * @ingroup Components
+ * @ingroup Unit
  */
 class Shooter {
 public:
@@ -63,10 +64,10 @@ private:
     float timeSinceLastFire;
     bool isFiring;
 
-    friend class sys::EntityActions;
+    friend class sys::Unit;
 };
 
-} // namespace com
+} // namespace unit
 } // namespace core
 
 #endif

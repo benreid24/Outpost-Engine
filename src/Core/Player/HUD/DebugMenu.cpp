@@ -153,13 +153,12 @@ bool DebugMenu::processEvent(const sf::Event& event) {
         shapeDef.filter       = core::world::Collisions::getUnitFilter();
 
         ecs.emplaceComponent<bl::com::Hitbox2D>(newEntity, transform, Radius);
-        auto physics       = game.physicsSystem().addPhysicsToEntity(newEntity, bodyDef, shapeDef);
-        controlling.object = ecs.emplaceComponent<core::com::Moveable>(
-            newEntity, *physics, 320.f, 1920.f / 6.f, 270.f, 0.9f, 10.f);
-
+        auto physics = game.physicsSystem().addPhysicsToEntity(newEntity, bodyDef, shapeDef);
         ecs.emplaceComponent<core::com::Mortal>(newEntity, 100.f);
-        controlling.shooter =
-            ecs.emplaceComponent<core::com::Shooter>(newEntity, 3.f, 20.f, Radius * 2.f);
+
+        controlling.unit = ecs.emplaceComponent<core::com::Unit>(newEntity, *physics);
+        controlling.unit->makeMoveable(320.f, 1920.f / 6.f, 270.f, 0.9f, 10.f);
+        controlling.unit->makeShooter(3.f, 20.f, Radius * 2.f);
 
         onEntityControl(newEntity);
     };
@@ -200,13 +199,9 @@ bool DebugMenu::processEvent(const sf::Event& event) {
         auto* phys = game.physicsSystem().findEntityAtPosition(
             world, worldPos, world::Collisions::getUnitQueryFilter());
         if (phys) {
-            auto coms =
-                engine.ecs()
-                    .getComponentSet<bl::ecs::Require<core::com::Moveable, core::com::Shooter>>(
-                        phys->getOwner());
-            if (coms.isValid()) {
-                controlling.object  = coms.get<core::com::Moveable>();
-                controlling.shooter = coms.get<core::com::Shooter>();
+            auto* unit = engine.ecs().getComponent<core::com::Unit>(phys->getOwner());
+            if (unit) {
+                controlling.unit = unit;
                 onEntityControl(phys->getOwner());
                 return true;
             }
@@ -304,28 +299,34 @@ bool DebugMenu::processEvent(const sf::Event& event) {
 void DebugMenu::update(float) {
     if (!window->visible()) { return; }
 
-    if (controlling.object) {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-            controlling.object->move(core::com::Moveable::Forward);
-        }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-            controlling.object->move(core::com::Moveable::Backward);
-        }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-            controlling.object->move(core::com::Moveable::Left);
-        }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            controlling.object->move(core::com::Moveable::Right);
+    if (controlling.unit) {
+        if (controlling.unit->canMove()) {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+                controlling.unit->getMover().move(core::unit::Moveable::Forward);
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+                controlling.unit->getMover().move(core::unit::Moveable::Backward);
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+                controlling.unit->getMover().move(core::unit::Moveable::Left);
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+                controlling.unit->getMover().move(core::unit::Moveable::Right);
+            }
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+                controlling.unit->getMover().rotate(core::unit::Moveable::CounterClockwise);
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
+                controlling.unit->getMover().rotate(core::unit::Moveable::Clockwise);
+            }
         }
 
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-            controlling.object->rotate(core::com::Moveable::CounterClockwise);
+        if (controlling.unit->canShoot()) {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+                controlling.unit->getShooter().fire();
+            }
         }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
-            controlling.object->rotate(core::com::Moveable::Clockwise);
-        }
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) { controlling.shooter->fire(); }
     }
 }
 

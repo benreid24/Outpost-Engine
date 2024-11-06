@@ -5,9 +5,9 @@
 
 #include <BLIB/Systems/Physics2D.hpp>
 #include <Core/Systems/Damage.hpp>
-#include <Core/Systems/EntityActions.hpp>
 #include <Core/Systems/Movement.hpp>
 #include <Core/Systems/Render.hpp>
+#include <Core/Systems/Unit.hpp>
 
 /**
  * @defgroup Core
@@ -42,7 +42,7 @@ public:
     /**
      * @brief Returns the entity actions system
      */
-    sys::EntityActions& entityActionsSystem() { return *entityActions; }
+    sys::Unit& unitSystem() { return *units; }
 
     /**
      * @brief Returns the movement system
@@ -81,7 +81,7 @@ private:
     sys::Damage damage;
     sys::Render* render;
     bl::sys::Physics2D* physics;
-    sys::EntityActions* entityActions;
+    sys::Unit* units;
     sys::Movement* movement;
 };
 
