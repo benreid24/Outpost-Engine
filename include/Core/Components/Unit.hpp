@@ -1,8 +1,11 @@
 #ifndef CORE_COMPONENTS_UNIT_HPP
 #define CORE_COMPONENTS_UNIT_HPP
 
+#include <BLIB/Containers/StaticRingBuffer.hpp>
+#include <Core/Unit/Command.hpp>
 #include <Core/Unit/Moveable.hpp>
 #include <Core/Unit/Shooter.hpp>
+#include <Core/World/Node.hpp>
 #include <optional>
 
 /**
@@ -21,6 +24,8 @@ namespace com
 {
 class Unit {
 public:
+    static constexpr std::size_t CommandQueueSize = 4;
+
     /**
      * @brief Creates a unit that cannot move or shoot
      *
@@ -70,9 +75,15 @@ public:
     unit::Shooter& getShooter() { return shooter.value(); }
 
 private:
+    // unit data and components
     bl::com::Physics2D& physics;
     std::optional<unit::Moveable> mover;
     std::optional<unit::Shooter> shooter;
+
+    // unit AI & command state
+    unit::Command activeCommands[unit::Command::ConcurrencyType::COUNT];
+    bl::ctr::StaticRingBuffer<unit::Command, CommandQueueSize> queuedCommands;
+    // TODO - pathfinding
 
     friend class sys::Unit;
 };
