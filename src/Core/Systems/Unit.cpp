@@ -109,7 +109,7 @@ void Unit::processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit, uni
         ctx.currentNode = 0;
         const glm::vec2 diff =
             unit.physics.getTransform().getGlobalPosition() - ctx.path.front()->getPosition();
-        ctx.targetAngle = bl::math::radiansToDegrees(std::atan2f(diff.y, diff.x));
+        ctx.targetAngle = bl::math::radiansToDegrees(::atan2f(diff.y, diff.x));
     }
 
     // point towards next node
@@ -172,7 +172,7 @@ void Unit::processKillUnitCommand(com::Unit& unit, unit::Command& cmd) {
     // point towards target and fire if close enough
     const glm::vec2 posDiff = unit.physics.getTransform().getGlobalPosition() -
                               cmd.getTargetUnit()->physics.getTransform().getGlobalPosition();
-    const float targetAngle = bl::math::radiansToDegrees(std::atan2f(posDiff.y, posDiff.x));
+    const float targetAngle = bl::math::radiansToDegrees(::atan2f(posDiff.y, posDiff.x));
     const float angleDiff   = unit.physics.getTransform().getRotation() - targetAngle;
     if (std::abs(angleDiff) > 3.f) {
         const auto dir = (angleDiff < 0.f && angleDiff >= -180.f) ?
