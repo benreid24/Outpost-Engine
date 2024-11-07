@@ -3,6 +3,7 @@
 
 #include <BLIB/Containers/StaticRingBuffer.hpp>
 #include <Core/Unit/Command.hpp>
+#include <Core/Unit/CommandContext.hpp>
 #include <Core/Unit/Moveable.hpp>
 #include <Core/Unit/Shooter.hpp>
 #include <Core/World/Node.hpp>
@@ -82,8 +83,8 @@ private:
 
     // unit AI & command state
     unit::Command activeCommands[unit::Command::ConcurrencyType::COUNT];
+    unit::CommandContext commandStates[unit::Command::ConcurrencyType::COUNT];
     bl::ctr::StaticRingBuffer<unit::Command, CommandQueueSize> queuedCommands;
-    // TODO - pathfinding
 
     friend class sys::Unit;
 };

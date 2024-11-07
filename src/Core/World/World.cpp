@@ -286,5 +286,11 @@ void World::regenNodeGraphics() {
     for (auto& node : nodes) { addDebugGraphicsToNode(node); }
 }
 
+bool World::computePath(const glm::vec2& startPos, Node* targetNode, std::vector<Node*>& path) {
+    // TODO - select first node by lowest net distance & ray cast for clearance
+    // TODO - find best path, taking into account node occupation
+    return false;
+}
+
 } // namespace world
 } // namespace core

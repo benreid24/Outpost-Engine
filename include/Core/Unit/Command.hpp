@@ -129,6 +129,14 @@ public:
      */
     Command(const Command& copy);
 
+    /**
+     * @brief Copies the command
+     *
+     * @param copy The command to copy
+     * @return A reference to this command
+     */
+    Command& operator=(const Command& copy);
+
 private:
     Status status;
     ConcurrencyType::Slot concurrencyType;

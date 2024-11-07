@@ -88,6 +88,16 @@ public:
      */
     void handleSensorExit(std::size_t node, bl::ecs::Entity entity);
 
+    /**
+     * @brief Finds a path from the start position to the target node
+     *
+     * @param startPos The start position in world coordinates
+     * @param target The target node
+     * @param path Vector to store the path of nodes in
+     * @return Whether a path could be found or not
+     */
+    bool computePath(const glm::vec2& startPos, Node* target, std::vector<Node*>& path);
+
 private:
     std::vector<Cover> covers;
     std::vector<Node> nodes;

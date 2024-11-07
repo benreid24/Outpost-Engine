@@ -50,6 +50,16 @@ public:
      */
     const glm::vec2& getPosition() const { return position; }
 
+    /**
+     * @brief Returns the id of the entity occupying this node
+     */
+    bl::ecs::Entity getOccupier() const { return occupiedBy; }
+
+    /**
+     * @brief Returns the id of the entity targeting this node
+     */
+    bl::ecs::Entity getTargetingEntity() const { return targetedBy; }
+
 private:
     Type type;
     glm::vec2 position;

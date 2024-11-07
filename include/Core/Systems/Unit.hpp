@@ -29,7 +29,10 @@ private:
     void init(bl::engine::Engine& engine) override;
     void update(std::mutex&, float dt, float, float, float) override;
 
-    void processAI();
+    void processAI(float dt);
+    void processHighLevelAI(bl::ecs::Entity entity, com::Unit& unit);
+    void processKillUnitCommand(com::Unit& unit, unit::Command& cmd);
+    void processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit, unit::Command& cmd);
 
     void resolveActions(float dt);
     void resolveUnitMovement(com::Unit& unit, float dt);

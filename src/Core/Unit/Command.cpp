@@ -11,10 +11,12 @@ Command::Command()
 , concurrencyType(ConcurrencyType::COUNT)
 , type(Type::Invalid) {}
 
-Command::Command(const Command& copy)
-: status(copy.status)
-, concurrencyType(copy.concurrencyType)
-, type(copy.type) {
+Command::Command(const Command& copy) { *this = copy; }
+
+Command& Command::operator=(const Command& copy) {
+    status          = copy.status;
+    concurrencyType = copy.concurrencyType;
+    type            = copy.type;
     switch (type) {
     case Type::MoveToNode:
         targetNode = copy.targetNode;
@@ -23,6 +25,7 @@ Command::Command(const Command& copy)
         targetUnit = copy.targetUnit;
         break;
     }
+    return *this;
 }
 
 Command Command::makeMoveToNodeCommand(world::Node* node) {

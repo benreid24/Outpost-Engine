@@ -40,12 +40,13 @@ void Unit::init(bl::engine::Engine& e) {
 }
 
 void Unit::update(std::mutex&, float dt, float, float, float) {
-    processAI();
+    processAI(dt);
     resolveActions(dt);
 }
 
-void Unit::processAI() {
-    // TODO - unit level AI
+void Unit::processAI(float dt) {
+    units->forEach(
+        [this, dt](bl::ecs::Entity entity, com::Unit& unit) { processHighLevelAI(entity, unit); });
 }
 
 void Unit::resolveActions(float dt) {
@@ -53,6 +54,132 @@ void Unit::resolveActions(float dt) {
         if (unit.mover.has_value()) { resolveUnitMovement(unit, dt); }
         if (unit.shooter.has_value()) { resolveUnitShoot(entity, unit, dt); }
     });
+}
+
+void Unit::processHighLevelAI(bl::ecs::Entity entity, com::Unit& unit) {
+    // first move queued actions into slots if possible
+    while (!unit.queuedCommands.empty()) {
+        auto& cmd = unit.queuedCommands.front();
+        if (unit.activeCommands[cmd.getConcurrencyType()].isTerminal()) {
+            unit.activeCommands[cmd.getConcurrencyType()] = cmd;
+            unit.activeCommands[cmd.getConcurrencyType()].markInProgress();
+            unit.commandStates[cmd.getConcurrencyType()].init(cmd);
+        }
+        else { break; }
+    }
+
+    // process active commands
+    using Type = unit::Command::Type;
+    for (int i = 0; i < unit::Command::ConcurrencyType::COUNT; ++i) {
+        auto& cmd = unit.activeCommands[i];
+        switch (cmd.getType()) {
+        case Type::MoveToNode:
+            processMoveToNodeCommand(entity, unit, cmd);
+            break;
+        case Type::KillUnit:
+            processKillUnitCommand(unit, cmd);
+            break;
+        default:
+            BL_LOG_ERROR << "Invalid command type: " << cmd.getType();
+            cmd.markFailed();
+            break;
+        }
+    }
+}
+
+void Unit::processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit, unit::Command& cmd) {
+    if (!unit.canMove()) {
+        cmd.markFailed();
+        return;
+    }
+
+    auto& mover = unit.getMover();
+    auto& ctx   = unit.commandStates[cmd.getConcurrencyType()].getPathContext();
+
+    // first make sure we have a path
+    if (ctx.path.empty()) {
+        auto& game = bl::game::Game::getInstance<core::Game>();
+        auto world = game.engine().getWorld<world::World>(entity.getWorldIndex());
+        if (!world->computePath(
+                unit.physics.getTransform().getGlobalPosition(), cmd.getTargetNode(), ctx.path)) {
+            cmd.markFailed();
+            return;
+        }
+        ctx.currentNode = 0;
+        const glm::vec2 diff =
+            unit.physics.getTransform().getGlobalPosition() - ctx.path.front()->getPosition();
+        ctx.targetAngle = bl::math::radiansToDegrees(std::atan2f(diff.y, diff.x));
+    }
+
+    // point towards next node
+    const float angleDiff = unit.physics.getTransform().getRotation() - ctx.targetAngle;
+    if (std::abs(angleDiff) > 3.f) {
+        const auto dir = (angleDiff < 0.f && angleDiff >= -180.f) ?
+                             unit::Moveable::Clockwise :
+                             unit::Moveable::CounterClockwise;
+        mover.rotate(dir); // TODO - scale speed based on distance to target
+        return;            // TODO - consider moving and turning at same time
+    }
+
+    // move towards target
+    world::Node* node = ctx.path[ctx.currentNode];
+    const float distance =
+        glm::distance(unit.physics.getTransform().getGlobalPosition(), node->getPosition());
+    if (node->getOccupier() == entity && distance <= 8.f) {
+        // TODO - make threshold a config property
+        if (ctx.currentNode == ctx.path.size() - 1) {
+            cmd.markComplete();
+            unit.commandStates[cmd.getConcurrencyType()].clear();
+        }
+        else {
+            ++ctx.currentNode;
+            processMoveToNodeCommand(entity, unit, cmd);
+        }
+    }
+    else {
+        if (node->getOccupier() != entity) {
+            ctx.path.clear();
+            processMoveToNodeCommand(entity, unit, cmd);
+        }
+        else { mover.move(unit::Moveable::Forward); }
+    }
+}
+
+void Unit::processKillUnitCommand(com::Unit& unit, unit::Command& cmd) {
+    if (!unit.canShoot()) {
+        cmd.markFailed();
+        return;
+    }
+
+    auto& game    = bl::game::Game::getInstance<core::Game>();
+    auto& mover   = unit.getMover();
+    auto& shooter = unit.getShooter();
+
+    // stop if target dead
+    if (!game.engine().ecs().entityExists(cmd.getTargetUnitEntity())) {
+        cmd.markComplete();
+        return;
+    }
+    else {
+        com::Mortal* m = game.engine().ecs().getComponent<com::Mortal>(cmd.getTargetUnitEntity());
+        if (m && m->health <= 0.f) {
+            cmd.markComplete();
+            return;
+        }
+    }
+
+    // point towards target and fire if close enough
+    const glm::vec2 posDiff = unit.physics.getTransform().getGlobalPosition() -
+                              cmd.getTargetUnit()->physics.getTransform().getGlobalPosition();
+    const float targetAngle = bl::math::radiansToDegrees(std::atan2f(posDiff.y, posDiff.x));
+    const float angleDiff   = unit.physics.getTransform().getRotation() - targetAngle;
+    if (std::abs(angleDiff) > 3.f) {
+        const auto dir = (angleDiff < 0.f && angleDiff >= -180.f) ?
+                             unit::Moveable::Clockwise :
+                             unit::Moveable::CounterClockwise;
+        mover.rotate(dir); // TODO - scale speed based on distance to target
+    }
+    else { shooter.fire(); }
 }
 
 void Unit::resolveUnitMovement(com::Unit& unit, float dt) {
