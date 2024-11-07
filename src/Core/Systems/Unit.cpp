@@ -7,6 +7,7 @@
 #include <Core/Components/Damager.hpp>
 #include <Core/Game.hpp>
 #include <Core/World/Collisions.hpp>
+#include <cmath>
 
 namespace core
 {

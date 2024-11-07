@@ -9,3 +9,7 @@ out
 logs
 *.spv
 data/
+
+Bundler
+OutpostEngineDebug
+OutpostEngineEditorDebug
