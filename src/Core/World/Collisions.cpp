@@ -53,5 +53,12 @@ b2QueryFilter Collisions::getUnitQueryFilter() {
     return filter;
 }
 
+b2QueryFilter Collisions::getUnitMovementQueryFilter() {
+    b2QueryFilter filter = b2DefaultQueryFilter();
+    filter.categoryBits  = Category::Unit;
+    filter.maskBits      = Category::Unit | Category::Cover;
+    return filter;
+}
+
 } // namespace world
 } // namespace core

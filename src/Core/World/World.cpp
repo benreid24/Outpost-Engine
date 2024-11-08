@@ -1,5 +1,6 @@
 #include <Core/World/World.hpp>
 
+#include <BLIB/AI/PathFinder.hpp>
 #include <BLIB/Math.hpp>
 #include <Core/Components/WorldNode.hpp>
 #include <Core/Game.hpp>
@@ -11,6 +12,8 @@ namespace world
 {
 namespace
 {
+using PathFinder = bl::ai::PathFinder<const Node*, std::hash<const Node*>>;
+
 const bl::rc::Color NodeFreeColor     = sf::Color(20, 230, 65);
 const bl::rc::Color NodeOccupiedColor = sf::Color(230, 65, 20);
 } // namespace
@@ -286,10 +289,57 @@ void World::regenNodeGraphics() {
     for (auto& node : nodes) { addDebugGraphicsToNode(node); }
 }
 
-bool World::computePath(const glm::vec2& startPos, Node* targetNode, std::vector<Node*>& path) {
-    // TODO - select first node by lowest net distance & ray cast for clearance
-    // TODO - find best path, taking into account node occupation
-    return false;
+const Node* World::getClosestReachableNode(const glm::vec2& position,
+                                           const glm::vec2& dstPos) const {
+    const Node* closest   = nullptr;
+    float closestDistance = std::numeric_limits<float>::max();
+    for (const Node& node : nodes) { // TODO - spatial partition
+        const float toNode = glm::distance(node.getPosition(), position);
+        const float toDst  = glm::distance(node.getPosition(), dstPos);
+        const float total  = toNode + toDst;
+        if (total < closestDistance || !closest) {
+            if (node.getOccupier() == bl::ecs::InvalidEntity) {
+                if (pathToNodeIsClear(position, node)) {
+                    closest         = &node;
+                    closestDistance = total;
+                }
+            }
+        }
+    }
+    return closest;
+}
+
+bool World::computePath(const glm::vec2& startPos, const Node* targetNode,
+                        std::vector<const Node*>& path) {
+    // select closest unoccupied reachable node
+    const Node* closest = getClosestReachableNode(startPos, targetNode->getPosition());
+    if (!closest) { return false; }
+
+    // perform path finding
+    const auto distanceCb = [](const Node* a, const Node* b) -> int {
+        return static_cast<int>(glm::distance(a->getPosition(), b->getPosition()));
+    };
+    const auto adjacentNodeCb =
+        [this, &distanceCb](const Node* node, std::vector<std::pair<const Node*, int>>& neighbors) {
+            neighbors.reserve(node->connectsTo.size());
+            for (std::uint32_t i : node->connectsTo) {
+                const Node* pn = &nodes[i];
+                if (pn->getOccupier() == bl::ecs::InvalidEntity) {
+                    neighbors.emplace_back(pn, distanceCb(pn, node));
+                }
+            }
+        };
+
+    return PathFinder::findPath(closest, targetNode, adjacentNodeCb, distanceCb, path);
+}
+
+bool World::pathToNodeIsClear(const glm::vec2& pos, const Node& node) const {
+    const float s     = getWorldToBoxScale();
+    const auto result = b2World_CastRayClosest(getBox2dWorldId(),
+                                               {pos.x * s, pos.y * s},
+                                               {node.position.x * s, node.position.y * s},
+                                               Collisions::getUnitMovementQueryFilter());
+    return !result.hit;
 }
 
 } // namespace world

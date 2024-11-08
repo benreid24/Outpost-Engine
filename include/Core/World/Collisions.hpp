@@ -75,6 +75,11 @@ struct Collisions {
      * @brief Returns the filter to use when querying for units
      */
     static b2QueryFilter getUnitQueryFilter();
+
+    /**
+     * @brief Returns the filter to use when querying for unit movement to nodes
+     */
+    static b2QueryFilter getUnitMovementQueryFilter();
 };
 
 } // namespace world

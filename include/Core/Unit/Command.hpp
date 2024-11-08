@@ -53,7 +53,7 @@ public:
      * @param target The world node to move to
      * @return The command to move to the node
      */
-    static Command makeMoveToNodeCommand(world::Node* target);
+    static Command makeMoveToNodeCommand(const world::Node* target);
 
     /**
      * @brief Creates a command to kill a unit
@@ -95,7 +95,7 @@ public:
     /**
      * @brief Returns the target world node of this command
      */
-    world::Node* getTargetNode() const { return targetNode; }
+    const world::Node* getTargetNode() const { return targetNode; }
 
     /**
      * @brief Returns the target unit entity id of this command
@@ -143,7 +143,7 @@ private:
     Type type;
 
     union {
-        world::Node* targetNode;
+        const world::Node* targetNode;
         struct {
             bl::ecs::Entity entity;
             com::Unit* unit;

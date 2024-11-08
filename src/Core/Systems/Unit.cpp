@@ -123,7 +123,7 @@ void Unit::processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit, uni
     }
 
     // move towards target
-    world::Node* node = ctx.path[ctx.currentNode];
+    const world::Node* node = ctx.path[ctx.currentNode];
     const float distance =
         glm::distance(unit.physics.getTransform().getGlobalPosition(), node->getPosition());
     if (node->getOccupier() == entity && distance <= 8.f) {

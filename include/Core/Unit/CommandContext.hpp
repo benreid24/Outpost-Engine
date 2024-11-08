@@ -20,7 +20,7 @@ public:
      * @brief Data for executing movement based commands
      */
     struct PathContext {
-        std::vector<world::Node*> path;
+        std::vector<const world::Node*> path;
         std::size_t currentNode;
         float targetAngle;
     };

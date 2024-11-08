@@ -28,7 +28,7 @@ Command& Command::operator=(const Command& copy) {
     return *this;
 }
 
-Command Command::makeMoveToNodeCommand(world::Node* node) {
+Command Command::makeMoveToNodeCommand(const world::Node* node) {
     Command cmd;
     cmd.concurrencyType = ConcurrencyType::Movement;
     cmd.type            = Type::MoveToNode;
