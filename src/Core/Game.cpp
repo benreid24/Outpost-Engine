@@ -45,6 +45,8 @@ bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
     units    = &engine.systems().registerSystem<sys::Unit>(Stage::Update1, Mask::Running);
     movement = &engine.systems().registerSystem<sys::Movement>(Stage::Update2, Mask::Running);
 
+    font.loadFromFile("Resources/font.ttf");
+
     bl::event::Dispatcher::subscribe(&windowSizePersister);
     bl::event::Dispatcher::subscribe(&damage);
 

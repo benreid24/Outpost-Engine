@@ -49,6 +49,11 @@ public:
      */
     sys::Movement& movementSystem() { return *movement; }
 
+    /**
+     * @brief Returns the default font
+     */
+    sf::VulkanFont& defaultFont() { return font; }
+
 protected:
     /**
      * @brief Early startup tasks shared by both editor and game go in here
@@ -83,6 +88,7 @@ private:
     bl::sys::Physics2D* physics;
     sys::Unit* units;
     sys::Movement* movement;
+    sf::VulkanFont font;
 };
 
 } // namespace core

@@ -4,6 +4,7 @@
 #include <BLIB/Events.hpp>
 #include <BLIB/Interfaces/GUI.hpp>
 #include <Core/Player/HUD/DebugMenu.hpp>
+#include <Core/Player/HUD/TempUnitController.hpp>
 
 namespace core
 {
@@ -50,6 +51,7 @@ public:
 private:
     Player& owner;
     bl::gui::GUI::Ptr gui;
+    hud::TempUnitController unitController;
     hud::DebugMenu debugMenu;
 
     virtual void observe(const sf::Event& event);
