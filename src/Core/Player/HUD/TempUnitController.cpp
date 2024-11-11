@@ -28,7 +28,7 @@ void TempUnitController::init() {
     background.getOverlayScaler().scaleToHeightPercent(0.15f);
     background.addToScene(scene, bl::rc::UpdateSpeed::Static);
 
-    hint.create(world, game.defaultFont(), "", 36); // TODO - font
+    hint.create(world, game.defaultFont(), "", 36);
     hint.getOverlayScaler().positionInParentSpace({0.5f, 0.5f});
     hint.getOverlayScaler().scaleToWidthPercent(0.85f);
     hint.setParent(background);
@@ -42,32 +42,68 @@ void TempUnitController::reset() {
     background.destroy();
 }
 
-bool TempUnitController::processEvent(const sf::Event& event) {
-    // TODO - make HUD event and perform world query once at event level (add common data like world
-    // pos, overlay pos, world unit, etc)
-    // TODO - process event
+bool TempUnitController::processEvent(const Event& event) {
+    auto& world = owner.getCurrentWorld<world::World>();
+
+    if (event.source().type == sf::Event::MouseMoved) {
+        if (controlling) {
+            if (event.unit()) {
+                if (event.unit() != controlling) { makeAttackState(); }
+                else { makeMoveState(); }
+            }
+            else { makeMoveState(); }
+        }
+        return true;
+    }
+    else if (event.source().type == sf::Event::MouseButtonPressed) {
+        if (event.source().mouseButton.button == sf::Mouse::Left) {
+            if (controlling) {
+                if (event.unit() && controlling != event.unit()) {
+                    controlling->queueCommand(unit::Command::makeKillUnitCommand(event.unit()));
+                }
+                else {
+                    controlling->queueCommand(
+                        unit::Command::makeMoveToNodeCommand(world.getClosestReachableNode(
+                            event.worldPosition(), event.worldPosition())));
+                }
+            }
+            else {
+                controlling = event.unit();
+                if (controlling) { makeMoveState(); }
+                return true;
+            }
+        }
+        else if (event.source().mouseButton.button == sf::Mouse::Right && controlling) {
+            controlling = nullptr;
+            makeEmptyState();
+            return true;
+        }
+    }
     return false;
 }
 
 void TempUnitController::observe(const bl::ecs::event::ComponentRemoved<com::Unit>& event) {
     if (&event.component == controlling) {
         controlling = nullptr;
-        // TODO - reset UI state
+        makeEmptyState();
     }
 }
 
 void TempUnitController::makeEmptyState() {
     hint.getSection().setString("Click to command");
+    hint.getSection().setFillColor(sf::Color::Black);
     centerText();
 }
 
 void TempUnitController::makeAttackState() {
     hint.getSection().setString("Attack unit");
+    hint.getSection().setFillColor(sf::Color::Red);
     centerText();
 }
 
 void TempUnitController::makeMoveState() {
     hint.getSection().setString("Move here");
+    hint.getSection().setFillColor(sf::Color::Green);
     centerText();
 }
 

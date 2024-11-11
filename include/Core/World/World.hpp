@@ -3,6 +3,7 @@
 
 #include <BLIB/Engine/Worlds/World2D.hpp>
 #include <BLIB/Graphics/VertexBuffer2D.hpp>
+#include <Core/Components/Unit.hpp>
 #include <Core/World/Cover.hpp>
 #include <Core/World/Node.hpp>
 #include <list>
@@ -107,6 +108,14 @@ public:
      * @return Whether a path could be found or not
      */
     bool computePath(const glm::vec2& startPos, const Node* target, std::vector<const Node*>& path);
+
+    /**
+     * @brief Returns the unit at the given world position
+     *
+     * @param worldPos The world position to query
+     * @return The unit at the position. May be nullptr
+     */
+    com::Unit* getUnitAtPosition(const glm::vec2& worldPos) const;
 
 private:
     std::vector<Cover> covers;

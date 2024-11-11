@@ -33,6 +33,20 @@ glm::vec2 changeVectorDirection(glm::vec2 forward, unit::Moveable::MoveDirection
         return -forward;
     }
 }
+
+unit::Moveable::RotateDirection getRotateDirection(float angle, float target) {
+    auto dir       = unit::Moveable::Clockwise;
+    float opposite = angle + 180.f;
+    if (opposite >= 360.f) {
+        opposite -= 360.f;
+        if (target < angle && target > opposite) { dir = unit::Moveable::CounterClockwise; }
+    }
+    else {
+        if (target < angle || target > opposite) { dir = unit::Moveable::CounterClockwise; }
+    }
+    return dir;
+}
+
 } // namespace
 
 void Unit::init(bl::engine::Engine& e) {
@@ -46,8 +60,9 @@ void Unit::update(std::mutex&, float dt, float, float, float) {
 }
 
 void Unit::processAI(float dt) {
-    units->forEach(
-        [this, dt](bl::ecs::Entity entity, com::Unit& unit) { processHighLevelAI(entity, unit); });
+    units->forEach([this, dt](bl::ecs::Entity entity, com::Unit& unit) {
+        processHighLevelAI(entity, unit, dt);
+    });
 }
 
 void Unit::resolveActions(float dt) {
@@ -57,7 +72,7 @@ void Unit::resolveActions(float dt) {
     });
 }
 
-void Unit::processHighLevelAI(bl::ecs::Entity entity, com::Unit& unit) {
+void Unit::processHighLevelAI(bl::ecs::Entity entity, com::Unit& unit, float dt) {
     // first move queued actions into slots if possible
     while (!unit.queuedCommands.empty()) {
         auto& cmd = unit.queuedCommands.front();
@@ -65,6 +80,7 @@ void Unit::processHighLevelAI(bl::ecs::Entity entity, com::Unit& unit) {
             unit.activeCommands[cmd.getConcurrencyType()] = cmd;
             unit.activeCommands[cmd.getConcurrencyType()].markInProgress();
             unit.commandStates[cmd.getConcurrencyType()].init(cmd);
+            unit.queuedCommands.pop_front();
         }
         else { break; }
     }
@@ -73,22 +89,25 @@ void Unit::processHighLevelAI(bl::ecs::Entity entity, com::Unit& unit) {
     using Type = unit::Command::Type;
     for (int i = 0; i < unit::Command::ConcurrencyType::COUNT; ++i) {
         auto& cmd = unit.activeCommands[i];
-        switch (cmd.getType()) {
-        case Type::MoveToNode:
-            processMoveToNodeCommand(entity, unit, cmd);
-            break;
-        case Type::KillUnit:
-            processKillUnitCommand(unit, cmd);
-            break;
-        default:
-            BL_LOG_ERROR << "Invalid command type: " << cmd.getType();
-            cmd.markFailed();
-            break;
+        if (!cmd.isTerminal()) {
+            switch (cmd.getType()) {
+            case Type::MoveToNode:
+                processMoveToNodeCommand(entity, unit, cmd, dt);
+                break;
+            case Type::KillUnit:
+                processKillUnitCommand(unit, cmd, dt);
+                break;
+            default:
+                BL_LOG_ERROR << "Invalid command type: " << cmd.getType();
+                cmd.markFailed();
+                break;
+            }
         }
     }
 }
 
-void Unit::processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit, unit::Command& cmd) {
+void Unit::processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit, unit::Command& cmd,
+                                    float dt) {
     if (!unit.canMove()) {
         cmd.markFailed();
         return;
@@ -107,46 +126,46 @@ void Unit::processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit, uni
             return;
         }
         ctx.currentNode = 0;
-        const glm::vec2 diff =
-            unit.physics.getTransform().getGlobalPosition() - ctx.path.front()->getPosition();
-        ctx.targetAngle = bl::math::radiansToDegrees(::atan2f(diff.y, diff.x));
+        ctx.targetAngle = bl::math::computeAngle(unit.physics.getTransform().getGlobalPosition(),
+                                                 ctx.path.front()->getPosition());
     }
 
     // point towards next node
-    const float angleDiff = unit.physics.getTransform().getRotation() - ctx.targetAngle;
-    if (std::abs(angleDiff) > 3.f) {
-        const auto dir = (angleDiff < 0.f && angleDiff >= -180.f) ?
-                             unit::Moveable::Clockwise :
-                             unit::Moveable::CounterClockwise;
-        mover.rotate(dir); // TODO - scale speed based on distance to target
-        return;            // TODO - consider moving and turning at same time
+    const float angle = unit.physics.getTransform().getRotation();
+    if (std::abs(angle - ctx.targetAngle) > 1.f) {
+        rotateUnit(unit, ctx.targetAngle, dt);
+        return; // TODO - consider moving and turning at same time
     }
 
     // move towards target
     const world::Node* node = ctx.path[ctx.currentNode];
     const float distance =
         glm::distance(unit.physics.getTransform().getGlobalPosition(), node->getPosition());
-    if (node->getOccupier() == entity && distance <= 8.f) {
-        // TODO - make threshold a config property
+    if (node->getOccupier() == entity) {
         if (ctx.currentNode == ctx.path.size() - 1) {
             cmd.markComplete();
             unit.commandStates[cmd.getConcurrencyType()].clear();
         }
         else {
             ++ctx.currentNode;
-            processMoveToNodeCommand(entity, unit, cmd);
+            if (ctx.currentNode < ctx.path.size()) {
+                ctx.targetAngle =
+                    bl::math::computeAngle(unit.physics.getTransform().getGlobalPosition(),
+                                           ctx.path[ctx.currentNode]->getPosition());
+            }
+            processMoveToNodeCommand(entity, unit, cmd, dt);
         }
     }
     else {
-        if (node->getOccupier() != entity) {
+        if (node->getOccupier() != bl::ecs::InvalidEntity && node->getOccupier() != entity) {
             ctx.path.clear();
-            processMoveToNodeCommand(entity, unit, cmd);
+            processMoveToNodeCommand(entity, unit, cmd, dt);
         }
         else { mover.move(unit::Moveable::Forward); }
     }
 }
 
-void Unit::processKillUnitCommand(com::Unit& unit, unit::Command& cmd) {
+void Unit::processKillUnitCommand(com::Unit& unit, unit::Command& cmd, float dt) {
     if (!unit.canShoot()) {
         cmd.markFailed();
         return;
@@ -170,17 +189,30 @@ void Unit::processKillUnitCommand(com::Unit& unit, unit::Command& cmd) {
     }
 
     // point towards target and fire if close enough
-    const glm::vec2 posDiff = unit.physics.getTransform().getGlobalPosition() -
-                              cmd.getTargetUnit()->physics.getTransform().getGlobalPosition();
-    const float targetAngle = bl::math::radiansToDegrees(::atan2f(posDiff.y, posDiff.x));
-    const float angleDiff   = unit.physics.getTransform().getRotation() - targetAngle;
-    if (std::abs(angleDiff) > 3.f) {
-        const auto dir = (angleDiff < 0.f && angleDiff >= -180.f) ?
-                             unit::Moveable::Clockwise :
-                             unit::Moveable::CounterClockwise;
-        mover.rotate(dir); // TODO - scale speed based on distance to target
-    }
+    const float angle = unit.physics.getTransform().getRotation();
+    const float targetAngle =
+        bl::math::computeAngle(unit.physics.getTransform().getGlobalPosition(),
+                               cmd.getTargetUnit()->physics.getTransform().getGlobalPosition());
+    if (std::abs(angle - targetAngle) > 1.f) { rotateUnit(unit, targetAngle, dt); }
     else { shooter.fire(); }
+}
+
+void Unit::rotateUnit(com::Unit& unit, float target, float dt) {
+    auto dir          = unit::Moveable::Clockwise;
+    const float angle = unit.physics.getTransform().getRotation();
+    float opposite    = angle + 180.f;
+    if (opposite >= 360.f) {
+        opposite -= 360.f;
+        if (target < angle && target > opposite) { dir = unit::Moveable::CounterClockwise; }
+    }
+    else {
+        if (target < angle || target > opposite) { dir = unit::Moveable::CounterClockwise; }
+    }
+
+    const float maxRot = unit.getMover().rotateRate * dt;
+    const float diff   = std::abs(angle - target);
+    const float factor = diff >= maxRot ? 1.f : diff / maxRot;
+    unit.getMover().rotate(dir, factor);
 }
 
 void Unit::resolveUnitMovement(com::Unit& unit, float dt) {

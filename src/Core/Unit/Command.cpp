@@ -1,6 +1,7 @@
 #include <Core/Unit/Command.hpp>
 
 #include <BLIB/Logging.hpp>
+#include <Core/Components/Unit.hpp>
 
 namespace core
 {
@@ -36,11 +37,11 @@ Command Command::makeMoveToNodeCommand(const world::Node* node) {
     return cmd;
 }
 
-Command Command::makeKillUnitCommand(bl::ecs::Entity entity, com::Unit* unit) {
+Command Command::makeKillUnitCommand(com::Unit* unit) {
     Command cmd;
     cmd.concurrencyType   = ConcurrencyType::Shooting;
     cmd.type              = Type::KillUnit;
-    cmd.targetUnit.entity = entity;
+    cmd.targetUnit.entity = unit->getId();
     cmd.targetUnit.unit   = unit;
     return cmd;
 }

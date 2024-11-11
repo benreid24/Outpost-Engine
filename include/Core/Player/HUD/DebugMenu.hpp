@@ -4,6 +4,7 @@
 #include <BLIB/Graphics/Rectangle.hpp>
 #include <BLIB/Interfaces/GUI.hpp>
 #include <Core/Components/Unit.hpp>
+#include <Core/Player/HUD/Event.hpp>
 
 namespace core
 {
@@ -54,7 +55,7 @@ public:
      * @param event The event to process
      * @return True if the event was used, false if no effect
      */
-    bool processEvent(const sf::Event& event);
+    bool processEvent(const Event& event);
 
 private:
     enum struct TopTab {

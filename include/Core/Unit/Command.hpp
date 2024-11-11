@@ -58,11 +58,10 @@ public:
     /**
      * @brief Creates a command to kill a unit
      *
-     * @param entity The ECS id of the unit to kill
      * @param unit The unit component of the unit to kill
      * @return The command to kill the unit
      */
-    static Command makeKillUnitCommand(bl::ecs::Entity entity, com::Unit* unit);
+    static Command makeKillUnitCommand(com::Unit* unit);
 
     /**
      * @brief Returns the concurrency type for this command
@@ -82,7 +81,7 @@ public:
     /**
      * @brief Returns whether this command is terminated or not
      */
-    bool isTerminal() const { return isTerminal(status); }
+    bool isTerminal() const { return isTerminal(status) || type == Type::Invalid; }
 
     /**
      * @brief Tests whether the given command status is terminal or not

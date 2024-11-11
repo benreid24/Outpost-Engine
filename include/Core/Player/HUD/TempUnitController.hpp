@@ -6,6 +6,7 @@
 #include <BLIB/Graphics/Rectangle.hpp>
 #include <BLIB/Graphics/Text.hpp>
 #include <Core/Components/Unit.hpp>
+#include <Core/Player/HUD/Event.hpp>
 
 namespace core
 {
@@ -23,7 +24,7 @@ public:
 
     void reset();
 
-    bool processEvent(const sf::Event& event);
+    bool processEvent(const Event& event);
 
 private:
     Player& owner;

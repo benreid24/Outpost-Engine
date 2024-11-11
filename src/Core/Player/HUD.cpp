@@ -32,8 +32,10 @@ void HUD::removeFromOverlay() {
 
 void HUD::observe(const sf::Event& event) {
     if (gui && gui->processEvent(event)) { return; }
-    if (debugMenu.processEvent(event)) { return; }
-    if (unitController.processEvent(event)) { return; }
+
+    const hud::Event hudEvent(owner, event);
+    if (debugMenu.processEvent(hudEvent)) { return; }
+    if (unitController.processEvent(hudEvent)) { return; }
 }
 
 void HUD::toggleDebugMenu() { debugMenu.toggle(); }

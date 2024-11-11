@@ -315,6 +315,12 @@ bool World::computePath(const glm::vec2& startPos, const Node* targetNode,
     const Node* closest = getClosestReachableNode(startPos, targetNode->getPosition());
     if (!closest) { return false; }
 
+    if (closest == targetNode) {
+        path.clear();
+        path.emplace_back(targetNode);
+        return true;
+    }
+
     // perform path finding
     const auto distanceCb = [](const Node* a, const Node* b) -> int {
         return static_cast<int>(glm::distance(a->getPosition(), b->getPosition()));
@@ -340,6 +346,13 @@ bool World::pathToNodeIsClear(const glm::vec2& pos, const Node& node) const {
                                                {node.position.x * s, node.position.y * s},
                                                Collisions::getUnitMovementQueryFilter());
     return !result.hit;
+}
+
+com::Unit* World::getUnitAtPosition(const glm::vec2& pos) const {
+    auto& game = bl::game::Game::getInstance<Game>();
+    auto* phys =
+        game.physicsSystem().findEntityAtPosition(*this, pos, Collisions::getUnitQueryFilter());
+    return phys != nullptr ? engine().ecs().getComponent<com::Unit>(phys->getOwner()) : nullptr;
 }
 
 } // namespace world

@@ -24,8 +24,8 @@ DebugMenu::DebugMenu() {}
 void DebugMenu::init(GUI& gui) {
     window = Window::create(LinePacker::create(), "Debug", Window::Default, {0.f, 0.f});
     window->getCloseButton()
-        ->getSignal(Event::LeftClicked)
-        .willCall([this](const Event&, Element*) { window->setVisible(false); });
+        ->getSignal(bl::gui::Event::LeftClicked)
+        .willCall([this](const bl::gui::Event&, Element*) { window->setVisible(false); });
 
     auto tabs = Notebook::create();
     tabs->addPage(
@@ -76,7 +76,7 @@ Element::Ptr DebugMenu::createWorldTab() {
     coverAngle->setSliderSize(0.1f);
     coverAngle->setRequisition({30.f, 30.f});
     coverAngleLabel = Label::create("Angle: 0");
-    coverAngle->getSignal(Event::ValueChanged)
+    coverAngle->getSignal(bl::gui::Event::ValueChanged)
         .willCall(std::bind(&DebugMenu::onCoverAngleChange, this));
     auto placeCover  = RadioButton::create("Place", "place");
     coverRadioGroup  = placeCover->getRadioGroup();
@@ -130,7 +130,7 @@ void DebugMenu::toggle() {
     }
 }
 
-bool DebugMenu::processEvent(const sf::Event& event) {
+bool DebugMenu::processEvent(const Event& event) {
     if (!window->visible()) { return false; }
 
     auto& game                = bl::game::Game::getInstance<core::Game>();
@@ -138,12 +138,12 @@ bool DebugMenu::processEvent(const sf::Event& event) {
     auto& ecs                 = engine.ecs();
     auto& player              = engine.getPlayer();
     core::world::World& world = static_cast<core::world::World&>(player.getCurrentWorld());
-    const auto worldPos       = player.getRenderObserver().getMousePosInWorldSpace();
 
-    const auto createEntity = [this, &player, &worldPos, &ecs, &game]() {
+    const auto createEntity = [this, &player, &event, &ecs, &game]() {
         constexpr float Radius = 30.f;
         const auto newEntity   = player.getCurrentWorld().createEntity();
-        auto* transform        = ecs.emplaceComponent<bl::com::Transform2D>(newEntity, worldPos);
+        auto* transform =
+            ecs.emplaceComponent<bl::com::Transform2D>(newEntity, event.worldPosition());
         game.renderSystem().addTestGraphicsToEntity(newEntity, Radius, sf::Color::Blue);
 
         auto bodyDef          = b2DefaultBodyDef();
@@ -163,58 +163,52 @@ bool DebugMenu::processEvent(const sf::Event& event) {
         onEntityControl(newEntity);
     };
 
-    const auto createCover = [this, &event, &worldPos, &world]() -> bool {
-        if (event.type == sf::Event::MouseButtonPressed) {
-            if (event.mouseButton.button == sf::Mouse::Left) {
-                clickStart = worldPos;
+    const auto createCover = [this, &event, &world]() -> bool {
+        if (event.source().type == sf::Event::MouseButtonPressed) {
+            if (event.source().mouseButton.button == sf::Mouse::Left) {
+                clickStart = event.worldPosition();
                 dragBox.setHidden(false);
                 dragBox.getTransform().setPosition(clickStart);
                 return true;
             }
         }
         else if (!dragBox.component().isHidden()) {
-            if (event.type == sf::Event::MouseButtonReleased) {
-                if (event.mouseButton.button == sf::Mouse::Left) {
-                    const glm::vec2 size = glm::abs(clickStart - worldPos);
+            if (event.source().type == sf::Event::MouseButtonReleased) {
+                if (event.source().mouseButton.button == sf::Mouse::Left) {
+                    const glm::vec2 size = glm::abs(clickStart - event.worldPosition());
                     world.addCover(clickStart, size, getCoverAngle());
                     dragBox.setHidden(true);
                     return true;
                 }
             }
-            else if (event.type == sf::Event::MouseMoved) {
-                const glm::vec2 size = glm::abs(clickStart - worldPos);
+            else if (event.source().type == sf::Event::MouseMoved) {
+                const glm::vec2 size = glm::abs(clickStart - event.worldPosition());
                 dragBox.setSize(size);
                 dragBox.getTransform().setOrigin(size * 0.5f);
                 return true;
             }
-            else if (event.type == sf::Event::MouseWheelScrolled) {
-                if (event.mouseWheelScroll.delta > 0.f) { coverAngle->incrementValue(1.f); }
+            else if (event.source().type == sf::Event::MouseWheelScrolled) {
+                if (event.source().mouseWheelScroll.delta > 0.f) {
+                    coverAngle->incrementValue(1.f);
+                }
                 else { coverAngle->incrementValue(-1.f); }
             }
         }
         return false;
     };
 
-    const auto controlEntity = [this, &worldPos, &game, &engine, &world]() -> bool {
-        auto* phys = game.physicsSystem().findEntityAtPosition(
-            world, worldPos, world::Collisions::getUnitQueryFilter());
-        if (phys) {
-            auto* unit = engine.ecs().getComponent<core::com::Unit>(phys->getOwner());
-            if (unit) {
-                controlling.unit = unit;
-                onEntityControl(phys->getOwner());
-                return true;
-            }
+    const auto controlEntity = [this, &event]() -> bool {
+        if (event.unit()) {
+            controlling.unit = event.unit();
+            onEntityControl(event.unit()->getId());
+            return true;
         }
         return false;
     };
 
-    const auto killEntity = [this, &worldPos, &game, &engine, &world]() -> bool {
-        auto* phys = game.physicsSystem().findEntityAtPosition(
-            world, worldPos, world::Collisions::getUnitQueryFilter());
-        if (phys) {
-            // TODO - other filter before destroy?
-            engine.ecs().destroyEntity(phys->getOwner());
+    const auto killEntity = [&engine, &event]() -> bool {
+        if (event.unit()) {
+            engine.ecs().destroyEntity(event.unit()->getId());
             return true;
         }
         return false;
@@ -227,25 +221,27 @@ bool DebugMenu::processEvent(const sf::Event& event) {
         case WorldTab::Nodes:
             switch (getCurrentNodeTool()) {
             case NodeTool::CreatePath:
-                if (event.type == sf::Event::MouseButtonPressed) {
-                    if (event.mouseButton.button == sf::Mouse::Left) {
-                        world.addNode(core::world::Node::Path, worldPos);
+                if (event.source().type == sf::Event::MouseButtonPressed) {
+                    if (event.source().mouseButton.button == sf::Mouse::Left) {
+                        world.addNode(core::world::Node::Path, event.worldPosition());
+                        return true;
                     }
                 }
                 break;
 
             case NodeTool::CreateCover:
-                if (event.type == sf::Event::MouseButtonPressed) {
-                    if (event.mouseButton.button == sf::Mouse::Left) {
-                        world.addNode(core::world::Node::Cover, worldPos);
+                if (event.source().type == sf::Event::MouseButtonPressed) {
+                    if (event.source().mouseButton.button == sf::Mouse::Left) {
+                        world.addNode(core::world::Node::Cover, event.worldPosition());
+                        return true;
                     }
                 }
                 break;
 
             case NodeTool::Remove:
-                if (event.type == sf::Event::MouseButtonPressed) {
-                    if (event.mouseButton.button == sf::Mouse::Left) {
-                        return world.removeNodeAtPosition(worldPos);
+                if (event.source().type == sf::Event::MouseButtonPressed) {
+                    if (event.source().mouseButton.button == sf::Mouse::Left) {
+                        return world.removeNodeAtPosition(event.worldPosition());
                     }
                 }
             }
@@ -257,9 +253,9 @@ bool DebugMenu::processEvent(const sf::Event& event) {
                 return createCover();
 
             case CoverTool::Remove:
-                if (event.type == sf::Event::MouseButtonPressed) {
-                    if (event.mouseButton.button == sf::Mouse::Left) {
-                        return world.removeCoverAtPosition(worldPos);
+                if (event.source().type == sf::Event::MouseButtonPressed) {
+                    if (event.source().mouseButton.button == sf::Mouse::Left) {
+                        return world.removeCoverAtPosition(event.worldPosition());
                     }
                 }
             }
@@ -270,20 +266,22 @@ bool DebugMenu::processEvent(const sf::Event& event) {
     case TopTab::Entity:
         switch (getCurrentEntityTool()) {
         case EntityTool::Create:
-            if (event.type == sf::Event::MouseButtonPressed) {
-                if (event.mouseButton.button == sf::Mouse::Left) {
+            if (event.source().type == sf::Event::MouseButtonPressed) {
+                if (event.source().mouseButton.button == sf::Mouse::Left) {
                     createEntity();
                     return true;
                 }
             }
             break;
         case EntityTool::Control:
-            if (event.type == sf::Event::MouseButtonPressed) {
-                if (event.mouseButton.button == sf::Mouse::Left) { return controlEntity(); }
+            if (event.source().type == sf::Event::MouseButtonPressed) {
+                if (event.source().mouseButton.button == sf::Mouse::Left) {
+                    return controlEntity();
+                }
             }
         case EntityTool::Kill:
-            if (event.type == sf::Event::MouseButtonPressed) {
-                if (event.mouseButton.button == sf::Mouse::Left) { return killEntity(); }
+            if (event.source().type == sf::Event::MouseButtonPressed) {
+                if (event.source().mouseButton.button == sf::Mouse::Left) { return killEntity(); }
             }
         }
         break; // TopTab::Entity

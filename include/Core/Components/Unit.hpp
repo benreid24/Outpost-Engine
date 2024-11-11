@@ -35,6 +35,11 @@ public:
     Unit(bl::com::Physics2D& physics);
 
     /**
+     * @brief Returns the entity id of this unit
+     */
+    bl::ecs::Entity getId() const { return physics.getOwner(); }
+
+    /**
      * @brief Allows the unit to move with the following parameters
      *
      * @param acceleration The rate of acceleration for movement, in world space units
@@ -74,6 +79,14 @@ public:
      * @brief Returns the shooter component for this unit. Only call if this unit can fire
      */
     unit::Shooter& getShooter() { return shooter.value(); }
+
+    /**
+     * @brief Queues a command to be carried out by the unit
+     *
+     * @param command The command to perform
+     * @return Whether or not the command was able to be queued
+     */
+    bool queueCommand(const unit::Command& command);
 
 private:
     // unit data and components
