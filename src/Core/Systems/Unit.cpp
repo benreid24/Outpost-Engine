@@ -91,7 +91,7 @@ void Unit::processHighLevelAI(bl::ecs::Entity entity, com::Unit& unit, float dt)
         auto& cmd = unit.activeCommands[i];
         if (!cmd.isTerminal()) {
             switch (cmd.getType()) {
-            case Type::MoveToNode:
+            case Type::MoveToPosition:
                 processMoveToNodeCommand(entity, unit, cmd, dt);
                 break;
             case Type::KillUnit:
@@ -108,60 +108,66 @@ void Unit::processHighLevelAI(bl::ecs::Entity entity, com::Unit& unit, float dt)
 
 void Unit::processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit, unit::Command& cmd,
                                     float dt) {
+    using Waypoint = unit::Path::Waypoint;
+
     if (!unit.canMove()) {
         cmd.markFailed();
         return;
     }
 
-    auto& mover = unit.getMover();
-    auto& ctx   = unit.commandStates[cmd.getConcurrencyType()].getPathContext();
+    auto& game          = bl::game::Game::getInstance<core::Game>();
+    auto world          = game.engine().getWorld<world::World>(entity.getWorldIndex());
+    auto& mover         = unit.getMover();
+    auto& ctx           = unit.commandStates[cmd.getConcurrencyType()].getPathContext();
+    const glm::vec2 pos = unit.physics.getTransform().getGlobalPosition();
 
     // first make sure we have a path
-    if (ctx.path.empty()) {
-        auto& game = bl::game::Game::getInstance<core::Game>();
-        auto world = game.engine().getWorld<world::World>(entity.getWorldIndex());
-        if (!world->computePath(
-                unit.physics.getTransform().getGlobalPosition(), cmd.getTargetNode(), ctx.path)) {
+    if (ctx.path.waypoints.empty()) {
+        if (!world->computePath(unit.physics.getTransform().getGlobalPosition(),
+                                cmd.getTargetPosition(),
+                                ctx.path)) {
             cmd.markFailed();
             return;
         }
         ctx.currentNode = 0;
-        ctx.targetAngle = bl::math::computeAngle(unit.physics.getTransform().getGlobalPosition(),
-                                                 ctx.path.front()->getPosition());
     }
 
+    const Waypoint node     = ctx.path.waypoints[ctx.currentNode];
+    const float distance    = glm::distance(pos, node.position);
+    const float targetAngle = bl::math::computeAngle(pos, node.position);
+
     // point towards next node
-    const float angle = unit.physics.getTransform().getRotation();
-    if (std::abs(angle - ctx.targetAngle) > 1.f) {
-        rotateUnit(unit, ctx.targetAngle, dt);
-        return; // TODO - consider moving and turning at same time
+    const float angle     = unit.physics.getTransform().getRotation();
+    const float angleDiff = std::abs(angle - targetAngle);
+    if (angleDiff > 1.f) {
+        rotateUnit(unit, targetAngle, dt);
+        if (distance / mover.maxSpeed < angleDiff / mover.rotateRate) { return; }
     }
 
     // move towards target
-    const world::Node* node = ctx.path[ctx.currentNode];
-    const float distance =
-        glm::distance(unit.physics.getTransform().getGlobalPosition(), node->getPosition());
-    if (node->getOccupier() == entity) {
-        if (ctx.currentNode == ctx.path.size() - 1) {
+    if (distance < 5.f) { // TODO - refine threshold
+        if (ctx.currentNode == ctx.path.waypoints.size() - 1) {
             cmd.markComplete();
             unit.commandStates[cmd.getConcurrencyType()].clear();
         }
         else {
             ++ctx.currentNode;
-            if (ctx.currentNode < ctx.path.size()) {
-                ctx.targetAngle =
-                    bl::math::computeAngle(unit.physics.getTransform().getGlobalPosition(),
-                                           ctx.path[ctx.currentNode]->getPosition());
-            }
             processMoveToNodeCommand(entity, unit, cmd, dt);
         }
     }
     else {
-        if (node->getOccupier() != bl::ecs::InvalidEntity && node->getOccupier() != entity) {
-            ctx.path.clear();
+        const bool occupied = node.worldNode &&
+                              node.worldNode->getOccupier() != bl::ecs::InvalidEntity &&
+                              node.worldNode->getOccupier() != entity;
+        if (occupied || !world->pathToPositionIsClear(pos, node.position)) {
+            ctx.path.waypoints.clear();
             processMoveToNodeCommand(entity, unit, cmd, dt);
         }
-        else { mover.move(unit::Moveable::Forward); }
+        else {
+            // TODO - this is not effective, need to begin damping when slowing
+            const float factor = distance >= mover.maxSpeed ? 1.f : distance / mover.maxSpeed;
+            mover.move(unit::Moveable::Forward, factor * factor);
+        }
     }
 }
 
@@ -176,12 +182,13 @@ void Unit::processKillUnitCommand(com::Unit& unit, unit::Command& cmd, float dt)
     auto& shooter = unit.getShooter();
 
     // stop if target dead
-    if (!game.engine().ecs().entityExists(cmd.getTargetUnitEntity())) {
+    if (!game.engine().ecs().entityExists(cmd.getTargetUnit()->getId())) {
         cmd.markComplete();
         return;
     }
     else {
-        com::Mortal* m = game.engine().ecs().getComponent<com::Mortal>(cmd.getTargetUnitEntity());
+        com::Mortal* m =
+            game.engine().ecs().getComponent<com::Mortal>(cmd.getTargetUnit()->getId());
         if (m && m->health <= 0.f) {
             cmd.markComplete();
             return;

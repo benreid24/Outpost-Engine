@@ -19,8 +19,9 @@ Command& Command::operator=(const Command& copy) {
     concurrencyType = copy.concurrencyType;
     type            = copy.type;
     switch (type) {
-    case Type::MoveToNode:
-        targetNode = copy.targetNode;
+    case Type::MoveToPosition:
+        targetPosition.position = copy.targetPosition.position;
+        targetPosition.node     = copy.targetPosition.node;
         break;
     case Type::KillUnit:
         targetUnit = copy.targetUnit;
@@ -29,20 +30,20 @@ Command& Command::operator=(const Command& copy) {
     return *this;
 }
 
-Command Command::makeMoveToNodeCommand(const world::Node* node) {
+Command Command::makeMoveToPositionCommand(const glm::vec2& pos, const world::Node* node) {
     Command cmd;
-    cmd.concurrencyType = ConcurrencyType::Movement;
-    cmd.type            = Type::MoveToNode;
-    cmd.targetNode      = node;
+    cmd.concurrencyType         = ConcurrencyType::Movement;
+    cmd.type                    = Type::MoveToPosition;
+    cmd.targetPosition.position = pos;
+    cmd.targetPosition.node     = node;
     return cmd;
 }
 
 Command Command::makeKillUnitCommand(com::Unit* unit) {
     Command cmd;
-    cmd.concurrencyType   = ConcurrencyType::Shooting;
-    cmd.type              = Type::KillUnit;
-    cmd.targetUnit.entity = unit->getId();
-    cmd.targetUnit.unit   = unit;
+    cmd.concurrencyType = ConcurrencyType::Shooting;
+    cmd.type            = Type::KillUnit;
+    cmd.targetUnit      = unit;
     return cmd;
 }
 

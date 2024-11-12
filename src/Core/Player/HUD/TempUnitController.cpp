@@ -62,9 +62,8 @@ bool TempUnitController::processEvent(const Event& event) {
                     controlling->queueCommand(unit::Command::makeKillUnitCommand(event.unit()));
                 }
                 else {
-                    controlling->queueCommand(
-                        unit::Command::makeMoveToNodeCommand(world.getClosestReachableNode(
-                            event.worldPosition(), event.worldPosition())));
+                    controlling->queueCommand(unit::Command::makeMoveToPositionCommand(
+                        event.worldPosition(), world.getNodeAtPosition(event.worldPosition())));
                 }
             }
             else {

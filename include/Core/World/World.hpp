@@ -4,6 +4,7 @@
 #include <BLIB/Engine/Worlds/World2D.hpp>
 #include <BLIB/Graphics/VertexBuffer2D.hpp>
 #include <Core/Components/Unit.hpp>
+#include <Core/Unit/Path.hpp>
 #include <Core/World/Cover.hpp>
 #include <Core/World/Node.hpp>
 #include <list>
@@ -90,6 +91,15 @@ public:
     void handleSensorExit(std::size_t node, bl::ecs::Entity entity);
 
     /**
+     * @brief Finds the node closest to the given position within the threshold distance
+     *
+     * @param position The position to find the node of
+     * @param threshold The threshold distance to query
+     * @return The closest node. May be nullptr
+     */
+    const Node* getNodeAtPosition(const glm::vec2& position, float threshold = 20.f) const;
+
+    /**
      * @brief Returns the closest reachable node to the given position
      *
      * @param position The position to get the closest node of
@@ -103,11 +113,11 @@ public:
      * @brief Finds a path from the start position to the target node
      *
      * @param startPos The start position in world coordinates
-     * @param target The target node
+     * @param target The target position in world coordinates
      * @param path Vector to store the path of nodes in
      * @return Whether a path could be found or not
      */
-    bool computePath(const glm::vec2& startPos, const Node* target, std::vector<const Node*>& path);
+    bool computePath(const glm::vec2& startPos, const glm::vec2& targetPosition, unit::Path& path);
 
     /**
      * @brief Returns the unit at the given world position
@@ -117,12 +127,28 @@ public:
      */
     com::Unit* getUnitAtPosition(const glm::vec2& worldPos) const;
 
+    /**
+     * @brief Returns whether the direct path between two positions is currently clear
+     *
+     * @param start The starting position
+     * @param end The ending position
+     * @return True if there are no units or cover blocking the path, false otherwise
+     */
+    bool pathToPositionIsClear(const glm::vec2& start, const glm::vec2& end) const;
+
+    /**
+     * @brief Returns whether the direct path between a position and a node is currently clear
+     *
+     * @param pos The starting position
+     * @param node The ending node
+     * @return True if there are no units or cover blocking the path, false otherwise
+     */
+    bool pathToNodeIsClear(const glm::vec2& pos, const Node& node) const;
+
 private:
     std::vector<Cover> covers;
     std::vector<Node> nodes;
     // TODO - spatial partitions?
-
-    bool pathToNodeIsClear(const glm::vec2& pos, const Node& node) const;
 
     // debug data
     bl::gfx::VertexBuffer2D debugNodes;

@@ -12,7 +12,7 @@ namespace world
 {
 namespace
 {
-using PathFinder = bl::ai::PathFinder<const Node*, std::hash<const Node*>>;
+using PathFinder = bl::ai::PathFinder<unit::Path::Waypoint, unit::Path::WaypointHash>;
 
 const bl::rc::Color NodeFreeColor     = sf::Color(20, 230, 65);
 const bl::rc::Color NodeOccupiedColor = sf::Color(230, 65, 20);
@@ -309,43 +309,60 @@ const Node* World::getClosestReachableNode(const glm::vec2& position,
     return closest;
 }
 
-bool World::computePath(const glm::vec2& startPos, const Node* targetNode,
-                        std::vector<const Node*>& path) {
-    // select closest unoccupied reachable node
-    const Node* closest = getClosestReachableNode(startPos, targetNode->getPosition());
-    if (!closest) { return false; }
-
-    if (closest == targetNode) {
-        path.clear();
-        path.emplace_back(targetNode);
-        return true;
-    }
+bool World::computePath(const glm::vec2& startPos, const glm::vec2& dst, unit::Path& path) {
+    using Waypoint = unit::Path::Waypoint;
 
     // perform path finding
-    const auto distanceCb = [](const Node* a, const Node* b) -> int {
-        return static_cast<int>(glm::distance(a->getPosition(), b->getPosition()));
+    const auto distanceCb = [](const Waypoint& a, const Waypoint& b) -> int {
+        return static_cast<int>(glm::distance(a.position, b.position));
     };
-    const auto adjacentNodeCb =
-        [this, &distanceCb](const Node* node, std::vector<std::pair<const Node*, int>>& neighbors) {
-            neighbors.reserve(node->connectsTo.size());
-            for (std::uint32_t i : node->connectsTo) {
+    const auto adjacentNodeCb = [this, &dst](const Waypoint& wp,
+                                             std::vector<std::pair<Waypoint, int>>& neighbors) {
+        if (wp.worldNode) {
+            neighbors.reserve(wp.worldNode->connectsTo.size() + 1);
+            for (std::uint32_t i : wp.worldNode->connectsTo) {
                 const Node* pn = &nodes[i];
                 if (pn->getOccupier() == bl::ecs::InvalidEntity) {
-                    neighbors.emplace_back(pn, distanceCb(pn, node));
+                    neighbors.emplace_back(
+                        Waypoint(pn->position, pn),
+                        static_cast<int>(glm::distance(wp.position, pn->position)));
                 }
             }
-        };
+        }
+        else {
+            neighbors.reserve(16);
+            for (const Node& node : nodes) {
+                const float d = glm::distance(wp.position, node.position);
+                if (pathToNodeIsClear(wp.position, node)) {
+                    neighbors.emplace_back(Waypoint(node.position, &node), static_cast<int>(d));
+                }
+            }
+        }
 
-    return PathFinder::findPath(closest, targetNode, adjacentNodeCb, distanceCb, path);
+        if (pathToPositionIsClear(wp.position, dst)) {
+            neighbors.emplace_back(Waypoint(dst),
+                                   static_cast<int>(glm::distance(wp.position, dst)));
+        }
+    };
+
+    return PathFinder::findPath({startPos, getNodeAtPosition(startPos)},
+                                {dst, getNodeAtPosition(dst)},
+                                adjacentNodeCb,
+                                distanceCb,
+                                path.waypoints);
+}
+
+bool World::pathToPositionIsClear(const glm::vec2& start, const glm::vec2& end) const {
+    const float s     = getWorldToBoxScale();
+    const auto result = b2World_CastRayClosest(getBox2dWorldId(),
+                                               {start.x * s, start.y * s},
+                                               {end.x * s, end.y * s},
+                                               Collisions::getUnitMovementQueryFilter());
+    return !result.hit;
 }
 
 bool World::pathToNodeIsClear(const glm::vec2& pos, const Node& node) const {
-    const float s     = getWorldToBoxScale();
-    const auto result = b2World_CastRayClosest(getBox2dWorldId(),
-                                               {pos.x * s, pos.y * s},
-                                               {node.position.x * s, node.position.y * s},
-                                               Collisions::getUnitMovementQueryFilter());
-    return !result.hit;
+    return pathToPositionIsClear(pos, node.position);
 }
 
 com::Unit* World::getUnitAtPosition(const glm::vec2& pos) const {
@@ -353,6 +370,21 @@ com::Unit* World::getUnitAtPosition(const glm::vec2& pos) const {
     auto* phys =
         game.physicsSystem().findEntityAtPosition(*this, pos, Collisions::getUnitQueryFilter());
     return phys != nullptr ? engine().ecs().getComponent<com::Unit>(phys->getOwner()) : nullptr;
+}
+
+const Node* World::getNodeAtPosition(const glm::vec2& pos, float thresh) const {
+    const Node* closest = nullptr;
+    float cdist         = 0.f;
+    for (const Node& node : nodes) {
+        const float d = glm::distance(node.position, pos);
+        if (d <= thresh) {
+            if (d < cdist || !closest) {
+                cdist   = d;
+                closest = &node;
+            }
+        }
+    }
+    return closest;
 }
 
 } // namespace world

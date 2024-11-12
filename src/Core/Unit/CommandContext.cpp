@@ -7,7 +7,7 @@ namespace unit
 void CommandContext::init(const Command& cmd) {
     using Type = Command::Type;
     switch (cmd.getType()) {
-    case Type::MoveToNode:
+    case Type::MoveToPosition:
         data.emplace<PathContext>();
         break;
     case Type::KillUnit:

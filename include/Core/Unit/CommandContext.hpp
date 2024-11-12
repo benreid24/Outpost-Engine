@@ -2,6 +2,7 @@
 #define CORE_UNIT_COMMANDCONTEXT_HPP
 
 #include <Core/Unit/Command.hpp>
+#include <Core/Unit/Path.hpp>
 #include <variant>
 #include <vector>
 
@@ -20,9 +21,8 @@ public:
      * @brief Data for executing movement based commands
      */
     struct PathContext {
-        std::vector<const world::Node*> path;
+        Path path;
         std::size_t currentNode;
-        float targetAngle;
     };
 
     /**

@@ -36,7 +36,7 @@ public:
      * @brief The actual type of the command
      */
     enum struct Type {
-        MoveToNode,
+        MoveToPosition,
         KillUnit,
         // TODO - other commands
         Invalid
@@ -48,12 +48,13 @@ public:
     Command();
 
     /**
-     * @brief Creates a command to move to a node
+     * @brief Creates a command to move to a position
      *
+     * @param The position in world units to move to
      * @param target The world node to move to
      * @return The command to move to the node
      */
-    static Command makeMoveToNodeCommand(const world::Node* target);
+    static Command makeMoveToPositionCommand(const glm::vec2& position, const world::Node* target);
 
     /**
      * @brief Creates a command to kill a unit
@@ -94,17 +95,17 @@ public:
     /**
      * @brief Returns the target world node of this command
      */
-    const world::Node* getTargetNode() const { return targetNode; }
+    const world::Node* getTargetNode() const { return targetPosition.node; }
 
     /**
-     * @brief Returns the target unit entity id of this command
+     * @brief Returns the target position of this command
      */
-    bl::ecs::Entity getTargetUnitEntity() const { return targetUnit.entity; }
+    const glm::vec2& getTargetPosition() const { return targetPosition.position; }
 
     /**
      * @brief Returns the target unit of this command
      */
-    com::Unit* getTargetUnit() const { return targetUnit.unit; }
+    com::Unit* getTargetUnit() const { return targetUnit; }
 
     /**
      * @brief Sets the status to Current if Queued
@@ -142,11 +143,13 @@ private:
     Type type;
 
     union {
-        const world::Node* targetNode;
         struct {
-            bl::ecs::Entity entity;
-            com::Unit* unit;
-        } targetUnit;
+            glm::vec2 position;
+            const world::Node* node;
+
+        } targetPosition;
+
+        com::Unit* targetUnit;
     };
 };
 
