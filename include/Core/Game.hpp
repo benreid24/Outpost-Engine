@@ -3,6 +3,12 @@
 
 #include <BLIB/Game.hpp>
 
+#include <BLIB/Systems/Physics2D.hpp>
+#include <Core/Systems/Damage.hpp>
+#include <Core/Systems/Movement.hpp>
+#include <Core/Systems/Render.hpp>
+#include <Core/Systems/Unit.hpp>
+
 /**
  * @defgroup Core
  * @brief Shared library containing code used by both the game and editor
@@ -13,7 +19,40 @@ namespace core
 {
 class Game : public bl::game::Game {
 public:
-    // TODO - SETUP_TASK - provide common interface here for systems etc
+    /**
+     * @brief Returns the game engine instance
+     */
+    bl::engine::Engine& engine() { return *enginePtr; }
+
+    /**
+     * @brief Returns the game render system
+     */
+    sys::Render& renderSystem() { return *render; }
+
+    /**
+     * @brief Returns the damage system
+     */
+    sys::Damage& damageSystem() { return damage; }
+
+    /**
+     * @brief Returns the physics system
+     */
+    bl::sys::Physics2D& physicsSystem() { return *physics; }
+
+    /**
+     * @brief Returns the entity actions system
+     */
+    sys::Unit& unitSystem() { return *units; }
+
+    /**
+     * @brief Returns the movement system
+     */
+    sys::Movement& movementSystem() { return *movement; }
+
+    /**
+     * @brief Returns the default font
+     */
+    sf::VulkanFont& defaultFont() { return font; }
 
 protected:
     /**
@@ -41,6 +80,15 @@ protected:
      * @brief Called at the end of main() after the engine instance is destroyed
      */
     virtual void completeShutdown() override;
+
+private:
+    bl::engine::Engine* enginePtr;
+    sys::Damage damage;
+    sys::Render* render;
+    bl::sys::Physics2D* physics;
+    sys::Unit* units;
+    sys::Movement* movement;
+    sf::VulkanFont font;
 };
 
 } // namespace core

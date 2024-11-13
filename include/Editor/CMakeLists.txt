@@ -1,4 +1,4 @@
-target_sources(ProjectNameEditor PUBLIC
+target_sources(OutpostEngineEditor PUBLIC
     ConstantsEditor.hpp
     Editor.hpp
 )

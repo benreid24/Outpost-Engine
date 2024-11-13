@@ -11,9 +11,12 @@ namespace core
 struct Constants {
     static constexpr unsigned int UnsetUintProperty = 0;
 
-    static constexpr const char* AppName                = "ProjectName";
+    static constexpr const char* AppName                = "OutpostEngine";
     static constexpr const char* DefaultSpritesheetPath = "Resources/Images/Spritesheets";
     static constexpr const char* DefaultMusicPath       = "Resources/Audio/Music";
+
+    static constexpr float UnitAiStopDistanceDefault = 5.f;
+    static constexpr float UnitDampingFactorDefault  = 0.1f;
 };
 } // namespace core
 

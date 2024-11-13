@@ -8,7 +8,7 @@ if (POLICY CMP0025)
   cmake_policy(SET CMP0025 NEW)
 endif()
 
-project(ProjectName C CXX)
+project(OutpostEngine C CXX)
 
 # BLIB will inherit these settings as well
 option(STATIC_LINK "On to link statically" On)
@@ -40,13 +40,13 @@ configure_blib_target(Core)
 link_blib_target(Core)
 
 create_blib_target(
-    TARGET ProjectName
+    TARGET OutpostEngine
     OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}"
     LINK_LIBRARIES Core
 )
 
 create_blib_target(
-    TARGET ProjectNameEditor
+    TARGET OutpostEngineEditor
     OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}"
     LINK_LIBRARIES Core
 )

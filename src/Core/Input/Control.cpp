@@ -19,7 +19,7 @@ void configureInputSystem(bl::input::InputSystem& system) {
     system.configureTriggerControl(Control::Back);
 
     // creator the actor. Peoplemon is only 1 player locally
-    bl::input::Actor& user = system.addActor();
+    bl::input::Actor& user = system.getActor();
 
     // set keyboard and mouse defaults. no defaults for controller
     user.getKBMTriggerControl(Control::MoveUp).triggerOnKey(sf::Keyboard::W);

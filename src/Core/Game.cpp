@@ -2,6 +2,7 @@
 
 #include <BLIB/Events.hpp>
 #include <Core/Input/Control.hpp>
+#include <Core/Player/Player.hpp>
 #include <Core/Properties.hpp>
 
 namespace core
@@ -24,7 +25,6 @@ bool Game::performSharedEarlyStartup(const char* configFilename) {
 
     // TODO - SETUP_TASK - setup resource loaders for custom resource types
 
-    // TODO - SETUP_TASK - keep or remove window size persistence
     windowSizePersister.configFilename = configFilename;
 
     Properties.save(configFilename);
@@ -33,12 +33,22 @@ bool Game::performSharedEarlyStartup(const char* configFilename) {
 }
 
 bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
+    engine.addPlayer<player::Player>();
     input::configureInputSystem(engine.inputSystem());
 
-    // TODO - SETUP_TASK - register shared engine systems here
+    using Stage = bl::engine::FrameStage;
+    using Mask  = bl::engine::StateMask::V;
+    enginePtr   = &engine;
+    render = &engine.systems().registerSystem<sys::Render>(Stage::RenderEarlyRefresh, Mask::All);
+    damage.init(engine);
+    physics  = &engine.systems().getSystem<bl::sys::Physics2D>();
+    units    = &engine.systems().registerSystem<sys::Unit>(Stage::Update1, Mask::Running);
+    movement = &engine.systems().registerSystem<sys::Movement>(Stage::Update2, Mask::Running);
 
-    // TODO - SETUP_TASK - keep or remove window size persistence
+    font.loadFromFile("Resources/font.ttf");
+
     bl::event::Dispatcher::subscribe(&windowSizePersister);
+    bl::event::Dispatcher::subscribe(&damage);
 
     return true;
 }
@@ -46,8 +56,8 @@ bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
 void Game::startShutdown() {
     // TODO - SETUP_TASK - any early shutdown tasks
 
-    // TODO - SETUP_TASK - keep or remove window size persistence
     bl::event::Dispatcher::unsubscribe(&windowSizePersister);
+    bl::event::Dispatcher::unsubscribe(&damage);
 }
 
 void Game::completeShutdown() {

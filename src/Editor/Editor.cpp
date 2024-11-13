@@ -27,6 +27,10 @@ bool Editor::performEarlyStartup(int argc, char** argv) {
         core::Properties.WindowHeight.set(ConstantsEditor::WindowHeight);
     }
 
+    // we will use a virtual coordinate space for now
+    bl::cam::OverlayCamera::setOverlayCoordinateSpace(ConstantsEditor::WindowWidth,
+                                                      ConstantsEditor::WindowHeight);
+
     // TODO - SETUP_TASK - any other editor specific early setup steps
 
     return true;

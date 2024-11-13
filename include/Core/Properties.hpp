@@ -32,6 +32,11 @@ public:
                   bl::engine::Settings::WindowParameters::WindowHeightKey,
                   Constants::UnsetUintProperty);
 
+    BLIB_PROPERTY(UnitAiDistanceStopThresh, float, "core.unit.stop_distance",
+                  Constants::UnitAiStopDistanceDefault);
+    BLIB_PROPERTY(UnitDampingFactor, float, "core.unit.damping_factor",
+                  Constants::UnitDampingFactorDefault);
+
     /**
      * @brief Loads the properties from the config file
      *

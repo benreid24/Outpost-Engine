@@ -19,12 +19,14 @@ public:
     virtual const char* name() const { return "DemoEngineState"; }
 
     virtual void activate(bl::engine::Engine& engine) {
-        auto scene = engine.renderer().getObserver().pushScene<bl::rc::scene::Scene2D>();
+        auto world =
+            engine.getPlayer().enterWorld<bl::engine::BasicWorld<bl::rc::scene::Scene2D>>();
+        auto scene = world->scene();
         engine.renderer().getObserver().setCamera<bl::cam::Camera2D>(glm::vec2(400, 300),
                                                                      glm::vec2(800, 600));
-        engine.renderer().getObserver().setClearColor(bl::sfcol(sf::Color::Cyan));
+        engine.renderer().getObserver().setClearColor(sf::Color::Cyan);
 
-        triangle.create(engine, {0.f, 173.f}, {200.f, 173.f}, {100.f, 0.f});
+        triangle.create(*world, {0.f, 173.f}, {200.f, 173.f}, {100.f, 0.f});
         triangle.setColorGradient({1.f, 0.f, 0.f, 1.f}, {0.f, 1.f, 0.f, 1.f}, {0.f, 0.f, 1.f, 1.f});
         triangle.getTransform().setPosition(400.f, 300.f);
         triangle.getTransform().setOrigin({100.f, 123.f});
@@ -34,7 +36,7 @@ public:
     }
 
     virtual void deactivate(bl::engine::Engine& engine) override {
-        engine.renderer().getObserver().popScene();
+        engine.getPlayer().leaveWorld();
     }
 
     virtual void update(bl::engine::Engine&, float dt, float) override {
