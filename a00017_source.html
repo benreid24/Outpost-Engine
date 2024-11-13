@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ProjectName: include/Core/Input/MenuDriver.hpp Source File</title>
+<title>Outpost Engine: include/Core/Constants.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -24,10 +24,10 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo-small.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">ProjectName
+   <div id="projectname">Outpost Engine
    &#160;<span id="projectnumber">0.1.0</span>
    </div>
-   <div id="projectbrief">ProjectName description here</div>
+   <div id="projectbrief">Train game source documentation!</div>
   </td>
  </tr>
  </tbody>
@@ -66,44 +66,45 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_5a360ce72f845b04181dbb6c528142b3.html">Input</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">MenuDriver.hpp</div>  </div>
+<div class="title">Constants.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00017.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CORE_INPUT_MENUDRIVER_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CORE_INPUT_MENUDRIVER_HPP</span></div>
+<a href="a00017.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CONSTANTS_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CONSTANTS_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;BLIB/Interfaces/Menu.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00014.html">Core/Input/Control.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00051.html">core</a></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>input</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="a00050.html#ga4177a2fb4c67d583c7ea3ab587db8791">   16</a></span>&#160;<span class="keyword">using</span> <a class="code" href="a00050.html#ga4177a2fb4c67d583c7ea3ab587db8791">MenuDriver</a> = bl::menu::TriggerDriver&lt;<a class="code" href="a00050.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4">Control::MoveUp</a>, <a class="code" href="a00050.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f">Control::MoveRight</a>, <a class="code" href="a00050.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07">Control::MoveDown</a>,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                                           <a class="code" href="a00050.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee">Control::MoveLeft</a>, <a class="code" href="a00050.html#ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223">Control::Interact</a>&gt;;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;} <span class="comment">// namespace input</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;} <span class="comment">// namespace core</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aa00014_html"><div class="ttname"><a href="a00014.html">Control.hpp</a></div></div>
-<div class="ttc" id="aa00050_html_ga4177a2fb4c67d583c7ea3ab587db8791"><div class="ttname"><a href="a00050.html#ga4177a2fb4c67d583c7ea3ab587db8791">core::input::MenuDriver</a></div><div class="ttdeci">bl::menu::TriggerDriver&lt; Control::MoveUp, Control::MoveRight, Control::MoveDown, Control::MoveLeft, Control::Interact &gt; MenuDriver</div><div class="ttdoc">Helper typedef for menu driving.</div><div class="ttdef"><b>Definition:</b> <a href="a00017_source.html#l00016">MenuDriver.hpp:17</a></div></div>
-<div class="ttc" id="aa00050_html_ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07"><div class="ttname"><a href="a00050.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07">core::input::Control::MoveDown</a></div><div class="ttdeci">@ MoveDown</div><div class="ttdef"><b>Definition:</b> <a href="a00014_source.html#l00029">Control.hpp:29</a></div></div>
-<div class="ttc" id="aa00050_html_ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223"><div class="ttname"><a href="a00050.html#ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223">core::input::Control::Interact</a></div><div class="ttdeci">@ Interact</div><div class="ttdef"><b>Definition:</b> <a href="a00014_source.html#l00032">Control.hpp:32</a></div></div>
-<div class="ttc" id="aa00050_html_ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee"><div class="ttname"><a href="a00050.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee">core::input::Control::MoveLeft</a></div><div class="ttdeci">@ MoveLeft</div><div class="ttdef"><b>Definition:</b> <a href="a00014_source.html#l00030">Control.hpp:30</a></div></div>
-<div class="ttc" id="aa00050_html_ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f"><div class="ttname"><a href="a00050.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f">core::input::Control::MoveRight</a></div><div class="ttdeci">@ MoveRight</div><div class="ttdef"><b>Definition:</b> <a href="a00014_source.html#l00028">Control.hpp:28</a></div></div>
-<div class="ttc" id="aa00050_html_ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4"><div class="ttname"><a href="a00050.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4">core::input::Control::MoveUp</a></div><div class="ttdeci">@ MoveUp</div><div class="ttdef"><b>Definition:</b> <a href="a00014_source.html#l00027">Control.hpp:27</a></div></div>
-<div class="ttc" id="aa00051_html"><div class="ttname"><a href="a00051.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00004">Constants.hpp:5</a></div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00170.html">core</a></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="a00209.html">   11</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00209.html">Constants</a> {</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="a00209.html#a2d737dbb76139dad69ca691e6e5afc91">   12</a></span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="a00209.html#a2d737dbb76139dad69ca691e6e5afc91">UnsetUintProperty</a> = 0;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="a00209.html#a57c15e838c56e8662a43e6510ba6d0ae">   14</a></span>&#160;    <span class="keyword">static</span> constexpr <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="a00209.html#a57c15e838c56e8662a43e6510ba6d0ae">AppName</a>                = <span class="stringliteral">&quot;OutpostEngine&quot;</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="a00209.html#ab4d3a4ed99d92facdd8d5c7754be267e">   15</a></span>&#160;    <span class="keyword">static</span> constexpr <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="a00209.html#ab4d3a4ed99d92facdd8d5c7754be267e">DefaultSpritesheetPath</a> = <span class="stringliteral">&quot;Resources/Images/Spritesheets&quot;</span>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="a00209.html#af35dfca8a939e58e3d1bd1e18a3fe27a">   16</a></span>&#160;    <span class="keyword">static</span> constexpr <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="a00209.html#af35dfca8a939e58e3d1bd1e18a3fe27a">DefaultMusicPath</a>       = <span class="stringliteral">&quot;Resources/Audio/Music&quot;</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="a00209.html#a4c4a3d2d68ae6e9a3be20a58528bccd8">   18</a></span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">float</span> <a class="code" href="a00209.html#a4c4a3d2d68ae6e9a3be20a58528bccd8">UnitAiStopDistanceDefault</a> = 5.f;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="a00209.html#a51fd1212b41276db23bb00b49a881664">   19</a></span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">float</span> <a class="code" href="a00209.html#a51fd1212b41276db23bb00b49a881664">UnitDampingFactorDefault</a>  = 0.1f;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;} <span class="comment">// namespace core</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00170_html"><div class="ttname"><a href="a00170.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00004">Damager.hpp:5</a></div></div>
+<div class="ttc" id="aa00209_html"><div class="ttname"><a href="a00209.html">core::Constants</a></div><div class="ttdoc">Collection of constants shared across the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00017_source.html#l00011">Constants.hpp:11</a></div></div>
+<div class="ttc" id="aa00209_html_a2d737dbb76139dad69ca691e6e5afc91"><div class="ttname"><a href="a00209.html#a2d737dbb76139dad69ca691e6e5afc91">core::Constants::UnsetUintProperty</a></div><div class="ttdeci">static constexpr unsigned int UnsetUintProperty</div><div class="ttdef"><b>Definition:</b> <a href="a00017_source.html#l00012">Constants.hpp:12</a></div></div>
+<div class="ttc" id="aa00209_html_a4c4a3d2d68ae6e9a3be20a58528bccd8"><div class="ttname"><a href="a00209.html#a4c4a3d2d68ae6e9a3be20a58528bccd8">core::Constants::UnitAiStopDistanceDefault</a></div><div class="ttdeci">static constexpr float UnitAiStopDistanceDefault</div><div class="ttdef"><b>Definition:</b> <a href="a00017_source.html#l00018">Constants.hpp:18</a></div></div>
+<div class="ttc" id="aa00209_html_a51fd1212b41276db23bb00b49a881664"><div class="ttname"><a href="a00209.html#a51fd1212b41276db23bb00b49a881664">core::Constants::UnitDampingFactorDefault</a></div><div class="ttdeci">static constexpr float UnitDampingFactorDefault</div><div class="ttdef"><b>Definition:</b> <a href="a00017_source.html#l00019">Constants.hpp:19</a></div></div>
+<div class="ttc" id="aa00209_html_a57c15e838c56e8662a43e6510ba6d0ae"><div class="ttname"><a href="a00209.html#a57c15e838c56e8662a43e6510ba6d0ae">core::Constants::AppName</a></div><div class="ttdeci">static constexpr const char * AppName</div><div class="ttdef"><b>Definition:</b> <a href="a00017_source.html#l00014">Constants.hpp:14</a></div></div>
+<div class="ttc" id="aa00209_html_ab4d3a4ed99d92facdd8d5c7754be267e"><div class="ttname"><a href="a00209.html#ab4d3a4ed99d92facdd8d5c7754be267e">core::Constants::DefaultSpritesheetPath</a></div><div class="ttdeci">static constexpr const char * DefaultSpritesheetPath</div><div class="ttdef"><b>Definition:</b> <a href="a00017_source.html#l00015">Constants.hpp:15</a></div></div>
+<div class="ttc" id="aa00209_html_af35dfca8a939e58e3d1bd1e18a3fe27a"><div class="ttname"><a href="a00209.html#af35dfca8a939e58e3d1bd1e18a3fe27a">core::Constants::DefaultMusicPath</a></div><div class="ttdeci">static constexpr const char * DefaultMusicPath</div><div class="ttdef"><b>Definition:</b> <a href="a00017_source.html#l00016">Constants.hpp:16</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 23 2024 02:04:13 for ProjectName by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 13 2024 23:42:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small></address>

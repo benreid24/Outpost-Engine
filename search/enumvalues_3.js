@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['movedown_133',['MoveDown',['../a00050.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07',1,'core::input::Control']]],
-  ['moveleft_134',['MoveLeft',['../a00050.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee',1,'core::input::Control']]],
-  ['moveright_135',['MoveRight',['../a00050.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f',1,'core::input::Control']]],
-  ['moveup_136',['MoveUp',['../a00050.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4',1,'core::input::Control']]]
+  ['failed_566',['Failed',['../a00265.html#aaeb3c5b56c4eb5bde9e1c9da9ef16176ad7e5c88dbbb71fa1f3410cfd055988d8',1,'core::unit::Command']]],
+  ['forward_567',['Forward',['../a00293.html#ad5cbe3c2b12c98f5c1ee598b7ae1a623a3af5141381e7e12ed0a5a21727492897',1,'core::unit::Moveable']]]
 ];
