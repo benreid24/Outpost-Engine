@@ -85,6 +85,7 @@ private:
     void onCoverAngleChange();
     float getCoverAngle() const;
 
+    bl::gui::Label::Ptr hoverIdLabel;
     bl::gui::Label::Ptr controlNameLabel;
     void onEntityControl(bl::ecs::Entity control);
 

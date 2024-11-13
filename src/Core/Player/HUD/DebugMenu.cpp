@@ -109,6 +109,14 @@ Element::Ptr DebugMenu::createEntityTab() {
     leftBox->pack(killEntity);
 
     auto nameRow = makeBoxH();
+    nameRow->pack(Label::create("Hover:"), false, true);
+    hoverIdLabel = Label::create("<none>");
+    hoverIdLabel->setColor(sf::Color::Blue, sf::Color::Transparent);
+    hoverIdLabel->setRequisition({120.f, 20.f});
+    nameRow->pack(hoverIdLabel, true, true);
+    rightBox->pack(nameRow, true, false);
+
+    nameRow = makeBoxH();
     nameRow->pack(Label::create("Controlling:"), false, true);
     controlNameLabel = Label::create("<none>");
     controlNameLabel->setColor(sf::Color::Blue, sf::Color::Transparent);
@@ -213,6 +221,13 @@ bool DebugMenu::processEvent(const Event& event) {
         }
         return false;
     };
+
+    // update hover entity
+    if (event.source().type == sf::Event::MouseMoved) {
+        const auto* phys = game.physicsSystem().findEntityAtPosition(world, event.worldPosition());
+        if (phys) { hoverIdLabel->setText(phys->getOwner().toString()); }
+        else { hoverIdLabel->setText("<none>"); }
+    }
 
     // process tools
     switch (currentTopTab) {

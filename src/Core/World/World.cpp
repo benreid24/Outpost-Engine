@@ -353,10 +353,11 @@ bool World::computePath(const glm::vec2& startPos, const glm::vec2& dst, unit::P
 }
 
 bool World::pathToPositionIsClear(const glm::vec2& start, const glm::vec2& end) const {
-    const float s     = getWorldToBoxScale();
-    const auto result = b2World_CastRayClosest(getBox2dWorldId(),
-                                               {start.x * s, start.y * s},
-                                               {end.x * s, end.y * s},
+    const float s        = getWorldToBoxScale();
+    const glm::vec2 diff = (end - start) * s;
+    const auto result    = b2World_CastRayClosest(getBox2dWorldId(),
+                                                  {start.x * s, start.y * s},
+                                                  {diff.x, diff.y},
                                                Collisions::getUnitMovementQueryFilter());
     return !result.hit;
 }
