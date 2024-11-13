@@ -49,7 +49,7 @@ public:
      * @param damping The damping factor to use to stop the entity when not moving
      */
     void makeMoveable(float acceleration, float maxSpeed, float rotateRate,
-                      float directionAdjustSpeed, float damping = 10.f);
+                      float directionAdjustSpeed, float damping = -1.f);
 
     /**
      * @brief Allows the unit to shoot with the following parameters

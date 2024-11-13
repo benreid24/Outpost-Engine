@@ -36,7 +36,7 @@ public:
      * @param damping The damping factor to use to stop the entity when not moving
      */
     Moveable(bl::com::Physics2D& physics, float acceleration, float maxSpeed, float rotateRate,
-             float directionAdjustSpeed, float damping = 10.f);
+             float directionAdjustSpeed, float damping = -1.f);
 
     /**
      * @brief Moves the entity in the given direction. Only the last call to this method in a frame
@@ -73,6 +73,7 @@ private:
     const float damping;
     MoveDirection moveDir;
     float moveFactor;
+    float slowdownStart;
     RotateDirection rotateDir;
     float rotateFactor;
 

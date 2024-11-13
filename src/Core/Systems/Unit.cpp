@@ -6,6 +6,7 @@
 #include <BLIB/Math.hpp>
 #include <Core/Components/Damager.hpp>
 #include <Core/Game.hpp>
+#include <Core/Properties.hpp>
 #include <Core/World/Collisions.hpp>
 #include <cmath>
 
@@ -145,7 +146,7 @@ void Unit::processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit, uni
     }
 
     // move towards target
-    if (distance < 5.f) { // TODO - refine threshold
+    if (distance < Properties.UnitAiDistanceStopThresh.get()) {
         if (ctx.currentNode == ctx.path.waypoints.size() - 1) {
             cmd.markComplete();
             unit.commandStates[cmd.getConcurrencyType()].clear();
@@ -163,11 +164,7 @@ void Unit::processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit, uni
             ctx.path.waypoints.clear();
             processMoveToNodeCommand(entity, unit, cmd, dt);
         }
-        else {
-            // TODO - this is not effective, need to begin damping when slowing
-            const float factor = distance >= mover.maxSpeed ? 1.f : distance / mover.maxSpeed;
-            mover.move(unit::Moveable::Forward, factor * factor);
-        }
+        else { mover.move(unit::Moveable::Forward); }
     }
 }
 
@@ -230,6 +227,7 @@ void Unit::resolveUnitMovement(com::Unit& unit, float dt) {
         unit.physics.getTransform().rotate(sign * mover.rotateRate * mover.rotateFactor * dt);
         mover.rotateDir = unit::Moveable::NoRotate;
     }
+
     if (mover.moveDir != unit::Moveable::NoMove) {
         unit.physics.setLinearDamping(0.f);
         const float radians = bl::math::degreesToRadians(unit.physics.getTransform().getRotation());

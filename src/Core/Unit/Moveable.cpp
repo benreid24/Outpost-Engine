@@ -1,6 +1,7 @@
 #include <Core/Unit/Moveable.hpp>
 
 #include <BLIB/Math.hpp>
+#include <Core/Properties.hpp>
 
 namespace core
 {
@@ -13,10 +14,11 @@ Moveable::Moveable(bl::com::Physics2D& physics, float accel, float maxVel, float
 , maxSpeed(maxVel)
 , rotateRate(rotate)
 , dirCorrectionFactor(dirFactor)
-, damping(damp)
+, damping(damp < 0.f ? maxSpeed * Properties.UnitDampingFactor.get() : damp)
 , force(physics.scaleWorldToPhysics(accel) * mass)
 , moveDir(NoMove)
 , moveFactor(1.f)
+, slowdownStart(-1.f)
 , rotateDir(NoRotate)
 , rotateFactor(1.f) {}
 

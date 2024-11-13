@@ -165,7 +165,7 @@ bool DebugMenu::processEvent(const Event& event) {
         ecs.emplaceComponent<core::com::Mortal>(newEntity, 100.f);
 
         controlling.unit = ecs.emplaceComponent<core::com::Unit>(newEntity, *physics);
-        controlling.unit->makeMoveable(320.f, 1920.f / 6.f, 270.f, 0.9f, 10.f);
+        controlling.unit->makeMoveable(320.f, 1920.f / 6.f, 270.f, 0.9f);
         controlling.unit->makeShooter(3.f, 20.f, Radius * 2.f);
 
         onEntityControl(newEntity);
