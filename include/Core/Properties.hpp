@@ -32,6 +32,9 @@ public:
                   bl::engine::Settings::WindowParameters::WindowHeightKey,
                   Constants::UnsetUintProperty);
 
+    BLIB_PROPERTY(CommandPoolInitialSize, unsigned int, "core.cmd.init_pool_size",
+                  Constants::CommandPoolInitialSize);
+
     BLIB_PROPERTY(UnitAiDistanceStopThresh, float, "core.unit.stop_distance",
                   Constants::UnitAiStopDistanceDefault);
     BLIB_PROPERTY(UnitDampingFactor, float, "core.unit.damping_factor",

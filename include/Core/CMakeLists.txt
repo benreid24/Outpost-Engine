@@ -5,6 +5,7 @@ target_sources(Core PUBLIC
     Properties.hpp
 )
 
+add_subdirectory(Commands)
 add_subdirectory(Components)
 add_subdirectory(Input)
 add_subdirectory(Player)
