@@ -2,7 +2,9 @@
 #define CORE_COMPONENTS_UNIT_HPP
 
 #include <BLIB/Containers/StaticRingBuffer.hpp>
-#include <Core/Unit/Command.hpp>
+#include <Core/Commands/Executor.hpp>
+#include <Core/Commands/ExecutorHandle.hpp>
+#include <Core/Commands/UnitCommand.hpp>
 #include <Core/Unit/CommandContext.hpp>
 #include <Core/Unit/Moveable.hpp>
 #include <Core/Unit/Shooter.hpp>
@@ -23,7 +25,13 @@ class Unit;
 }
 namespace com
 {
-class Unit {
+/**
+ * @brief Component and data storage for in game units
+ *
+ * @ingroup Components
+ * @ingroup Unit
+ */
+class Unit : public cmd::Executor<cmd::UnitCommand> {
 public:
     static constexpr std::size_t CommandQueueSize = 4;
 
@@ -86,18 +94,20 @@ public:
      * @param command The command to perform
      * @return Whether or not the command was able to be queued
      */
-    bool queueCommand(const unit::Command& command);
+    bool queueCommand(const cmd::ExternalHandle<cmd::UnitCommand>& command);
 
 private:
+    using CmdHandle = cmd::ExecutorHandle<cmd::UnitCommand>;
+
     // unit data and components
     bl::com::Physics2D& physics;
     std::optional<unit::Moveable> mover;
     std::optional<unit::Shooter> shooter;
 
     // unit AI & command state
-    unit::Command activeCommands[unit::Command::ConcurrencyType::COUNT];
-    unit::CommandContext commandStates[unit::Command::ConcurrencyType::COUNT];
-    bl::ctr::StaticRingBuffer<unit::Command, CommandQueueSize> queuedCommands;
+    CmdHandle activeCommands[cmd::UnitCommand::ConcurrencyType::COUNT];
+    unit::CommandContext commandStates[cmd::UnitCommand::ConcurrencyType::COUNT];
+    bl::ctr::StaticRingBuffer<CmdHandle, CommandQueueSize> queuedCommands;
 
     friend class sys::Unit;
 };

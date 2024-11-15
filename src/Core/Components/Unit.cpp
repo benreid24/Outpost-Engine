@@ -16,9 +16,10 @@ void Unit::makeShooter(float fireRate, float damage, float bulletOffset) {
     shooter.emplace(fireRate, damage, bulletOffset);
 }
 
-bool Unit::queueCommand(const unit::Command& cmd) {
+bool Unit::queueCommand(const cmd::ExternalHandle<cmd::UnitCommand>& cmd) {
     if (!queuedCommands.full()) {
-        queuedCommands.emplace_back(cmd);
+        queuedCommands.emplace_back(makeCommandHandle(cmd));
+        queuedCommands.back().markQueued();
         return true;
     }
     return false;

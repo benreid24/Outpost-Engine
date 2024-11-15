@@ -15,6 +15,8 @@ struct Constants {
     static constexpr const char* DefaultSpritesheetPath = "Resources/Images/Spritesheets";
     static constexpr const char* DefaultMusicPath       = "Resources/Audio/Music";
 
+    static constexpr unsigned int CommandPoolInitialSize = 64;
+
     static constexpr float UnitAiStopDistanceDefault = 5.f;
     static constexpr float UnitDampingFactorDefault  = 0.1f;
 };
