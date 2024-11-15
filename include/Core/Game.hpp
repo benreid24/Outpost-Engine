@@ -4,6 +4,7 @@
 #include <BLIB/Game.hpp>
 
 #include <BLIB/Systems/Physics2D.hpp>
+#include <Core/Commands/CommandStore.hpp>
 #include <Core/Systems/Damage.hpp>
 #include <Core/Systems/Movement.hpp>
 #include <Core/Systems/Render.hpp>
@@ -54,6 +55,11 @@ public:
      */
     sf::VulkanFont& defaultFont() { return font; }
 
+    /**
+     * @brief Returns the command store
+     */
+    cmd::CommandStore& commandStore() { return commands; }
+
 protected:
     /**
      * @brief Early startup tasks shared by both editor and game go in here
@@ -89,6 +95,7 @@ private:
     sys::Unit* units;
     sys::Movement* movement;
     sf::VulkanFont font;
+    cmd::CommandStore commands;
 };
 
 } // namespace core

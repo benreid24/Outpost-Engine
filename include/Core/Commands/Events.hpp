@@ -9,7 +9,7 @@ namespace cmd
 {
 /**
  * @brief Event that is fired when a command changes state. Not all states result in events being
- *        fired. Subscribable states are Current, Complete, Failed, Canceled
+ *        fired. Subscribable states are Queued, Current, Complete, Failed, Canceled
  *
  * @tparam T The command type to get events for
  * @tparam Status The status to get events for
@@ -17,8 +17,8 @@ namespace cmd
  */
 template<typename T, Command::Status Status>
 struct CommandStatusChange {
-    static_assert(Status >= Command::Current,
-                  "Status must be one of Current, Complete, Failed, Canceled");
+    static_assert(Status >= Command::Queued,
+                  "Status must be one of Queued, Current, Complete, Failed, Canceled");
 
     const T& command;
 };

@@ -6,6 +6,7 @@
 #include <Core/Commands/Events.hpp>
 #include <Core/Commands/ExternalHandle.hpp>
 #include <Core/Commands/Ref.hpp>
+#include <Core/Commands/SingleStore.hpp>
 
 namespace core
 {
@@ -114,11 +115,22 @@ public:
         }
     }
 
+    /**
+     * @brief Marks the command to be in the queued state
+     */
+    void markQueued() {
+        ref->status = Command::Queued;
+        bl::event::Dispatcher::dispatch<CommandStatusChange<T, Command::Queued>>({*ref});
+    }
+
 private:
     Ref<T> ref;
 
     ExecutorHandle(ExternalHandle<T>&& ext)
     : ref(std::move(ext.ref)) {}
+
+    ExecutorHandle(const ExternalHandle<T>& ext)
+    : ref(ext.ref) {}
 
     friend class Executor<T>;
 };

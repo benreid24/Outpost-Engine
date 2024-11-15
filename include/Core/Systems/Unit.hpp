@@ -31,9 +31,9 @@ private:
 
     void processAI(float dt);
     void processHighLevelAI(bl::ecs::Entity entity, com::Unit& unit, float dt);
-    void processKillUnitCommand(com::Unit& unit, unit::Command& cmd, float dt);
-    void processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit, unit::Command& cmd,
-                                  float dt);
+    void processKillUnitCommand(com::Unit& unit, com::Unit::CmdHandle& cmd, float dt);
+    void processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit,
+                                  com::Unit::CmdHandle& cmd, float dt);
     void rotateUnit(com::Unit& unit, float target, float dt);
 
     void resolveActions(float dt);

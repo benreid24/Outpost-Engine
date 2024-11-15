@@ -4,6 +4,7 @@
 #include <BLIB/Events.hpp>
 #include <Core/Commands/Events.hpp>
 #include <Core/Commands/Ref.hpp>
+#include <Core/Commands/SingleStore.hpp>
 
 namespace core
 {

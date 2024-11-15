@@ -76,22 +76,23 @@ void Unit::resolveActions(float dt) {
 void Unit::processHighLevelAI(bl::ecs::Entity entity, com::Unit& unit, float dt) {
     // first move queued actions into slots if possible
     while (!unit.queuedCommands.empty()) {
-        auto& cmd = unit.queuedCommands.front();
-        if (unit.activeCommands[cmd.getConcurrencyType()].isTerminal()) {
-            unit.activeCommands[cmd.getConcurrencyType()] = cmd;
-            unit.activeCommands[cmd.getConcurrencyType()].markInProgress();
-            unit.commandStates[cmd.getConcurrencyType()].init(cmd);
+        auto& cmd  = unit.queuedCommands.front();
+        auto& slot = unit.activeCommands[cmd->getConcurrencyType()];
+        if (!slot || slot->isTerminal()) {
+            slot = std::move(cmd);
+            slot.markInProgress();
+            unit.commandStates[slot->getConcurrencyType()].init(*slot);
             unit.queuedCommands.pop_front();
         }
         else { break; }
     }
 
     // process active commands
-    using Type = unit::Command::Type;
-    for (int i = 0; i < unit::Command::ConcurrencyType::COUNT; ++i) {
+    using Type = cmd::UnitCommand::Type;
+    for (int i = 0; i < cmd::UnitCommand::ConcurrencyType::COUNT; ++i) {
         auto& cmd = unit.activeCommands[i];
-        if (!cmd.isTerminal()) {
-            switch (cmd.getType()) {
+        if (cmd && !cmd->isTerminal()) {
+            switch (cmd->getType()) {
             case Type::MoveToPosition:
                 processMoveToNodeCommand(entity, unit, cmd, dt);
                 break;
@@ -99,16 +100,17 @@ void Unit::processHighLevelAI(bl::ecs::Entity entity, com::Unit& unit, float dt)
                 processKillUnitCommand(unit, cmd, dt);
                 break;
             default:
-                BL_LOG_ERROR << "Invalid command type: " << cmd.getType();
+                BL_LOG_ERROR << "Invalid command type: " << cmd->getType();
                 cmd.markFailed();
+                cmd.release();
                 break;
             }
         }
     }
 }
 
-void Unit::processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit, unit::Command& cmd,
-                                    float dt) {
+void Unit::processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit,
+                                    com::Unit::CmdHandle& cmd, float dt) {
     using Waypoint = unit::Path::Waypoint;
 
     if (!unit.canMove()) {
@@ -119,15 +121,16 @@ void Unit::processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit, uni
     auto& game          = bl::game::Game::getInstance<core::Game>();
     auto world          = game.engine().getWorld<world::World>(entity.getWorldIndex());
     auto& mover         = unit.getMover();
-    auto& ctx           = unit.commandStates[cmd.getConcurrencyType()].getPathContext();
+    auto& ctx           = unit.commandStates[cmd->getConcurrencyType()].getPathContext();
     const glm::vec2 pos = unit.physics.getTransform().getGlobalPosition();
 
     // first make sure we have a path
     if (ctx.path.waypoints.empty()) {
         if (!world->computePath(unit.physics.getTransform().getGlobalPosition(),
-                                cmd.getTargetPosition(),
+                                cmd->getTargetPosition(),
                                 ctx.path)) {
             cmd.markFailed();
+            cmd.release();
             return;
         }
         ctx.currentNode = 0;
@@ -149,7 +152,8 @@ void Unit::processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit, uni
     if (distance < Properties.UnitAiDistanceStopThresh.get()) {
         if (ctx.currentNode == ctx.path.waypoints.size() - 1) {
             cmd.markComplete();
-            unit.commandStates[cmd.getConcurrencyType()].clear();
+            unit.commandStates[cmd->getConcurrencyType()].clear();
+            cmd.release();
         }
         else {
             ++ctx.currentNode;
@@ -168,9 +172,10 @@ void Unit::processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit, uni
     }
 }
 
-void Unit::processKillUnitCommand(com::Unit& unit, unit::Command& cmd, float dt) {
+void Unit::processKillUnitCommand(com::Unit& unit, com::Unit::CmdHandle& cmd, float dt) {
     if (!unit.canShoot()) {
         cmd.markFailed();
+        cmd.release();
         return;
     }
 
@@ -179,15 +184,17 @@ void Unit::processKillUnitCommand(com::Unit& unit, unit::Command& cmd, float dt)
     auto& shooter = unit.getShooter();
 
     // stop if target dead
-    if (!game.engine().ecs().entityExists(cmd.getTargetUnit()->getId())) {
+    if (!game.engine().ecs().entityExists(cmd->getTargetUnit()->getId())) {
         cmd.markComplete();
+        cmd.release();
         return;
     }
     else {
         com::Mortal* m =
-            game.engine().ecs().getComponent<com::Mortal>(cmd.getTargetUnit()->getId());
+            game.engine().ecs().getComponent<com::Mortal>(cmd->getTargetUnit()->getId());
         if (m && m->health <= 0.f) {
             cmd.markComplete();
+            cmd.release();
             return;
         }
     }
@@ -196,7 +203,7 @@ void Unit::processKillUnitCommand(com::Unit& unit, unit::Command& cmd, float dt)
     const float angle = unit.physics.getTransform().getRotation();
     const float targetAngle =
         bl::math::computeAngle(unit.physics.getTransform().getGlobalPosition(),
-                               cmd.getTargetUnit()->physics.getTransform().getGlobalPosition());
+                               cmd->getTargetUnit()->physics.getTransform().getGlobalPosition());
     if (std::abs(angle - targetAngle) > 1.f) { rotateUnit(unit, targetAngle, dt); }
     else { shooter.fire(); }
 }

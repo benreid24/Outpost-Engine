@@ -1,7 +1,7 @@
 #ifndef CORE_UNIT_COMMANDCONTEXT_HPP
 #define CORE_UNIT_COMMANDCONTEXT_HPP
 
-#include <Core/Unit/Command.hpp>
+#include <Core/Commands/UnitCommand.hpp>
 #include <Core/Unit/Path.hpp>
 #include <variant>
 #include <vector>
@@ -35,7 +35,7 @@ public:
      *
      * @param cmd The command to init data for
      */
-    void init(const Command& cmd);
+    void init(const cmd::UnitCommand& cmd);
 
     /**
      * @brief Clears context data and releases memory

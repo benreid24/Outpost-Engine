@@ -52,7 +52,8 @@ protected:
     /**
      * @brief Creates the command in the Invalid state
      */
-    Command();
+    Command()
+    : status(Invalid) {}
 
 private:
     Status status;

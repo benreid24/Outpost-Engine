@@ -74,6 +74,11 @@ public:
     Type getType() const { return type; }
 
     /**
+     * @brief Returns the concurrency type for this command
+     */
+    ConcurrencyType::Slot getConcurrencyType() const { return concurrencyType; }
+
+    /**
      * @brief Returns the target world node of this command
      */
     const world::Node* getTargetNode() const { return targetPosition.node; }

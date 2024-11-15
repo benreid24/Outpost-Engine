@@ -27,6 +27,16 @@ protected:
     ExecutorHandle<T> makeCommandHandle(ExternalHandle<T>&& extHandle) {
         return ExecutorHandle<T>(std::forward<ExternalHandle<T>>(extHandle));
     }
+
+    /**
+     * @brief Creates an executor handle from the given external command handle
+     *
+     * @param extHandle The handle to convert
+     * @return An executor handle for the same command
+     */
+    ExecutorHandle<T> makeCommandHandle(const ExternalHandle<T>& extHandle) {
+        return ExecutorHandle<T>(extHandle);
+    }
 };
 
 } // namespace cmd

@@ -4,7 +4,7 @@
 #include <BLIB/Containers/ObjectWrapper.hpp>
 #include <BLIB/Util/IdAllocatorUnbounded.hpp>
 #include <Core/Commands/Ref.hpp>
-#include <Core/Properties.hpp>
+#include <Core/Constants.hpp>
 #include <type_traits>
 
 namespace core
@@ -65,29 +65,29 @@ void Ref<T>::release() {
 
 template<typename T>
 T* Ref<T>::operator->() {
-    return &owner.pool[i].get();
+    return &owner->pool[i].get();
 }
 
 template<typename T>
 const T* Ref<T>::operator->() const {
-    return &owner.pool[i].get();
+    return &owner->pool[i].get();
 }
 
 template<typename T>
 T& Ref<T>::operator*() {
-    return owner.pool[i].get();
+    return owner->pool[i].get();
 }
 
 template<typename T>
 const T& Ref<T>::operator*() const {
-    return owner.pool[i].get();
+    return owner->pool[i].get();
 }
 
 template<typename T>
 SingleStore<T>::SingleStore()
-: freeIndices(Properties.CommandPoolInitialSize.get()) {
-    pool.resize(Properties.CommandPoolInitialSize.get());
-    refCounts.resize(Properties.CommandPoolInitialSize.get(), 0);
+: freeIndices(Constants::CommandPoolInitialSize) {
+    pool.resize(Constants::CommandPoolInitialSize);
+    refCounts.resize(Constants::CommandPoolInitialSize, 0);
 }
 
 template<typename T>

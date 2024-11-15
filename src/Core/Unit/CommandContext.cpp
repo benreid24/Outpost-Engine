@@ -4,8 +4,8 @@ namespace core
 {
 namespace unit
 {
-void CommandContext::init(const Command& cmd) {
-    using Type = Command::Type;
+void CommandContext::init(const cmd::UnitCommand& cmd) {
+    using Type = cmd::UnitCommand::Type;
     switch (cmd.getType()) {
     case Type::MoveToPosition:
         data.emplace<PathContext>();
