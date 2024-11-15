@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Systems/Render.hpp Source File</title>
+<title>Outpost Engine: include/Core/Input/MenuDriver.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,66 +66,44 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_9ee9775a41bd202429166df6e1b725b2.html">Systems</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_5a360ce72f845b04181dbb6c528142b3.html">Input</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Render.hpp</div>  </div>
+<div class="title">MenuDriver.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00056.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CORE_SYSTEMS_RENDER_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CORE_SYSTEMS_RENDER_HPP</span></div>
+<a href="a00056.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CORE_INPUT_MENUDRIVER_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CORE_INPUT_MENUDRIVER_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;BLIB/ECS/Entity.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;BLIB/Engine/System.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;BLIB/Render/Color.hpp&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00080.html">Core/World/Node.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00170.html">core</a></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">namespace </span>sys</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="a00257.html">   26</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00257.html">Render</a> : <span class="keyword">public</span> bl::engine::System {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="a00257.html#a20ce2362025619c0405e6044fc725316">   28</a></span>&#160;    <span class="keyword">static</span> constexpr std::uint32_t <a class="code" href="a00257.html#a20ce2362025619c0405e6044fc725316">NodeEdgesPipelineId</a> = 1000;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="a00257.html#abba664f187b6c526cf6e48f1c656ed8c">Render</a>();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="a00257.html#af5c8cda7cafe49289d24d5ed37fb1897">   38</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="a00257.html#af5c8cda7cafe49289d24d5ed37fb1897">~Render</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00257.html#a6b750e9f08d2f0402cdb1a49469fb20e">addTestGraphicsToEntity</a>(bl::ecs::Entity entity, glm::vec2 size, bl::rc::Color color);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00257.html#a6b750e9f08d2f0402cdb1a49469fb20e">addTestGraphicsToEntity</a>(bl::ecs::Entity entity, <span class="keywordtype">float</span> radius, bl::rc::Color color);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00257.html#a87b0bce84fe2f1d8e6ebdae21eb6c062">updateTestGraphicsColor</a>(bl::ecs::Entity entity, bl::rc::Color color);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    bl::engine::Engine* engine;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> init(bl::engine::Engine&amp; engine) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> update(std::mutex&amp; stageMutex, <span class="keywordtype">float</span> dt, <span class="keywordtype">float</span> realDt, <span class="keywordtype">float</span> residual,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                <span class="keywordtype">float</span> realResidual) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;} <span class="comment">// namespace sys</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;} <span class="comment">// namespace core</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aa00080_html"><div class="ttname"><a href="a00080.html">Node.hpp</a></div></div>
-<div class="ttc" id="aa00170_html"><div class="ttname"><a href="a00170.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00004">Damager.hpp:5</a></div></div>
-<div class="ttc" id="aa00257_html"><div class="ttname"><a href="a00257.html">core::sys::Render</a></div><div class="ttdoc">Core game system that manages how entities are rendered.</div><div class="ttdef"><b>Definition:</b> <a href="a00056_source.html#l00026">Render.hpp:26</a></div></div>
-<div class="ttc" id="aa00257_html_a20ce2362025619c0405e6044fc725316"><div class="ttname"><a href="a00257.html#a20ce2362025619c0405e6044fc725316">core::sys::Render::NodeEdgesPipelineId</a></div><div class="ttdeci">static constexpr std::uint32_t NodeEdgesPipelineId</div><div class="ttdef"><b>Definition:</b> <a href="a00056_source.html#l00028">Render.hpp:28</a></div></div>
-<div class="ttc" id="aa00257_html_a6b750e9f08d2f0402cdb1a49469fb20e"><div class="ttname"><a href="a00257.html#a6b750e9f08d2f0402cdb1a49469fb20e">core::sys::Render::addTestGraphicsToEntity</a></div><div class="ttdeci">void addTestGraphicsToEntity(bl::ecs::Entity entity, glm::vec2 size, bl::rc::Color color)</div><div class="ttdoc">Adds basic testing graphics to the given entity.</div><div class="ttdef"><b>Definition:</b> <a href="a00134_source.html#l00017">Render.cpp:17</a></div></div>
-<div class="ttc" id="aa00257_html_a87b0bce84fe2f1d8e6ebdae21eb6c062"><div class="ttname"><a href="a00257.html#a87b0bce84fe2f1d8e6ebdae21eb6c062">core::sys::Render::updateTestGraphicsColor</a></div><div class="ttdeci">void updateTestGraphicsColor(bl::ecs::Entity entity, bl::rc::Color color)</div><div class="ttdoc">Sets the test graphics for the given entity to the new color.</div><div class="ttdef"><b>Definition:</b> <a href="a00134_source.html#l00074">Render.cpp:74</a></div></div>
-<div class="ttc" id="aa00257_html_abba664f187b6c526cf6e48f1c656ed8c"><div class="ttname"><a href="a00257.html#abba664f187b6c526cf6e48f1c656ed8c">core::sys::Render::Render</a></div><div class="ttdeci">Render()</div><div class="ttdoc">Creates the system.</div><div class="ttdef"><b>Definition:</b> <a href="a00134_source.html#l00014">Render.cpp:14</a></div></div>
-<div class="ttc" id="aa00257_html_af5c8cda7cafe49289d24d5ed37fb1897"><div class="ttname"><a href="a00257.html#af5c8cda7cafe49289d24d5ed37fb1897">core::sys::Render::~Render</a></div><div class="ttdeci">virtual ~Render()=default</div><div class="ttdoc">Destroys the system.</div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;BLIB/Interfaces/Menu.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00053.html">Core/Input/Control.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00195.html">core</a></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>input</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="a00191.html#ga4177a2fb4c67d583c7ea3ab587db8791">   16</a></span>&#160;<span class="keyword">using</span> <a class="code" href="a00191.html#ga4177a2fb4c67d583c7ea3ab587db8791">MenuDriver</a> = bl::menu::TriggerDriver&lt;<a class="code" href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4">Control::MoveUp</a>, <a class="code" href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f">Control::MoveRight</a>, <a class="code" href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07">Control::MoveDown</a>,</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                                           <a class="code" href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee">Control::MoveLeft</a>, <a class="code" href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223">Control::Interact</a>&gt;;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;} <span class="comment">// namespace input</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;} <span class="comment">// namespace core</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00053_html"><div class="ttname"><a href="a00053.html">Control.hpp</a></div></div>
+<div class="ttc" id="aa00191_html_ga4177a2fb4c67d583c7ea3ab587db8791"><div class="ttname"><a href="a00191.html#ga4177a2fb4c67d583c7ea3ab587db8791">core::input::MenuDriver</a></div><div class="ttdeci">bl::menu::TriggerDriver&lt; Control::MoveUp, Control::MoveRight, Control::MoveDown, Control::MoveLeft, Control::Interact &gt; MenuDriver</div><div class="ttdoc">Helper typedef for menu driving.</div><div class="ttdef"><b>Definition:</b> <a href="a00056_source.html#l00016">MenuDriver.hpp:17</a></div></div>
+<div class="ttc" id="aa00191_html_ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07"><div class="ttname"><a href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07">core::input::Control::MoveDown</a></div><div class="ttdeci">@ MoveDown</div><div class="ttdef"><b>Definition:</b> <a href="a00053_source.html#l00029">Control.hpp:29</a></div></div>
+<div class="ttc" id="aa00191_html_ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223"><div class="ttname"><a href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223">core::input::Control::Interact</a></div><div class="ttdeci">@ Interact</div><div class="ttdef"><b>Definition:</b> <a href="a00053_source.html#l00032">Control.hpp:32</a></div></div>
+<div class="ttc" id="aa00191_html_ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee"><div class="ttname"><a href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee">core::input::Control::MoveLeft</a></div><div class="ttdeci">@ MoveLeft</div><div class="ttdef"><b>Definition:</b> <a href="a00053_source.html#l00030">Control.hpp:30</a></div></div>
+<div class="ttc" id="aa00191_html_ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f"><div class="ttname"><a href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f">core::input::Control::MoveRight</a></div><div class="ttdeci">@ MoveRight</div><div class="ttdef"><b>Definition:</b> <a href="a00053_source.html#l00028">Control.hpp:28</a></div></div>
+<div class="ttc" id="aa00191_html_ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4"><div class="ttname"><a href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4">core::input::Control::MoveUp</a></div><div class="ttdeci">@ MoveUp</div><div class="ttdef"><b>Definition:</b> <a href="a00053_source.html#l00027">Control.hpp:27</a></div></div>
+<div class="ttc" id="aa00195_html"><div class="ttname"><a href="a00195.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00010">Command.hpp:11</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 13 2024 23:42:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 15 2024 02:19:21 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small></address>

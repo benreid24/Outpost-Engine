@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/World/Cover.hpp Source File</title>
+<title>Outpost Engine: include/Core/Systems/Damage.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,59 +66,72 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_100acb167518532779441d57507c79aa.html">World</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_9ee9775a41bd202429166df6e1b725b2.html">Systems</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Cover.hpp</div>  </div>
+<div class="title">Damage.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00077.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CORE_WORLD_COVER_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CORE_WORLD_COVER_HPP</span></div>
+<a href="a00077.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CORE_SYSTEMS_DAMAGE_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CORE_SYSTEMS_DAMAGE_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;BLIB/ECS/Entity.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00170.html">core</a></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>world</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="a00317.html">   16</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00317.html">Cover</a> {</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="a00317.html#a4a5e64debebb447696a66f005225636d">   17</a></span>&#160;    bl::ecs::Entity <a class="code" href="a00317.html#a4a5e64debebb447696a66f005225636d">entity</a>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="a00317.html#a671388210ab0a99f83b12ea0f92d29d5">   18</a></span>&#160;    glm::vec2 <a class="code" href="a00317.html#a671388210ab0a99f83b12ea0f92d29d5">center</a>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="a00317.html#a13f14d9f0c7e73afb31d41f0f1e09174">   19</a></span>&#160;    glm::vec2 <a class="code" href="a00317.html#a13f14d9f0c7e73afb31d41f0f1e09174">size</a>;</div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="a00317.html#ab48a79df1fe860830c18bd4942af9520">   20</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="a00317.html#ab48a79df1fe860830c18bd4942af9520">angle</a>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="a00317.html#a29415be3461a4ff26a207742d18b557e">   25</a></span>&#160;    <a class="code" href="a00317.html#a29415be3461a4ff26a207742d18b557e">Cover</a>()</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    : <a class="code" href="a00317.html#a671388210ab0a99f83b12ea0f92d29d5">center</a>(0.f)</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    , <a class="code" href="a00317.html#a13f14d9f0c7e73afb31d41f0f1e09174">size</a>(0.f)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    , <a class="code" href="a00317.html#ab48a79df1fe860830c18bd4942af9520">angle</a>(0.f) {}</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="a00317.html#aaf49ce350035425bcb737e213d66da1e">   38</a></span>&#160;    <a class="code" href="a00317.html#aaf49ce350035425bcb737e213d66da1e">Cover</a>(bl::ecs::Entity <a class="code" href="a00317.html#a4a5e64debebb447696a66f005225636d">entity</a>, <span class="keyword">const</span> glm::vec2&amp; <a class="code" href="a00317.html#a671388210ab0a99f83b12ea0f92d29d5">center</a>, <span class="keyword">const</span> glm::vec2&amp; <a class="code" href="a00317.html#a13f14d9f0c7e73afb31d41f0f1e09174">size</a>, <span class="keywordtype">float</span> <a class="code" href="a00317.html#ab48a79df1fe860830c18bd4942af9520">angle</a>)</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    : <a class="code" href="a00317.html#a4a5e64debebb447696a66f005225636d">entity</a>(<a class="code" href="a00317.html#a4a5e64debebb447696a66f005225636d">entity</a>)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    , <a class="code" href="a00317.html#a671388210ab0a99f83b12ea0f92d29d5">center</a>(<a class="code" href="a00317.html#a671388210ab0a99f83b12ea0f92d29d5">center</a>)</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    , <a class="code" href="a00317.html#a13f14d9f0c7e73afb31d41f0f1e09174">size</a>(<a class="code" href="a00317.html#a13f14d9f0c7e73afb31d41f0f1e09174">size</a>)</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    , <a class="code" href="a00317.html#ab48a79df1fe860830c18bd4942af9520">angle</a>(<a class="code" href="a00317.html#ab48a79df1fe860830c18bd4942af9520">angle</a>) {}</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;} <span class="comment">// namespace world</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;} <span class="comment">// namespace core</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;BLIB/Components/MarkedForDeath.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;BLIB/Engine.hpp&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;BLIB/Events.hpp&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;BLIB/Systems/Physics2D.hpp&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00032.html">Core/Components/Damager.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00035.html">Core/Components/Mortal.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00195.html">core</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>sys</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="a00323.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00323.html">Damage</a> : <span class="keyword">public</span> bl::event::Listener&lt;bl::sys::Physics2D::EntityCollisionBeginEvent&gt; {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="a00323.html#a9bf57bc9cd5a3c45b7b4f43c7518cdbf">Damage</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="a00323.html#a2ba9220b22c903011dc2ac194ea35931">   30</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="a00323.html#a2ba9220b22c903011dc2ac194ea35931">~Damage</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00323.html#a6b7ad7025d6b1d4cf7baedb463fe63e6">init</a>(bl::engine::Engine&amp; engine);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00323.html#a95ceef1f902aa78de33e852980884dfe">makeMortal</a>(bl::ecs::Entity entity, <span class="keywordtype">float</span> health, <span class="keywordtype">float</span> deathTime = -1.f);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aa00170_html"><div class="ttname"><a href="a00170.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00004">Damager.hpp:5</a></div></div>
-<div class="ttc" id="aa00317_html"><div class="ttname"><a href="a00317.html">core::world::Cover</a></div><div class="ttdoc">Basic rotated rectangle cover struct for prototyping.</div><div class="ttdef"><b>Definition:</b> <a href="a00077_source.html#l00016">Cover.hpp:16</a></div></div>
-<div class="ttc" id="aa00317_html_a13f14d9f0c7e73afb31d41f0f1e09174"><div class="ttname"><a href="a00317.html#a13f14d9f0c7e73afb31d41f0f1e09174">core::world::Cover::size</a></div><div class="ttdeci">glm::vec2 size</div><div class="ttdef"><b>Definition:</b> <a href="a00077_source.html#l00019">Cover.hpp:19</a></div></div>
-<div class="ttc" id="aa00317_html_a29415be3461a4ff26a207742d18b557e"><div class="ttname"><a href="a00317.html#a29415be3461a4ff26a207742d18b557e">core::world::Cover::Cover</a></div><div class="ttdeci">Cover()</div><div class="ttdoc">Creates an empty cover object.</div><div class="ttdef"><b>Definition:</b> <a href="a00077_source.html#l00025">Cover.hpp:25</a></div></div>
-<div class="ttc" id="aa00317_html_a4a5e64debebb447696a66f005225636d"><div class="ttname"><a href="a00317.html#a4a5e64debebb447696a66f005225636d">core::world::Cover::entity</a></div><div class="ttdeci">bl::ecs::Entity entity</div><div class="ttdef"><b>Definition:</b> <a href="a00077_source.html#l00017">Cover.hpp:17</a></div></div>
-<div class="ttc" id="aa00317_html_a671388210ab0a99f83b12ea0f92d29d5"><div class="ttname"><a href="a00317.html#a671388210ab0a99f83b12ea0f92d29d5">core::world::Cover::center</a></div><div class="ttdeci">glm::vec2 center</div><div class="ttdef"><b>Definition:</b> <a href="a00077_source.html#l00018">Cover.hpp:18</a></div></div>
-<div class="ttc" id="aa00317_html_aaf49ce350035425bcb737e213d66da1e"><div class="ttname"><a href="a00317.html#aaf49ce350035425bcb737e213d66da1e">core::world::Cover::Cover</a></div><div class="ttdeci">Cover(bl::ecs::Entity entity, const glm::vec2 &amp;center, const glm::vec2 &amp;size, float angle)</div><div class="ttdoc">Creates a cover object.</div><div class="ttdef"><b>Definition:</b> <a href="a00077_source.html#l00038">Cover.hpp:38</a></div></div>
-<div class="ttc" id="aa00317_html_ab48a79df1fe860830c18bd4942af9520"><div class="ttname"><a href="a00317.html#ab48a79df1fe860830c18bd4942af9520">core::world::Cover::angle</a></div><div class="ttdeci">float angle</div><div class="ttdef"><b>Definition:</b> <a href="a00077_source.html#l00020">Cover.hpp:20</a></div></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00323.html#aabd9a8fbf137af5fa7b0507849c5bdf4">makeDamager</a>(bl::ecs::Entity entity, <span class="keywordtype">float</span> damage);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    bl::engine::Engine* engine;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">using</span> Transaction = bl::ecs::Transaction&lt;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        bl::ecs::tx::EntityWrite, bl::ecs::tx::ComponentRead&lt;&gt;,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        bl::ecs::tx::ComponentWrite&lt;com::Damager, com::Mortal, bl::com::MarkedForDeath&gt;&gt;;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> applyDamage(bl::ecs::Entity mortalEntity, <a class="code" href="a00271.html">com::Mortal</a>&amp; victim,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                     bl::ecs::Entity damagerEntity, <a class="code" href="a00267.html">com::Damager</a>&amp; damager, Transaction&amp; tx);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> observe(<span class="keyword">const</span> bl::sys::Physics2D::EntityCollisionBeginEvent&amp; event) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;} <span class="comment">// namespace sys</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;} <span class="comment">// namespace core</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00032_html"><div class="ttname"><a href="a00032.html">Damager.hpp</a></div></div>
+<div class="ttc" id="aa00035_html"><div class="ttname"><a href="a00035.html">Mortal.hpp</a></div></div>
+<div class="ttc" id="aa00195_html"><div class="ttname"><a href="a00195.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00010">Command.hpp:11</a></div></div>
+<div class="ttc" id="aa00267_html"><div class="ttname"><a href="a00267.html">core::com::Damager</a></div><div class="ttdoc">Component that makes an entity cause damage on collision.</div><div class="ttdef"><b>Definition:</b> <a href="a00032_source.html#l00013">Damager.hpp:13</a></div></div>
+<div class="ttc" id="aa00271_html"><div class="ttname"><a href="a00271.html">core::com::Mortal</a></div><div class="ttdoc">Component that makes an entity susceptible to damage and dying.</div><div class="ttdef"><b>Definition:</b> <a href="a00035_source.html#l00020">Mortal.hpp:20</a></div></div>
+<div class="ttc" id="aa00323_html"><div class="ttname"><a href="a00323.html">core::sys::Damage</a></div><div class="ttdoc">System that applies damage to entities from collisions.</div><div class="ttdef"><b>Definition:</b> <a href="a00077_source.html#l00020">Damage.hpp:20</a></div></div>
+<div class="ttc" id="aa00323_html_a2ba9220b22c903011dc2ac194ea35931"><div class="ttname"><a href="a00323.html#a2ba9220b22c903011dc2ac194ea35931">core::sys::Damage::~Damage</a></div><div class="ttdeci">virtual ~Damage()=default</div><div class="ttdoc">Destroys the system.</div></div>
+<div class="ttc" id="aa00323_html_a6b7ad7025d6b1d4cf7baedb463fe63e6"><div class="ttname"><a href="a00323.html#a6b7ad7025d6b1d4cf7baedb463fe63e6">core::sys::Damage::init</a></div><div class="ttdeci">void init(bl::engine::Engine &amp;engine)</div><div class="ttdoc">Initializes the system.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00010">Damage.cpp:10</a></div></div>
+<div class="ttc" id="aa00323_html_a95ceef1f902aa78de33e852980884dfe"><div class="ttname"><a href="a00323.html#a95ceef1f902aa78de33e852980884dfe">core::sys::Damage::makeMortal</a></div><div class="ttdeci">void makeMortal(bl::ecs::Entity entity, float health, float deathTime=-1.f)</div><div class="ttdoc">Makes the given entity mortal.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00012">Damage.cpp:12</a></div></div>
+<div class="ttc" id="aa00323_html_a9bf57bc9cd5a3c45b7b4f43c7518cdbf"><div class="ttname"><a href="a00323.html#a9bf57bc9cd5a3c45b7b4f43c7518cdbf">core::sys::Damage::Damage</a></div><div class="ttdeci">Damage()</div><div class="ttdoc">Creates the system.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00007">Damage.cpp:7</a></div></div>
+<div class="ttc" id="aa00323_html_aabd9a8fbf137af5fa7b0507849c5bdf4"><div class="ttname"><a href="a00323.html#aabd9a8fbf137af5fa7b0507849c5bdf4">core::sys::Damage::makeDamager</a></div><div class="ttdeci">void makeDamager(bl::ecs::Entity entity, float damage)</div><div class="ttdoc">Makes the given entity a giver of damage.</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00016">Damage.cpp:16</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 13 2024 23:42:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 15 2024 02:19:21 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small></address>

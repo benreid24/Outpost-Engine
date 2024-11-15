@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['unit_316',['Unit',['../a00201.html',1,'core::com::Unit'],['../a00261.html',1,'core::sys::Unit']]]
+  ['unit_372',['Unit',['../a00275.html',1,'core::com::Unit'],['../a00335.html',1,'core::sys::Unit']]],
+  ['unitcommand_373',['UnitCommand',['../a00251.html',1,'core::cmd']]]
 ];

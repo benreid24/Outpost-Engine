@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: src/Core/Player/HUD/Event.cpp Source File</title>
+<title>Outpost Engine: include/Editor/Editor.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,47 +66,49 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a2f0e5642e47e7ed59fe0f0829eafb5f.html">Core</a></li><li class="navelem"><a class="el" href="dir_5ab21b59a04f996a9cadf7e77e16925a.html">Player</a></li><li class="navelem"><a class="el" href="dir_00aeb524f80569c0651d5ad40358f52a.html">HUD</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_9879a2d9fc75d55adf27ec2dfa65cb52.html">Editor</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Event.cpp</div>  </div>
+<div class="title">Editor.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00113.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00035.html">Core/Player/HUD/Event.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00459.html">Core/Game.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00044.html">Core/Player/Player.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00083.html">Core/World/World.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00170.html">core</a></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>player</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>hud</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="a00229.html#a77b0b50403088db732e8b33866237d95">   13</a></span>&#160;<a class="code" href="a00229.html#a77b0b50403088db732e8b33866237d95">Event::Event</a>(<a class="code" href="a00241.html">Player</a>&amp; owner, <span class="keyword">const</span> sf::Event&amp; e)</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;: windowEvent(e)</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;, overlayCoord(owner.getRenderObserver().getMousePosInOverlaySpace())</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;, worldCoord(owner.getRenderObserver().getMousePosInWorldSpace())</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;, overUnit(owner.getCurrentWorld&lt;world::World&gt;().getUnitAtPosition(worldCoord)) {}</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;} <span class="comment">// namespace hud</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;} <span class="comment">// namespace player</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;} <span class="comment">// namespace core</span></div>
-<div class="ttc" id="aa00035_html"><div class="ttname"><a href="a00035.html">Event.hpp</a></div></div>
-<div class="ttc" id="aa00044_html"><div class="ttname"><a href="a00044.html">Player.hpp</a></div></div>
-<div class="ttc" id="aa00083_html"><div class="ttname"><a href="a00083.html">World.hpp</a></div></div>
-<div class="ttc" id="aa00170_html"><div class="ttname"><a href="a00170.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00004">Damager.hpp:5</a></div></div>
-<div class="ttc" id="aa00229_html_a77b0b50403088db732e8b33866237d95"><div class="ttname"><a href="a00229.html#a77b0b50403088db732e8b33866237d95">core::player::hud::Event::Event</a></div><div class="ttdeci">Event(Player &amp;owner, const sf::Event &amp;event)</div><div class="ttdoc">Creates the event.</div><div class="ttdef"><b>Definition:</b> <a href="a00113_source.html#l00013">Event.cpp:13</a></div></div>
-<div class="ttc" id="aa00241_html"><div class="ttname"><a href="a00241.html">core::player::Player</a></div><div class="ttdoc">Player class that owns player specific state and UI.</div><div class="ttdef"><b>Definition:</b> <a href="a00044_source.html#l00023">Player.hpp:23</a></div></div>
-<div class="ttc" id="aa00459_html"><div class="ttname"><a href="a00459.html">Game.hpp</a></div></div>
+<a href="a00113.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef EDITOR_EDITOR_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define EDITOR_EDITOR_HPP</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00535.html">Core/Game.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00205.html">editor</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="a00391.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00391.html">Editor</a> : <span class="keyword">public</span> <a class="code" href="a00291.html">core::Game</a> {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="a00391.html#ab45601f4b78cbada2eeea34744e0f4f3">performEarlyStartup</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">virtual</span> bl::engine::Settings <a class="code" href="a00391.html#af5bea36e3863f1bd8798798970ef70d5">createStartupParameters</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="a00391.html#a1d09cddcb235384b0f928bdadd94d68a">completeStartup</a>(bl::engine::Engine&amp; <a class="code" href="a00291.html#a17e1c4d14941b733ba156b10694c69e0">engine</a>) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">virtual</span> bl::engine::State::Ptr <a class="code" href="a00391.html#a85979448f14f34065a318543ef7d0b1d">createInitialEngineState</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;} <span class="comment">// namespace editor</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00205_html"><div class="ttname"><a href="a00205.html">editor</a></div><div class="ttdoc">All classes and modules that implement the editor for the game.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00004">ConstantsEditor.hpp:5</a></div></div>
+<div class="ttc" id="aa00291_html"><div class="ttname"><a href="a00291.html">core::Game</a></div><div class="ttdef"><b>Definition:</b> <a href="a00535_source.html#l00021">Game.hpp:21</a></div></div>
+<div class="ttc" id="aa00291_html_a17e1c4d14941b733ba156b10694c69e0"><div class="ttname"><a href="a00291.html#a17e1c4d14941b733ba156b10694c69e0">core::Game::engine</a></div><div class="ttdeci">bl::engine::Engine &amp; engine()</div><div class="ttdoc">Returns the game engine instance.</div><div class="ttdef"><b>Definition:</b> <a href="a00535_source.html#l00026">Game.hpp:26</a></div></div>
+<div class="ttc" id="aa00391_html"><div class="ttname"><a href="a00391.html">editor::Editor</a></div><div class="ttdef"><b>Definition:</b> <a href="a00113_source.html#l00014">Editor.hpp:14</a></div></div>
+<div class="ttc" id="aa00391_html_a1d09cddcb235384b0f928bdadd94d68a"><div class="ttname"><a href="a00391.html#a1d09cddcb235384b0f928bdadd94d68a">editor::Editor::completeStartup</a></div><div class="ttdeci">virtual bool completeStartup(bl::engine::Engine &amp;engine) override</div><div class="ttdoc">Creates editor-specific systems and completes startup.</div><div class="ttdef"><b>Definition:</b> <a href="a00179_source.html#l00050">Editor.cpp:50</a></div></div>
+<div class="ttc" id="aa00391_html_a85979448f14f34065a318543ef7d0b1d"><div class="ttname"><a href="a00391.html#a85979448f14f34065a318543ef7d0b1d">editor::Editor::createInitialEngineState</a></div><div class="ttdeci">virtual bl::engine::State::Ptr createInitialEngineState() override</div><div class="ttdoc">Creates the engine state to launch the editor with.</div><div class="ttdef"><b>Definition:</b> <a href="a00179_source.html#l00058">Editor.cpp:58</a></div></div>
+<div class="ttc" id="aa00391_html_ab45601f4b78cbada2eeea34744e0f4f3"><div class="ttname"><a href="a00391.html#ab45601f4b78cbada2eeea34744e0f4f3">editor::Editor::performEarlyStartup</a></div><div class="ttdeci">virtual bool performEarlyStartup(int argc, char **argv) override</div><div class="ttdoc">Called at the beginning of main(). Loads game config and properties.</div><div class="ttdef"><b>Definition:</b> <a href="a00179_source.html#l00016">Editor.cpp:16</a></div></div>
+<div class="ttc" id="aa00391_html_af5bea36e3863f1bd8798798970ef70d5"><div class="ttname"><a href="a00391.html#af5bea36e3863f1bd8798798970ef70d5">editor::Editor::createStartupParameters</a></div><div class="ttdeci">virtual bl::engine::Settings createStartupParameters() override</div><div class="ttdoc">Creates the parameters to launch the engine with.</div><div class="ttdef"><b>Definition:</b> <a href="a00179_source.html#l00039">Editor.cpp:39</a></div></div>
+<div class="ttc" id="aa00535_html"><div class="ttname"><a href="a00535.html">Game.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 13 2024 23:42:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 15 2024 02:19:21 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small></address>

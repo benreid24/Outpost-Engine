@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Components/WorldNode.hpp File Reference</title>
+<title>Outpost Engine: include/Core/Commands/Executor.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,7 +66,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_b572e9e567c53bf52c1d322a7f434893.html">Components</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_cd42dacb0257cf84a1e4800a9c985ad9.html">Commands</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -74,36 +74,34 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">WorldNode.hpp File Reference</div>  </div>
+<div class="title">Executor.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="a00017_source.html">Core/Commands/ExecutorHandle.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00020_source.html">Core/Commands/ExternalHandle.hpp</a>&gt;</code><br />
 </div>
 <p><a href="a00014_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00205.html">core::com::WorldNode</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic component that links an entity to a node in the world.  <a href="a00205.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00239.html">core::cmd::Executor&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class for executors of commands. Allows the conversion of <a class="el" href="a00223.html" title="Handle to a command. This handle type is for UI, AI, and observers of commands.">ExternalHandle</a> to <a class="el" href="a00219.html">ExecutorHandle</a> in order to allow status changing.  <a href="a00239.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00170"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00170.html">core</a></td></tr>
-<tr class="memdesc:a00170"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains everything shared between the game and editor. <br /></td></tr>
+<tr class="memitem:a00195"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html">core</a></td></tr>
+<tr class="memdesc:a00195"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains everything shared between the game and editor. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00173"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00173.html">core::world</a></td></tr>
-<tr class="memdesc:a00173"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of classes for the in-game world. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00171"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00171.html">core::com</a></td></tr>
-<tr class="memdesc:a00171"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of core game components. <br /></td></tr>
+<tr class="memitem:a00196"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00196.html">core::cmd</a></td></tr>
+<tr class="memdesc:a00196"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functionality, storage, and events for commands for units and squads. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 13 2024 23:42:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 15 2024 02:19:21 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small></address>

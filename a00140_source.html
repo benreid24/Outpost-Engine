@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: src/Core/Unit/CommandContext.cpp Source File</title>
+<title>Outpost Engine: src/Core/Player/HUD/Event.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,63 +66,47 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a2f0e5642e47e7ed59fe0f0829eafb5f.html">Core</a></li><li class="navelem"><a class="el" href="dir_f0654ae01a7bcca659aa4ec1de065498.html">Unit</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a2f0e5642e47e7ed59fe0f0829eafb5f.html">Core</a></li><li class="navelem"><a class="el" href="dir_5ab21b59a04f996a9cadf7e77e16925a.html">Player</a></li><li class="navelem"><a class="el" href="dir_00aeb524f80569c0651d5ad40358f52a.html">HUD</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">CommandContext.cpp</div>  </div>
+<div class="title">Event.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00140.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00062.html">Core/Unit/CommandContext.hpp</a>&gt;</span></div>
+<a href="a00140.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00062.html">Core/Player/HUD/Event.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00170.html">core</a></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;{</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span>unit</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div>
-<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="a00281.html#a043a452d3c0c63445cc07e861f24ac88">    7</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00281.html#a043a452d3c0c63445cc07e861f24ac88">CommandContext::init</a>(<span class="keyword">const</span> <a class="code" href="a00265.html">Command</a>&amp; cmd) {</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keyword">using</span> Type = <a class="code" href="a00265.html#a0b663606de167fc89dbcceb595f47bf7">Command::Type</a>;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordflow">switch</span> (cmd.<a class="code" href="a00265.html#a0dedab430146274e3e9e1badff1e83c4">getType</a>()) {</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keywordflow">case</span> Type::MoveToPosition:</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        data.emplace&lt;<a class="code" href="a00285.html">PathContext</a>&gt;();</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordflow">case</span> Type::KillUnit:</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        data.emplace&lt;<a class="code" href="a00289.html">ShootContext</a>&gt;();</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        data.emplace&lt;std::monostate&gt;();</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    }</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;}</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="a00281.html#a4621cb2773d2f250bc4690b482b3548c">   22</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00281.html#a4621cb2773d2f250bc4690b482b3548c">CommandContext::clear</a>() { data.emplace&lt;std::monostate&gt;(); }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="a00281.html#a9a5f61568f1a434bead54a02d2556e23">   24</a></span>&#160;<a class="code" href="a00285.html">CommandContext::PathContext</a>&amp; <a class="code" href="a00281.html#a9a5f61568f1a434bead54a02d2556e23">CommandContext::getPathContext</a>() {</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordflow">return</span> *std::get_if&lt;PathContext&gt;(&amp;data);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="a00281.html#a78fd11198a96e2d3ad78b0d0381d965b">   28</a></span>&#160;<a class="code" href="a00289.html">CommandContext::ShootContext</a>&amp; <a class="code" href="a00281.html#a78fd11198a96e2d3ad78b0d0381d965b">CommandContext::getShootContext</a>() {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">return</span> *std::get_if&lt;ShootContext&gt;(&amp;data);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;} <span class="comment">// namespace unit</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;} <span class="comment">// namespace core</span></div>
-<div class="ttc" id="aa00062_html"><div class="ttname"><a href="a00062.html">CommandContext.hpp</a></div></div>
-<div class="ttc" id="aa00170_html"><div class="ttname"><a href="a00170.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00004">Damager.hpp:5</a></div></div>
-<div class="ttc" id="aa00265_html"><div class="ttname"><a href="a00265.html">core::unit::Command</a></div><div class="ttdoc">Commands that can be issued to units.</div><div class="ttdef"><b>Definition:</b> <a href="a00059_source.html#l00020">Command.hpp:20</a></div></div>
-<div class="ttc" id="aa00265_html_a0b663606de167fc89dbcceb595f47bf7"><div class="ttname"><a href="a00265.html#a0b663606de167fc89dbcceb595f47bf7">core::unit::Command::Type</a></div><div class="ttdeci">Type</div><div class="ttdoc">The actual type of the command.</div><div class="ttdef"><b>Definition:</b> <a href="a00059_source.html#l00038">Command.hpp:38</a></div></div>
-<div class="ttc" id="aa00265_html_a0dedab430146274e3e9e1badff1e83c4"><div class="ttname"><a href="a00265.html#a0dedab430146274e3e9e1badff1e83c4">core::unit::Command::getType</a></div><div class="ttdeci">Type getType() const</div><div class="ttdoc">Returns the type of this command.</div><div class="ttdef"><b>Definition:</b> <a href="a00059_source.html#l00075">Command.hpp:75</a></div></div>
-<div class="ttc" id="aa00281_html_a043a452d3c0c63445cc07e861f24ac88"><div class="ttname"><a href="a00281.html#a043a452d3c0c63445cc07e861f24ac88">core::unit::CommandContext::init</a></div><div class="ttdeci">void init(const Command &amp;cmd)</div><div class="ttdoc">Initializes the context for the given command.</div><div class="ttdef"><b>Definition:</b> <a href="a00140_source.html#l00007">CommandContext.cpp:7</a></div></div>
-<div class="ttc" id="aa00281_html_a4621cb2773d2f250bc4690b482b3548c"><div class="ttname"><a href="a00281.html#a4621cb2773d2f250bc4690b482b3548c">core::unit::CommandContext::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">Clears context data and releases memory.</div><div class="ttdef"><b>Definition:</b> <a href="a00140_source.html#l00022">CommandContext.cpp:22</a></div></div>
-<div class="ttc" id="aa00281_html_a78fd11198a96e2d3ad78b0d0381d965b"><div class="ttname"><a href="a00281.html#a78fd11198a96e2d3ad78b0d0381d965b">core::unit::CommandContext::getShootContext</a></div><div class="ttdeci">ShootContext &amp; getShootContext()</div><div class="ttdoc">Returns the shooting context data.</div><div class="ttdef"><b>Definition:</b> <a href="a00140_source.html#l00028">CommandContext.cpp:28</a></div></div>
-<div class="ttc" id="aa00281_html_a9a5f61568f1a434bead54a02d2556e23"><div class="ttname"><a href="a00281.html#a9a5f61568f1a434bead54a02d2556e23">core::unit::CommandContext::getPathContext</a></div><div class="ttdeci">PathContext &amp; getPathContext()</div><div class="ttdoc">Returns the path context data.</div><div class="ttdef"><b>Definition:</b> <a href="a00140_source.html#l00024">CommandContext.cpp:24</a></div></div>
-<div class="ttc" id="aa00285_html"><div class="ttname"><a href="a00285.html">core::unit::CommandContext::PathContext</a></div><div class="ttdoc">Data for executing movement based commands.</div><div class="ttdef"><b>Definition:</b> <a href="a00062_source.html#l00023">CommandContext.hpp:23</a></div></div>
-<div class="ttc" id="aa00289_html"><div class="ttname"><a href="a00289.html">core::unit::CommandContext::ShootContext</a></div><div class="ttdoc">Data for executing combat based commands.</div><div class="ttdef"><b>Definition:</b> <a href="a00062_source.html#l00031">CommandContext.hpp:31</a></div></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00535.html">Core/Game.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00071.html">Core/Player/Player.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00107.html">Core/World/World.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00195.html">core</a></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>player</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>hud</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="a00303.html#a77b0b50403088db732e8b33866237d95">   13</a></span>&#160;<a class="code" href="a00303.html#a77b0b50403088db732e8b33866237d95">Event::Event</a>(<a class="code" href="a00315.html">Player</a>&amp; owner, <span class="keyword">const</span> sf::Event&amp; e)</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;: windowEvent(e)</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;, overlayCoord(owner.getRenderObserver().getMousePosInOverlaySpace())</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;, worldCoord(owner.getRenderObserver().getMousePosInWorldSpace())</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;, overUnit(owner.getCurrentWorld&lt;world::World&gt;().getUnitAtPosition(worldCoord)) {}</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;} <span class="comment">// namespace hud</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;} <span class="comment">// namespace player</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;} <span class="comment">// namespace core</span></div>
+<div class="ttc" id="aa00062_html"><div class="ttname"><a href="a00062.html">Event.hpp</a></div></div>
+<div class="ttc" id="aa00071_html"><div class="ttname"><a href="a00071.html">Player.hpp</a></div></div>
+<div class="ttc" id="aa00107_html"><div class="ttname"><a href="a00107.html">World.hpp</a></div></div>
+<div class="ttc" id="aa00195_html"><div class="ttname"><a href="a00195.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00010">Command.hpp:11</a></div></div>
+<div class="ttc" id="aa00303_html_a77b0b50403088db732e8b33866237d95"><div class="ttname"><a href="a00303.html#a77b0b50403088db732e8b33866237d95">core::player::hud::Event::Event</a></div><div class="ttdeci">Event(Player &amp;owner, const sf::Event &amp;event)</div><div class="ttdoc">Creates the event.</div><div class="ttdef"><b>Definition:</b> <a href="a00140_source.html#l00013">Event.cpp:13</a></div></div>
+<div class="ttc" id="aa00315_html"><div class="ttname"><a href="a00315.html">core::player::Player</a></div><div class="ttdoc">Player class that owns player specific state and UI.</div><div class="ttdef"><b>Definition:</b> <a href="a00071_source.html#l00023">Player.hpp:23</a></div></div>
+<div class="ttc" id="aa00535_html"><div class="ttname"><a href="a00535.html">Game.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 13 2024 23:42:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 15 2024 02:19:21 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small></address>

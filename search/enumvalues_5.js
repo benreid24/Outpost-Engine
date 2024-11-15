@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['killunit_570',['KillUnit',['../a00265.html#a0b663606de167fc89dbcceb595f47bf7a37e6404da665240784e4460ecc291e67',1,'core::unit::Command']]]
+  ['killunit_658',['KillUnit',['../a00251.html#a9bd805f5af5be757737a76f8a32388baa37e6404da665240784e4460ecc291e67',1,'core::cmd::UnitCommand']]]
 ];

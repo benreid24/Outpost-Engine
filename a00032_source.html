@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Player/HUD/DebugMenu.hpp Source File</title>
+<title>Outpost Engine: include/Core/Components/Damager.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,119 +66,45 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_be6ecaab1a4ec5e27af38c3573eadf7d.html">Player</a></li><li class="navelem"><a class="el" href="dir_eeddce6b71639576d56ea59e586fb7d1.html">HUD</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_b572e9e567c53bf52c1d322a7f434893.html">Components</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">DebugMenu.hpp</div>  </div>
+<div class="title">Damager.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00032.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CORE_PLAYER_HUD_DEBUGMENU_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CORE_PLAYER_HUD_DEBUGMENU_HPP</span></div>
+<a href="a00032.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CORE_COMPONENTS_DAMAGER_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CORE_COMPONENTS_DAMAGER_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;BLIB/Graphics/Rectangle.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;BLIB/Interfaces/GUI.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00453.html">Core/Components/Unit.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00035.html">Core/Player/HUD/Event.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00170.html">core</a></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="a00176.html">   11</a></span>&#160;<span class="keyword">namespace </span>player</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="a00177.html">   14</a></span>&#160;<span class="keyword">namespace </span>hud</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="a00221.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00221.html">DebugMenu</a> : <span class="keyword">public</span> bl::event::Listener&lt;bl::ecs::event::EntityDestroyed&gt; {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="a00221.html#ade5cfabe62f2d348c998ac3dde4e415c">DebugMenu</a>();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a00221.html#a408e834e5c26e92178aeaf1db964de06">   31</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="a00221.html#a408e834e5c26e92178aeaf1db964de06">~DebugMenu</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00221.html#a28d43284906f5c163ba5c2c6d00633d6">update</a>(<span class="keywordtype">float</span> dt);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00221.html#a67c3052638dd008f0f5c80d3ac715e95">init</a>(bl::gui::GUI&amp; gui);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00221.html#ac12fa74914ed4d17bbba279a89aee94d">toggle</a>();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a00221.html#a3737869790273d9824e24f65941e8583">processEvent</a>(<span class="keyword">const</span> <a class="code" href="a00229.html">Event</a>&amp; event);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">enum struct</span> TopTab {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        Console,</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        World,</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        Entity,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    } currentTopTab;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">enum struct</span> WorldTab { Nodes, Cover } currentWorldTab;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">enum struct</span> NodeTool { CreatePath, CreateCover, Remove };</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    bl::gui::RadioButton::Group* nodeRadioGroup;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    NodeTool getCurrentNodeTool() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">enum struct</span> CoverTool { Create, Remove };</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    bl::gui::RadioButton::Group* coverRadioGroup;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    CoverTool getCurrentCoverTool() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">enum struct</span> EntityTool { Create, Control, Kill };</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    bl::gui::RadioButton::Group* entityRadioGroup;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    EntityTool getCurrentEntityTool() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    bl::gui::Window::Ptr window;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    bl::gui::Label::Ptr coverAngleLabel;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    bl::gui::Slider::Ptr coverAngle;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">void</span> onCoverAngleChange();</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">float</span> getCoverAngle() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    bl::gui::Label::Ptr hoverIdLabel;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    bl::gui::Label::Ptr controlNameLabel;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> onEntityControl(bl::ecs::Entity control);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">struct </span>Controlling {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        bl::ecs::Entity entity;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <a class="code" href="a00201.html">core::com::Unit</a>* unit;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        Controlling()</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        : entity(bl::ecs::InvalidEntity)</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        , unit(nullptr) {}</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordtype">void</span> reset() {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            entity = bl::ecs::InvalidEntity;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            unit   = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        }</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    } controlling;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    bl::gfx::Rectangle dragBox;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    glm::vec2 clickStart;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    bl::gui::Element::Ptr createConsoleTab();</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    bl::gui::Element::Ptr createWorldTab();</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    bl::gui::Element::Ptr createEntityTab();</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> observe(<span class="keyword">const</span> bl::ecs::event::EntityDestroyed&amp; event) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;};</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;} <span class="comment">// namespace hud</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;} <span class="comment">// namespace player</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;} <span class="comment">// namespace core</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aa00035_html"><div class="ttname"><a href="a00035.html">Event.hpp</a></div></div>
-<div class="ttc" id="aa00170_html"><div class="ttname"><a href="a00170.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00004">Damager.hpp:5</a></div></div>
-<div class="ttc" id="aa00201_html"><div class="ttname"><a href="a00201.html">core::com::Unit</a></div><div class="ttdef"><b>Definition:</b> <a href="a00453_source.html#l00026">Unit.hpp:26</a></div></div>
-<div class="ttc" id="aa00221_html"><div class="ttname"><a href="a00221.html">core::player::hud::DebugMenu</a></div><div class="ttdoc">Debug menu class for the player HUD.</div><div class="ttdef"><b>Definition:</b> <a href="a00032_source.html#l00021">DebugMenu.hpp:21</a></div></div>
-<div class="ttc" id="aa00221_html_a28d43284906f5c163ba5c2c6d00633d6"><div class="ttname"><a href="a00221.html#a28d43284906f5c163ba5c2c6d00633d6">core::player::hud::DebugMenu::update</a></div><div class="ttdeci">void update(float dt)</div><div class="ttdoc">Updates the debug menu.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00312">DebugMenu.cpp:312</a></div></div>
-<div class="ttc" id="aa00221_html_a3737869790273d9824e24f65941e8583"><div class="ttname"><a href="a00221.html#a3737869790273d9824e24f65941e8583">core::player::hud::DebugMenu::processEvent</a></div><div class="ttdeci">bool processEvent(const Event &amp;event)</div><div class="ttdoc">Processes the window event.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00141">DebugMenu.cpp:141</a></div></div>
-<div class="ttc" id="aa00221_html_a408e834e5c26e92178aeaf1db964de06"><div class="ttname"><a href="a00221.html#a408e834e5c26e92178aeaf1db964de06">core::player::hud::DebugMenu::~DebugMenu</a></div><div class="ttdeci">virtual ~DebugMenu()=default</div><div class="ttdoc">Destroys the debug menu.</div></div>
-<div class="ttc" id="aa00221_html_a67c3052638dd008f0f5c80d3ac715e95"><div class="ttname"><a href="a00221.html#a67c3052638dd008f0f5c80d3ac715e95">core::player::hud::DebugMenu::init</a></div><div class="ttdeci">void init(bl::gui::GUI &amp;gui)</div><div class="ttdoc">Creates the GUI components in the hidden state.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00024">DebugMenu.cpp:24</a></div></div>
-<div class="ttc" id="aa00221_html_ac12fa74914ed4d17bbba279a89aee94d"><div class="ttname"><a href="a00221.html#ac12fa74914ed4d17bbba279a89aee94d">core::player::hud::DebugMenu::toggle</a></div><div class="ttdeci">void toggle()</div><div class="ttdoc">Shows or hides the debug menu window.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00130">DebugMenu.cpp:130</a></div></div>
-<div class="ttc" id="aa00221_html_ade5cfabe62f2d348c998ac3dde4e415c"><div class="ttname"><a href="a00221.html#ade5cfabe62f2d348c998ac3dde4e415c">core::player::hud::DebugMenu::DebugMenu</a></div><div class="ttdeci">DebugMenu()</div><div class="ttdoc">Initializes some default state.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00022">DebugMenu.cpp:22</a></div></div>
-<div class="ttc" id="aa00229_html"><div class="ttname"><a href="a00229.html">core::player::hud::Event</a></div><div class="ttdoc">HUD event. Wrapper around sf::Event with some common fields computed.</div><div class="ttdef"><b>Definition:</b> <a href="a00035_source.html#l00020">Event.hpp:20</a></div></div>
-<div class="ttc" id="aa00453_html"><div class="ttname"><a href="a00453.html">Unit.hpp</a></div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00195.html">core</a></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>com</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="a00267.html">   13</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00267.html">Damager</a> {</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="a00267.html#a5eadb5db0b1a67937b1ff68e5538da1d">   14</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="a00267.html#a5eadb5db0b1a67937b1ff68e5538da1d">damage</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="a00267.html#abf4a717b1a5b55727b2477383c121ddf">   19</a></span>&#160;    <a class="code" href="a00267.html#abf4a717b1a5b55727b2477383c121ddf">Damager</a>()</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    : <a class="code" href="a00267.html#a5eadb5db0b1a67937b1ff68e5538da1d">damage</a>(0.f) {}</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="a00267.html#ab264e4cab6c4e480343f0c8070ea83b3">   27</a></span>&#160;    <a class="code" href="a00267.html#ab264e4cab6c4e480343f0c8070ea83b3">Damager</a>(<span class="keywordtype">float</span> <a class="code" href="a00267.html#a5eadb5db0b1a67937b1ff68e5538da1d">damage</a>)</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    : <a class="code" href="a00267.html#a5eadb5db0b1a67937b1ff68e5538da1d">damage</a>(<a class="code" href="a00267.html#a5eadb5db0b1a67937b1ff68e5538da1d">damage</a>) {}</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;} <span class="comment">// namespace com</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;} <span class="comment">// namespace core</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00195_html"><div class="ttname"><a href="a00195.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00010">Command.hpp:11</a></div></div>
+<div class="ttc" id="aa00267_html"><div class="ttname"><a href="a00267.html">core::com::Damager</a></div><div class="ttdoc">Component that makes an entity cause damage on collision.</div><div class="ttdef"><b>Definition:</b> <a href="a00032_source.html#l00013">Damager.hpp:13</a></div></div>
+<div class="ttc" id="aa00267_html_a5eadb5db0b1a67937b1ff68e5538da1d"><div class="ttname"><a href="a00267.html#a5eadb5db0b1a67937b1ff68e5538da1d">core::com::Damager::damage</a></div><div class="ttdeci">float damage</div><div class="ttdef"><b>Definition:</b> <a href="a00032_source.html#l00014">Damager.hpp:14</a></div></div>
+<div class="ttc" id="aa00267_html_ab264e4cab6c4e480343f0c8070ea83b3"><div class="ttname"><a href="a00267.html#ab264e4cab6c4e480343f0c8070ea83b3">core::com::Damager::Damager</a></div><div class="ttdeci">Damager(float damage)</div><div class="ttdoc">Creates the damager component with the given damage.</div><div class="ttdef"><b>Definition:</b> <a href="a00032_source.html#l00027">Damager.hpp:27</a></div></div>
+<div class="ttc" id="aa00267_html_abf4a717b1a5b55727b2477383c121ddf"><div class="ttname"><a href="a00267.html#abf4a717b1a5b55727b2477383c121ddf">core::com::Damager::Damager</a></div><div class="ttdeci">Damager()</div><div class="ttdoc">Creates the damager component with 0 damage.</div><div class="ttdef"><b>Definition:</b> <a href="a00032_source.html#l00019">Damager.hpp:19</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 13 2024 23:42:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 15 2024 02:19:21 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small></address>

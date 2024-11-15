@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['unit_590',['Unit',['../a00201.html#a646fd60d6dfff097f2b04ae23c9b9c67',1,'core::com::Unit::Unit()'],['../a00293.html#a646fd60d6dfff097f2b04ae23c9b9c67',1,'core::unit::Moveable::Unit()'],['../a00309.html#a646fd60d6dfff097f2b04ae23c9b9c67',1,'core::unit::Shooter::Unit()']]]
+  ['commandstore_678',['CommandStore',['../a00227.html#a9b7bc55c71074e6882d0b46e3f48370b',1,'core::cmd::Command::CommandStore()'],['../a00223.html#a9b7bc55c71074e6882d0b46e3f48370b',1,'core::cmd::ExternalHandle::CommandStore()']]]
 ];

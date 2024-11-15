@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Input/MenuDriver.hpp Source File</title>
+<title>Outpost Engine: include/Core/Commands/UnitCommand.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,44 +66,117 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_5a360ce72f845b04181dbb6c528142b3.html">Input</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_cd42dacb0257cf84a1e4800a9c985ad9.html">Commands</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">MenuDriver.hpp</div>  </div>
+<div class="title">UnitCommand.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00029.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CORE_INPUT_MENUDRIVER_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CORE_INPUT_MENUDRIVER_HPP</span></div>
+<a href="a00029.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CORE_COMMANDS_UNITCOMMAND_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CORE_COMMANDS_UNITCOMMAND_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;BLIB/Interfaces/Menu.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00026.html">Core/Input/Control.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00005.html">Core/Commands/Command.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00104.html">Core/World/Node.hpp</a>&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00170.html">core</a></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00195.html">core</a></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>input</div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="a00197.html">    9</a></span>&#160;<span class="keyword">namespace </span>com</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="a00166.html#ga4177a2fb4c67d583c7ea3ab587db8791">   16</a></span>&#160;<span class="keyword">using</span> <a class="code" href="a00166.html#ga4177a2fb4c67d583c7ea3ab587db8791">MenuDriver</a> = bl::menu::TriggerDriver&lt;<a class="code" href="a00166.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4">Control::MoveUp</a>, <a class="code" href="a00166.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f">Control::MoveRight</a>, <a class="code" href="a00166.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07">Control::MoveDown</a>,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                                           <a class="code" href="a00166.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee">Control::MoveLeft</a>, <a class="code" href="a00166.html#ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223">Control::Interact</a>&gt;;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;} <span class="comment">// namespace input</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;} <span class="comment">// namespace core</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aa00026_html"><div class="ttname"><a href="a00026.html">Control.hpp</a></div></div>
-<div class="ttc" id="aa00166_html_ga4177a2fb4c67d583c7ea3ab587db8791"><div class="ttname"><a href="a00166.html#ga4177a2fb4c67d583c7ea3ab587db8791">core::input::MenuDriver</a></div><div class="ttdeci">bl::menu::TriggerDriver&lt; Control::MoveUp, Control::MoveRight, Control::MoveDown, Control::MoveLeft, Control::Interact &gt; MenuDriver</div><div class="ttdoc">Helper typedef for menu driving.</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00016">MenuDriver.hpp:17</a></div></div>
-<div class="ttc" id="aa00166_html_ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07"><div class="ttname"><a href="a00166.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07">core::input::Control::MoveDown</a></div><div class="ttdeci">@ MoveDown</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00029">Control.hpp:29</a></div></div>
-<div class="ttc" id="aa00166_html_ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223"><div class="ttname"><a href="a00166.html#ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223">core::input::Control::Interact</a></div><div class="ttdeci">@ Interact</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00032">Control.hpp:32</a></div></div>
-<div class="ttc" id="aa00166_html_ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee"><div class="ttname"><a href="a00166.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee">core::input::Control::MoveLeft</a></div><div class="ttdeci">@ MoveLeft</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00030">Control.hpp:30</a></div></div>
-<div class="ttc" id="aa00166_html_ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f"><div class="ttname"><a href="a00166.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f">core::input::Control::MoveRight</a></div><div class="ttdeci">@ MoveRight</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00028">Control.hpp:28</a></div></div>
-<div class="ttc" id="aa00166_html_ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4"><div class="ttname"><a href="a00166.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4">core::input::Control::MoveUp</a></div><div class="ttdeci">@ MoveUp</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00027">Control.hpp:27</a></div></div>
-<div class="ttc" id="aa00170_html"><div class="ttname"><a href="a00170.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00004">Damager.hpp:5</a></div></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span><a class="code" href="a00275.html">Unit</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;}</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>cmd</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="a00251.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00251.html">UnitCommand</a> : <span class="keyword">public</span> <a class="code" href="a00227.html">Command</a> {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="a00255.html">   28</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="a00255.html">ConcurrencyType</a> {</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="a00255.html#a0bc96126fdcf1ba746d5474b7ac71fb0a4b1eec1f51b00555ca10bd2c50870dbd">   29</a></span>&#160;        <span class="keyword">enum</span> <a class="code" href="a00255.html#a0bc96126fdcf1ba746d5474b7ac71fb0">Slot</a> { <a class="code" href="a00255.html#a0bc96126fdcf1ba746d5474b7ac71fb0ae57ccbe447f6effa5b4c0b004cf18244">Movement</a> = 0, <a class="code" href="a00255.html#a0bc96126fdcf1ba746d5474b7ac71fb0a7e930bd62bbd4706e9e71b8ca70cfae6">Shooting</a> = 1, <a class="code" href="a00255.html#a0bc96126fdcf1ba746d5474b7ac71fb0a4b1eec1f51b00555ca10bd2c50870dbd">COUNT</a> };</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    };</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="a00251.html#a9bd805f5af5be757737a76f8a32388ba">   35</a></span>&#160;    <span class="keyword">enum struct</span> <a class="code" href="a00251.html#a9bd805f5af5be757737a76f8a32388ba">Type</a> {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="a00251.html#a9bd805f5af5be757737a76f8a32388baad0b8917cb9f9e33a4ced929fe90a20f3">MoveToPosition</a>,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="a00251.html#a9bd805f5af5be757737a76f8a32388baa37e6404da665240784e4460ecc291e67">KillUnit</a>,</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="comment">// TODO - other commands</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="a00251.html#a9bd805f5af5be757737a76f8a32388baa4bbb8f967da6d1a610596d7257179c2b">Invalid</a></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    };</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="a00251.html#adabe9441e3b8916387cc558eda306eea">   50</a></span>&#160;    <a class="code" href="a00251.html#adabe9441e3b8916387cc558eda306eea">UnitCommand</a>(<a class="code" href="a00251.html#a9bd805f5af5be757737a76f8a32388ba">Type</a> type, <a class="code" href="a00255.html#a0bc96126fdcf1ba746d5474b7ac71fb0">ConcurrencyType::Slot</a> concurrencyType, <span class="keyword">const</span> glm::vec2&amp; <a class="code" href="a00251.html#a4ae0093cf6f38468ce9c612e881cad62">position</a>,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="keyword">const</span> <a class="code" href="a00379.html">world::Node</a>* <a class="code" href="a00251.html#acc9981f087fd4ba75d04a3d149c89c02">node</a>)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    : concurrencyType(concurrencyType)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    , type(type) {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <a class="code" href="a00251.html#a10e2948a387d72108036c9e992497d49">targetPosition</a>.position = <a class="code" href="a00251.html#a4ae0093cf6f38468ce9c612e881cad62">position</a>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <a class="code" href="a00251.html#a10e2948a387d72108036c9e992497d49">targetPosition</a>.node     = <a class="code" href="a00251.html#acc9981f087fd4ba75d04a3d149c89c02">node</a>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="a00251.html#a039f7bd14d748ea091a84299a8d2ba7e">   65</a></span>&#160;    <a class="code" href="a00251.html#a039f7bd14d748ea091a84299a8d2ba7e">UnitCommand</a>(<a class="code" href="a00251.html#a9bd805f5af5be757737a76f8a32388ba">Type</a> type, <a class="code" href="a00255.html#a0bc96126fdcf1ba746d5474b7ac71fb0">ConcurrencyType::Slot</a> concurrencyType, <a class="code" href="a00275.html">com::Unit</a>* unit)</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    : type(type)</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    , concurrencyType(concurrencyType) {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <a class="code" href="a00251.html#ad1a1b44a822e4129f19a193c4d5a79c5">targetUnit</a> = unit;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="a00251.html#ae400fd8098e0fcf9ed945c0d376ca2b1">   74</a></span>&#160;    <a class="code" href="a00251.html#a9bd805f5af5be757737a76f8a32388ba">Type</a> <a class="code" href="a00251.html#ae400fd8098e0fcf9ed945c0d376ca2b1">getType</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> type; }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="a00251.html#adf1101a1143f7ca3e5825fa59b6f58a0">   79</a></span>&#160;    <a class="code" href="a00255.html#a0bc96126fdcf1ba746d5474b7ac71fb0">ConcurrencyType::Slot</a> <a class="code" href="a00251.html#adf1101a1143f7ca3e5825fa59b6f58a0">getConcurrencyType</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> concurrencyType; }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="a00251.html#af402b294890c45923b4fa5f0df5f5f2b">   84</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="a00379.html">world::Node</a>* <a class="code" href="a00251.html#af402b294890c45923b4fa5f0df5f5f2b">getTargetNode</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="a00251.html#a10e2948a387d72108036c9e992497d49">targetPosition</a>.node; }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="a00251.html#a885793328f4df83341a582666471df42">   89</a></span>&#160;    <span class="keyword">const</span> glm::vec2&amp; <a class="code" href="a00251.html#a885793328f4df83341a582666471df42">getTargetPosition</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="a00251.html#a10e2948a387d72108036c9e992497d49">targetPosition</a>.position; }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="a00251.html#a689e762cb6211cf35b03871238a13ae9">   94</a></span>&#160;    <a class="code" href="a00275.html">com::Unit</a>* <a class="code" href="a00251.html#a689e762cb6211cf35b03871238a13ae9">getTargetUnit</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="a00251.html#ad1a1b44a822e4129f19a193c4d5a79c5">targetUnit</a>; }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <a class="code" href="a00255.html#a0bc96126fdcf1ba746d5474b7ac71fb0">ConcurrencyType::Slot</a> concurrencyType;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <a class="code" href="a00251.html#a9bd805f5af5be757737a76f8a32388ba">Type</a> type;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">union </span>{</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="a00251.html#a4ae0093cf6f38468ce9c612e881cad62">  102</a></span>&#160;            glm::vec2 <a class="code" href="a00251.html#a4ae0093cf6f38468ce9c612e881cad62">position</a>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="a00251.html#acc9981f087fd4ba75d04a3d149c89c02">  103</a></span>&#160;            <span class="keyword">const</span> <a class="code" href="a00379.html">world::Node</a>* <a class="code" href="a00251.html#acc9981f087fd4ba75d04a3d149c89c02">node</a>;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="a00251.html#a10e2948a387d72108036c9e992497d49">  105</a></span>&#160;        } <a class="code" href="a00251.html#a10e2948a387d72108036c9e992497d49">targetPosition</a>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="a00251.html#ad1a1b44a822e4129f19a193c4d5a79c5">  107</a></span>&#160;        <a class="code" href="a00275.html">com::Unit</a>* <a class="code" href="a00251.html#ad1a1b44a822e4129f19a193c4d5a79c5">targetUnit</a>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    };</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;};</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;} <span class="comment">// namespace cmd</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;} <span class="comment">// namespace core</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00005_html"><div class="ttname"><a href="a00005.html">Command.hpp</a></div></div>
+<div class="ttc" id="aa00104_html"><div class="ttname"><a href="a00104.html">Node.hpp</a></div></div>
+<div class="ttc" id="aa00195_html"><div class="ttname"><a href="a00195.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00010">Command.hpp:11</a></div></div>
+<div class="ttc" id="aa00227_html"><div class="ttname"><a href="a00227.html">core::cmd::Command</a></div><div class="ttdoc">Base class for commands that can be issued to units and squads.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00026">Command.hpp:26</a></div></div>
+<div class="ttc" id="aa00251_html"><div class="ttname"><a href="a00251.html">core::cmd::UnitCommand</a></div><div class="ttdoc">Commands that can be issued to units.</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00022">UnitCommand.hpp:22</a></div></div>
+<div class="ttc" id="aa00251_html_a039f7bd14d748ea091a84299a8d2ba7e"><div class="ttname"><a href="a00251.html#a039f7bd14d748ea091a84299a8d2ba7e">core::cmd::UnitCommand::UnitCommand</a></div><div class="ttdeci">UnitCommand(Type type, ConcurrencyType::Slot concurrencyType, com::Unit *unit)</div><div class="ttdoc">Creates a unit command. Use the factory methods on CommandStore.</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00065">UnitCommand.hpp:65</a></div></div>
+<div class="ttc" id="aa00251_html_a10e2948a387d72108036c9e992497d49"><div class="ttname"><a href="a00251.html#a10e2948a387d72108036c9e992497d49">core::cmd::UnitCommand::targetPosition</a></div><div class="ttdeci">struct core::cmd::UnitCommand::@0::@2 targetPosition</div></div>
+<div class="ttc" id="aa00251_html_a4ae0093cf6f38468ce9c612e881cad62"><div class="ttname"><a href="a00251.html#a4ae0093cf6f38468ce9c612e881cad62">core::cmd::UnitCommand::position</a></div><div class="ttdeci">glm::vec2 position</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00102">UnitCommand.hpp:102</a></div></div>
+<div class="ttc" id="aa00251_html_a689e762cb6211cf35b03871238a13ae9"><div class="ttname"><a href="a00251.html#a689e762cb6211cf35b03871238a13ae9">core::cmd::UnitCommand::getTargetUnit</a></div><div class="ttdeci">com::Unit * getTargetUnit() const</div><div class="ttdoc">Returns the target unit of this command.</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00094">UnitCommand.hpp:94</a></div></div>
+<div class="ttc" id="aa00251_html_a885793328f4df83341a582666471df42"><div class="ttname"><a href="a00251.html#a885793328f4df83341a582666471df42">core::cmd::UnitCommand::getTargetPosition</a></div><div class="ttdeci">const glm::vec2 &amp; getTargetPosition() const</div><div class="ttdoc">Returns the target position of this command.</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00089">UnitCommand.hpp:89</a></div></div>
+<div class="ttc" id="aa00251_html_a9bd805f5af5be757737a76f8a32388ba"><div class="ttname"><a href="a00251.html#a9bd805f5af5be757737a76f8a32388ba">core::cmd::UnitCommand::Type</a></div><div class="ttdeci">Type</div><div class="ttdoc">The actual type of the command.</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00035">UnitCommand.hpp:35</a></div></div>
+<div class="ttc" id="aa00251_html_a9bd805f5af5be757737a76f8a32388baa37e6404da665240784e4460ecc291e67"><div class="ttname"><a href="a00251.html#a9bd805f5af5be757737a76f8a32388baa37e6404da665240784e4460ecc291e67">core::cmd::UnitCommand::Type::KillUnit</a></div><div class="ttdeci">@ KillUnit</div></div>
+<div class="ttc" id="aa00251_html_a9bd805f5af5be757737a76f8a32388baa4bbb8f967da6d1a610596d7257179c2b"><div class="ttname"><a href="a00251.html#a9bd805f5af5be757737a76f8a32388baa4bbb8f967da6d1a610596d7257179c2b">core::cmd::UnitCommand::Type::Invalid</a></div><div class="ttdeci">@ Invalid</div></div>
+<div class="ttc" id="aa00251_html_a9bd805f5af5be757737a76f8a32388baad0b8917cb9f9e33a4ced929fe90a20f3"><div class="ttname"><a href="a00251.html#a9bd805f5af5be757737a76f8a32388baad0b8917cb9f9e33a4ced929fe90a20f3">core::cmd::UnitCommand::Type::MoveToPosition</a></div><div class="ttdeci">@ MoveToPosition</div></div>
+<div class="ttc" id="aa00251_html_acc9981f087fd4ba75d04a3d149c89c02"><div class="ttname"><a href="a00251.html#acc9981f087fd4ba75d04a3d149c89c02">core::cmd::UnitCommand::node</a></div><div class="ttdeci">const world::Node * node</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00103">UnitCommand.hpp:103</a></div></div>
+<div class="ttc" id="aa00251_html_ad1a1b44a822e4129f19a193c4d5a79c5"><div class="ttname"><a href="a00251.html#ad1a1b44a822e4129f19a193c4d5a79c5">core::cmd::UnitCommand::targetUnit</a></div><div class="ttdeci">com::Unit * targetUnit</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00107">UnitCommand.hpp:107</a></div></div>
+<div class="ttc" id="aa00251_html_adabe9441e3b8916387cc558eda306eea"><div class="ttname"><a href="a00251.html#adabe9441e3b8916387cc558eda306eea">core::cmd::UnitCommand::UnitCommand</a></div><div class="ttdeci">UnitCommand(Type type, ConcurrencyType::Slot concurrencyType, const glm::vec2 &amp;position, const world::Node *node)</div><div class="ttdoc">Creates a unit command. Use the factory methods on CommandStore.</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00050">UnitCommand.hpp:50</a></div></div>
+<div class="ttc" id="aa00251_html_adf1101a1143f7ca3e5825fa59b6f58a0"><div class="ttname"><a href="a00251.html#adf1101a1143f7ca3e5825fa59b6f58a0">core::cmd::UnitCommand::getConcurrencyType</a></div><div class="ttdeci">ConcurrencyType::Slot getConcurrencyType() const</div><div class="ttdoc">Returns the concurrency type for this command.</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00079">UnitCommand.hpp:79</a></div></div>
+<div class="ttc" id="aa00251_html_ae400fd8098e0fcf9ed945c0d376ca2b1"><div class="ttname"><a href="a00251.html#ae400fd8098e0fcf9ed945c0d376ca2b1">core::cmd::UnitCommand::getType</a></div><div class="ttdeci">Type getType() const</div><div class="ttdoc">Returns the type of this command.</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00074">UnitCommand.hpp:74</a></div></div>
+<div class="ttc" id="aa00251_html_af402b294890c45923b4fa5f0df5f5f2b"><div class="ttname"><a href="a00251.html#af402b294890c45923b4fa5f0df5f5f2b">core::cmd::UnitCommand::getTargetNode</a></div><div class="ttdeci">const world::Node * getTargetNode() const</div><div class="ttdoc">Returns the target world node of this command.</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00084">UnitCommand.hpp:84</a></div></div>
+<div class="ttc" id="aa00255_html"><div class="ttname"><a href="a00255.html">core::cmd::UnitCommand::ConcurrencyType</a></div><div class="ttdoc">The concurrency type of command. Commands of different types may be executed in parallel by a single ...</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00028">UnitCommand.hpp:28</a></div></div>
+<div class="ttc" id="aa00255_html_a0bc96126fdcf1ba746d5474b7ac71fb0"><div class="ttname"><a href="a00255.html#a0bc96126fdcf1ba746d5474b7ac71fb0">core::cmd::UnitCommand::ConcurrencyType::Slot</a></div><div class="ttdeci">Slot</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00029">UnitCommand.hpp:29</a></div></div>
+<div class="ttc" id="aa00255_html_a0bc96126fdcf1ba746d5474b7ac71fb0a4b1eec1f51b00555ca10bd2c50870dbd"><div class="ttname"><a href="a00255.html#a0bc96126fdcf1ba746d5474b7ac71fb0a4b1eec1f51b00555ca10bd2c50870dbd">core::cmd::UnitCommand::ConcurrencyType::COUNT</a></div><div class="ttdeci">@ COUNT</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00029">UnitCommand.hpp:29</a></div></div>
+<div class="ttc" id="aa00255_html_a0bc96126fdcf1ba746d5474b7ac71fb0a7e930bd62bbd4706e9e71b8ca70cfae6"><div class="ttname"><a href="a00255.html#a0bc96126fdcf1ba746d5474b7ac71fb0a7e930bd62bbd4706e9e71b8ca70cfae6">core::cmd::UnitCommand::ConcurrencyType::Shooting</a></div><div class="ttdeci">@ Shooting</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00029">UnitCommand.hpp:29</a></div></div>
+<div class="ttc" id="aa00255_html_a0bc96126fdcf1ba746d5474b7ac71fb0ae57ccbe447f6effa5b4c0b004cf18244"><div class="ttname"><a href="a00255.html#a0bc96126fdcf1ba746d5474b7ac71fb0ae57ccbe447f6effa5b4c0b004cf18244">core::cmd::UnitCommand::ConcurrencyType::Movement</a></div><div class="ttdeci">@ Movement</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00029">UnitCommand.hpp:29</a></div></div>
+<div class="ttc" id="aa00275_html"><div class="ttname"><a href="a00275.html">core::com::Unit</a></div><div class="ttdoc">Component and data storage for in game units.</div><div class="ttdef"><b>Definition:</b> <a href="a00529_source.html#l00034">Unit.hpp:34</a></div></div>
+<div class="ttc" id="aa00379_html"><div class="ttname"><a href="a00379.html">core::world::Node</a></div><div class="ttdoc">Spatial node in a world. Nodes are used for pathing and cover.</div><div class="ttdef"><b>Definition:</b> <a href="a00104_source.html#l00019">Node.hpp:19</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 13 2024 23:42:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 15 2024 02:19:21 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small></address>

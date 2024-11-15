@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: src/Core/Player/HUD.cpp Source File</title>
+<title>Outpost Engine: include/Game/States/CombatDemo.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,79 +66,56 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a2f0e5642e47e7ed59fe0f0829eafb5f.html">Core</a></li><li class="navelem"><a class="el" href="dir_5ab21b59a04f996a9cadf7e77e16925a.html">Player</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_42f88387b2411e5d672af5da212cf282.html">Game</a></li><li class="navelem"><a class="el" href="dir_63f60c6c182692e62620af266969e641.html">States</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">HUD.cpp</div>  </div>
+<div class="title">CombatDemo.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00119.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00041.html">Core/Player/HUD.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00044.html">Core/Player/Player.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00170.html">core</a></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>player</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="a00237.html#ac343a0830003afdf04602d2dc4b83e3d">    9</a></span>&#160;<a class="code" href="a00237.html#ac343a0830003afdf04602d2dc4b83e3d">HUD::HUD</a>(<a class="code" href="a00241.html">Player</a>&amp; owner)</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;: owner(owner)</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;, unitController(owner) {}</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="a00237.html#a808093ab7ee69b9dfe48b316c6f74d4d">   13</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00237.html#a808093ab7ee69b9dfe48b316c6f74d4d">HUD::update</a>(<span class="keywordtype">float</span> dt) {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    gui-&gt;update(dt);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    debugMenu.<a class="code" href="a00221.html#a28d43284906f5c163ba5c2c6d00633d6">update</a>(dt);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
+<a href="a00119.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef GAME_STATES_COMBATDEMO_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define GAME_STATES_COMBATDEMO_HPP</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;BLIB/Engine/State.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;BLIB/Events.hpp&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;SFML/Window/Event.hpp&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00206.html">game</a></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="a00207.html">   10</a></span>&#160;<span class="keyword">namespace </span>state</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="a00403.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00403.html">CombatDemo</a></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;: <span class="keyword">public</span> bl::engine::State</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;, <span class="keyword">public</span> bl::event::Listener&lt;sf::Event&gt; {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="a00403.html#a337aac90791c467304bdfc35c2780e18">CombatDemo</a>(bl::engine::Engine&amp; engine);</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="a00237.html#aeee864dcd45f8f3fbfaeefc1d45ac9b4">   18</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00237.html#aeee864dcd45f8f3fbfaeefc1d45ac9b4">HUD::addToOverlay</a>() {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    gui = bl::gui::GUI::create(owner.getCurrentWorld(), owner, bl::gui::LinePacker::create());</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    debugMenu.<a class="code" href="a00221.html#a67c3052638dd008f0f5c80d3ac715e95">init</a>(*gui);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    unitController.<a class="code" href="a00233.html#af72da4759a775dfe9e49f4a4a1230155">init</a>();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    gui-&gt;addToOverlay(<span class="keyword">nullptr</span>, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    gui-&gt;setRegion({0.f, 0.f, 0.f, 0.f});</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    bl::event::Dispatcher::subscribe(<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="a00237.html#aeb88b1503ccb418c4a139a7cc2c9a6ae">   27</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00237.html#aeb88b1503ccb418c4a139a7cc2c9a6ae">HUD::removeFromOverlay</a>() {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    gui.reset();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    unitController.<a class="code" href="a00233.html#ae3a13800e0e7406f5ebd492c29b0332d">reset</a>();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    bl::event::Dispatcher::unsubscribe(<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="a00403.html#adbd9bb66977f2456e6800cfa3b742c82">   18</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="a00403.html#adbd9bb66977f2456e6800cfa3b742c82">~CombatDemo</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    bl::engine::Engine&amp; engine;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>* name() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> activate(bl::engine::Engine&amp; engine) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> deactivate(bl::engine::Engine&amp; engine) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> update(bl::engine::Engine&amp; engine, <span class="keywordtype">float</span> dt, <span class="keywordtype">float</span> realDt) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> observe(<span class="keyword">const</span> sf::Event&amp; event) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;} <span class="comment">// namespace state</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;} <span class="comment">// namespace game</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">void</span> HUD::observe(<span class="keyword">const</span> sf::Event&amp; event) {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">if</span> (gui &amp;&amp; gui-&gt;processEvent(event)) { <span class="keywordflow">return</span>; }</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">const</span> hud::Event hudEvent(owner, event);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">if</span> (debugMenu.<a class="code" href="a00221.html#a3737869790273d9824e24f65941e8583">processEvent</a>(hudEvent)) { <span class="keywordflow">return</span>; }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">if</span> (unitController.<a class="code" href="a00233.html#a712e2cf2be12a6c3c9ff8345ab2f1f33">processEvent</a>(hudEvent)) { <span class="keywordflow">return</span>; }</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="a00237.html#a06d1dcabb9f1dedb67c9ec6d077d1315">   41</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00237.html#a06d1dcabb9f1dedb67c9ec6d077d1315">HUD::toggleDebugMenu</a>() { debugMenu.<a class="code" href="a00221.html#ac12fa74914ed4d17bbba279a89aee94d">toggle</a>(); }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;} <span class="comment">// namespace player</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;} <span class="comment">// namespace core</span></div>
-<div class="ttc" id="aa00041_html"><div class="ttname"><a href="a00041.html">HUD.hpp</a></div></div>
-<div class="ttc" id="aa00044_html"><div class="ttname"><a href="a00044.html">Player.hpp</a></div></div>
-<div class="ttc" id="aa00170_html"><div class="ttname"><a href="a00170.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00004">Damager.hpp:5</a></div></div>
-<div class="ttc" id="aa00221_html_a28d43284906f5c163ba5c2c6d00633d6"><div class="ttname"><a href="a00221.html#a28d43284906f5c163ba5c2c6d00633d6">core::player::hud::DebugMenu::update</a></div><div class="ttdeci">void update(float dt)</div><div class="ttdoc">Updates the debug menu.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00312">DebugMenu.cpp:312</a></div></div>
-<div class="ttc" id="aa00221_html_a3737869790273d9824e24f65941e8583"><div class="ttname"><a href="a00221.html#a3737869790273d9824e24f65941e8583">core::player::hud::DebugMenu::processEvent</a></div><div class="ttdeci">bool processEvent(const Event &amp;event)</div><div class="ttdoc">Processes the window event.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00141">DebugMenu.cpp:141</a></div></div>
-<div class="ttc" id="aa00221_html_a67c3052638dd008f0f5c80d3ac715e95"><div class="ttname"><a href="a00221.html#a67c3052638dd008f0f5c80d3ac715e95">core::player::hud::DebugMenu::init</a></div><div class="ttdeci">void init(bl::gui::GUI &amp;gui)</div><div class="ttdoc">Creates the GUI components in the hidden state.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00024">DebugMenu.cpp:24</a></div></div>
-<div class="ttc" id="aa00221_html_ac12fa74914ed4d17bbba279a89aee94d"><div class="ttname"><a href="a00221.html#ac12fa74914ed4d17bbba279a89aee94d">core::player::hud::DebugMenu::toggle</a></div><div class="ttdeci">void toggle()</div><div class="ttdoc">Shows or hides the debug menu window.</div><div class="ttdef"><b>Definition:</b> <a href="a00110_source.html#l00130">DebugMenu.cpp:130</a></div></div>
-<div class="ttc" id="aa00233_html_a712e2cf2be12a6c3c9ff8345ab2f1f33"><div class="ttname"><a href="a00233.html#a712e2cf2be12a6c3c9ff8345ab2f1f33">core::player::hud::TempUnitController::processEvent</a></div><div class="ttdeci">bool processEvent(const Event &amp;event)</div><div class="ttdef"><b>Definition:</b> <a href="a00116_source.html#l00045">TempUnitController.cpp:45</a></div></div>
-<div class="ttc" id="aa00233_html_ae3a13800e0e7406f5ebd492c29b0332d"><div class="ttname"><a href="a00233.html#ae3a13800e0e7406f5ebd492c29b0332d">core::player::hud::TempUnitController::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdef"><b>Definition:</b> <a href="a00116_source.html#l00040">TempUnitController.cpp:40</a></div></div>
-<div class="ttc" id="aa00233_html_af72da4759a775dfe9e49f4a4a1230155"><div class="ttname"><a href="a00233.html#af72da4759a775dfe9e49f4a4a1230155">core::player::hud::TempUnitController::init</a></div><div class="ttdeci">void init()</div><div class="ttdef"><b>Definition:</b> <a href="a00116_source.html#l00017">TempUnitController.cpp:17</a></div></div>
-<div class="ttc" id="aa00237_html_a06d1dcabb9f1dedb67c9ec6d077d1315"><div class="ttname"><a href="a00237.html#a06d1dcabb9f1dedb67c9ec6d077d1315">core::player::HUD::toggleDebugMenu</a></div><div class="ttdeci">void toggleDebugMenu()</div><div class="ttdoc">Toggles the debug menu.</div><div class="ttdef"><b>Definition:</b> <a href="a00119_source.html#l00041">HUD.cpp:41</a></div></div>
-<div class="ttc" id="aa00237_html_a808093ab7ee69b9dfe48b316c6f74d4d"><div class="ttname"><a href="a00237.html#a808093ab7ee69b9dfe48b316c6f74d4d">core::player::HUD::update</a></div><div class="ttdeci">void update(float dt)</div><div class="ttdoc">Updates the HUD.</div><div class="ttdef"><b>Definition:</b> <a href="a00119_source.html#l00013">HUD.cpp:13</a></div></div>
-<div class="ttc" id="aa00237_html_ac343a0830003afdf04602d2dc4b83e3d"><div class="ttname"><a href="a00237.html#ac343a0830003afdf04602d2dc4b83e3d">core::player::HUD::HUD</a></div><div class="ttdeci">HUD(Player &amp;owner)</div><div class="ttdoc">Creates the HUD.</div><div class="ttdef"><b>Definition:</b> <a href="a00119_source.html#l00009">HUD.cpp:9</a></div></div>
-<div class="ttc" id="aa00237_html_aeb88b1503ccb418c4a139a7cc2c9a6ae"><div class="ttname"><a href="a00237.html#aeb88b1503ccb418c4a139a7cc2c9a6ae">core::player::HUD::removeFromOverlay</a></div><div class="ttdeci">void removeFromOverlay()</div><div class="ttdoc">Removes the HUD from the overlay that it is on.</div><div class="ttdef"><b>Definition:</b> <a href="a00119_source.html#l00027">HUD.cpp:27</a></div></div>
-<div class="ttc" id="aa00237_html_aeee864dcd45f8f3fbfaeefc1d45ac9b4"><div class="ttname"><a href="a00237.html#aeee864dcd45f8f3fbfaeefc1d45ac9b4">core::player::HUD::addToOverlay</a></div><div class="ttdeci">void addToOverlay()</div><div class="ttdoc">Adds the HUD to the players current overlay.</div><div class="ttdef"><b>Definition:</b> <a href="a00119_source.html#l00018">HUD.cpp:18</a></div></div>
-<div class="ttc" id="aa00241_html"><div class="ttname"><a href="a00241.html">core::player::Player</a></div><div class="ttdoc">Player class that owns player specific state and UI.</div><div class="ttdef"><b>Definition:</b> <a href="a00044_source.html#l00023">Player.hpp:23</a></div></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00206_html"><div class="ttname"><a href="a00206.html">game</a></div><div class="ttdoc">All classes and modules that implement the game itself.</div><div class="ttdef"><b>Definition:</b> <a href="a00116_source.html#l00004">ConstantsGame.hpp:5</a></div></div>
+<div class="ttc" id="aa00403_html"><div class="ttname"><a href="a00403.html">game::state::CombatDemo</a></div><div class="ttdef"><b>Definition:</b> <a href="a00119_source.html#l00012">CombatDemo.hpp:14</a></div></div>
+<div class="ttc" id="aa00403_html_a337aac90791c467304bdfc35c2780e18"><div class="ttname"><a href="a00403.html#a337aac90791c467304bdfc35c2780e18">game::state::CombatDemo::CombatDemo</a></div><div class="ttdeci">CombatDemo(bl::engine::Engine &amp;engine)</div><div class="ttdef"><b>Definition:</b> <a href="a00182_source.html#l00017">CombatDemo.cpp:17</a></div></div>
+<div class="ttc" id="aa00403_html_adbd9bb66977f2456e6800cfa3b742c82"><div class="ttname"><a href="a00403.html#adbd9bb66977f2456e6800cfa3b742c82">game::state::CombatDemo::~CombatDemo</a></div><div class="ttdeci">virtual ~CombatDemo()=default</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 13 2024 23:42:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 15 2024 02:19:21 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small></address>

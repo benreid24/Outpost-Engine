@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Unit/Shooter.hpp Source File</title>
+<title>Outpost Engine: include/Core/Player/Player.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,73 +66,53 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_b638a04f7290da32ecfac2df55fb6497.html">Unit</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_be6ecaab1a4ec5e27af38c3573eadf7d.html">Player</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Shooter.hpp</div>  </div>
+<div class="title">Player.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00071.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CORE_UNIT_SHOOTER_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CORE_UNIT_SHOOTER_HPP</span></div>
+<a href="a00071.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CORE_PLAYER_PLAYER_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CORE_PLAYER_PLAYER_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00170.html">core</a></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>sys</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">class </span>Unit;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;}</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span>unit</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="a00309.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00309.html">Shooter</a> {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="a00309.html#afa0beafe6c47d8dd9d3adc4fab37eb1e">   28</a></span>&#160;    <a class="code" href="a00309.html#afa0beafe6c47d8dd9d3adc4fab37eb1e">Shooter</a>(<span class="keywordtype">float</span> fireRate, <span class="keywordtype">float</span> damage, <span class="keywordtype">float</span> bulletOffset)</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    : fireDelay(1.f / fireRate)</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    , damage(damage)</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    , bulletOffset(bulletOffset)</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    , timeSinceLastFire(1.f / fireRate)</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    , isFiring(false) {}</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="a00309.html#aa4d24dcd5a6ff670a5567589176f78dd">   38</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="a00309.html#aa4d24dcd5a6ff670a5567589176f78dd">getFireRate</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> 1.f / fireDelay; }</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="a00309.html#a4a28f038fd1d785065f67701f41b9abf">   43</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="a00309.html#a4a28f038fd1d785065f67701f41b9abf">getFireDelay</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> fireDelay; }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="a00309.html#a1028cd8083f8ddf35d7e55262f3a708d">   48</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="a00309.html#a1028cd8083f8ddf35d7e55262f3a708d">getDamage</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> damage; }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="a00309.html#a575f907ad02f3656c2034844a0fe81a0">   53</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="a00309.html#a575f907ad02f3656c2034844a0fe81a0">getBulletOffset</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> bulletOffset; }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="a00309.html#adecc3037a972b9b1d7ad7170b106f3a4">   58</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00309.html#adecc3037a972b9b1d7ad7170b106f3a4">fire</a>() { isFiring = <span class="keyword">true</span>; }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">float</span> fireDelay;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">float</span> damage;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">float</span> bulletOffset;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">float</span> timeSinceLastFire;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">bool</span> isFiring;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="a00309.html#a646fd60d6dfff097f2b04ae23c9b9c67">   67</a></span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="a00261.html">sys::Unit</a>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;};</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;} <span class="comment">// namespace unit</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;} <span class="comment">// namespace core</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aa00170_html"><div class="ttname"><a href="a00170.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00004">Damager.hpp:5</a></div></div>
-<div class="ttc" id="aa00261_html"><div class="ttname"><a href="a00261.html">core::sys::Unit</a></div><div class="ttdoc">System that handles unit level AI and resolves unit actions.</div><div class="ttdef"><b>Definition:</b> <a href="a00456_source.html#l00018">Unit.hpp:18</a></div></div>
-<div class="ttc" id="aa00309_html"><div class="ttname"><a href="a00309.html">core::unit::Shooter</a></div><div class="ttdoc">Component that allows a unit to fire bullets.</div><div class="ttdef"><b>Definition:</b> <a href="a00071_source.html#l00019">Shooter.hpp:19</a></div></div>
-<div class="ttc" id="aa00309_html_a1028cd8083f8ddf35d7e55262f3a708d"><div class="ttname"><a href="a00309.html#a1028cd8083f8ddf35d7e55262f3a708d">core::unit::Shooter::getDamage</a></div><div class="ttdeci">float getDamage() const</div><div class="ttdoc">Returns the damage of bullets.</div><div class="ttdef"><b>Definition:</b> <a href="a00071_source.html#l00048">Shooter.hpp:48</a></div></div>
-<div class="ttc" id="aa00309_html_a4a28f038fd1d785065f67701f41b9abf"><div class="ttname"><a href="a00309.html#a4a28f038fd1d785065f67701f41b9abf">core::unit::Shooter::getFireDelay</a></div><div class="ttdeci">float getFireDelay() const</div><div class="ttdoc">Returns the delay between bullets in seconds.</div><div class="ttdef"><b>Definition:</b> <a href="a00071_source.html#l00043">Shooter.hpp:43</a></div></div>
-<div class="ttc" id="aa00309_html_a575f907ad02f3656c2034844a0fe81a0"><div class="ttname"><a href="a00309.html#a575f907ad02f3656c2034844a0fe81a0">core::unit::Shooter::getBulletOffset</a></div><div class="ttdeci">float getBulletOffset() const</div><div class="ttdoc">Returns the offset to spawn bullets from the shooter.</div><div class="ttdef"><b>Definition:</b> <a href="a00071_source.html#l00053">Shooter.hpp:53</a></div></div>
-<div class="ttc" id="aa00309_html_aa4d24dcd5a6ff670a5567589176f78dd"><div class="ttname"><a href="a00309.html#aa4d24dcd5a6ff670a5567589176f78dd">core::unit::Shooter::getFireRate</a></div><div class="ttdeci">float getFireRate() const</div><div class="ttdoc">Returns the fire rate in bullets per second.</div><div class="ttdef"><b>Definition:</b> <a href="a00071_source.html#l00038">Shooter.hpp:38</a></div></div>
-<div class="ttc" id="aa00309_html_adecc3037a972b9b1d7ad7170b106f3a4"><div class="ttname"><a href="a00309.html#adecc3037a972b9b1d7ad7170b106f3a4">core::unit::Shooter::fire</a></div><div class="ttdeci">void fire()</div><div class="ttdoc">Attempts to fire the weapon.</div><div class="ttdef"><b>Definition:</b> <a href="a00071_source.html#l00058">Shooter.hpp:58</a></div></div>
-<div class="ttc" id="aa00309_html_afa0beafe6c47d8dd9d3adc4fab37eb1e"><div class="ttname"><a href="a00309.html#afa0beafe6c47d8dd9d3adc4fab37eb1e">core::unit::Shooter::Shooter</a></div><div class="ttdeci">Shooter(float fireRate, float damage, float bulletOffset)</div><div class="ttdoc">Creates the shooter component.</div><div class="ttdef"><b>Definition:</b> <a href="a00071_source.html#l00028">Shooter.hpp:28</a></div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;BLIB/Engine/Player.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00068.html">Core/Player/HUD.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00195.html">core</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">namespace </span>player</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="a00315.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00315.html">Player</a> : <span class="keyword">public</span> bl::engine::Player {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="a00315.html#ae13f132510460277ce858654b988fa18">Player</a>(bl::engine::Engine&amp; engine, bl::rc::Observer* observer, bl::input::Actor* actor);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="a00315.html#ad38000f3d1cf0bfa5b6a82e3a59ba3f9">   37</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="a00315.html#ad38000f3d1cf0bfa5b6a82e3a59ba3f9">~Player</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="a00315.html#a52c5c0225f707872d40481304e97ae90">   42</a></span>&#160;    <a class="code" href="a00311.html">HUD</a>&amp; <a class="code" href="a00315.html#a52c5c0225f707872d40481304e97ae90">getHud</a>() { <span class="keywordflow">return</span> hud; }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="a00311.html">HUD</a> hud;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> onWorldChange(bl::engine::World* prev, bl::engine::World* next) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;} <span class="comment">// namespace player</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;} <span class="comment">// namespace core</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00068_html"><div class="ttname"><a href="a00068.html">HUD.hpp</a></div></div>
+<div class="ttc" id="aa00195_html"><div class="ttname"><a href="a00195.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00010">Command.hpp:11</a></div></div>
+<div class="ttc" id="aa00311_html"><div class="ttname"><a href="a00311.html">core::player::HUD</a></div><div class="ttdoc">Top level HUD class for the player.</div><div class="ttdef"><b>Definition:</b> <a href="a00068_source.html#l00020">HUD.hpp:20</a></div></div>
+<div class="ttc" id="aa00315_html"><div class="ttname"><a href="a00315.html">core::player::Player</a></div><div class="ttdoc">Player class that owns player specific state and UI.</div><div class="ttdef"><b>Definition:</b> <a href="a00071_source.html#l00023">Player.hpp:23</a></div></div>
+<div class="ttc" id="aa00315_html_a52c5c0225f707872d40481304e97ae90"><div class="ttname"><a href="a00315.html#a52c5c0225f707872d40481304e97ae90">core::player::Player::getHud</a></div><div class="ttdeci">HUD &amp; getHud()</div><div class="ttdoc">Returns the HUD for this player.</div><div class="ttdef"><b>Definition:</b> <a href="a00071_source.html#l00042">Player.hpp:42</a></div></div>
+<div class="ttc" id="aa00315_html_ad38000f3d1cf0bfa5b6a82e3a59ba3f9"><div class="ttname"><a href="a00315.html#ad38000f3d1cf0bfa5b6a82e3a59ba3f9">core::player::Player::~Player</a></div><div class="ttdeci">virtual ~Player()=default</div><div class="ttdoc">Destroys the player.</div></div>
+<div class="ttc" id="aa00315_html_ae13f132510460277ce858654b988fa18"><div class="ttname"><a href="a00315.html#ae13f132510460277ce858654b988fa18">core::player::Player::Player</a></div><div class="ttdeci">Player(bl::engine::Engine &amp;engine, bl::rc::Observer *observer, bl::input::Actor *actor)</div><div class="ttdoc">Creates the player.</div><div class="ttdef"><b>Definition:</b> <a href="a00149_source.html#l00007">Player.cpp:7</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 13 2024 23:42:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 15 2024 02:19:21 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small></address>

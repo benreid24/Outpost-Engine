@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Unit/Path.hpp File Reference</title>
+<title>Outpost Engine: include/Core/Player/HUD.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,7 +66,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_b638a04f7290da32ecfac2df55fb6497.html">Unit</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_be6ecaab1a4ec5e27af38c3573eadf7d.html">Player</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -74,40 +74,36 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">Path.hpp File Reference</div>  </div>
+<div class="title">HUD.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;BLIB/Util/HashCombine.hpp&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00080_source.html">Core/World/Node.hpp</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;BLIB/Events.hpp&gt;</code><br />
+<code>#include &lt;BLIB/Interfaces/GUI.hpp&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00059_source.html">Core/Player/HUD/DebugMenu.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00065_source.html">Core/Player/HUD/TempUnitController.hpp</a>&gt;</code><br />
 </div>
 <p><a href="a00068_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00297.html">core::unit::Path</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data structure representing a path a unit can take.  <a href="a00297.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00301.html">core::unit::Path::Waypoint</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a00301.html" title="Waypoint along a path.">Waypoint</a> along a path.  <a href="a00301.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00305.html">core::unit::Path::WaypointHash</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hash functor for path waypoints.  <a href="a00305.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00311.html">core::player::HUD</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Top level <a class="el" href="a00311.html" title="Top level HUD class for the player.">HUD</a> class for the player.  <a href="a00311.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00170"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00170.html">core</a></td></tr>
-<tr class="memdesc:a00170"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains everything shared between the game and editor. <br /></td></tr>
+<tr class="memitem:a00195"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00195.html">core</a></td></tr>
+<tr class="memdesc:a00195"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains everything shared between the game and editor. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00178"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00178.html">core::unit</a></td></tr>
-<tr class="memdesc:a00178"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of functionality and behaviors for units. <br /></td></tr>
+<tr class="memitem:a00202"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00202.html">core::player</a></td></tr>
+<tr class="memdesc:a00202"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of classes representing the player. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 13 2024 23:42:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 15 2024 02:19:21 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small></address>

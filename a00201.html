@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: core::com::Unit Class Reference</title>
+<title>Outpost Engine: core::input::Control Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,434 +66,47 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00170.html">core</a></li><li class="navelem"><a class="el" href="a00171.html">com</a></li><li class="navelem"><a class="el" href="a00201.html">Unit</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00195.html">core</a></li><li class="navelem"><a class="el" href="a00200.html">input</a></li><li class="navelem"><a class="el" href="a00201.html">Control</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
-<a href="#friends">Friends</a> &#124;
-<a href="a00198.html">List of all members</a>  </div>
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
-<div class="title">core::com::Unit Class Reference</div>  </div>
+<div class="title">core::input::Control Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="a00453_source.html">Unit.hpp</a>&gt;</code></p>
+<p>Wrapper around the enum for player input ids.  
+<a href="a00201.html#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a96eeb1a9dc855ccbbf68569efb5317a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00201.html#a96eeb1a9dc855ccbbf68569efb5317a5">Unit</a> (bl::com::Physics2D &amp;physics)</td></tr>
-<tr class="memdesc:a96eeb1a9dc855ccbbf68569efb5317a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a unit that cannot move or shoot.  <a href="a00201.html#a96eeb1a9dc855ccbbf68569efb5317a5">More...</a><br /></td></tr>
-<tr class="separator:a96eeb1a9dc855ccbbf68569efb5317a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e7e13620e0eaebd130f73263b5d5034"><td class="memItemLeft" align="right" valign="top">bl::ecs::Entity&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00201.html#a1e7e13620e0eaebd130f73263b5d5034">getId</a> () const</td></tr>
-<tr class="memdesc:a1e7e13620e0eaebd130f73263b5d5034"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the entity id of this unit.  <a href="a00201.html#a1e7e13620e0eaebd130f73263b5d5034">More...</a><br /></td></tr>
-<tr class="separator:a1e7e13620e0eaebd130f73263b5d5034"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ec8ff081f2cc2807c50c0d714ea3845"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00201.html#a8ec8ff081f2cc2807c50c0d714ea3845">makeMoveable</a> (float acceleration, float maxSpeed, float rotateRate, float directionAdjustSpeed, float damping=-1.f)</td></tr>
-<tr class="memdesc:a8ec8ff081f2cc2807c50c0d714ea3845"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows the unit to move with the following parameters.  <a href="a00201.html#a8ec8ff081f2cc2807c50c0d714ea3845">More...</a><br /></td></tr>
-<tr class="separator:a8ec8ff081f2cc2807c50c0d714ea3845"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a51f931c4aaed0f3209a9dbed257bab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00201.html#a7a51f931c4aaed0f3209a9dbed257bab">makeShooter</a> (float fireRate, float damage, float bulletOffset)</td></tr>
-<tr class="memdesc:a7a51f931c4aaed0f3209a9dbed257bab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows the unit to shoot with the following parameters.  <a href="a00201.html#a7a51f931c4aaed0f3209a9dbed257bab">More...</a><br /></td></tr>
-<tr class="separator:a7a51f931c4aaed0f3209a9dbed257bab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e9949097bb1c7cda985df408e28a100"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00201.html#a6e9949097bb1c7cda985df408e28a100">canMove</a> () const</td></tr>
-<tr class="memdesc:a6e9949097bb1c7cda985df408e28a100"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether this unit can move or not.  <a href="a00201.html#a6e9949097bb1c7cda985df408e28a100">More...</a><br /></td></tr>
-<tr class="separator:a6e9949097bb1c7cda985df408e28a100"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33bd9493ffce2ebadfa744a56d0bba5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00293.html">unit::Moveable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00201.html#a33bd9493ffce2ebadfa744a56d0bba5e">getMover</a> ()</td></tr>
-<tr class="memdesc:a33bd9493ffce2ebadfa744a56d0bba5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the movement component for this unit. Only call if this unit can move.  <a href="a00201.html#a33bd9493ffce2ebadfa744a56d0bba5e">More...</a><br /></td></tr>
-<tr class="separator:a33bd9493ffce2ebadfa744a56d0bba5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0435ab7300d1e8f478068760afc4fe75"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00201.html#a0435ab7300d1e8f478068760afc4fe75">canShoot</a> () const</td></tr>
-<tr class="memdesc:a0435ab7300d1e8f478068760afc4fe75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether this unit can fire or not.  <a href="a00201.html#a0435ab7300d1e8f478068760afc4fe75">More...</a><br /></td></tr>
-<tr class="separator:a0435ab7300d1e8f478068760afc4fe75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac57234c7e9c9454b5dacdbe9c1eb4fac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00309.html">unit::Shooter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00201.html#ac57234c7e9c9454b5dacdbe9c1eb4fac">getShooter</a> ()</td></tr>
-<tr class="memdesc:ac57234c7e9c9454b5dacdbe9c1eb4fac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the shooter component for this unit. Only call if this unit can fire.  <a href="a00201.html#ac57234c7e9c9454b5dacdbe9c1eb4fac">More...</a><br /></td></tr>
-<tr class="separator:ac57234c7e9c9454b5dacdbe9c1eb4fac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6e92d303923583e06653abfcc7b0800"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00201.html#ac6e92d303923583e06653abfcc7b0800">queueCommand</a> (const <a class="el" href="a00265.html">unit::Command</a> &amp;command)</td></tr>
-<tr class="memdesc:ac6e92d303923583e06653abfcc7b0800"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queues a command to be carried out by the unit.  <a href="a00201.html#ac6e92d303923583e06653abfcc7b0800">More...</a><br /></td></tr>
-<tr class="separator:ac6e92d303923583e06653abfcc7b0800"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
-Static Public Attributes</h2></td></tr>
-<tr class="memitem:a17dc9570873349f8d09d1c9dfe500ee4"><td class="memItemLeft" align="right" valign="top">static constexpr std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00201.html#a17dc9570873349f8d09d1c9dfe500ee4">CommandQueueSize</a> = 4</td></tr>
-<tr class="separator:a17dc9570873349f8d09d1c9dfe500ee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:a646fd60d6dfff097f2b04ae23c9b9c67"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00201.html#a646fd60d6dfff097f2b04ae23c9b9c67">sys::Unit</a></td></tr>
-<tr class="separator:a646fd60d6dfff097f2b04ae23c9b9c67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:gaf9a43071401d217a03ca35e89affedf2"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00191.html#gaf9a43071401d217a03ca35e89affedf2">EntityControl</a> : unsigned int { <br />
+&#160;&#160;<a class="el" href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4">MoveUp</a> = 0
+, <a class="el" href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f">MoveRight</a> = 1
+, <a class="el" href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07">MoveDown</a> = 2
+, <a class="el" href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee">MoveLeft</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2a9b882d2a24b5eb81f6582255ed43db8c">Sprint</a> = 4
+, <a class="el" href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223">Interact</a> = 5
+, <a class="el" href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2a49a69734c9eaf47436751b36372b85d7">Pause</a> = 6
+, <a class="el" href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2a1899a8772502d8ebc0f31a92bc342868">Back</a> = 7
+, <br />
+&#160;&#160;<a class="el" href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2ae1b03a6443bb04e423b2b5afba52dd5c">Count</a>
+, <a class="el" href="a00191.html#ggaf9a43071401d217a03ca35e89affedf2a5c901845de1e00083b7af54583348b8d">None</a> = Count
+<br />
+ }</td></tr>
+<tr class="memdesc:gaf9a43071401d217a03ca35e89affedf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the various inputs a player or AI can use to control the game or an NPC.  <a href="a00191.html#gaf9a43071401d217a03ca35e89affedf2">More...</a><br /></td></tr>
+<tr class="separator:gaf9a43071401d217a03ca35e89affedf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="a00453_source.html#l00026">26</a> of file <a class="el" href="a00453_source.html">Unit.hpp</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a96eeb1a9dc855ccbbf68569efb5317a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96eeb1a9dc855ccbbf68569efb5317a5">&#9670;&nbsp;</a></span>Unit()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">core::com::Unit::Unit </td>
-          <td>(</td>
-          <td class="paramtype">bl::com::Physics2D &amp;&#160;</td>
-          <td class="paramname"><em>physics</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Creates a unit that cannot move or shoot. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">physics</td><td>The physics component of the unit </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="a00465_source.html#l00007">7</a> of file <a class="el" href="a00465_source.html">Unit.cpp</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6e9949097bb1c7cda985df408e28a100"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e9949097bb1c7cda985df408e28a100">&#9670;&nbsp;</a></span>canMove()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool core::com::Unit::canMove </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns whether this unit can move or not. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00453_source.html#l00066">66</a> of file <a class="el" href="a00453_source.html">Unit.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a0435ab7300d1e8f478068760afc4fe75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0435ab7300d1e8f478068760afc4fe75">&#9670;&nbsp;</a></span>canShoot()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool core::com::Unit::canShoot </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns whether this unit can fire or not. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00453_source.html#l00076">76</a> of file <a class="el" href="a00453_source.html">Unit.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a1e7e13620e0eaebd130f73263b5d5034"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e7e13620e0eaebd130f73263b5d5034">&#9670;&nbsp;</a></span>getId()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bl::ecs::Entity core::com::Unit::getId </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the entity id of this unit. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00453_source.html#l00040">40</a> of file <a class="el" href="a00453_source.html">Unit.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a33bd9493ffce2ebadfa744a56d0bba5e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a33bd9493ffce2ebadfa744a56d0bba5e">&#9670;&nbsp;</a></span>getMover()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00293.html">unit::Moveable</a>&amp; core::com::Unit::getMover </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the movement component for this unit. Only call if this unit can move. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00453_source.html#l00071">71</a> of file <a class="el" href="a00453_source.html">Unit.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ac57234c7e9c9454b5dacdbe9c1eb4fac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac57234c7e9c9454b5dacdbe9c1eb4fac">&#9670;&nbsp;</a></span>getShooter()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00309.html">unit::Shooter</a>&amp; core::com::Unit::getShooter </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the shooter component for this unit. Only call if this unit can fire. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00453_source.html#l00081">81</a> of file <a class="el" href="a00453_source.html">Unit.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a8ec8ff081f2cc2807c50c0d714ea3845"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ec8ff081f2cc2807c50c0d714ea3845">&#9670;&nbsp;</a></span>makeMoveable()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void core::com::Unit::makeMoveable </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>acceleration</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>maxSpeed</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>rotateRate</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>directionAdjustSpeed</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>damping</em> = <code>-1.f</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Allows the unit to move with the following parameters. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">acceleration</td><td>The rate of acceleration for movement, in world space units </td></tr>
-    <tr><td class="paramname">maxSpeed</td><td>The maximum movement speed to enforce, in world space units </td></tr>
-    <tr><td class="paramname">rotateRate</td><td>The rotation speed in degrees per second </td></tr>
-    <tr><td class="paramname">directionAdjustSpeed</td><td>How quickly the entity velocity changes direction. In range [0,1] </td></tr>
-    <tr><td class="paramname">damping</td><td>The damping factor to use to stop the entity when not moving </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="a00465_source.html#l00010">10</a> of file <a class="el" href="a00465_source.html">Unit.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a7a51f931c4aaed0f3209a9dbed257bab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a51f931c4aaed0f3209a9dbed257bab">&#9670;&nbsp;</a></span>makeShooter()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void core::com::Unit::makeShooter </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>fireRate</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>damage</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>bulletOffset</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Allows the unit to shoot with the following parameters. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">fireRate</td><td>The fire rate in bullets per second </td></tr>
-    <tr><td class="paramname">damage</td><td>The damage applied by each bullet </td></tr>
-    <tr><td class="paramname">bulletOffset</td><td>The distance from the shooter to spawn bullets </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="a00465_source.html#l00015">15</a> of file <a class="el" href="a00465_source.html">Unit.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ac6e92d303923583e06653abfcc7b0800"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6e92d303923583e06653abfcc7b0800">&#9670;&nbsp;</a></span>queueCommand()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool core::com::Unit::queueCommand </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a00265.html">unit::Command</a> &amp;&#160;</td>
-          <td class="paramname"><em>command</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Queues a command to be carried out by the unit. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">command</td><td>The command to perform </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Whether or not the command was able to be queued </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00465_source.html#l00019">19</a> of file <a class="el" href="a00465_source.html">Unit.cpp</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="a646fd60d6dfff097f2b04ae23c9b9c67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a646fd60d6dfff097f2b04ae23c9b9c67">&#9670;&nbsp;</a></span>sys::Unit</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">friend class <a class="el" href="a00261.html">sys::Unit</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00453_source.html#l00102">102</a> of file <a class="el" href="a00453_source.html">Unit.hpp</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a17dc9570873349f8d09d1c9dfe500ee4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17dc9570873349f8d09d1c9dfe500ee4">&#9670;&nbsp;</a></span>CommandQueueSize</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr std::size_t core::com::Unit::CommandQueueSize = 4</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00453_source.html#l00028">28</a> of file <a class="el" href="a00453_source.html">Unit.hpp</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following files:<ul>
-<li>include/Core/Components/<a class="el" href="a00453_source.html">Unit.hpp</a></li>
-<li>src/Core/Components/<a class="el" href="a00465_source.html">Unit.cpp</a></li>
-</ul>
-</div><!-- contents -->
+<div class="textblock"><p>Wrapper around the enum for player input ids. </p>
+</div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 13 2024 23:42:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 15 2024 02:19:21 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small></address>

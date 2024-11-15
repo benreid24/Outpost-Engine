@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: src/Core/Player/HUD/TempUnitController.cpp Source File</title>
+<title>Outpost Engine: include/Game/ConstantsGame.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,151 +66,38 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a2f0e5642e47e7ed59fe0f0829eafb5f.html">Core</a></li><li class="navelem"><a class="el" href="dir_5ab21b59a04f996a9cadf7e77e16925a.html">Player</a></li><li class="navelem"><a class="el" href="dir_00aeb524f80569c0651d5ad40358f52a.html">HUD</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_42f88387b2411e5d672af5da212cf282.html">Game</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">TempUnitController.cpp</div>  </div>
+<div class="title">ConstantsGame.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00116.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00038.html">Core/Player/HUD/TempUnitController.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00459.html">Core/Game.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00044.html">Core/Player/Player.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00083.html">Core/World/World.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00170.html">core</a></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>player</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>hud</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="a00233.html#aabfd242045bb3ee1faa53b1d9e20e648">   13</a></span>&#160;<a class="code" href="a00233.html#aabfd242045bb3ee1faa53b1d9e20e648">TempUnitController::TempUnitController</a>(<a class="code" href="a00241.html">Player</a>&amp; owner)</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;: owner(owner)</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;, controlling(nullptr) {}</div>
+<a href="a00116.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef GAME_CONSTANTSGAME_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define GAME_CONSTANTSGAME_HPP</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="a00206.html">    4</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="a00206.html">game</a></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="a00395.html">   11</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a00395.html">ConstantsGame</a> {</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="a00395.html#ae598033ffcdf806c31dfcbc6c531d43d">   12</a></span>&#160;    <span class="keyword">static</span> constexpr <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="a00395.html#ae598033ffcdf806c31dfcbc6c531d43d">ConfigFilePath</a> = <span class="stringliteral">&quot;config.cfg&quot;</span>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="a00395.html#a79eb6e2faf7542ae364f389d6634000d">   13</a></span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="a00395.html#a79eb6e2faf7542ae364f389d6634000d">WindowWidth</a>   = 1920;</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="a00395.html#a02529d866e760bf3863a758e3596e7aa">   14</a></span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="a00395.html#a02529d866e760bf3863a758e3596e7aa">WindowHeight</a>  = 1080;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;};</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="a00233.html#af72da4759a775dfe9e49f4a4a1230155">   17</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00233.html#af72da4759a775dfe9e49f4a4a1230155">TempUnitController::init</a>() {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">auto</span>&amp; <a class="code" href="a00180.html">game</a>  = bl::game::Game::getInstance&lt;Game&gt;();</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">auto</span>&amp; world = owner.getCurrentWorld&lt;<a class="code" href="a00325.html">world::World</a>&gt;();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">auto</span> scene  = owner.getRenderObserver().getOrCreateSceneOverlay();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    background.create(world, {100.f, 60.f});</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    background.setFillColor(sf::Color(160, 160, 160));</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    background.setOutlineColor(sf::Color::Black);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    background.setOutlineThickness(1.f);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    background.getTransform().setOrigin(100.f, 0.f);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    background.getOverlayScaler().positionInParentSpace({1.f, 0.f});</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    background.getOverlayScaler().scaleToHeightPercent(0.15f);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    background.addToScene(scene, bl::rc::UpdateSpeed::Static);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    hint.create(world, <a class="code" href="a00180.html">game</a>.defaultFont(), <span class="stringliteral">&quot;&quot;</span>, 36);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    hint.getOverlayScaler().positionInParentSpace({0.5f, 0.5f});</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    hint.getOverlayScaler().scaleToWidthPercent(0.85f);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    hint.setParent(background);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    hint.addToScene(scene, bl::rc::UpdateSpeed::Static);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    makeEmptyState();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="a00233.html#ae3a13800e0e7406f5ebd492c29b0332d">   40</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00233.html#ae3a13800e0e7406f5ebd492c29b0332d">TempUnitController::reset</a>() {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    hint.destroy();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    background.destroy();</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="a00233.html#a712e2cf2be12a6c3c9ff8345ab2f1f33">   45</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a00233.html#a712e2cf2be12a6c3c9ff8345ab2f1f33">TempUnitController::processEvent</a>(<span class="keyword">const</span> <a class="code" href="a00229.html">Event</a>&amp; event) {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">auto</span>&amp; world = owner.getCurrentWorld&lt;<a class="code" href="a00325.html">world::World</a>&gt;();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">if</span> (event.<a class="code" href="a00229.html#a7a3cd3b925291400b03df40285bde9a4">source</a>().type == sf::Event::MouseMoved) {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">if</span> (controlling) {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">if</span> (event.<a class="code" href="a00229.html#af02cd654b01a45261ab939cc68d3b9ca">unit</a>()) {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="keywordflow">if</span> (event.<a class="code" href="a00229.html#af02cd654b01a45261ab939cc68d3b9ca">unit</a>() != controlling) { makeAttackState(); }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <span class="keywordflow">else</span> { makeMoveState(); }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordflow">else</span> { makeMoveState(); }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (event.<a class="code" href="a00229.html#a7a3cd3b925291400b03df40285bde9a4">source</a>().type == sf::Event::MouseButtonPressed) {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">if</span> (event.<a class="code" href="a00229.html#a7a3cd3b925291400b03df40285bde9a4">source</a>().mouseButton.button == sf::Mouse::Left) {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="keywordflow">if</span> (controlling) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="keywordflow">if</span> (event.<a class="code" href="a00229.html#af02cd654b01a45261ab939cc68d3b9ca">unit</a>() &amp;&amp; controlling != event.<a class="code" href="a00229.html#af02cd654b01a45261ab939cc68d3b9ca">unit</a>()) {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    controlling-&gt;<a class="code" href="a00201.html#ac6e92d303923583e06653abfcc7b0800">queueCommand</a>(<a class="code" href="a00265.html#a6bf229ecebed11ce6c1a7661614f5340">unit::Command::makeKillUnitCommand</a>(event.<a class="code" href="a00229.html#af02cd654b01a45261ab939cc68d3b9ca">unit</a>()));</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    controlling-&gt;<a class="code" href="a00201.html#ac6e92d303923583e06653abfcc7b0800">queueCommand</a>(<a class="code" href="a00265.html#a72983386d7636c073ba5918f7934ed5a">unit::Command::makeMoveToPositionCommand</a>(</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                        event.<a class="code" href="a00229.html#ad55bda2445ab6174a8ed876b861d3453">worldPosition</a>(), world.getNodeAtPosition(event.<a class="code" href="a00229.html#ad55bda2445ab6174a8ed876b861d3453">worldPosition</a>())));</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            }</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                controlling = <span class="keyword">event</span>.unit();</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                <span class="keywordflow">if</span> (controlling) { makeMoveState(); }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (event.<a class="code" href="a00229.html#a7a3cd3b925291400b03df40285bde9a4">source</a>().mouseButton.button == sf::Mouse::Right &amp;&amp; controlling) {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            controlling = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            makeEmptyState();</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordtype">void</span> TempUnitController::observe(<span class="keyword">const</span> bl::ecs::event::ComponentRemoved&lt;com::Unit&gt;&amp; event) {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">if</span> (&amp;event.component == controlling) {</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        controlling = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        makeEmptyState();</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keywordtype">void</span> TempUnitController::makeEmptyState() {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    hint.getSection().setString(<span class="stringliteral">&quot;Click to command&quot;</span>);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    hint.getSection().setFillColor(sf::Color::Black);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    centerText();</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keywordtype">void</span> TempUnitController::makeAttackState() {</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    hint.getSection().setString(<span class="stringliteral">&quot;Attack unit&quot;</span>);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    hint.getSection().setFillColor(sf::Color::Red);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    centerText();</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keywordtype">void</span> TempUnitController::makeMoveState() {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    hint.getSection().setString(<span class="stringliteral">&quot;Move here&quot;</span>);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    hint.getSection().setFillColor(sf::Color::Green);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    centerText();</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;}</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keywordtype">void</span> TempUnitController::centerText() { hint.getTransform().setOrigin(hint.getLocalSize() * 0.5f); }</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;} <span class="comment">// namespace hud</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;} <span class="comment">// namespace player</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;} <span class="comment">// namespace core</span></div>
-<div class="ttc" id="aa00038_html"><div class="ttname"><a href="a00038.html">TempUnitController.hpp</a></div></div>
-<div class="ttc" id="aa00044_html"><div class="ttname"><a href="a00044.html">Player.hpp</a></div></div>
-<div class="ttc" id="aa00083_html"><div class="ttname"><a href="a00083.html">World.hpp</a></div></div>
-<div class="ttc" id="aa00170_html"><div class="ttname"><a href="a00170.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00004">Damager.hpp:5</a></div></div>
-<div class="ttc" id="aa00180_html"><div class="ttname"><a href="a00180.html">game</a></div><div class="ttdoc">All classes and modules that implement the game itself.</div><div class="ttdef"><b>Definition:</b> <a href="a00092_source.html#l00004">ConstantsGame.hpp:5</a></div></div>
-<div class="ttc" id="aa00201_html_ac6e92d303923583e06653abfcc7b0800"><div class="ttname"><a href="a00201.html#ac6e92d303923583e06653abfcc7b0800">core::com::Unit::queueCommand</a></div><div class="ttdeci">bool queueCommand(const unit::Command &amp;command)</div><div class="ttdoc">Queues a command to be carried out by the unit.</div><div class="ttdef"><b>Definition:</b> <a href="a00465_source.html#l00019">Unit.cpp:19</a></div></div>
-<div class="ttc" id="aa00229_html"><div class="ttname"><a href="a00229.html">core::player::hud::Event</a></div><div class="ttdoc">HUD event. Wrapper around sf::Event with some common fields computed.</div><div class="ttdef"><b>Definition:</b> <a href="a00035_source.html#l00020">Event.hpp:20</a></div></div>
-<div class="ttc" id="aa00229_html_a7a3cd3b925291400b03df40285bde9a4"><div class="ttname"><a href="a00229.html#a7a3cd3b925291400b03df40285bde9a4">core::player::hud::Event::source</a></div><div class="ttdeci">const sf::Event &amp; source() const</div><div class="ttdoc">Returns the source window event.</div><div class="ttdef"><b>Definition:</b> <a href="a00035_source.html#l00033">Event.hpp:33</a></div></div>
-<div class="ttc" id="aa00229_html_ad55bda2445ab6174a8ed876b861d3453"><div class="ttname"><a href="a00229.html#ad55bda2445ab6174a8ed876b861d3453">core::player::hud::Event::worldPosition</a></div><div class="ttdeci">const glm::vec2 &amp; worldPosition() const</div><div class="ttdoc">Returns the position of the event in world coordinates.</div><div class="ttdef"><b>Definition:</b> <a href="a00035_source.html#l00048">Event.hpp:48</a></div></div>
-<div class="ttc" id="aa00229_html_af02cd654b01a45261ab939cc68d3b9ca"><div class="ttname"><a href="a00229.html#af02cd654b01a45261ab939cc68d3b9ca">core::player::hud::Event::unit</a></div><div class="ttdeci">com::Unit * unit() const</div><div class="ttdoc">Returns the unit the event occurred over. May be nullptr.</div><div class="ttdef"><b>Definition:</b> <a href="a00035_source.html#l00038">Event.hpp:38</a></div></div>
-<div class="ttc" id="aa00233_html_a712e2cf2be12a6c3c9ff8345ab2f1f33"><div class="ttname"><a href="a00233.html#a712e2cf2be12a6c3c9ff8345ab2f1f33">core::player::hud::TempUnitController::processEvent</a></div><div class="ttdeci">bool processEvent(const Event &amp;event)</div><div class="ttdef"><b>Definition:</b> <a href="a00116_source.html#l00045">TempUnitController.cpp:45</a></div></div>
-<div class="ttc" id="aa00233_html_aabfd242045bb3ee1faa53b1d9e20e648"><div class="ttname"><a href="a00233.html#aabfd242045bb3ee1faa53b1d9e20e648">core::player::hud::TempUnitController::TempUnitController</a></div><div class="ttdeci">TempUnitController(Player &amp;owner)</div><div class="ttdef"><b>Definition:</b> <a href="a00116_source.html#l00013">TempUnitController.cpp:13</a></div></div>
-<div class="ttc" id="aa00233_html_ae3a13800e0e7406f5ebd492c29b0332d"><div class="ttname"><a href="a00233.html#ae3a13800e0e7406f5ebd492c29b0332d">core::player::hud::TempUnitController::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdef"><b>Definition:</b> <a href="a00116_source.html#l00040">TempUnitController.cpp:40</a></div></div>
-<div class="ttc" id="aa00233_html_af72da4759a775dfe9e49f4a4a1230155"><div class="ttname"><a href="a00233.html#af72da4759a775dfe9e49f4a4a1230155">core::player::hud::TempUnitController::init</a></div><div class="ttdeci">void init()</div><div class="ttdef"><b>Definition:</b> <a href="a00116_source.html#l00017">TempUnitController.cpp:17</a></div></div>
-<div class="ttc" id="aa00241_html"><div class="ttname"><a href="a00241.html">core::player::Player</a></div><div class="ttdoc">Player class that owns player specific state and UI.</div><div class="ttdef"><b>Definition:</b> <a href="a00044_source.html#l00023">Player.hpp:23</a></div></div>
-<div class="ttc" id="aa00265_html_a6bf229ecebed11ce6c1a7661614f5340"><div class="ttname"><a href="a00265.html#a6bf229ecebed11ce6c1a7661614f5340">core::unit::Command::makeKillUnitCommand</a></div><div class="ttdeci">static Command makeKillUnitCommand(com::Unit *unit)</div><div class="ttdoc">Creates a command to kill a unit.</div><div class="ttdef"><b>Definition:</b> <a href="a00137_source.html#l00042">Command.cpp:42</a></div></div>
-<div class="ttc" id="aa00265_html_a72983386d7636c073ba5918f7934ed5a"><div class="ttname"><a href="a00265.html#a72983386d7636c073ba5918f7934ed5a">core::unit::Command::makeMoveToPositionCommand</a></div><div class="ttdeci">static Command makeMoveToPositionCommand(const glm::vec2 &amp;position, const world::Node *target)</div><div class="ttdoc">Creates a command to move to a position.</div><div class="ttdef"><b>Definition:</b> <a href="a00137_source.html#l00033">Command.cpp:33</a></div></div>
-<div class="ttc" id="aa00325_html"><div class="ttname"><a href="a00325.html">core::world::World</a></div><div class="ttdoc">The game world class.</div><div class="ttdef"><b>Definition:</b> <a href="a00083_source.html#l00029">World.hpp:29</a></div></div>
-<div class="ttc" id="aa00459_html"><div class="ttname"><a href="a00459.html">Game.hpp</a></div></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;} <span class="comment">// namespace game</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00206_html"><div class="ttname"><a href="a00206.html">game</a></div><div class="ttdoc">All classes and modules that implement the game itself.</div><div class="ttdef"><b>Definition:</b> <a href="a00116_source.html#l00004">ConstantsGame.hpp:5</a></div></div>
+<div class="ttc" id="aa00395_html"><div class="ttname"><a href="a00395.html">game::ConstantsGame</a></div><div class="ttdoc">Collection of constants specific in nature or value to the game.</div><div class="ttdef"><b>Definition:</b> <a href="a00116_source.html#l00011">ConstantsGame.hpp:11</a></div></div>
+<div class="ttc" id="aa00395_html_a02529d866e760bf3863a758e3596e7aa"><div class="ttname"><a href="a00395.html#a02529d866e760bf3863a758e3596e7aa">game::ConstantsGame::WindowHeight</a></div><div class="ttdeci">static constexpr unsigned int WindowHeight</div><div class="ttdef"><b>Definition:</b> <a href="a00116_source.html#l00014">ConstantsGame.hpp:14</a></div></div>
+<div class="ttc" id="aa00395_html_a79eb6e2faf7542ae364f389d6634000d"><div class="ttname"><a href="a00395.html#a79eb6e2faf7542ae364f389d6634000d">game::ConstantsGame::WindowWidth</a></div><div class="ttdeci">static constexpr unsigned int WindowWidth</div><div class="ttdef"><b>Definition:</b> <a href="a00116_source.html#l00013">ConstantsGame.hpp:13</a></div></div>
+<div class="ttc" id="aa00395_html_ae598033ffcdf806c31dfcbc6c531d43d"><div class="ttname"><a href="a00395.html#ae598033ffcdf806c31dfcbc6c531d43d">game::ConstantsGame::ConfigFilePath</a></div><div class="ttdeci">static constexpr const char * ConfigFilePath</div><div class="ttdef"><b>Definition:</b> <a href="a00116_source.html#l00012">ConstantsGame.hpp:12</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 13 2024 23:42:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 15 2024 02:19:21 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small></address>

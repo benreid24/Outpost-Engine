@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/World/Node.hpp Source File</title>
+<title>Outpost Engine: include/Core/Systems/Movement.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,79 +66,54 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_100acb167518532779441d57507c79aa.html">World</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_9ee9775a41bd202429166df6e1b725b2.html">Systems</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Node.hpp</div>  </div>
+<div class="title">Movement.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00080.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CORE_WORLD_NODE_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CORE_WORLD_NODE_HPP</span></div>
+<a href="a00080.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CORE_SYSTEMS_MOVEMENT_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CORE_SYSTEMS_MOVEMENT_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;BLIB/ECS/Entity.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00170.html">core</a></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>world</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">class </span>World;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="a00321.html">   19</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00321.html">Node</a> {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="a00321.html#a0cde01a7f11c86e307c0edfe97b8c179">   22</a></span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">float</span> <a class="code" href="a00321.html#a0cde01a7f11c86e307c0edfe97b8c179">MaxCoverDistance</a> = 175.f;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="a00321.html#aaf7bf4950c4a2bf777e6018296ef2c72acfe76fd9bd571cf04e2c3a2cddd47187">   25</a></span>&#160;    <span class="keyword">enum</span> <a class="code" href="a00321.html#aaf7bf4950c4a2bf777e6018296ef2c72">Type</a> { <a class="code" href="a00321.html#aaf7bf4950c4a2bf777e6018296ef2c72a8fa9238f3458937c9b29c35ae2db66cd">Path</a>, <a class="code" href="a00317.html">Cover</a> };</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;BLIB/Engine/System.hpp&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;BLIB/Events.hpp&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;BLIB/Systems/Physics2D.hpp&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00107.html">Core/World/World.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00195.html">core</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>sys</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="a00327.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00327.html">Movement</a></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;: <span class="keyword">public</span> bl::engine::System</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;, <span class="keyword">public</span> bl::event::Listener&lt;bl::sys::Physics2D::SensorEntered, bl::sys::Physics2D::SensorExited&gt; {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="a00327.html#a37556f2efe80cd40a09cd1dad3a39f2a">~Movement</a>();</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="a00321.html#ac00c0c543f5ee737a1da4c580b730c31">Node</a>(<a class="code" href="a00321.html#aaf7bf4950c4a2bf777e6018296ef2c72">Type</a> type, glm::vec2 pos);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="a00321.html#af00cbbe0151e54057a9eacea538c12c8">   38</a></span>&#160;    <a class="code" href="a00321.html#aaf7bf4950c4a2bf777e6018296ef2c72">Type</a> <a class="code" href="a00321.html#af00cbbe0151e54057a9eacea538c12c8">getType</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> type; }</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="a00321.html#aa9a7abd7ec9c582f2b76fb0211deb2d3">getDistanceToCover</a>(<span class="keywordtype">float</span> degrees) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="a00321.html#a3dea85da863107cb775134d0dec7cf53">   51</a></span>&#160;    <span class="keyword">const</span> glm::vec2&amp; <a class="code" href="a00321.html#a3dea85da863107cb775134d0dec7cf53">getPosition</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> position; }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="a00321.html#af3794ebeb6249950a87d517b6689c78b">   56</a></span>&#160;    bl::ecs::Entity <a class="code" href="a00321.html#af3794ebeb6249950a87d517b6689c78b">getOccupier</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> occupiedBy; }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="a00321.html#a8c6b3d6edccd2269b8033b63009a3ee4">   61</a></span>&#160;    bl::ecs::Entity <a class="code" href="a00321.html#a8c6b3d6edccd2269b8033b63009a3ee4">getTargetingEntity</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> targetedBy; }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="a00321.html#aaf7bf4950c4a2bf777e6018296ef2c72">Type</a> type;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    glm::vec2 position;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">float</span> distanceToCover[12];</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    bl::ecs::Entity occupiedBy;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    bl::ecs::Entity targetedBy;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    std::vector&lt;std::uint32_t&gt; connectsTo;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    bl::ecs::Entity sensorEntity;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="a00321.html#a7b4bcdf992c21ae83363f25df05b1d25">   72</a></span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="a00325.html">World</a>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;};</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;} <span class="comment">// namespace world</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;} <span class="comment">// namespace core</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aa00170_html"><div class="ttname"><a href="a00170.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00004">Damager.hpp:5</a></div></div>
-<div class="ttc" id="aa00317_html"><div class="ttname"><a href="a00317.html">core::world::Cover</a></div><div class="ttdoc">Basic rotated rectangle cover struct for prototyping.</div><div class="ttdef"><b>Definition:</b> <a href="a00077_source.html#l00016">Cover.hpp:16</a></div></div>
-<div class="ttc" id="aa00321_html"><div class="ttname"><a href="a00321.html">core::world::Node</a></div><div class="ttdoc">Spatial node in a world. Nodes are used for pathing and cover.</div><div class="ttdef"><b>Definition:</b> <a href="a00080_source.html#l00019">Node.hpp:19</a></div></div>
-<div class="ttc" id="aa00321_html_a0cde01a7f11c86e307c0edfe97b8c179"><div class="ttname"><a href="a00321.html#a0cde01a7f11c86e307c0edfe97b8c179">core::world::Node::MaxCoverDistance</a></div><div class="ttdeci">static constexpr float MaxCoverDistance</div><div class="ttdoc">The maximum distance to cover that is queried, in world space.</div><div class="ttdef"><b>Definition:</b> <a href="a00080_source.html#l00022">Node.hpp:22</a></div></div>
-<div class="ttc" id="aa00321_html_a3dea85da863107cb775134d0dec7cf53"><div class="ttname"><a href="a00321.html#a3dea85da863107cb775134d0dec7cf53">core::world::Node::getPosition</a></div><div class="ttdeci">const glm::vec2 &amp; getPosition() const</div><div class="ttdoc">Returns the position of the node in world space.</div><div class="ttdef"><b>Definition:</b> <a href="a00080_source.html#l00051">Node.hpp:51</a></div></div>
-<div class="ttc" id="aa00321_html_a8c6b3d6edccd2269b8033b63009a3ee4"><div class="ttname"><a href="a00321.html#a8c6b3d6edccd2269b8033b63009a3ee4">core::world::Node::getTargetingEntity</a></div><div class="ttdeci">bl::ecs::Entity getTargetingEntity() const</div><div class="ttdoc">Returns the id of the entity targeting this node.</div><div class="ttdef"><b>Definition:</b> <a href="a00080_source.html#l00061">Node.hpp:61</a></div></div>
-<div class="ttc" id="aa00321_html_aa9a7abd7ec9c582f2b76fb0211deb2d3"><div class="ttname"><a href="a00321.html#aa9a7abd7ec9c582f2b76fb0211deb2d3">core::world::Node::getDistanceToCover</a></div><div class="ttdeci">float getDistanceToCover(float degrees) const</div><div class="ttdoc">Returns the distance to the nearest cover from this node facing the given angle.</div><div class="ttdef"><b>Definition:</b> <a href="a00149_source.html#l00017">Node.cpp:17</a></div></div>
-<div class="ttc" id="aa00321_html_aaf7bf4950c4a2bf777e6018296ef2c72"><div class="ttname"><a href="a00321.html#aaf7bf4950c4a2bf777e6018296ef2c72">core::world::Node::Type</a></div><div class="ttdeci">Type</div><div class="ttdoc">The types of nodes.</div><div class="ttdef"><b>Definition:</b> <a href="a00080_source.html#l00025">Node.hpp:25</a></div></div>
-<div class="ttc" id="aa00321_html_aaf7bf4950c4a2bf777e6018296ef2c72a8fa9238f3458937c9b29c35ae2db66cd"><div class="ttname"><a href="a00321.html#aaf7bf4950c4a2bf777e6018296ef2c72a8fa9238f3458937c9b29c35ae2db66cd">core::world::Node::Path</a></div><div class="ttdeci">@ Path</div><div class="ttdef"><b>Definition:</b> <a href="a00080_source.html#l00025">Node.hpp:25</a></div></div>
-<div class="ttc" id="aa00321_html_ac00c0c543f5ee737a1da4c580b730c31"><div class="ttname"><a href="a00321.html#ac00c0c543f5ee737a1da4c580b730c31">core::world::Node::Node</a></div><div class="ttdeci">Node(Type type, glm::vec2 pos)</div><div class="ttdoc">Constructs the node from a type and position.</div><div class="ttdef"><b>Definition:</b> <a href="a00149_source.html#l00009">Node.cpp:9</a></div></div>
-<div class="ttc" id="aa00321_html_af00cbbe0151e54057a9eacea538c12c8"><div class="ttname"><a href="a00321.html#af00cbbe0151e54057a9eacea538c12c8">core::world::Node::getType</a></div><div class="ttdeci">Type getType() const</div><div class="ttdoc">Returns the type of node this is.</div><div class="ttdef"><b>Definition:</b> <a href="a00080_source.html#l00038">Node.hpp:38</a></div></div>
-<div class="ttc" id="aa00321_html_af3794ebeb6249950a87d517b6689c78b"><div class="ttname"><a href="a00321.html#af3794ebeb6249950a87d517b6689c78b">core::world::Node::getOccupier</a></div><div class="ttdeci">bl::ecs::Entity getOccupier() const</div><div class="ttdoc">Returns the id of the entity occupying this node.</div><div class="ttdef"><b>Definition:</b> <a href="a00080_source.html#l00056">Node.hpp:56</a></div></div>
-<div class="ttc" id="aa00325_html"><div class="ttname"><a href="a00325.html">core::world::World</a></div><div class="ttdoc">The game world class.</div><div class="ttdef"><b>Definition:</b> <a href="a00083_source.html#l00029">World.hpp:29</a></div></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    bl::engine::Engine* engine;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> init(bl::engine::Engine&amp;) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> update(std::mutex&amp;, <span class="keywordtype">float</span> dt, <span class="keywordtype">float</span>, <span class="keywordtype">float</span>, <span class="keywordtype">float</span>) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> observe(<span class="keyword">const</span> bl::sys::Physics2D::SensorEntered&amp; event) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> observe(<span class="keyword">const</span> bl::sys::Physics2D::SensorExited&amp; event) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;} <span class="comment">// namespace sys</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;} <span class="comment">// namespace core</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00107_html"><div class="ttname"><a href="a00107.html">World.hpp</a></div></div>
+<div class="ttc" id="aa00195_html"><div class="ttname"><a href="a00195.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00010">Command.hpp:11</a></div></div>
+<div class="ttc" id="aa00327_html"><div class="ttname"><a href="a00327.html">core::sys::Movement</a></div><div class="ttdoc">System responsible for managing entity movement and state in the game world.</div><div class="ttdef"><b>Definition:</b> <a href="a00080_source.html#l00018">Movement.hpp:20</a></div></div>
+<div class="ttc" id="aa00327_html_a37556f2efe80cd40a09cd1dad3a39f2a"><div class="ttname"><a href="a00327.html#a37556f2efe80cd40a09cd1dad3a39f2a">core::sys::Movement::~Movement</a></div><div class="ttdeci">virtual ~Movement()</div><div class="ttdoc">Destroys the system.</div><div class="ttdef"><b>Definition:</b> <a href="a00158_source.html#l00009">Movement.cpp:9</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 13 2024 23:42:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 15 2024 02:19:21 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small></address>

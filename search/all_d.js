@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['operator_21_3d_190',['operator!=',['../a00301.html#a1d2c2b468b6e7b1faa2a81317fdf2b76',1,'core::unit::Path::Waypoint']]],
-  ['operator_28_29_191',['operator()',['../a00305.html#a122e577566d13c0d8ddd5cdb9de49135',1,'core::unit::Path::WaypointHash']]],
-  ['operator_3d_192',['operator=',['../a00265.html#a7ab39cf0c4f303cc732ab9cf87a6dbd3',1,'core::unit::Command']]],
-  ['operator_3d_3d_193',['operator==',['../a00301.html#a3380305d018336bef66914469e60d1ef',1,'core::unit::Path::Waypoint']]],
-  ['overlayposition_194',['overlayPosition',['../a00229.html#ab3d7eec566ff3c06ca62b5648e48d532',1,'core::player::hud::Event']]]
+  ['operator_20bool_217',['operator bool',['../a00223.html#a7e4fb9375f43e60d10cdb11b4d8d3474',1,'core::cmd::ExternalHandle::operator bool()'],['../a00247.html#adba2ec58c168cbf49e8305bcf07c3916',1,'core::cmd::Ref::operator bool()'],['../a00219.html#a348fe26ae8cde86432152a2a39e6c953',1,'core::cmd::ExecutorHandle::operator bool()']]],
+  ['operator_21_3d_218',['operator!=',['../a00359.html#a1d2c2b468b6e7b1faa2a81317fdf2b76',1,'core::unit::Path::Waypoint']]],
+  ['operator_28_29_219',['operator()',['../a00363.html#a122e577566d13c0d8ddd5cdb9de49135',1,'core::unit::Path::WaypointHash']]],
+  ['operator_2a_220',['operator*',['../a00219.html#a94d4ffc0aa5dd53aa850255ad36510d0',1,'core::cmd::ExecutorHandle::operator*()'],['../a00223.html#a3b5e039d03474bc276d262555bbbff61',1,'core::cmd::ExternalHandle::operator*()'],['../a00247.html#a83e66f44bcc76f3948a9dab61923833a',1,'core::cmd::Ref::operator*()'],['../a00247.html#a35338682cbec73c17a91ded9b70db35b',1,'core::cmd::Ref::operator*() const']]],
+  ['operator_2d_3e_221',['operator-&gt;',['../a00223.html#a4b322c12ffcae5b6e8d53a2062efb79f',1,'core::cmd::ExternalHandle::operator-&gt;()'],['../a00247.html#a833ad6be79d90d5b6dac64a6b5944e93',1,'core::cmd::Ref::operator-&gt;() const'],['../a00247.html#aff1abb49adbf6eb5ba91ed8736b995a6',1,'core::cmd::Ref::operator-&gt;()'],['../a00219.html#a40e3f291c813919806ff8a1d13ace688',1,'core::cmd::ExecutorHandle::operator-&gt;() const']]],
+  ['operator_3d_222',['operator=',['../a00219.html#a60e758c89aeb4c6e730aedab4edafe7b',1,'core::cmd::ExecutorHandle::operator=(const ExecutorHandle &amp;)=default'],['../a00219.html#a0c7c5f57e5c0faad0c7b02bced19c4bc',1,'core::cmd::ExecutorHandle::operator=(ExecutorHandle &amp;&amp;)=default'],['../a00223.html#a8c946d5d6a13ff5fcac41054e93b669e',1,'core::cmd::ExternalHandle::operator=(const ExternalHandle &amp;)=default'],['../a00223.html#a58ce40dc9cb847ea79e28d6a5ea561d9',1,'core::cmd::ExternalHandle::operator=(ExternalHandle &amp;&amp;)=default'],['../a00247.html#aced88bc7d6ca6a5211135a7c748171ef',1,'core::cmd::Ref::operator=(const Ref &amp;copy)'],['../a00247.html#aa380f07a13ea16e7985e258448b70dcb',1,'core::cmd::Ref::operator=(Ref &amp;&amp;move)']]],
+  ['operator_3d_3d_223',['operator==',['../a00359.html#a3380305d018336bef66914469e60d1ef',1,'core::unit::Path::Waypoint']]],
+  ['overlayposition_224',['overlayPosition',['../a00303.html#ab3d7eec566ff3c06ca62b5648e48d532',1,'core::player::hud::Event']]]
 ];

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Unit/CommandContext.hpp Source File</title>
+<title>Outpost Engine: include/Core/Player/HUD/Event.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,70 +66,67 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_b638a04f7290da32ecfac2df55fb6497.html">Unit</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_be6ecaab1a4ec5e27af38c3573eadf7d.html">Player</a></li><li class="navelem"><a class="el" href="dir_eeddce6b71639576d56ea59e586fb7d1.html">HUD</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">CommandContext.hpp</div>  </div>
+<div class="title">Event.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00062.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CORE_UNIT_COMMANDCONTEXT_HPP</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CORE_UNIT_COMMANDCONTEXT_HPP</span></div>
+<a href="a00062.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CORE_PLAYER_HUD_EVENT_HPP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CORE_PLAYER_HUD_EVENT_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00059.html">Core/Unit/Command.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00068.html">Core/Unit/Path.hpp</a>&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;variant&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00170.html">core</a></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00529.html">Core/Components/Unit.hpp</a>&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;SFML/Window/Event.hpp&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00195.html">core</a></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>player</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span>unit</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="a00281.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00281.html">CommandContext</a> {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="a00285.html">   23</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="a00285.html">PathContext</a> {</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="a00285.html#a3cd6e2e2997af3e66ac9d9da874727b4">   24</a></span>&#160;        <a class="code" href="a00297.html">Path</a> <a class="code" href="a00285.html#a3cd6e2e2997af3e66ac9d9da874727b4">path</a>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="a00285.html#a4c6497147656ecc604fa1a3b3011e271">   25</a></span>&#160;        std::size_t <a class="code" href="a00285.html#a4c6497147656ecc604fa1a3b3011e271">currentNode</a>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    };</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a00289.html">   31</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="a00289.html">ShootContext</a> {};</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00281.html#a043a452d3c0c63445cc07e861f24ac88">init</a>(<span class="keyword">const</span> <a class="code" href="a00265.html">Command</a>&amp; cmd);</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span>Player;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>hud</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="a00303.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00303.html">Event</a> {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="a00303.html#a77b0b50403088db732e8b33866237d95">Event</a>(<a class="code" href="a00315.html">Player</a>&amp; owner, <span class="keyword">const</span> sf::Event&amp; event);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="a00303.html#a7a3cd3b925291400b03df40285bde9a4">   33</a></span>&#160;    <span class="keyword">const</span> sf::Event&amp; <a class="code" href="a00303.html#a7a3cd3b925291400b03df40285bde9a4">source</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> windowEvent; }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="a00303.html#af02cd654b01a45261ab939cc68d3b9ca">   38</a></span>&#160;    <a class="code" href="a00275.html">com::Unit</a>* <a class="code" href="a00303.html#af02cd654b01a45261ab939cc68d3b9ca">unit</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> overUnit; }</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a00281.html#a4621cb2773d2f250bc4690b482b3548c">clear</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="a00303.html#ab3d7eec566ff3c06ca62b5648e48d532">   43</a></span>&#160;    <span class="keyword">const</span> glm::vec2&amp; <a class="code" href="a00303.html#ab3d7eec566ff3c06ca62b5648e48d532">overlayPosition</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> overlayCoord; }</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="a00285.html">PathContext</a>&amp; <a class="code" href="a00281.html#a9a5f61568f1a434bead54a02d2556e23">getPathContext</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="a00303.html#ad55bda2445ab6174a8ed876b861d3453">   48</a></span>&#160;    <span class="keyword">const</span> glm::vec2&amp; <a class="code" href="a00303.html#ad55bda2445ab6174a8ed876b861d3453">worldPosition</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> worldCoord; }</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="a00289.html">ShootContext</a>&amp; <a class="code" href="a00281.html#a78fd11198a96e2d3ad78b0d0381d965b">getShootContext</a>();</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    std::variant&lt;std::monostate, PathContext, ShootContext&gt; data;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;} <span class="comment">// namespace unit</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;} <span class="comment">// namespace core</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aa00059_html"><div class="ttname"><a href="a00059.html">Command.hpp</a></div></div>
-<div class="ttc" id="aa00068_html"><div class="ttname"><a href="a00068.html">Path.hpp</a></div></div>
-<div class="ttc" id="aa00170_html"><div class="ttname"><a href="a00170.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00004">Damager.hpp:5</a></div></div>
-<div class="ttc" id="aa00265_html"><div class="ttname"><a href="a00265.html">core::unit::Command</a></div><div class="ttdoc">Commands that can be issued to units.</div><div class="ttdef"><b>Definition:</b> <a href="a00059_source.html#l00020">Command.hpp:20</a></div></div>
-<div class="ttc" id="aa00281_html"><div class="ttname"><a href="a00281.html">core::unit::CommandContext</a></div><div class="ttdoc">Execution level for units executing commands.</div><div class="ttdef"><b>Definition:</b> <a href="a00062_source.html#l00018">CommandContext.hpp:18</a></div></div>
-<div class="ttc" id="aa00281_html_a043a452d3c0c63445cc07e861f24ac88"><div class="ttname"><a href="a00281.html#a043a452d3c0c63445cc07e861f24ac88">core::unit::CommandContext::init</a></div><div class="ttdeci">void init(const Command &amp;cmd)</div><div class="ttdoc">Initializes the context for the given command.</div><div class="ttdef"><b>Definition:</b> <a href="a00140_source.html#l00007">CommandContext.cpp:7</a></div></div>
-<div class="ttc" id="aa00281_html_a4621cb2773d2f250bc4690b482b3548c"><div class="ttname"><a href="a00281.html#a4621cb2773d2f250bc4690b482b3548c">core::unit::CommandContext::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">Clears context data and releases memory.</div><div class="ttdef"><b>Definition:</b> <a href="a00140_source.html#l00022">CommandContext.cpp:22</a></div></div>
-<div class="ttc" id="aa00281_html_a78fd11198a96e2d3ad78b0d0381d965b"><div class="ttname"><a href="a00281.html#a78fd11198a96e2d3ad78b0d0381d965b">core::unit::CommandContext::getShootContext</a></div><div class="ttdeci">ShootContext &amp; getShootContext()</div><div class="ttdoc">Returns the shooting context data.</div><div class="ttdef"><b>Definition:</b> <a href="a00140_source.html#l00028">CommandContext.cpp:28</a></div></div>
-<div class="ttc" id="aa00281_html_a9a5f61568f1a434bead54a02d2556e23"><div class="ttname"><a href="a00281.html#a9a5f61568f1a434bead54a02d2556e23">core::unit::CommandContext::getPathContext</a></div><div class="ttdeci">PathContext &amp; getPathContext()</div><div class="ttdoc">Returns the path context data.</div><div class="ttdef"><b>Definition:</b> <a href="a00140_source.html#l00024">CommandContext.cpp:24</a></div></div>
-<div class="ttc" id="aa00285_html"><div class="ttname"><a href="a00285.html">core::unit::CommandContext::PathContext</a></div><div class="ttdoc">Data for executing movement based commands.</div><div class="ttdef"><b>Definition:</b> <a href="a00062_source.html#l00023">CommandContext.hpp:23</a></div></div>
-<div class="ttc" id="aa00285_html_a3cd6e2e2997af3e66ac9d9da874727b4"><div class="ttname"><a href="a00285.html#a3cd6e2e2997af3e66ac9d9da874727b4">core::unit::CommandContext::PathContext::path</a></div><div class="ttdeci">Path path</div><div class="ttdef"><b>Definition:</b> <a href="a00062_source.html#l00024">CommandContext.hpp:24</a></div></div>
-<div class="ttc" id="aa00285_html_a4c6497147656ecc604fa1a3b3011e271"><div class="ttname"><a href="a00285.html#a4c6497147656ecc604fa1a3b3011e271">core::unit::CommandContext::PathContext::currentNode</a></div><div class="ttdeci">std::size_t currentNode</div><div class="ttdef"><b>Definition:</b> <a href="a00062_source.html#l00025">CommandContext.hpp:25</a></div></div>
-<div class="ttc" id="aa00289_html"><div class="ttname"><a href="a00289.html">core::unit::CommandContext::ShootContext</a></div><div class="ttdoc">Data for executing combat based commands.</div><div class="ttdef"><b>Definition:</b> <a href="a00062_source.html#l00031">CommandContext.hpp:31</a></div></div>
-<div class="ttc" id="aa00297_html"><div class="ttname"><a href="a00297.html">core::unit::Path</a></div><div class="ttdoc">Data structure representing a path a unit can take.</div><div class="ttdef"><b>Definition:</b> <a href="a00068_source.html#l00016">Path.hpp:16</a></div></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">const</span> sf::Event&amp; windowEvent;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    glm::vec2 overlayCoord;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    glm::vec2 worldCoord;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="a00275.html">com::Unit</a>* overUnit;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;} <span class="comment">// namespace hud</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;} <span class="comment">// namespace player</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;} <span class="comment">// namespace core</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00195_html"><div class="ttname"><a href="a00195.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00010">Command.hpp:11</a></div></div>
+<div class="ttc" id="aa00275_html"><div class="ttname"><a href="a00275.html">core::com::Unit</a></div><div class="ttdoc">Component and data storage for in game units.</div><div class="ttdef"><b>Definition:</b> <a href="a00529_source.html#l00034">Unit.hpp:34</a></div></div>
+<div class="ttc" id="aa00303_html"><div class="ttname"><a href="a00303.html">core::player::hud::Event</a></div><div class="ttdoc">HUD event. Wrapper around sf::Event with some common fields computed.</div><div class="ttdef"><b>Definition:</b> <a href="a00062_source.html#l00020">Event.hpp:20</a></div></div>
+<div class="ttc" id="aa00303_html_a77b0b50403088db732e8b33866237d95"><div class="ttname"><a href="a00303.html#a77b0b50403088db732e8b33866237d95">core::player::hud::Event::Event</a></div><div class="ttdeci">Event(Player &amp;owner, const sf::Event &amp;event)</div><div class="ttdoc">Creates the event.</div><div class="ttdef"><b>Definition:</b> <a href="a00140_source.html#l00013">Event.cpp:13</a></div></div>
+<div class="ttc" id="aa00303_html_a7a3cd3b925291400b03df40285bde9a4"><div class="ttname"><a href="a00303.html#a7a3cd3b925291400b03df40285bde9a4">core::player::hud::Event::source</a></div><div class="ttdeci">const sf::Event &amp; source() const</div><div class="ttdoc">Returns the source window event.</div><div class="ttdef"><b>Definition:</b> <a href="a00062_source.html#l00033">Event.hpp:33</a></div></div>
+<div class="ttc" id="aa00303_html_ab3d7eec566ff3c06ca62b5648e48d532"><div class="ttname"><a href="a00303.html#ab3d7eec566ff3c06ca62b5648e48d532">core::player::hud::Event::overlayPosition</a></div><div class="ttdeci">const glm::vec2 &amp; overlayPosition() const</div><div class="ttdoc">Returns the position of the event in overlay coordinates.</div><div class="ttdef"><b>Definition:</b> <a href="a00062_source.html#l00043">Event.hpp:43</a></div></div>
+<div class="ttc" id="aa00303_html_ad55bda2445ab6174a8ed876b861d3453"><div class="ttname"><a href="a00303.html#ad55bda2445ab6174a8ed876b861d3453">core::player::hud::Event::worldPosition</a></div><div class="ttdeci">const glm::vec2 &amp; worldPosition() const</div><div class="ttdoc">Returns the position of the event in world coordinates.</div><div class="ttdef"><b>Definition:</b> <a href="a00062_source.html#l00048">Event.hpp:48</a></div></div>
+<div class="ttc" id="aa00303_html_af02cd654b01a45261ab939cc68d3b9ca"><div class="ttname"><a href="a00303.html#af02cd654b01a45261ab939cc68d3b9ca">core::player::hud::Event::unit</a></div><div class="ttdeci">com::Unit * unit() const</div><div class="ttdoc">Returns the unit the event occurred over. May be nullptr.</div><div class="ttdef"><b>Definition:</b> <a href="a00062_source.html#l00038">Event.hpp:38</a></div></div>
+<div class="ttc" id="aa00315_html"><div class="ttname"><a href="a00315.html">core::player::Player</a></div><div class="ttdoc">Player class that owns player specific state and UI.</div><div class="ttdef"><b>Definition:</b> <a href="a00071_source.html#l00023">Player.hpp:23</a></div></div>
+<div class="ttc" id="aa00529_html"><div class="ttname"><a href="a00529.html">Unit.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 13 2024 23:42:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Nov 15 2024 02:19:21 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.1
 </small></address>
