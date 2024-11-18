@@ -1,0 +1,26 @@
+#include <Core/Factions/Faction.hpp>
+
+namespace core
+{
+namespace fcn
+{
+Faction::Faction(FactionId id)
+: id(id)
+, friendlyTo(FilterEmpty)
+, hostileTo(FilterEmpty) {
+    units.reserve(32);
+}
+
+void Faction::addUnit(com::Unit* unit) { units.emplace_back(unit); }
+
+void Faction::removeUnit(com::Unit* unit) {
+    for (auto it = units.begin(); it != units.end(); ++it) {
+        if (*it == unit) {
+            units.erase(it);
+            break;
+        }
+    }
+}
+
+} // namespace fcn
+} // namespace core
