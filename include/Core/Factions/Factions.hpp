@@ -40,6 +40,21 @@ public:
     Faction* createFaction(std::string_view name = "");
 
     /**
+     * @brief Fetches the faction with the given id
+     *
+     * @param id The id of the faction to fetch
+     * @return Pointer to the faction, or nullptr for invalid id
+     */
+    Faction* getFaction(FactionId id);
+
+    /**
+     * @brief Enumerates all current factions into the given storage
+     *
+     * @param factions Vector to store the factions in
+     */
+    void enumerateFactions(std::vector<Faction*>& factions);
+
+    /**
      * @brief Destroys the faction with the given id
      *
      * @param id The id of the faction to destroy

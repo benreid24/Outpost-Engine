@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <limits>
+#include <ostream>
 
 #ifdef BLIB_WINDOWS
 #include <intrin.h>
@@ -64,6 +65,23 @@ public:
 #else
         return id == 0 ? 0 : __builtin_ctzll(id);
 #endif
+    }
+
+    /**
+     * @brief Returns the underlying faction id value
+     */
+    IdType getRaw() const { return id; }
+
+    /**
+     * @brief Outputs the id
+     *
+     * @param os Output stream to write to
+     * @param id The id to write
+     * @return The same output stream
+     */
+    friend std::ostream& operator<<(std::ostream& os, FactionId id) {
+        os << id.id << "(" << id.getIndex() << ")";
+        return os;
     }
 
 private:

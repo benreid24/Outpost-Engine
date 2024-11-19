@@ -31,8 +31,14 @@ void DebugMenu::init(GUI& gui) {
     tabs->addPage(
         "console", "Console", createConsoleTab(), [this]() { currentTopTab = TopTab::Console; });
     tabs->addPage("world", "World", createWorldTab(), [this]() { currentTopTab = TopTab::World; });
-    tabs->addPage(
-        "entity", "Entity", createEntityTab(), [this]() { currentTopTab = TopTab::Entity; });
+    tabs->addPage("factions", "Factions", createFactionsTab(), [this]() {
+        currentTopTab = TopTab::Factions;
+        refreshFactions();
+    });
+    tabs->addPage("entity", "Entity", createEntityTab(), [this]() {
+        currentTopTab = TopTab::Entity;
+        refreshFactions();
+    });
     currentTopTab = TopTab::Console;
 
     window->pack(tabs, true, true);
@@ -91,6 +97,28 @@ Element::Ptr DebugMenu::createWorldTab() {
     return worldTabs;
 }
 
+Element::Ptr DebugMenu::createFactionsTab() {
+    auto content = makeBoxV();
+
+    auto row    = makeBoxH();
+    factionName = TextEntry::create();
+    factionName->setRequisition({120.f, 30.f});
+    auto createBut = Button::create("Create");
+    createBut->getSignal(bl::gui::Event::LeftClicked)
+        .willCall(std::bind(&DebugMenu::onFactionCreate, this));
+    row->pack(Label::create("Name:"), false, true);
+    row->pack(factionName, true, true);
+    row->pack(createBut, false, true);
+    content->pack(row, true, false);
+
+    factionBox = ScrollArea::create(LinePacker::create(LinePacker::Vertical, 4.f));
+    factionBox->setRequisition({180.f, 150.f});
+    content->pack(Label::create("Factions:"), true, false);
+    content->pack(factionBox);
+
+    return content;
+}
+
 Element::Ptr DebugMenu::createEntityTab() {
     auto entityBox = makeBoxH();
     auto leftBox   = makeBoxV();
@@ -104,7 +132,11 @@ Element::Ptr DebugMenu::createEntityTab() {
     auto controlEntity = RadioButton::create("Control", "control", entityRadioGroup);
     auto killEntity    = RadioButton::create("Kill", "kill", entityRadioGroup);
     placeEntity->setValue(true);
-    leftBox->pack(placeEntity);
+    auto createRow      = makeBoxH();
+    entityFactionSelect = ComboBox::create();
+    createRow->pack(entityFactionSelect);
+    createRow->pack(placeEntity);
+    leftBox->pack(createRow);
     leftBox->pack(controlEntity);
     leftBox->pack(killEntity);
 
@@ -147,7 +179,13 @@ bool DebugMenu::processEvent(const Event& event) {
     auto& player              = engine.getPlayer();
     core::world::World& world = static_cast<core::world::World&>(player.getCurrentWorld());
 
+    // TODO - remove this when BLIB GUI bug fixed
+    static const auto faction = game.factions().createFaction("Default faction");
+
     const auto createEntity = [this, &player, &event, &ecs, &game]() {
+        const int fi = entityFactionSelect->getSelectedOption();
+        if (fi < 0 || fi >= factions.size()) { return; }
+
         constexpr float Radius = 30.f;
         const auto newEntity   = player.getCurrentWorld().createEntity();
         auto* transform =
@@ -164,7 +202,8 @@ bool DebugMenu::processEvent(const Event& event) {
         auto physics = game.physicsSystem().addPhysicsToEntity(newEntity, bodyDef, shapeDef);
         ecs.emplaceComponent<core::com::Mortal>(newEntity, 100.f);
 
-        controlling.unit = ecs.emplaceComponent<core::com::Unit>(newEntity, *physics);
+        controlling.unit =
+            ecs.emplaceComponent<core::com::Unit>(newEntity, factions[fi]->getId(), *physics);
         controlling.unit->makeMoveable(320.f, 1920.f / 6.f, 270.f, 0.9f);
         controlling.unit->makeShooter(3.f, 20.f, Radius * 2.f);
 
@@ -379,6 +418,45 @@ void DebugMenu::observe(const bl::ecs::event::EntityDestroyed& event) {
     if (event.entity == controlling.entity) {
         controlling.reset();
         controlNameLabel->setText("<none>");
+    }
+}
+
+void DebugMenu::onFactionCreate() {
+    const std::string& name = factionName->getInput();
+    if (name.empty()) { return; }
+
+    auto& game    = bl::game::Game::getInstance<Game>();
+    auto* faction = game.factions().createFaction(name.c_str());
+    if (faction) {
+        factionName->setInput("");
+        refreshFactions();
+    }
+}
+
+void DebugMenu::onFactionDelete(fcn::FactionId id) {
+    auto& game = bl::game::Game::getInstance<Game>();
+    game.factions().destroyFaction(id);
+    refreshFactions();
+}
+
+void DebugMenu::refreshFactions() {
+    factionBox->clearChildren(true);
+    entityFactionSelect->clearOptions();
+
+    auto& game = bl::game::Game::getInstance<Game>();
+    game.factions().enumerateFactions(factions);
+    for (auto& faction : factions) {
+        const std::string name =
+            faction->getName() + " (" + std::to_string(faction->getId().getIndex()) + ")";
+        entityFactionSelect->addOption(name);
+
+        auto row = makeBoxH();
+        auto but = Button::create("Destroy");
+        but->getSignal(bl::gui::Event::LeftClicked)
+            .willCall(std::bind(&DebugMenu::onFactionDelete, this, faction->getId()));
+        row->pack(Label::create(name), true, true);
+        row->pack(but, false, true);
+        factionBox->pack(row, true, false);
     }
 }
 

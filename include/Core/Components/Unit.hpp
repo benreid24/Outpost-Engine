@@ -5,6 +5,7 @@
 #include <Core/Commands/Executor.hpp>
 #include <Core/Commands/ExecutorHandle.hpp>
 #include <Core/Commands/UnitCommand.hpp>
+#include <Core/Factions/FactionId.hpp>
 #include <Core/Unit/CommandContext.hpp>
 #include <Core/Unit/Moveable.hpp>
 #include <Core/Unit/Shooter.hpp>
@@ -38,14 +39,20 @@ public:
     /**
      * @brief Creates a unit that cannot move or shoot
      *
+     * @param faction The id of the faction that this unit belongs to
      * @param physics The physics component of the unit
      */
-    Unit(bl::com::Physics2D& physics);
+    Unit(fcn::FactionId faction, bl::com::Physics2D& physics);
 
     /**
      * @brief Returns the entity id of this unit
      */
     bl::ecs::Entity getId() const { return physics.getOwner(); }
+
+    /**
+     * @brief Returns the id of the faction the unit belongs to
+     */
+    fcn::FactionId getFaction() const { return faction; }
 
     /**
      * @brief Allows the unit to move with the following parameters
@@ -100,6 +107,7 @@ private:
     using CmdHandle = cmd::ExecutorHandle<cmd::UnitCommand>;
 
     // unit data and components
+    fcn::FactionId faction;
     bl::com::Physics2D& physics;
     std::optional<unit::Moveable> mover;
     std::optional<unit::Shooter> shooter;

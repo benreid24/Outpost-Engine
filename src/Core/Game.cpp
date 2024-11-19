@@ -49,6 +49,7 @@ bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
 
     bl::event::Dispatcher::subscribe(&windowSizePersister);
     bl::event::Dispatcher::subscribe(&damage);
+    bl::event::Dispatcher::subscribe(&factionStore);
 
     return true;
 }
@@ -58,6 +59,7 @@ void Game::startShutdown() {
 
     bl::event::Dispatcher::unsubscribe(&windowSizePersister);
     bl::event::Dispatcher::unsubscribe(&damage);
+    bl::event::Dispatcher::unsubscribe(&factionStore);
 }
 
 void Game::completeShutdown() {

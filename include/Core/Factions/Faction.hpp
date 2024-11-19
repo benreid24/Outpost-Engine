@@ -105,7 +105,7 @@ private:
 
     Faction(FactionId id);
     void addUnit(com::Unit* unit);
-    void removeUnit(com::Unit* unit);
+    void removeUnit(const com::Unit* unit);
 
     friend class Factions;
 };

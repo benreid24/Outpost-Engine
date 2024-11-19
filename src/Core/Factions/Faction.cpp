@@ -13,7 +13,7 @@ Faction::Faction(FactionId id)
 
 void Faction::addUnit(com::Unit* unit) { units.emplace_back(unit); }
 
-void Faction::removeUnit(com::Unit* unit) {
+void Faction::removeUnit(const com::Unit* unit) {
     for (auto it = units.begin(); it != units.end(); ++it) {
         if (*it == unit) {
             units.erase(it);
@@ -21,6 +21,8 @@ void Faction::removeUnit(com::Unit* unit) {
         }
     }
 }
+
+void Faction::setName(std::string_view n) { name = n; }
 
 } // namespace fcn
 } // namespace core
