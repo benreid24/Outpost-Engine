@@ -112,9 +112,9 @@ Element::Ptr DebugMenu::createFactionsTab() {
     content->pack(row, true, false);
 
     factionBox = ScrollArea::create(LinePacker::create(LinePacker::Vertical, 4.f));
-    factionBox->setRequisition({180.f, 150.f});
+    factionBox->setMaxSize({600.f, 200.f});
     content->pack(Label::create("Factions:"), true, false);
-    content->pack(factionBox);
+    content->pack(factionBox, true, false);
 
     return content;
 }
@@ -178,9 +178,6 @@ bool DebugMenu::processEvent(const Event& event) {
     auto& ecs                 = engine.ecs();
     auto& player              = engine.getPlayer();
     core::world::World& world = static_cast<core::world::World&>(player.getCurrentWorld());
-
-    // TODO - remove this when BLIB GUI bug fixed
-    static const auto faction = game.factions().createFaction("Default faction");
 
     const auto createEntity = [this, &player, &event, &ecs, &game]() {
         const int fi = entityFactionSelect->getSelectedOption();
