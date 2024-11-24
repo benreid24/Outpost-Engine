@@ -7,5 +7,6 @@ target_sources(Core PUBLIC
     ExternalHandle.hpp
     Ref.hpp
     SingleStore.hpp
+    SquadCommand.hpp
     UnitCommand.hpp
 )

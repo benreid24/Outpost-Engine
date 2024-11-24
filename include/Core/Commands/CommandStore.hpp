@@ -3,6 +3,7 @@
 
 #include <Core/Commands/ExternalHandle.hpp>
 #include <Core/Commands/SingleStore.hpp>
+#include <Core/Commands/SquadCommand.hpp>
 #include <Core/Commands/UnitCommand.hpp>
 
 namespace core
@@ -29,7 +30,7 @@ public:
      * @param node The world node to move to
      * @return A handle to the new move command
      */
-    ExternalHandle<UnitCommand> unitMakeMove(const glm::vec2& position, const world::Node* node);
+    UnitCommandHandle unitMakeMove(const glm::vec2& position, const world::Node* node);
 
     /**
      * @brief Makes a unit attack command
@@ -37,10 +38,35 @@ public:
      * @param target The unit to attack
      * @return A handle to the new attack command
      */
-    ExternalHandle<UnitCommand> unitMakeAttack(com::Unit* target);
+    UnitCommandHandle unitMakeAttack(com::Unit* target);
+
+    /**
+     * @brief Makes a squad move command
+     *
+     * @param position The position to move to
+     * @return A handle to the new command
+     */
+    SquadCommandHandle squadMakeMove(const glm::vec2& position);
+
+    /**
+     * @brief Makes a squad attack command
+     *
+     * @param position The position to suppress
+     * @return A handle to the new command
+     */
+    SquadCommandHandle squadMakeAttack(const glm::vec2& position);
+
+    /**
+     * @brief Makes a squad attack command
+     *
+     * @param unit The unit to attack
+     * @return A handle to the new command
+     */
+    SquadCommandHandle squadMakeAttack(com::Unit* unit);
 
 private:
     SingleStore<UnitCommand> unitCommands;
+    SingleStore<SquadCommand> squadCommands;
 };
 
 } // namespace cmd

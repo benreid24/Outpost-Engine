@@ -7,17 +7,31 @@ namespace cmd
 CommandStore::CommandStore()
 : unitCommands() {}
 
-ExternalHandle<UnitCommand> CommandStore::unitMakeMove(const glm::vec2& position,
-                                                       const world::Node* node) {
+UnitCommandHandle CommandStore::unitMakeMove(const glm::vec2& position, const world::Node* node) {
     Ref<UnitCommand> ref = unitCommands.allocate(
         UnitCommand::Type::MoveToPosition, UnitCommand::ConcurrencyType::Movement, position, node);
-    return ExternalHandle<UnitCommand>(std::move(ref));
+    return UnitCommandHandle(std::move(ref));
 }
 
-ExternalHandle<UnitCommand> CommandStore::unitMakeAttack(com::Unit* target) {
+UnitCommandHandle CommandStore::unitMakeAttack(com::Unit* target) {
     Ref<UnitCommand> ref = unitCommands.allocate(
         UnitCommand::Type::KillUnit, UnitCommand::ConcurrencyType::Shooting, target);
-    return ExternalHandle<UnitCommand>(std::move(ref));
+    return UnitCommandHandle(std::move(ref));
+}
+
+SquadCommandHandle CommandStore::squadMakeMove(const glm::vec2& pos) {
+    Ref<SquadCommand> ref = squadCommands.allocate(SquadCommand::Type::MoveToPosition, pos);
+    return SquadCommandHandle(std::move(ref));
+}
+
+SquadCommandHandle CommandStore::squadMakeAttack(const glm::vec2& pos) {
+    Ref<SquadCommand> ref = squadCommands.allocate(SquadCommand::Type::AttackArea, pos);
+    return SquadCommandHandle(std::move(ref));
+}
+
+SquadCommandHandle CommandStore::squadMakeAttack(com::Unit* unit) {
+    Ref<SquadCommand> ref = squadCommands.allocate(SquadCommand::Type::AttackUnit, unit);
+    return SquadCommandHandle(std::move(ref));
 }
 
 } // namespace cmd

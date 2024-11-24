@@ -2,6 +2,7 @@
 #define CORE_COMMANDS_UNITCOMMAND_HPP
 
 #include <Core/Commands/Command.hpp>
+#include <Core/Commands/ExternalHandle.hpp>
 #include <Core/World/Node.hpp>
 
 namespace core
@@ -107,6 +108,13 @@ private:
         com::Unit* targetUnit;
     };
 };
+
+/**
+ * @brief Handle for unit commands
+ *
+ * @ingroup Commands
+ */
+using UnitCommandHandle = ExternalHandle<UnitCommand>;
 
 } // namespace cmd
 } // namespace core
