@@ -73,6 +73,22 @@ public:
     IdType getRaw() const { return id; }
 
     /**
+     * @brief Tests whether two faction ids are equal
+     *
+     * @param right The id to compare to
+     * @return True if the ids are the same, false if different
+     */
+    bool operator==(FactionId right) { return id == right.id; }
+
+    /**
+     * @brief Tests whether two faction ids are not equal
+     *
+     * @param right The id to compare to
+     * @return True if the ids are different, false if the same
+     */
+    bool operator!=(FactionId right) { return id != right.id; }
+
+    /**
      * @brief Outputs the id
      *
      * @param os Output stream to write to

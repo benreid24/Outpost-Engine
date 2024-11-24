@@ -10,6 +10,11 @@ namespace core
 {
 namespace cmd
 {
+/**
+ * @brief Command that can be issued to squads
+ *
+ * @ingroup Commands
+ */
 class SquadCommand : public Command {
 public:
     enum struct Type {

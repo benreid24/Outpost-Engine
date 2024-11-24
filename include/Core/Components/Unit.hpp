@@ -101,7 +101,7 @@ public:
      * @param command The command to perform
      * @return Whether or not the command was able to be queued
      */
-    bool queueCommand(const cmd::ExternalHandle<cmd::UnitCommand>& command);
+    bool queueCommand(const cmd::UnitCommandHandle& command);
 
 private:
     using CmdHandle = cmd::ExecutorHandle<cmd::UnitCommand>;

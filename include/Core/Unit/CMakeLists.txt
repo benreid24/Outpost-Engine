@@ -3,4 +3,5 @@ target_sources(Core PUBLIC
     Moveable.hpp
     Path.hpp
     Shooter.hpp
+    Squad.hpp
 )
