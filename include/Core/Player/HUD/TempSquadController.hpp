@@ -6,6 +6,7 @@
 #include <BLIB/Graphics/Text.hpp>
 #include <Core/Player/HUD/Event.hpp>
 #include <Core/Unit/Squad.hpp>
+#include <Core/Unit/SquadManager.hpp>
 
 namespace core
 {
@@ -29,7 +30,7 @@ private:
     enum State { Initial, Selecting, Ordering };
 
     Player& owner;
-    unit::Squad* controlling;
+    unit::SquadManager::Ref controlling;
     State state;
     glm::vec2 dragStart;
     glm::vec2 dragEnd;

@@ -16,6 +16,20 @@ using PathFinder = bl::ai::PathFinder<unit::Path::Waypoint, unit::Path::Waypoint
 
 const bl::rc::Color NodeFreeColor     = sf::Color(20, 230, 65);
 const bl::rc::Color NodeOccupiedColor = sf::Color(230, 65, 20);
+
+struct UnitQueryContext {
+    bl::ecs::Registry* ecs;
+    std::vector<com::Unit*>* result;
+    bl::ecs::Transaction<bl::ecs::tx::EntityUnlocked, bl::ecs::tx::ComponentRead<com::Unit>>* tx;
+};
+
+bool unitQueryCallback(bl::com::Physics2D* physics, void* ctx) {
+    UnitQueryContext* queryCtx = static_cast<UnitQueryContext*>(ctx);
+    com::Unit* unit = queryCtx->ecs->getComponent<com::Unit>(physics->getOwner(), *queryCtx->tx);
+    if (unit) { queryCtx->result->emplace_back(unit); }
+    return true;
+}
+
 } // namespace
 
 World::World(bl::engine::Engine& e)
@@ -386,6 +400,22 @@ const Node* World::getNodeAtPosition(const glm::vec2& pos, float thresh) const {
         }
     }
     return closest;
+}
+
+std::vector<com::Unit*> World::getUnitsInArea(const sf::FloatRect& region) const {
+    std::vector<com::Unit*> result;
+    result.reserve(64);
+
+    bl::ecs::Transaction<bl::ecs::tx::EntityUnlocked, bl::ecs::tx::ComponentRead<com::Unit>> tx(
+        engine().ecs());
+    UnitQueryContext ctx{&engine().ecs(), &result, &tx};
+    queryAABB({region.left, region.top},
+              {region.left + region.width, region.top + region.height},
+              Collisions::getUnitQueryFilter(),
+              &unitQueryCallback,
+              &ctx);
+
+    return result;
 }
 
 } // namespace world

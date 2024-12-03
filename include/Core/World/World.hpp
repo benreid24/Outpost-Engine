@@ -145,6 +145,14 @@ public:
      */
     bool pathToNodeIsClear(const glm::vec2& pos, const Node& node) const;
 
+    /**
+     * @brief Queries the world and returns the units contained within the given region
+     *
+     * @param area The region to query, in world coordinates
+     * @return The list of units in the region
+     */
+    std::vector<com::Unit*> getUnitsInArea(const sf::FloatRect& area) const;
+
 private:
     std::vector<Cover> covers;
     std::vector<Node> nodes;

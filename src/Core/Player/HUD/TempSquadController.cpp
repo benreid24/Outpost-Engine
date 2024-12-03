@@ -12,8 +12,7 @@ namespace player
 namespace hud
 {
 TempSquadController::TempSquadController(Player& owner)
-: owner(owner)
-, controlling(nullptr) {}
+: owner(owner) {}
 
 void TempSquadController::init() {
     auto& game   = bl::game::Game::getInstance<Game>();
@@ -43,6 +42,7 @@ void TempSquadController::init() {
     selectRect.setHidden(true);
     selectRect.addToScene(scene, bl::rc::UpdateSpeed::Dynamic);
 
+    controlling = game.squadManager().makeSquad(owner.getFaction());
     makeEmptyState();
 }
 
@@ -50,7 +50,7 @@ void TempSquadController::reset() {
     controlLabel.destroy();
     selectRect.destroy();
     background.destroy();
-    controlling = nullptr;
+    controlling.release();
 }
 
 bool TempSquadController::processEvent(const Event& event) {
@@ -69,13 +69,21 @@ bool TempSquadController::processEvent(const Event& event) {
         switch (event.source().type) {
         case sf::Event::MouseMoved:
             dragEnd = event.worldPosition();
-            selectRect.getTransform().setPosition(std::min(dragStart.x, dragEnd.x),
-                                                  std::min(dragStart.y, dragEnd.y));
+            selectRect.getTransform().setPosition(glm::min(dragStart, dragEnd));
             selectRect.scaleToSize(glm::abs(dragEnd - dragStart));
             break;
         case sf::Event::MouseButtonReleased:
             if (event.source().mouseButton.button == sf::Mouse::Right) {
-                // TODO - select units & add to squad
+                const glm::vec2 corner = glm::min(dragStart, dragEnd);
+                const glm::vec2 size   = glm::abs(dragStart - dragEnd);
+                std::vector<com::Unit*> units =
+                    owner.getCurrentWorld<world::World>().getUnitsInArea(
+                        {corner.x, corner.y, size.x, size.y});
+                // TODO - clear squad
+                for (com::Unit* unit : units) {
+                    // TODO - can/should units belong to more than one squad?
+                    if (unit->getFaction() == owner.getFaction()) { controlling->addUnit(unit); }
+                }
                 state = Ordering;
             }
             break;
