@@ -26,12 +26,22 @@ public:
     bool processEvent(const Event& event);
 
 private:
+    enum State { Initial, Selecting, Ordering };
+
     Player& owner;
+    unit::Squad* controlling;
+    State state;
+    glm::vec2 dragStart;
+    glm::vec2 dragEnd;
+
     bl::gfx::Rectangle background;
     bl::gfx::Text controlLabel;
-    bl::gfx::Text orderLabel;
     bl::gfx::Rectangle selectRect;
-    unit::Squad* controlling;
+
+    void makeEmptyState();
+    void makeMoveState();
+    void makeAttackState();
+    void centerText();
 };
 
 } // namespace hud

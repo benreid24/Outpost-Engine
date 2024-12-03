@@ -25,7 +25,7 @@ void TempUnitController::init() {
     background.setOutlineThickness(1.f);
     background.getTransform().setOrigin(100.f, 0.f);
     background.getOverlayScaler().positionInParentSpace({1.f, 0.f});
-    background.getOverlayScaler().scaleToHeightPercent(0.15f);
+    background.getOverlayScaler().scaleToWidthPercent(0.11f);
     background.addToScene(scene, bl::rc::UpdateSpeed::Static);
 
     hint.create(world, game.defaultFont(), "", 36);
@@ -40,6 +40,7 @@ void TempUnitController::init() {
 void TempUnitController::reset() {
     hint.destroy();
     background.destroy();
+    controlling = nullptr;
 }
 
 bool TempUnitController::processEvent(const Event& event) {
