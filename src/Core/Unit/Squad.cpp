@@ -25,6 +25,8 @@ void Squad::removeUnit(com::Unit* unit) {
     }
 }
 
+void Squad::clearUnits() { units.clear(); }
+
 bool Squad::queueCommand(const cmd::SquadCommandHandle& cmd) {
     if (!queuedCommands.full()) {
         queuedCommands.emplace_back(makeCommandHandle(cmd));

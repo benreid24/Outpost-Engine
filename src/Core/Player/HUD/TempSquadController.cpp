@@ -79,9 +79,8 @@ bool TempSquadController::processEvent(const Event& event) {
                 std::vector<com::Unit*> units =
                     owner.getCurrentWorld<world::World>().getUnitsInArea(
                         {corner.x, corner.y, size.x, size.y});
-                // TODO - clear squad
+                controlling->clearUnits();
                 for (com::Unit* unit : units) {
-                    // TODO - can/should units belong to more than one squad?
                     if (unit->getFaction() == owner.getFaction()) { controlling->addUnit(unit); }
                 }
                 state = Ordering;

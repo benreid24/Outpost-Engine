@@ -43,9 +43,14 @@ public:
     /**
      * @brief Removes the unit from the squad
      *
-     * @param The unit to remove
+     * @param unit The unit to remove
      */
-    void removeUnit(com::Unit*);
+    void removeUnit(com::Unit* unit);
+
+    /**
+     * @brief Removes all units from the squad
+     */
+    void clearUnits();
 
     /**
      * @brief Queues a command to the squad
