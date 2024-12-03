@@ -44,6 +44,7 @@ bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
     physics  = &engine.systems().getSystem<bl::sys::Physics2D>();
     units    = &engine.systems().registerSystem<sys::Unit>(Stage::Update1, Mask::Running);
     movement = &engine.systems().registerSystem<sys::Movement>(Stage::Update2, Mask::Running);
+    squads   = &engine.systems().registerSystem<unit::SquadManager>(Stage::Update0, Mask::Running);
 
     font.loadFromFile("Resources/font.ttf");
 

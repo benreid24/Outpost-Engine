@@ -53,6 +53,9 @@ public:
     /// Copies the faction id
     FactionId(FactionId&&) = default;
 
+    /// Copies the faction id
+    FactionId& operator=(const FactionId&) = default;
+
     /**
      * @brief Returns a 0-based index for this faction id
      */

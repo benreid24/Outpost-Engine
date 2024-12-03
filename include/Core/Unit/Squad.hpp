@@ -28,6 +28,11 @@ public:
     Squad(fcn::FactionId faction);
 
     /**
+     * @brief Returns the faction that this squad belongs to
+     */
+    fcn::FactionId getFaction() const { return faction; }
+
+    /**
      * @brief Adds a unit to this squad
      *
      * @param unit The unit to add

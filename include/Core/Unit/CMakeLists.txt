@@ -4,4 +4,5 @@ target_sources(Core PUBLIC
     Path.hpp
     Shooter.hpp
     Squad.hpp
+    SquadManager.hpp
 )

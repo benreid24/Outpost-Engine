@@ -10,6 +10,7 @@
 #include <Core/Systems/Movement.hpp>
 #include <Core/Systems/Render.hpp>
 #include <Core/Systems/Unit.hpp>
+#include <Core/Unit/SquadManager.hpp>
 
 /**
  * @defgroup Core
@@ -66,6 +67,11 @@ public:
      */
     fcn::Factions& factions() { return factionStore; }
 
+    /**
+     * @brief Returns the squad manager
+     */
+    unit::SquadManager& squadManager() { return *squads; }
+
 protected:
     /**
      * @brief Early startup tasks shared by both editor and game go in here
@@ -103,6 +109,7 @@ private:
     sf::VulkanFont font;
     cmd::CommandStore commands;
     fcn::Factions factionStore;
+    unit::SquadManager* squads;
 };
 
 } // namespace core
