@@ -44,9 +44,7 @@ void TempUnitController::reset() {
 }
 
 bool TempUnitController::processEvent(const Event& event) {
-    auto& game  = bl::game::Game::getInstance<Game>();
-    auto& world = owner.getCurrentWorld<world::World>();
-
+    auto& game = bl::game::Game::getInstance<Game>();
     if (event.source().type == sf::Event::MouseMoved) {
         if (controlling) {
             if (event.unit()) {
@@ -61,11 +59,12 @@ bool TempUnitController::processEvent(const Event& event) {
         if (event.source().mouseButton.button == sf::Mouse::Left) {
             if (controlling) {
                 if (event.unit() && controlling != event.unit()) {
-                    controlling->queueCommand(game.commandStore().unitMakeAttack(event.unit()));
+                    controlling->queueCommand(game.commandStore().unitMakeAttack(
+                        event.unit(), cmd::AggroLevel::Aggressive));
                 }
                 else {
                     controlling->queueCommand(game.commandStore().unitMakeMove(
-                        event.worldPosition(), world.getNodeAtPosition(event.worldPosition())));
+                        event.worldPosition(), cmd::AggroLevel::Neutral));
                 }
             }
             else {

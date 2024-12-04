@@ -15,7 +15,7 @@ namespace unit
  *
  * @ingroup Unit
  */
-class CommandContext {
+class CommandContext { // TODO - remove and put in unit AI classes
 public:
     /**
      * @brief Data for executing movement based commands

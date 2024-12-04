@@ -201,8 +201,9 @@ bool DebugMenu::processEvent(const Event& event) {
 
         controlling.unit =
             ecs.emplaceComponent<core::com::Unit>(newEntity, factions[fi]->getId(), *physics);
-        controlling.unit->makeMoveable(320.f, 1920.f / 6.f, 270.f, 0.9f);
-        controlling.unit->makeShooter(3.f, 20.f, Radius * 2.f);
+        controlling.unit->capabilities().add<unit::Capability::Move>();
+        controlling.unit->capabilities().add<unit::Capability::Rotate>();
+        controlling.unit->capabilities().add<unit::Capability::Shoot>();
 
         onEntityControl(newEntity);
     };
@@ -349,32 +350,35 @@ void DebugMenu::update(float) {
     if (!window->visible()) { return; }
 
     if (controlling.unit) {
-        if (controlling.unit->canMove()) {
+        auto* mover = controlling.unit->capabilities().get<unit::Capability::Move>();
+        if (mover) {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-                controlling.unit->getMover().move(core::unit::Moveable::Forward);
+                mover->move(unit::able::Move::Forward);
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-                controlling.unit->getMover().move(core::unit::Moveable::Backward);
+                mover->move(unit::able::Move::Backward);
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-                controlling.unit->getMover().move(core::unit::Moveable::Left);
+                mover->move(unit::able::Move::Left);
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-                controlling.unit->getMover().move(core::unit::Moveable::Right);
-            }
-
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-                controlling.unit->getMover().rotate(core::unit::Moveable::CounterClockwise);
-            }
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
-                controlling.unit->getMover().rotate(core::unit::Moveable::Clockwise);
+                mover->move(unit::able::Move::Right);
             }
         }
 
-        if (controlling.unit->canShoot()) {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-                controlling.unit->getShooter().fire();
+        auto* rotater = controlling.unit->capabilities().get<unit::Capability::Rotate>();
+        if (rotater) {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+                rotater->rotate(unit::able::Rotate::CounterClockwise);
             }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
+                rotater->rotate(unit::able::Rotate::Clockwise);
+            }
+        }
+
+        auto* shooter = controlling.unit->capabilities().get<unit::Capability::Shoot>();
+        if (shooter) {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) { shooter->fire(); }
         }
     }
 }

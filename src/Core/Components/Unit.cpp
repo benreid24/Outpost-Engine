@@ -8,22 +8,9 @@ Unit::Unit(fcn::FactionId faction, bl::com::Physics2D& physics)
 : faction(faction)
 , physics(physics) {}
 
-void Unit::makeMoveable(float acceleration, float maxSpeed, float rotateRate,
-                        float directionAdjustSpeed, float damping) {
-    mover.emplace(physics, acceleration, maxSpeed, rotateRate, directionAdjustSpeed, damping);
-}
-
-void Unit::makeShooter(float fireRate, float damage, float bulletOffset) {
-    shooter.emplace(fireRate, damage, bulletOffset);
-}
-
-bool Unit::queueCommand(const cmd::UnitCommandHandle& cmd) {
-    if (!queuedCommands.full()) {
-        queuedCommands.emplace_back(makeCommandHandle(cmd));
-        queuedCommands.back().markQueued();
-        return true;
-    }
-    return false;
+void Unit::queueCommand(const cmd::UnitCommandHandle& cmd, cmd::AddMode addMode) {
+    auto cmdCopy = cmd;
+    commandQueue.queueCommand(std::move(cmdCopy), addMode);
 }
 
 } // namespace com

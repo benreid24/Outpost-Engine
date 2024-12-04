@@ -17,32 +17,40 @@ namespace cmd
  */
 class SquadCommand : public Command {
 public:
-    enum struct Type {
-        MoveToPosition,
-        AttackArea,
-        AttackUnit,
-        // TODO - other commands
-        Invalid
-    };
+    enum struct Type { Idle, Move, Suppress, AttackArea, AttackUnit, Invalid };
 
     /**
      * @brief Creates a squad command. Use the factory methods on CommandStore
      *
      * @param type The type of command
+     * @param aggroLevel How aggressively to perform the command
+     */
+    SquadCommand(Type type, AggroLevel aggroLevel)
+    : Command(aggroLevel)
+    , type(type) {}
+
+    /**
+     * @brief Creates a squad command. Use the factory methods on CommandStore
+     *
+     * @param type The type of command
+     * @param aggroLevel How aggressively to perform the command
      * @param position The target position of the command
      */
-    SquadCommand(Type type, const glm::vec2& position)
-    : type(type)
+    SquadCommand(Type type, AggroLevel aggroLevel, const glm::vec2& position)
+    : Command(aggroLevel)
+    , type(type)
     , position(position) {}
 
     /**
      * @brief Creates a squad command. Use the factory methods on CommandStore
      *
      * @param type The type of command
+     * @param aggroLevel How aggressively to perform the command
      * @param unit The target unit of the command
      */
-    SquadCommand(Type type, com::Unit* unit)
-    : type(type)
+    SquadCommand(Type type, AggroLevel aggroLevel, com::Unit* unit)
+    : Command(aggroLevel)
+    , type(type)
     , unit(unit) {}
 
     /**

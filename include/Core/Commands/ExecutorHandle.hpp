@@ -12,8 +12,8 @@ namespace core
 {
 namespace cmd
 {
-template<typename T>
-class Executor;
+template<typename T, std::size_t Size>
+class Queue;
 
 template<typename T>
 class ExecutorHandle {
@@ -116,6 +116,14 @@ public:
     }
 
     /**
+     * @brief Marks the command as canceled
+     */
+    void markCanceled() {
+        ref->status = Command::Canceled;
+        bl::event::Dispatcher::dispatch<CommandStatusChange<T, Command::Canceled>>({*ref});
+    }
+
+    /**
      * @brief Marks the command to be in the queued state
      */
     void markQueued() {
@@ -132,7 +140,18 @@ private:
     ExecutorHandle(const ExternalHandle<T>& ext)
     : ref(ext.ref) {}
 
-    friend class Executor<T>;
+    ExecutorHandle& operator=(ExternalHandle<T>&& ext) {
+        ref = std::move(ext.ref);
+        return *this;
+    }
+
+    ExecutorHandle& operator=(const ExternalHandle<T>& ext) {
+        ref = ext.ref;
+        return *this;
+    }
+
+    template<typename T, std::size_t N>
+    friend class Queue;
 };
 
 } // namespace cmd

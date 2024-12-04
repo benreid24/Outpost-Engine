@@ -1,8 +1,10 @@
 target_sources(Core PUBLIC
+    Capability.hpp
+    Capabilities.hpp
     CommandContext.hpp
-    Moveable.hpp
     Path.hpp
-    Shooter.hpp
     Squad.hpp
     SquadManager.hpp
 )
+
+add_subdirectory(Capabilities)

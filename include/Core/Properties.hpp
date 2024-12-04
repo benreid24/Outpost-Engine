@@ -34,8 +34,23 @@ public:
 
     BLIB_PROPERTY(UnitAiDistanceStopThresh, float, "core.unit.stop_distance",
                   Constants::UnitAiStopDistanceDefault);
+    BLIB_PROPERTY(UnitAccelerationDefault, float, "core.unit.default_accel",
+                  Constants::UnitAccelerationDefault);
+    BLIB_PROPERTY(UnitMaxSpeedDefault, float, "core.unit.default_max_speed",
+                  Constants::UnitMaxSpeedDefault);
+    BLIB_PROPERTY(UnitDirCorrectFactorDefault, float, "core.unit.default_dir_correct",
+                  Constants::UnitDirCorrectFactorDefault);
     BLIB_PROPERTY(UnitDampingFactor, float, "core.unit.damping_factor",
                   Constants::UnitDampingFactorDefault);
+    BLIB_PROPERTY(UnitRotateRateDefault, float, "core.unit.default_rotate_rate",
+                  Constants::UnitRotateRateDefault);
+
+    BLIB_PROPERTY(UnitFireRateDefault, float, "core.unit.unit_default_fire_rate",
+                  Constants::UnitFireRateDefault);
+    BLIB_PROPERTY(UnitBulletDamageDefault, float, "core.unit.unit_default_bullet_damage",
+                  Constants::UnitBulletDamageDefault);
+    BLIB_PROPERTY(UnitBulletOffsetDefault, float, "core.unit.unit_default_bullet_offset",
+                  Constants::UnitBulletOffsetDefault);
 
     /**
      * @brief Loads the properties from the config file

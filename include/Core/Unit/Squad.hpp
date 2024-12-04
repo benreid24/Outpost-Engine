@@ -2,7 +2,7 @@
 #define CORE_UNIT_SQUAD_HPP
 
 #include <BLIB/Containers/StaticRingBuffer.hpp>
-#include <Core/Commands/Executor.hpp>
+#include <Core/Commands/Queue.hpp>
 #include <Core/Commands/SquadCommand.hpp>
 #include <Core/Components/Unit.hpp>
 #include <vector>
@@ -16,7 +16,7 @@ namespace unit
  *
  * @ingroup Units
  */
-class Squad : public cmd::Executor<cmd::SquadCommand> {
+class Squad {
 public:
     static constexpr std::size_t CommandQueueSize = 4;
 
@@ -56,17 +56,15 @@ public:
      * @brief Queues a command to the squad
      *
      * @param command The command to execute
-     * @return Whether the command was able to be queued
+     * @param addMode How to add the command to the queue
      */
-    bool queueCommand(const cmd::SquadCommandHandle& command);
+    void queueCommand(const cmd::SquadCommandHandle& command,
+                      cmd::AddMode addMode = cmd::AddMode::QueueEnd);
 
 private:
-    using CmdHandle = cmd::ExecutorHandle<cmd::SquadCommand>;
-
     fcn::FactionId faction;
     std::vector<com::Unit*> units;
-    CmdHandle currentCommand;
-    bl::ctr::StaticRingBuffer<CmdHandle, CommandQueueSize> queuedCommands;
+    cmd::Queue<cmd::SquadCommand, CommandQueueSize> commandQueue;
 };
 
 } // namespace unit
