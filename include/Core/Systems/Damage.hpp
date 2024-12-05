@@ -6,7 +6,7 @@
 #include <BLIB/Events.hpp>
 #include <BLIB/Systems/Physics2D.hpp>
 #include <Core/Components/Damager.hpp>
-#include <Core/Components/Mortal.hpp>
+#include <Core/Components/Target.hpp>
 
 namespace core
 {
@@ -40,10 +40,12 @@ public:
      * @brief Makes the given entity mortal
      *
      * @param entity The entity to make mortal
+     * @param physics The physics component of the mortal entity
      * @param health The amount of health to give it
      * @param deathTime How long, in seconds, for the body to stay before being removed
      */
-    void makeMortal(bl::ecs::Entity entity, float health, float deathTime = -1.f);
+    void makeMortal(bl::ecs::Entity entity, bl::com::Physics2D& physics, float health,
+                    float deathTime = 0.f);
 
     /**
      * @brief Makes the given entity a giver of damage
@@ -58,9 +60,9 @@ private:
 
     using Transaction = bl::ecs::Transaction<
         bl::ecs::tx::EntityWrite, bl::ecs::tx::ComponentRead<>,
-        bl::ecs::tx::ComponentWrite<com::Damager, com::Mortal, bl::com::MarkedForDeath>>;
+        bl::ecs::tx::ComponentWrite<com::Damager, com::Target, bl::com::MarkedForDeath>>;
 
-    void applyDamage(bl::ecs::Entity mortalEntity, com::Mortal& victim,
+    void applyDamage(bl::ecs::Entity mortalEntity, com::Target& victim,
                      bl::ecs::Entity damagerEntity, com::Damager& damager, Transaction& tx);
     virtual void observe(const bl::sys::Physics2D::EntityCollisionBeginEvent& event) override;
 };

@@ -12,7 +12,8 @@ namespace hud
 {
 TempUnitController::TempUnitController(Player& owner)
 : owner(owner)
-, controlling(nullptr) {}
+, controlling(nullptr)
+, self(nullptr) {}
 
 void TempUnitController::init() {
     auto& game  = bl::game::Game::getInstance<Game>();
@@ -41,14 +42,17 @@ void TempUnitController::reset() {
     hint.destroy();
     background.destroy();
     controlling = nullptr;
+    self        = nullptr;
 }
 
 bool TempUnitController::processEvent(const Event& event) {
     auto& game = bl::game::Game::getInstance<Game>();
+
     if (event.source().type == sf::Event::MouseMoved) {
         if (controlling) {
-            if (event.unit()) {
-                if (event.unit() != controlling) { makeAttackState(); }
+            if (event.target()) {
+                auto* unit = game.engine().ecs().getComponent<com::Unit>(event.target()->getId());
+                if (unit != controlling) { makeAttackState(); }
                 else { makeMoveState(); }
             }
             else { makeMoveState(); }
@@ -58,9 +62,9 @@ bool TempUnitController::processEvent(const Event& event) {
     else if (event.source().type == sf::Event::MouseButtonPressed) {
         if (event.source().mouseButton.button == sf::Mouse::Left) {
             if (controlling) {
-                if (event.unit() && controlling != event.unit()) {
+                if (event.target() && self != event.target()) {
                     controlling->queueCommand(game.commandStore().unitMakeAttack(
-                        event.unit(), cmd::AggroLevel::Aggressive));
+                        event.target(), cmd::AggroLevel::Aggressive));
                 }
                 else {
                     controlling->queueCommand(game.commandStore().unitMakeMove(
@@ -68,13 +72,18 @@ bool TempUnitController::processEvent(const Event& event) {
                 }
             }
             else {
-                controlling = event.unit();
+                self = event.target();
+                controlling =
+                    event.target() ?
+                        game.engine().ecs().getComponent<com::Unit>(event.target()->getId()) :
+                        nullptr;
                 if (controlling) { makeMoveState(); }
                 return true;
             }
         }
         else if (event.source().mouseButton.button == sf::Mouse::Right && controlling) {
             controlling = nullptr;
+            self        = nullptr;
             makeEmptyState();
             return true;
         }

@@ -56,10 +56,10 @@ void LowBrain::moveToPosition(const glm::vec2& pos) {
     targetPosition = pos;
 }
 
-void LowBrain::fireAtTarget(com::Unit* target) {
+void LowBrain::fireAtTarget(com::Target* target) {
     state             = Firing;
     killTarget.entity = target->getId();
-    killTarget.unit   = target;
+    killTarget.target = target;
 }
 
 void LowBrain::processMove(float dt) {
@@ -103,7 +103,7 @@ void LowBrain::processFire(float dt) {
     // point towards target and fire if close enough
     const float angle = owner.getRotation();
     const float targetAngle =
-        bl::math::computeAngle(owner.getPosition(), killTarget.unit->getPosition());
+        bl::math::computeAngle(owner.getPosition(), killTarget.target->getPosition());
     if (std::abs(angle - targetAngle) > 1.f) { rotate(targetAngle, dt); }
     else { shooter->fire(); }
 }

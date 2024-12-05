@@ -18,6 +18,13 @@ b2Filter Collisions::getUnitFilter() {
     return filter;
 }
 
+b2Filter Collisions::getBuildingFilter() {
+    b2Filter filter     = b2DefaultFilter();
+    filter.categoryBits = Category::Building;
+    filter.maskBits     = Category::All;
+    return filter;
+}
+
 b2Filter Collisions::getBulletFilter() {
     b2Filter filter     = b2DefaultFilter();
     filter.categoryBits = Category::Bullet;
@@ -50,6 +57,20 @@ b2QueryFilter Collisions::getUnitQueryFilter() {
     b2QueryFilter filter = b2DefaultQueryFilter();
     filter.categoryBits  = Category::Unit;
     filter.maskBits      = Category::Unit;
+    return filter;
+}
+
+b2QueryFilter Collisions::getBuildingQueryFilter() {
+    b2QueryFilter filter = b2DefaultQueryFilter();
+    filter.categoryBits  = Category::Building;
+    filter.maskBits      = Category::Building;
+    return filter;
+}
+
+b2QueryFilter Collisions::getTargetQueryFilter() {
+    b2QueryFilter filter = b2DefaultQueryFilter();
+    filter.categoryBits  = Category::Unit | Category::Building;
+    filter.maskBits      = Category::Unit | Category::Building;
     return filter;
 }
 

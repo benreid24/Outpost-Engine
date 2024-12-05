@@ -1,6 +1,7 @@
 #ifndef CORE_UNIT_AI_LOWBRAIN_HPP
 #define CORE_UNIT_AI_LOWBRAIN_HPP
 
+#include <Core/Components/Target.hpp>
 #include <Core/Unit/AI/Notification.hpp>
 #include <glm/glm.hpp>
 
@@ -83,7 +84,7 @@ public:
      *
      * @param target The target to fire at and kill
      */
-    void fireAtTarget(com::Unit* target); // TODO - make target base class
+    void fireAtTarget(com::Target* target);
 
 private:
     State state;
@@ -92,7 +93,7 @@ private:
         glm::vec2 targetPosition;
         struct {
             bl::ecs::Entity entity;
-            com::Unit* unit;
+            com::Target* target;
         } killTarget;
     };
 

@@ -45,11 +45,6 @@ public:
     bl::ecs::Entity getId() const { return physics.getOwner(); }
 
     /**
-     * @brief Returns the id of the faction the unit belongs to
-     */
-    fcn::FactionId getFaction() const { return faction; }
-
-    /**
      * @brief Returns the position of the unit in world coordinates
      */
     glm::vec2 getPosition() const { return physics.getTransform().getGlobalPosition(); }
@@ -58,6 +53,11 @@ public:
      * @brief Returns the rotation of the unit in degrees
      */
     float getRotation() const { return physics.getTransform().getRotation(); }
+
+    /**
+     * @brief Returns the id of the faction the unit belongs to
+     */
+    fcn::FactionId getFaction() const { return faction; }
 
     /**
      * @brief Returns the units capabilities
@@ -74,9 +74,10 @@ public:
                       cmd::AddMode addMode = cmd::AddMode::QueueEnd);
 
 private:
+    bl::com::Physics2D& physics;
+
     // unit data and components
     fcn::FactionId faction;
-    bl::com::Physics2D& physics;
     unit::Capabilities abilities;
 
     // unit AI & command state

@@ -3,15 +3,11 @@
 
 #include <Core/Commands/Command.hpp>
 #include <Core/Commands/ExternalHandle.hpp>
+#include <Core/Components/Target.hpp>
 #include <Core/World/Node.hpp>
 
 namespace core
 {
-namespace com
-{
-class Unit;
-}
-
 namespace cmd
 {
 /**
@@ -55,12 +51,12 @@ public:
      *
      * @param type The type of command
      * @param aggroLevel How aggressive to be when doing the command
-     * @param unit The unit of the command
+     * @param target The target of the command
      */
-    UnitCommand(Type type, AggroLevel aggroLevel, com::Unit* unit)
+    UnitCommand(Type type, AggroLevel aggroLevel, com::Target* target)
     : Command(aggroLevel)
     , type(type) {
-        targetUnit = unit;
+        target = target;
     }
 
     /**
@@ -74,16 +70,16 @@ public:
     const glm::vec2& getTargetPosition() const { return targetPosition; }
 
     /**
-     * @brief Returns the target unit of this command
+     * @brief Returns the target of this command
      */
-    com::Unit* getTargetUnit() const { return targetUnit; }
+    com::Target* getTarget() const { return target; }
 
 private:
     Type type;
 
     union {
         glm::vec2 targetPosition;
-        com::Unit* targetUnit;
+        com::Target* target;
     };
 };
 

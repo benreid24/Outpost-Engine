@@ -5,6 +5,7 @@
 #include <Core/Commands/SingleStore.hpp>
 #include <Core/Commands/SquadCommand.hpp>
 #include <Core/Commands/UnitCommand.hpp>
+#include <Core/Components/Target.hpp>
 
 namespace core
 {
@@ -35,10 +36,10 @@ public:
     /**
      * @brief Makes a unit attack command
      *
-     * @param target The unit to attack
+     * @param target The target to attack
      * @return A handle to the new attack command
      */
-    UnitCommandHandle unitMakeAttack(com::Unit* target, AggroLevel aggroLevel);
+    UnitCommandHandle unitMakeAttack(com::Target* target, AggroLevel aggroLevel);
 
     /**
      * @brief Makes a unit idle command
@@ -96,11 +97,11 @@ public:
     /**
      * @brief Makes a squad attack command
      *
-     * @param unit The unit to attack
+     * @param target The target to attack
      * @param aggroLevel How aggressively to attack
      * @return A handle to the new command
      */
-    SquadCommandHandle squadMakeAttack(com::Unit* unit, AggroLevel aggroLevel);
+    SquadCommandHandle squadMakeAttack(com::Target* target, AggroLevel aggroLevel);
 
 private:
     SingleStore<UnitCommand> unitCommands;

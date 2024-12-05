@@ -14,7 +14,7 @@ Event::Event(Player& owner, const sf::Event& e)
 : windowEvent(e)
 , overlayCoord(owner.getRenderObserver().getMousePosInOverlaySpace())
 , worldCoord(owner.getRenderObserver().getMousePosInWorldSpace())
-, overUnit(owner.getCurrentWorld<world::World>().getUnitAtPosition(worldCoord)) {}
+, overTarget(owner.getCurrentWorld<world::World>().getTargetAtPosition(worldCoord)) {}
 
 } // namespace hud
 } // namespace player

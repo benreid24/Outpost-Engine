@@ -1,7 +1,7 @@
 #ifndef CORE_PLAYER_HUD_EVENT_HPP
 #define CORE_PLAYER_HUD_EVENT_HPP
 
-#include <Core/Components/Unit.hpp>
+#include <Core/Components/Target.hpp>
 #include <SFML/Window/Event.hpp>
 
 namespace core
@@ -33,9 +33,9 @@ public:
     const sf::Event& source() const { return windowEvent; }
 
     /**
-     * @brief Returns the unit the event occurred over. May be nullptr
+     * @brief Returns the target the event occurred over. May be nullptr
      */
-    com::Unit* unit() const { return overUnit; }
+    com::Target* target() const { return overTarget; }
 
     /**
      * @brief Returns the position of the event in overlay coordinates
@@ -51,7 +51,7 @@ private:
     const sf::Event& windowEvent;
     glm::vec2 overlayCoord;
     glm::vec2 worldCoord;
-    com::Unit* overUnit;
+    com::Target* overTarget;
 };
 
 } // namespace hud

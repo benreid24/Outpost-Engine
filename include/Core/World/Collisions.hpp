@@ -25,17 +25,20 @@ struct Collisions {
         /// Units that move around and can be shot
         Unit = 0x1 << 1,
 
+        /// Buildings that can be targeted
+        Building = 0x1 << 2,
+
         /// Bullets that impact units and cover
-        Bullet = 0x1 << 2,
+        Bullet = 0x1 << 3,
 
         /// Virtual category for world queries
         CoverQueryRay = 0x1 << 3,
 
         /// Sensors that do not interact with bullets or cover
-        WorldSensor = 0x1 << 4,
+        WorldSensor = 0x1 << 5,
 
         /// Virtual category for sensor connection queries
-        SensorQueryRay = 0x1 << 5,
+        SensorQueryRay = 0x1 << 6,
 
         /// Helper value for masks that should collide with all categories
         All = std::numeric_limits<std::uint32_t>::max()
@@ -50,6 +53,11 @@ struct Collisions {
      * @brief Returns the filter to use for units
      */
     static b2Filter getUnitFilter();
+
+    /**
+     * @brief Returns the filter to use for buildings
+     */
+    static b2Filter getBuildingFilter();
 
     /**
      * @brief Returns the filter to use for bullets
@@ -75,6 +83,16 @@ struct Collisions {
      * @brief Returns the filter to use when querying for units
      */
     static b2QueryFilter getUnitQueryFilter();
+
+    /**
+     * @brief Returns the filter to use when querying for buildings
+     */
+    static b2QueryFilter getBuildingQueryFilter();
+
+    /**
+     * @brief Returns the filter to use when querying for target-able entities
+     */
+    static b2QueryFilter getTargetQueryFilter();
 
     /**
      * @brief Returns the filter to use when querying for unit movement to nodes

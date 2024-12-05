@@ -197,7 +197,7 @@ bool DebugMenu::processEvent(const Event& event) {
 
         ecs.emplaceComponent<bl::com::Hitbox2D>(newEntity, transform, Radius);
         auto physics = game.physicsSystem().addPhysicsToEntity(newEntity, bodyDef, shapeDef);
-        ecs.emplaceComponent<core::com::Mortal>(newEntity, 100.f);
+        game.damageSystem().makeMortal(newEntity, *physics, 100.f);
 
         controlling.unit =
             ecs.emplaceComponent<core::com::Unit>(newEntity, factions[fi]->getId(), *physics);
@@ -242,19 +242,25 @@ bool DebugMenu::processEvent(const Event& event) {
         return false;
     };
 
-    const auto controlEntity = [this, &event]() -> bool {
-        if (event.unit()) {
-            controlling.unit = event.unit();
-            onEntityControl(event.unit()->getId());
-            return true;
+    const auto controlEntity = [this, &event, &ecs]() -> bool {
+        if (event.target()) {
+            auto* unit = ecs.getComponent<com::Unit>(event.target()->getId());
+            if (unit) {
+                controlling.unit = unit;
+                onEntityControl(event.target()->getId());
+                return true;
+            }
         }
         return false;
     };
 
-    const auto killEntity = [&engine, &event]() -> bool {
-        if (event.unit()) {
-            engine.ecs().destroyEntity(event.unit()->getId());
-            return true;
+    const auto killEntity = [&engine, &event, &ecs]() -> bool {
+        if (event.target()) {
+            auto* unit = ecs.getComponent<com::Unit>(event.target()->getId());
+            if (unit) {
+                engine.ecs().destroyEntity(event.target()->getId());
+                return true;
+            }
         }
         return false;
     };

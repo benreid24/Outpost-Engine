@@ -380,6 +380,13 @@ bool World::pathToNodeIsClear(const glm::vec2& pos, const Node& node) const {
     return pathToPositionIsClear(pos, node.position);
 }
 
+com::Target* World::getTargetAtPosition(const glm::vec2& pos) const {
+    auto& game = bl::game::Game::getInstance<Game>();
+    auto* phys =
+        game.physicsSystem().findEntityAtPosition(*this, pos, Collisions::getTargetQueryFilter());
+    return phys != nullptr ? engine().ecs().getComponent<com::Target>(phys->getOwner()) : nullptr;
+}
+
 com::Unit* World::getUnitAtPosition(const glm::vec2& pos) const {
     auto& game = bl::game::Game::getInstance<Game>();
     auto* phys =

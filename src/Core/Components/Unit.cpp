@@ -5,8 +5,8 @@ namespace core
 namespace com
 {
 Unit::Unit(fcn::FactionId faction, bl::com::Physics2D& physics)
-: faction(faction)
-, physics(physics) {}
+: physics(physics)
+, faction(faction) {}
 
 void Unit::queueCommand(const cmd::UnitCommandHandle& cmd, cmd::AddMode addMode) {
     auto cmdCopy = cmd;
