@@ -12,7 +12,7 @@ namespace world
 {
 namespace
 {
-using PathFinder = bl::ai::PathFinder<unit::Path::Waypoint, unit::Path::WaypointHash>;
+using PathFinder = bl::ai::PathFinder<Path::Waypoint, Path::WaypointHash>;
 
 const bl::rc::Color NodeFreeColor     = sf::Color(20, 230, 65);
 const bl::rc::Color NodeOccupiedColor = sf::Color(230, 65, 20);
@@ -323,8 +323,8 @@ const Node* World::getClosestReachableNode(const glm::vec2& position,
     return closest;
 }
 
-bool World::computePath(const glm::vec2& startPos, const glm::vec2& dst, unit::Path& path) {
-    using Waypoint = unit::Path::Waypoint;
+bool World::computePath(const glm::vec2& startPos, const glm::vec2& dst, Path& path) {
+    using Waypoint = Path::Waypoint;
 
     // perform path finding
     const auto distanceCb = [](const Waypoint& a, const Waypoint& b) -> int {

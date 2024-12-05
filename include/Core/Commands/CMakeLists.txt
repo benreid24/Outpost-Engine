@@ -3,7 +3,6 @@ target_sources(Core PUBLIC
     AggroLevel.hpp
     Command.hpp
     CommandStore.hpp
-    Events.hpp
     ExecutorHandle.hpp
     ExternalHandle.hpp
     Queue.hpp

@@ -1,5 +1,8 @@
 #include <Core/Systems/Damage.hpp>
 
+#include <Core/Events/EntityDamaged.hpp>
+#include <Core/Events/EntityKilled.hpp>
+
 namespace core
 {
 namespace sys
@@ -51,6 +54,7 @@ void Damage::observe(const bl::sys::Physics2D::EntityCollisionBeginEvent& collis
 
 void Damage::applyDamage(bl::ecs::Entity mortalEntity, com::Mortal& victim,
                          bl::ecs::Entity damagerEntity, com::Damager& damager, Transaction& tx) {
+    bl::event::Dispatcher::dispatch<event::EntityDamaged>({mortalEntity, damagerEntity});
     victim.health -= damager.damage;
     if (victim.health <= 0.f) {
         if (victim.deathTime > 0.f) {
@@ -58,6 +62,9 @@ void Damage::applyDamage(bl::ecs::Entity mortalEntity, com::Mortal& victim,
                 mortalEntity, tx, victim.deathTime, bl::engine::StateMask::Running);
         }
         else { engine->ecs().destroyEntity(mortalEntity, tx); }
+
+        engine->ecs().removeComponent<com::Mortal>(mortalEntity);
+        bl::event::Dispatcher::dispatch<event::EntityKilled>({mortalEntity, damagerEntity});
     }
 }
 

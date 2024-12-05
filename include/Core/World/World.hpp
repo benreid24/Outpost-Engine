@@ -4,9 +4,9 @@
 #include <BLIB/Engine/Worlds/World2D.hpp>
 #include <BLIB/Graphics/VertexBuffer2D.hpp>
 #include <Core/Components/Unit.hpp>
-#include <Core/Unit/Path.hpp>
 #include <Core/World/Cover.hpp>
 #include <Core/World/Node.hpp>
+#include <Core/World/Path.hpp>
 #include <list>
 #include <vector>
 
@@ -117,7 +117,7 @@ public:
      * @param path Vector to store the path of nodes in
      * @return Whether a path could be found or not
      */
-    bool computePath(const glm::vec2& startPos, const glm::vec2& targetPosition, unit::Path& path);
+    bool computePath(const glm::vec2& startPos, const glm::vec2& targetPosition, Path& path);
 
     /**
      * @brief Returns the unit at the given world position

@@ -3,10 +3,10 @@
 
 #include <BLIB/Events.hpp>
 #include <BLIB/Logging.hpp>
-#include <Core/Commands/Events.hpp>
 #include <Core/Commands/ExternalHandle.hpp>
 #include <Core/Commands/Ref.hpp>
 #include <Core/Commands/SingleStore.hpp>
+#include <Core/Events/CommandStatusChange.hpp>
 
 namespace core
 {
@@ -79,7 +79,8 @@ public:
     void markInProgress() {
         if (ref->getStatus() == Command::Queued) {
             ref->status = Command::Current;
-            bl::event::Dispatcher::dispatch<CommandStatusChange<T, Command::Current>>({*ref});
+            bl::event::Dispatcher::dispatch<event::CommandStatusChange<T, Command::Current>>(
+                {*ref});
         }
         else {
             BL_LOG_ERROR << "Cannot move command to Current from invalid state: "
@@ -93,7 +94,8 @@ public:
     void markComplete() {
         if (ref->getStatus() == Command::Current) {
             ref->status = Command::Complete;
-            bl::event::Dispatcher::dispatch<CommandStatusChange<T, Command::Complete>>({*ref});
+            bl::event::Dispatcher::dispatch<event::CommandStatusChange<T, Command::Complete>>(
+                {*ref});
         }
         else {
             BL_LOG_ERROR << "Cannot move command to Complete from invalid state: "
@@ -107,7 +109,7 @@ public:
     void markFailed() {
         if (ref->getStatus() == Command::Current) {
             ref->status = Command::Failed;
-            bl::event::Dispatcher::dispatch<CommandStatusChange<T, Command::Failed>>({*ref});
+            bl::event::Dispatcher::dispatch<event::CommandStatusChange<T, Command::Failed>>({*ref});
         }
         else {
             BL_LOG_ERROR << "Cannot move command to Failed from invalid state: "
@@ -120,7 +122,7 @@ public:
      */
     void markCanceled() {
         ref->status = Command::Canceled;
-        bl::event::Dispatcher::dispatch<CommandStatusChange<T, Command::Canceled>>({*ref});
+        bl::event::Dispatcher::dispatch<event::CommandStatusChange<T, Command::Canceled>>({*ref});
     }
 
     /**
@@ -128,7 +130,7 @@ public:
      */
     void markQueued() {
         ref->status = Command::Queued;
-        bl::event::Dispatcher::dispatch<CommandStatusChange<T, Command::Queued>>({*ref});
+        bl::event::Dispatcher::dispatch<event::CommandStatusChange<T, Command::Queued>>({*ref});
     }
 
 private:

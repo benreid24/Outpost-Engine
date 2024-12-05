@@ -6,7 +6,6 @@
 #include <Core/Commands/UnitCommand.hpp>
 #include <Core/Factions/FactionId.hpp>
 #include <Core/Unit/Capabilities.hpp>
-#include <Core/Unit/CommandContext.hpp>
 
 /**
  * @addtogroup Unit
@@ -49,6 +48,16 @@ public:
      * @brief Returns the id of the faction the unit belongs to
      */
     fcn::FactionId getFaction() const { return faction; }
+
+    /**
+     * @brief Returns the position of the unit in world coordinates
+     */
+    glm::vec2 getPosition() const { return physics.getTransform().getGlobalPosition(); }
+
+    /**
+     * @brief Returns the rotation of the unit in degrees
+     */
+    float getRotation() const { return physics.getTransform().getRotation(); }
 
     /**
      * @brief Returns the units capabilities

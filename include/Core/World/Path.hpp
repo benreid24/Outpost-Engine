@@ -6,7 +6,7 @@
 
 namespace core
 {
-namespace unit
+namespace world
 {
 /**
  * @brief Data structure representing a path a unit can take
@@ -20,7 +20,7 @@ public:
      */
     struct Waypoint {
         glm::vec2 position;
-        const world::Node* worldNode;
+        const Node* worldNode;
 
         /**
          * @brief Creates an empty waypoint
@@ -35,7 +35,7 @@ public:
          * @param position The position of the waypoint
          * @param worldNode The world node of the waypoint
          */
-        Waypoint(const glm::vec2& position, const world::Node* worldNode = nullptr)
+        Waypoint(const glm::vec2& position, const Node* worldNode = nullptr)
         : position(position)
         , worldNode(worldNode) {}
 
@@ -69,7 +69,7 @@ public:
     std::vector<Waypoint> waypoints;
 };
 
-} // namespace unit
+} // namespace world
 } // namespace core
 
 #endif
