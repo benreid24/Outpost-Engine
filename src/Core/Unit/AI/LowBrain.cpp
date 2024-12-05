@@ -56,7 +56,7 @@ void LowBrain::moveToPosition(const glm::vec2& pos) {
     targetPosition = pos;
 }
 
-void LowBrain::fireAtTarget(com::Target* target) {
+void LowBrain::fireAtTarget(com::Combatant* target) {
     state             = Firing;
     killTarget.entity = target->getId();
     killTarget.target = target;

@@ -3,7 +3,7 @@
 
 #include <Core/Commands/Command.hpp>
 #include <Core/Commands/ExternalHandle.hpp>
-#include <Core/Components/Target.hpp>
+#include <Core/Components/Combatant.hpp>
 #include <Core/World/Node.hpp>
 
 namespace core
@@ -53,7 +53,7 @@ public:
      * @param aggroLevel How aggressive to be when doing the command
      * @param target The target of the command
      */
-    UnitCommand(Type type, AggroLevel aggroLevel, com::Target* target)
+    UnitCommand(Type type, AggroLevel aggroLevel, com::Combatant* target)
     : Command(aggroLevel)
     , type(type) {
         target = target;
@@ -72,14 +72,14 @@ public:
     /**
      * @brief Returns the target of this command
      */
-    com::Target* getTarget() const { return target; }
+    com::Combatant* getTarget() const { return target; }
 
 private:
     Type type;
 
     union {
         glm::vec2 targetPosition;
-        com::Target* target;
+        com::Combatant* target;
     };
 };
 

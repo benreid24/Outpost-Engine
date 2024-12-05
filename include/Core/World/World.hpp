@@ -125,7 +125,7 @@ public:
      * @param worldPos The world position to query
      * @return The target at the position. May be nullptr
      */
-    com::Target* getTargetAtPosition(const glm::vec2& worldPos) const;
+    com::Combatant* getTargetAtPosition(const glm::vec2& worldPos) const;
 
     /**
      * @brief Returns the unit at the given world position

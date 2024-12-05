@@ -3,7 +3,7 @@
 
 #include <Core/Commands/Command.hpp>
 #include <Core/Commands/ExternalHandle.hpp>
-#include <Core/Components/Target.hpp>
+#include <Core/Components/Combatant.hpp>
 #include <glm/glm.hpp>
 
 namespace core
@@ -48,7 +48,7 @@ public:
      * @param aggroLevel How aggressively to perform the command
      * @param target The target of the command
      */
-    SquadCommand(Type type, AggroLevel aggroLevel, com::Target* target)
+    SquadCommand(Type type, AggroLevel aggroLevel, com::Combatant* target)
     : Command(aggroLevel)
     , type(type)
     , target(target) {}
@@ -67,7 +67,7 @@ private:
     Type type;
     union {
         glm::vec2 position;
-        com::Target* target;
+        com::Combatant* target;
     };
 };
 

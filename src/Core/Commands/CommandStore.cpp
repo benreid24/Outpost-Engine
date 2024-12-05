@@ -12,7 +12,7 @@ UnitCommandHandle CommandStore::unitMakeMove(const glm::vec2& position, AggroLev
     return UnitCommandHandle(std::move(ref));
 }
 
-UnitCommandHandle CommandStore::unitMakeAttack(com::Target* target, AggroLevel aggroLevel) {
+UnitCommandHandle CommandStore::unitMakeAttack(com::Combatant* target, AggroLevel aggroLevel) {
     Ref<UnitCommand> ref = unitCommands.allocate(UnitCommand::Type::Attack, aggroLevel, target);
     return UnitCommandHandle(std::move(ref));
 }
@@ -42,7 +42,7 @@ SquadCommandHandle CommandStore::squadMakeAttack(const glm::vec2& pos, AggroLeve
     return SquadCommandHandle(std::move(ref));
 }
 
-SquadCommandHandle CommandStore::squadMakeAttack(com::Target* unit, AggroLevel aggroLevel) {
+SquadCommandHandle CommandStore::squadMakeAttack(com::Combatant* unit, AggroLevel aggroLevel) {
     Ref<SquadCommand> ref =
         squadCommands.allocate(SquadCommand::Type::AttackUnit, aggroLevel, unit);
     return SquadCommandHandle(std::move(ref));

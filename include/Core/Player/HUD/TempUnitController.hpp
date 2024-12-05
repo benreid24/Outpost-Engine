@@ -31,7 +31,7 @@ private:
     bl::gfx::Rectangle background;
     bl::gfx::Text hint;
     com::Unit* controlling;
-    com::Target* self;
+    com::Combatant* self;
 
     void makeEmptyState();
     void makeMoveState();

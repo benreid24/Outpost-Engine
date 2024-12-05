@@ -5,8 +5,8 @@
 #include <BLIB/Engine.hpp>
 #include <BLIB/Events.hpp>
 #include <BLIB/Systems/Physics2D.hpp>
+#include <Core/Components/Combatant.hpp>
 #include <Core/Components/Damager.hpp>
-#include <Core/Components/Target.hpp>
 
 namespace core
 {
@@ -60,9 +60,9 @@ private:
 
     using Transaction = bl::ecs::Transaction<
         bl::ecs::tx::EntityWrite, bl::ecs::tx::ComponentRead<>,
-        bl::ecs::tx::ComponentWrite<com::Damager, com::Target, bl::com::MarkedForDeath>>;
+        bl::ecs::tx::ComponentWrite<com::Damager, com::Combatant, bl::com::MarkedForDeath>>;
 
-    void applyDamage(bl::ecs::Entity mortalEntity, com::Target& victim,
+    void applyDamage(bl::ecs::Entity mortalEntity, com::Combatant& victim,
                      bl::ecs::Entity damagerEntity, com::Damager& damager, Transaction& tx);
     virtual void observe(const bl::sys::Physics2D::EntityCollisionBeginEvent& event) override;
 };

@@ -14,7 +14,7 @@ void Damage::init(bl::engine::Engine& e) { engine = &e; }
 
 void Damage::makeMortal(bl::ecs::Entity entity, bl::com::Physics2D& physics, float health,
                         float deathTime) {
-    engine->ecs().emplaceComponent<com::Target>(entity, physics, health, deathTime);
+    engine->ecs().emplaceComponent<com::Combatant>(entity, physics, health, deathTime);
 }
 
 void Damage::makeDamager(bl::ecs::Entity entity, float damage) {
@@ -25,16 +25,16 @@ void Damage::observe(const bl::sys::Physics2D::EntityCollisionBeginEvent& collis
     using namespace bl::ecs;
     Transaction tx(engine->ecs());
 
-    auto setA = engine->ecs().getComponentSet<Require<>, Optional<com::Damager, com::Target>>(
+    auto setA = engine->ecs().getComponentSet<Require<>, Optional<com::Damager, com::Combatant>>(
         collision.entityA, tx);
-    auto setB = engine->ecs().getComponentSet<Require<>, Optional<com::Damager, com::Target>>(
+    auto setB = engine->ecs().getComponentSet<Require<>, Optional<com::Damager, com::Combatant>>(
         collision.entityB, tx);
     tx.unlock();
 
     if (setB.get<com::Damager>()) {
-        if (setA.get<com::Target>()) {
+        if (setA.get<com::Combatant>()) {
             applyDamage(collision.entityA,
-                        *setA.get<com::Target>(),
+                        *setA.get<com::Combatant>(),
                         collision.entityB,
                         *setB.get<com::Damager>(),
                         tx);
@@ -42,9 +42,9 @@ void Damage::observe(const bl::sys::Physics2D::EntityCollisionBeginEvent& collis
         engine->ecs().destroyEntity(setB.entity(), tx);
     }
     if (setA.get<com::Damager>()) {
-        if (setB.get<com::Target>()) {
+        if (setB.get<com::Combatant>()) {
             applyDamage(collision.entityB,
-                        *setB.get<com::Target>(),
+                        *setB.get<com::Combatant>(),
                         collision.entityA,
                         *setA.get<com::Damager>(),
                         tx);
@@ -53,7 +53,7 @@ void Damage::observe(const bl::sys::Physics2D::EntityCollisionBeginEvent& collis
     }
 }
 
-void Damage::applyDamage(bl::ecs::Entity mortalEntity, com::Target& victim,
+void Damage::applyDamage(bl::ecs::Entity mortalEntity, com::Combatant& victim,
                          bl::ecs::Entity damagerEntity, com::Damager& damager, Transaction& tx) {
     bl::event::Dispatcher::dispatch<event::EntityDamaged>({mortalEntity, damagerEntity});
     if (victim.applyDamage(damager.damage)) {
@@ -63,7 +63,7 @@ void Damage::applyDamage(bl::ecs::Entity mortalEntity, com::Target& victim,
         }
         else { engine->ecs().destroyEntity(mortalEntity, tx); }
 
-        engine->ecs().removeComponent<com::Target>(mortalEntity);
+        engine->ecs().removeComponent<com::Combatant>(mortalEntity);
         bl::event::Dispatcher::dispatch<event::EntityKilled>({mortalEntity, damagerEntity});
     }
 }

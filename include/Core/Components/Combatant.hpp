@@ -1,5 +1,5 @@
-#ifndef CORE_COMPONENTS_TARGET_HPP
-#define CORE_COMPONENTS_TARGET_HPP
+#ifndef CORE_COMPONENTS_COMBATANT_HPP
+#define CORE_COMPONENTS_COMBATANT_HPP
 
 #include <BLIB/Components/Physics2D.hpp>
 
@@ -12,7 +12,7 @@ namespace com
  *
  * @ingroup Components
  */
-class Target {
+class Combatant {
 public:
     /**
      * @brief Creates the target component
@@ -21,7 +21,7 @@ public:
      * @param health The health of the target
      * @param deathTime How long the body should stay after death
      */
-    Target(bl::com::Physics2D& physics, float health, float deathTime = 0.f)
+    Combatant(bl::com::Physics2D& physics, float health, float deathTime = 0.f)
     : physics(physics)
     , hp(health)
     , deathTime(deathTime) {}

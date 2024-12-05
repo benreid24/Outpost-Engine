@@ -1,6 +1,6 @@
 target_sources(Core PUBLIC
+    Combatant.hpp
     Damager.hpp
-    Target.hpp
     Unit.hpp
     WorldNode.hpp
 )
