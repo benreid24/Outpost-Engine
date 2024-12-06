@@ -32,8 +32,13 @@ public:
                   bl::engine::Settings::WindowParameters::WindowHeightKey,
                   Constants::UnsetUintProperty);
 
-    BLIB_PROPERTY(UnitAiDistanceStopThresh, float, "core.unit.stop_distance",
+    BLIB_PROPERTY(UnitAiDistanceStopThresh, float, "core.unit.ai_stop_distance",
                   Constants::UnitAiStopDistanceDefault);
+    BLIB_PROPERTY(UnitAiFiringMaxDistance, float, "core.unit.ai_max_shoot_distance",
+                  Constants::UnitAiFiringMaxDistanceDefault);
+    BLIB_PROPERTY(UnitAiFiringLineRecheckTime, float, "core.unit.ai_firing_line_recheck_time",
+                  Constants::UnitAiFiringLineRecheckTimeDefault);
+
     BLIB_PROPERTY(UnitAccelerationDefault, float, "core.unit.default_accel",
                   Constants::UnitAccelerationDefault);
     BLIB_PROPERTY(UnitMaxSpeedDefault, float, "core.unit.default_max_speed",

@@ -170,6 +170,22 @@ public:
      */
     std::vector<com::Unit*> getUnitsInArea(const sf::FloatRect& area) const;
 
+    /**
+     * @brief Picks a node to fire on, prioritizing cover and distance to target
+     *
+     * @param comingFrom The position the unit is starting at
+     * @param firingOn The position to fire on
+     * @param maxDistance The max distance to consider nodes for
+     * @param searcher The entity searching for a spot
+     * @param distanceWeight [0, 1] weight to prioritize distance when choosing node
+     * @param coverWeight [0, 1] weight to prioritize cover when choosing node
+     * @return The node best suited to fire from
+     */
+    const Node* pickFiringPosition(const glm::vec2& comingFrom, const glm::vec2& firingOn,
+                                   float maxDistance,
+                                   bl::ecs::Entity searcher = bl::ecs::InvalidEntity,
+                                   float distanceWeight = 0.35f, float coverWeight = 0.65f) const;
+
 private:
     std::vector<Cover> covers;
     std::vector<Node> nodes;

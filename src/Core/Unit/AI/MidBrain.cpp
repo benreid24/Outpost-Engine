@@ -127,10 +127,60 @@ void MidBrain::processMovement(const UpdateContext& ctx) {
 }
 
 void MidBrain::processShooting(const UpdateContext& ctx) {
+    const auto pickFiringPosition = [this, &ctx]() {
+        const world::Node* node = ctx.world.pickFiringPosition(
+            owner.getPosition(), target->getPosition(), Properties.UnitAiFiringMaxDistance.get());
+        if (!node) {
+            BL_LOG_WARN << "Unit could not find suitable firing position";
+            enterState(Failed);
+            return;
+        }
+        destPos = node->getPosition();
+        enterState(MovingToKill);
+    };
+
     // check if we have a line and are in range
-    const float distance = glm::distance(owner.getPosition(), target->getPosition());
-    if (distance >= 0.f) {
-        // TODO - pick position + move
+    if (!waitingForLowBrain) {
+        const float distance = glm::distance(owner.getPosition(), target->getPosition());
+        if (distance >= Properties.UnitAiFiringMaxDistance.get()) {
+            pickFiringPosition();
+            return;
+        }
+
+        com::Combatant* see = ctx.world.lineOfSightIsClear(owner.getPosition(), target);
+        if (see == target || see->getFaction() != owner.getFaction()) {
+            lowBrain.fireAtTarget(target);
+            waitingForLowBrain = true;
+            waitingTime        = 0.f;
+            return;
+        }
+        else {
+            pickFiringPosition();
+            return;
+        }
+    }
+    else {
+        switch (lowBrain.getState()) {
+        case LowBrain::Firing:
+            waitingTime += ctx.dt;
+            if (waitingTime >= Properties.UnitAiFiringLineRecheckTime.get()) {
+                waitingForLowBrain = false;
+            }
+            break;
+
+        case LowBrain::Done:
+            enterState(Done);
+            break;
+
+        case LowBrain::Failed:
+            enterState(Failed);
+            break;
+
+        default:
+            BL_LOG_WARN << "Unit low brain in unexpected state: " << lowBrain.getState();
+            waitingForLowBrain = false;
+            break;
+        }
     }
 }
 

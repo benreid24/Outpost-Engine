@@ -17,7 +17,10 @@ struct Constants {
 
     static constexpr unsigned int CommandPoolInitialSize = 64;
 
-    static constexpr float UnitAiStopDistanceDefault   = 5.f;
+    static constexpr float UnitAiStopDistanceDefault          = 5.f;
+    static constexpr float UnitAiFiringMaxDistanceDefault     = 450.f;
+    static constexpr float UnitAiFiringLineRecheckTimeDefault = 3.f;
+
     static constexpr float UnitAccelerationDefault     = 320.f;
     static constexpr float UnitMaxSpeedDefault         = 1920.f / 6.f;
     static constexpr float UnitDirCorrectFactorDefault = 0.9f;

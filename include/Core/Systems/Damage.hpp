@@ -40,12 +40,13 @@ public:
      * @brief Makes the given entity mortal
      *
      * @param entity The entity to make mortal
+     * @param faction The faction of the entity
      * @param physics The physics component of the mortal entity
      * @param health The amount of health to give it
      * @param deathTime How long, in seconds, for the body to stay before being removed
      */
-    void makeMortal(bl::ecs::Entity entity, bl::com::Physics2D& physics, float health,
-                    float deathTime = 0.f);
+    void makeMortal(bl::ecs::Entity entity, fcn::FactionId faction, bl::com::Physics2D& physics,
+                    float health, float deathTime = 0.f);
 
     /**
      * @brief Makes the given entity a giver of damage

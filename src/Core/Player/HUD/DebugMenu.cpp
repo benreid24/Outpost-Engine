@@ -197,7 +197,7 @@ bool DebugMenu::processEvent(const Event& event) {
 
         ecs.emplaceComponent<bl::com::Hitbox2D>(newEntity, transform, Radius);
         auto physics = game.physicsSystem().addPhysicsToEntity(newEntity, bodyDef, shapeDef);
-        game.damageSystem().makeMortal(newEntity, *physics, 100.f);
+        game.damageSystem().makeMortal(newEntity, factions[fi]->getId(), *physics, 100.f);
 
         controlling.unit =
             ecs.emplaceComponent<core::com::Unit>(newEntity, factions[fi]->getId(), *physics);

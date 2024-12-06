@@ -226,6 +226,33 @@ void World::repopulateAllNodeEdges() {
     }
 }
 
+const Node* World::pickFiringPosition(const glm::vec2& comingFrom, const glm::vec2& firingOn,
+                                      float maxDistance, bl::ecs::Entity searcher,
+                                      float distanceWeight, float coverWeight) const {
+    const Node* best = nullptr;
+    float bestScore  = std::numeric_limits<float>::max();
+    distanceWeight   = 1.f - distanceWeight;
+    coverWeight      = 1.f - coverWeight;
+
+    for (const Node& node : nodes) {
+        if (node.getOccupier() != bl::ecs::InvalidEntity && node.getOccupier() != searcher) {
+            continue;
+        }
+
+        // TODO - set/check targeting entity? or drop concept?
+        const float d = glm::distance(comingFrom, node.getPosition());
+        const float c =
+            node.getDistanceToCover(bl::math::computeAngle(node.getPosition(), firingOn));
+        const float score = d * distanceWeight + c * coverWeight;
+        if (score <= bestScore) {
+            best      = &node;
+            bestScore = score;
+        }
+    }
+
+    return best;
+}
+
 void World::addDebugGraphicsToNode(Node& node) {
     constexpr unsigned int CircleTriangleCount = 100;
     constexpr unsigned int CircleVertexCount   = CircleTriangleCount * 3;

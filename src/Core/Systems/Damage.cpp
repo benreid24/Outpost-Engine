@@ -12,9 +12,9 @@ Damage::Damage()
 
 void Damage::init(bl::engine::Engine& e) { engine = &e; }
 
-void Damage::makeMortal(bl::ecs::Entity entity, bl::com::Physics2D& physics, float health,
-                        float deathTime) {
-    engine->ecs().emplaceComponent<com::Combatant>(entity, physics, health, deathTime);
+void Damage::makeMortal(bl::ecs::Entity entity, fcn::FactionId faction, bl::com::Physics2D& physics,
+                        float health, float deathTime) {
+    engine->ecs().emplaceComponent<com::Combatant>(entity, faction, physics, health, deathTime);
 }
 
 void Damage::makeDamager(bl::ecs::Entity entity, float damage) {

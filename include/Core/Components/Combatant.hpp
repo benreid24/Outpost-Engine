@@ -2,6 +2,7 @@
 #define CORE_COMPONENTS_COMBATANT_HPP
 
 #include <BLIB/Components/Physics2D.hpp>
+#include <Core/Factions/FactionId.hpp>
 
 namespace core
 {
@@ -17,12 +18,15 @@ public:
     /**
      * @brief Creates the target component
      *
+     * @param faction The faction that the combatant belongs to
      * @param physics The physics component of the target
      * @param health The health of the target
      * @param deathTime How long the body should stay after death
      */
-    Combatant(bl::com::Physics2D& physics, float health, float deathTime = 0.f)
-    : physics(physics)
+    Combatant(fcn::FactionId faction, bl::com::Physics2D& physics, float health,
+              float deathTime = 0.f)
+    : faction(faction)
+    , physics(physics)
     , hp(health)
     , deathTime(deathTime) {}
 
@@ -30,6 +34,11 @@ public:
      * @brief Returns the entity id of this unit
      */
     bl::ecs::Entity getId() const { return physics.getOwner(); }
+
+    /**
+     * @brief Returns the faction this combatant belongs to
+     */
+    fcn::FactionId getFaction() const { return faction; }
 
     /**
      * @brief Returns the position of the target in world coordinates
@@ -72,6 +81,7 @@ public:
     }
 
 private:
+    fcn::FactionId faction;
     bl::com::Physics2D& physics;
     float hp;
     float deathTime;

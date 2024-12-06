@@ -95,6 +95,7 @@ private:
     bl::ecs::Entity targetEntity;
     com::Combatant* target;
     bool waitingForLowBrain;
+    float waitingTime;
 
     void enterState(State newState);
     void processMovement(const UpdateContext& ctx);
