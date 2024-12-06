@@ -67,6 +67,13 @@ public:
     };
 
     std::vector<Waypoint> waypoints;
+    unsigned int currentWaypoint;
+
+    /**
+     * @brief Creates an empty path
+     */
+    Path()
+    : currentWaypoint(0) {}
 };
 
 } // namespace world

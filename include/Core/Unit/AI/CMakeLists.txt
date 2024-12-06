@@ -3,4 +3,5 @@ target_sources(Core PUBLIC
     MidBrain.hpp
     Notification.hpp
     TopBrain.hpp
+    UpdateContext.hpp
 )

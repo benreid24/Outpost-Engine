@@ -359,6 +359,7 @@ bool World::computePath(const glm::vec2& startPos, const glm::vec2& dst, Path& p
         }
     };
 
+    path.currentWaypoint = 0;
     return PathFinder::findPath({startPos, getNodeAtPosition(startPos)},
                                 {dst, getNodeAtPosition(dst)},
                                 adjacentNodeCb,

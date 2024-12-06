@@ -3,6 +3,7 @@
 
 #include <Core/Components/Combatant.hpp>
 #include <Core/Unit/AI/Notification.hpp>
+#include <Core/Unit/AI/UpdateContext.hpp>
 #include <glm/glm.hpp>
 
 namespace core
@@ -37,11 +38,11 @@ public:
         // Low brain is firing at a target
         Firing,
 
-        // Low brain is done with prior order
-        Done = Idle,
-
         /// Low brain could not complete command
         Failed,
+
+        // Low brain is done with prior order
+        Done = Idle,
     };
 
     /**
@@ -59,9 +60,9 @@ public:
     /**
      * @brief Performs the low level AI update
      *
-     * @param dt Time elapsed, in seconds, since the last call to update
+     * @param ctx The update context
      */
-    void update(float dt);
+    void update(const UpdateContext& ctx);
 
     /**
      * @brief Notify the low brain of an event affecting its unit

@@ -14,14 +14,14 @@ LowBrain::LowBrain(com::Unit& owner)
 : owner(owner)
 , state(Idle) {}
 
-void LowBrain::update(float dt) {
+void LowBrain::update(const UpdateContext& ctx) {
     switch (state) {
     case Moving:
-        processMove(dt);
+        processMove(ctx.dt);
         break;
 
     case Firing:
-        processFire(dt);
+        processFire(ctx.dt);
         break;
 
     default:
