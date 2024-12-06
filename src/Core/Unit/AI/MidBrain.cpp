@@ -127,7 +127,11 @@ void MidBrain::processMovement(const UpdateContext& ctx) {
 }
 
 void MidBrain::processShooting(const UpdateContext& ctx) {
-    //
+    // check if we have a line and are in range
+    const float distance = glm::distance(owner.getPosition(), target->getPosition());
+    if (distance >= 0.f) {
+        // TODO - pick position + move
+    }
 }
 
 } // namespace ai

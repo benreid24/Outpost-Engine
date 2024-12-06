@@ -61,12 +61,6 @@ void Unit::update(std::mutex&, float dt, float, float, float) {
     doCapabilities(dt);
 }
 
-// void Unit::processAI(float dt) {
-//     units->forEach([this, dt](bl::ecs::Entity entity, com::Unit& unit) {
-//         processHighLevelAI(entity, unit, dt);
-//     });
-// }
-
 void Unit::doCapabilities(float dt) {
     units->forEach([this, dt](bl::ecs::Entity entity, com::Unit& unit) {
         auto* rotater = unit.capabilities().get<unit::Capability::Rotate>();
@@ -203,123 +197,6 @@ void Unit::doCapabilities(float dt) {
 //             }
 //         }
 //     }
-// }
-
-// void Unit::processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit,
-//                                     com::Unit::CmdHandle& cmd, float dt) {
-//     using Waypoint = unit::Path::Waypoint;
-//
-//     if (!unit.canMove()) {
-//         cmd.markFailed();
-//         return;
-//     }
-//
-//     auto& game          = bl::game::Game::getInstance<core::Game>();
-//     auto world          = game.engine().getWorld<world::World>(entity.getWorldIndex());
-//     auto& mover         = unit.getMover();
-//     auto& ctx           = unit.commandStates[cmd->getConcurrencyType()].getPathContext();
-//     const glm::vec2 pos = unit.physics.getTransform().getGlobalPosition();
-//
-//     // first make sure we have a path
-//     if (ctx.path.waypoints.empty()) {
-//         if (!world->computePath(unit.physics.getTransform().getGlobalPosition(),
-//                                 cmd->getTargetPosition(),
-//                                 ctx.path)) {
-//             cmd.markFailed();
-//             cmd.release();
-//             return;
-//         }
-//         ctx.currentNode = 0;
-//     }
-//
-//     const Waypoint node     = ctx.path.waypoints[ctx.currentNode];
-//     const float distance    = glm::distance(pos, node.position);
-//     const float targetAngle = bl::math::computeAngle(pos, node.position);
-//
-//     // point towards next node
-//     const float angle     = unit.physics.getTransform().getRotation();
-//     const float angleDiff = std::abs(angle - targetAngle);
-//     if (angleDiff > 1.f) {
-//         rotateUnit(unit, targetAngle, dt);
-//         if (distance / mover.maxSpeed < angleDiff / mover.rotateRate) { return; }
-//     }
-//
-//     // move towards target
-//     if (distance < Properties.UnitAiDistanceStopThresh.get()) {
-//         if (ctx.currentNode == ctx.path.waypoints.size() - 1) {
-//             cmd.markComplete();
-//             unit.commandStates[cmd->getConcurrencyType()].clear();
-//             cmd.release();
-//         }
-//         else {
-//             ++ctx.currentNode;
-//             processMoveToNodeCommand(entity, unit, cmd, dt);
-//         }
-//     }
-//     else {
-//         const bool occupied = node.worldNode &&
-//                               node.worldNode->getOccupier() != bl::ecs::InvalidEntity &&
-//                               node.worldNode->getOccupier() != entity;
-//         if (occupied || !world->pathToPositionIsClear(pos, node.position)) {
-//             ctx.path.waypoints.clear();
-//             processMoveToNodeCommand(entity, unit, cmd, dt);
-//         }
-//         else { mover.move(unit::Moveable::Forward); }
-//     }
-// }
-
-// void Unit::processKillUnitCommand(com::Unit& unit, com::Unit::CmdHandle& cmd, float dt) {
-//     if (!unit.canShoot()) {
-//         cmd.markFailed();
-//         cmd.release();
-//         return;
-//     }
-//
-//     auto& game    = bl::game::Game::getInstance<core::Game>();
-//     auto& mover   = unit.getMover();
-//     auto& shooter = unit.getShooter();
-//
-//     // stop if target dead
-//     if (!game.engine().ecs().entityExists(cmd->getTargetUnit()->getId())) {
-//         cmd.markComplete();
-//         cmd.release();
-//         return;
-//     }
-//     else {
-//         com::Mortal* m =
-//             game.engine().ecs().getComponent<com::Mortal>(cmd->getTargetUnit()->getId());
-//         if (m && m->health <= 0.f) {
-//             cmd.markComplete();
-//             cmd.release();
-//             return;
-//         }
-//     }
-//
-//     // point towards target and fire if close enough
-//     const float angle = unit.physics.getTransform().getRotation();
-//     const float targetAngle =
-//         bl::math::computeAngle(unit.physics.getTransform().getGlobalPosition(),
-//                                cmd->getTargetUnit()->physics.getTransform().getGlobalPosition());
-//     if (std::abs(angle - targetAngle) > 1.f) { rotateUnit(unit, targetAngle, dt); }
-//     else { shooter.fire(); }
-// }
-
-// void Unit::rotateUnit(com::Unit& unit, float target, float dt) {
-//     auto dir          = unit::Moveable::Clockwise;
-//     const float angle = unit.physics.getTransform().getRotation();
-//     float opposite    = angle + 180.f;
-//     if (opposite >= 360.f) {
-//         opposite -= 360.f;
-//         if (target < angle && target > opposite) { dir = unit::Moveable::CounterClockwise; }
-//     }
-//     else {
-//         if (target < angle || target > opposite) { dir = unit::Moveable::CounterClockwise; }
-//     }
-//
-//     const float maxRot = unit.getMover().rotateRate * dt;
-//     const float diff   = std::abs(angle - target);
-//     const float factor = diff >= maxRot ? 1.f : diff / maxRot;
-//     unit.getMover().rotate(dir, factor);
 // }
 
 } // namespace sys

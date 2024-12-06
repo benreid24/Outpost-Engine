@@ -78,7 +78,7 @@ void World::addCover(glm::vec2 pos, glm::vec2 size, float angle) {
     auto bodyDef      = b2DefaultBodyDef();
     auto shapeDef     = b2DefaultShapeDef();
     bodyDef.type      = b2_staticBody;
-    shapeDef.filter   = Collisions::getCoverFilter();
+    shapeDef.filter   = Collisions::getTallCoverFilter(); // TODO - parameterize
     shapeDef.friction = 0.f;
     engine().ecs().emplaceComponent<bl::com::Hitbox2D>(entity, transform, size);
     game.physicsSystem().addPhysicsToEntity(entity, bodyDef, shapeDef);
@@ -375,6 +375,18 @@ bool World::pathToPositionIsClear(const glm::vec2& start, const glm::vec2& end) 
                                                   {diff.x, diff.y},
                                                Collisions::getUnitMovementQueryFilter());
     return !result.hit;
+}
+
+com::Combatant* World::lineOfSightIsClear(const glm::vec2& pos, com::Combatant* target) const {
+    const float s        = getWorldToBoxScale();
+    const glm::vec2 diff = (target->getPosition() - pos) * s;
+    const auto result    = b2World_CastRayClosest(getBox2dWorldId(),
+                                                  {pos.x * s, pos.y * s},
+                                                  {diff.x, diff.y},
+                                               Collisions::getLineOfSightQueryFilter());
+    if (!result.hit) { return target; }
+    auto* phys = bl::sys::Physics2D::getPhysicsComponentFromShape(result.shapeId);
+    return engine().ecs().getComponent<com::Combatant>(phys->getOwner());
 }
 
 bool World::pathToNodeIsClear(const glm::vec2& pos, const Node& node) const {

@@ -4,9 +4,16 @@ namespace core
 {
 namespace world
 {
-b2Filter Collisions::getCoverFilter() {
+b2Filter Collisions::getShortCoverFilter() {
     b2Filter filter     = b2DefaultFilter();
-    filter.categoryBits = Category::Cover;
+    filter.categoryBits = Category::ShortCover;
+    filter.maskBits     = Category::All;
+    return filter;
+}
+
+b2Filter Collisions::getTallCoverFilter() {
+    b2Filter filter     = b2DefaultFilter();
+    filter.categoryBits = Category::TallCover;
     filter.maskBits     = Category::All;
     return filter;
 }
@@ -42,14 +49,14 @@ b2Filter Collisions::getSensorFilter() {
 b2QueryFilter Collisions::getCoverQueryFilter() {
     b2QueryFilter filter = b2DefaultQueryFilter();
     filter.categoryBits  = Category::CoverQueryRay;
-    filter.maskBits      = Category::Cover;
+    filter.maskBits      = Category::ShortCover;
     return filter;
 }
 
 b2QueryFilter Collisions::getNodeConnectionFilter() {
     b2QueryFilter filter = b2DefaultQueryFilter();
     filter.categoryBits  = Category::SensorQueryRay;
-    filter.maskBits      = Category::Cover | Category::WorldSensor;
+    filter.maskBits      = Category::ShortCover | Category::TallCover | Category::WorldSensor;
     return filter;
 }
 
@@ -74,10 +81,18 @@ b2QueryFilter Collisions::getTargetQueryFilter() {
     return filter;
 }
 
+b2QueryFilter Collisions::getLineOfSightQueryFilter() {
+    b2QueryFilter filter = b2DefaultQueryFilter();
+    filter.categoryBits  = Category::Unit | Category::Building;
+    filter.maskBits =
+        Category::TallCover | Category::ShortCover | Category::Unit | Category::Building;
+    return filter;
+}
+
 b2QueryFilter Collisions::getUnitMovementQueryFilter() {
     b2QueryFilter filter = b2DefaultQueryFilter();
     filter.categoryBits  = Category::Unit;
-    filter.maskBits      = Category::Unit | Category::Cover;
+    filter.maskBits      = Category::Unit | Category::ShortCover | Category::TallCover;
     return filter;
 }
 

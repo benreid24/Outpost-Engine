@@ -154,6 +154,15 @@ public:
     bool pathToNodeIsClear(const glm::vec2& pos, const Node& node) const;
 
     /**
+     * @brief Tests whether the line of sight to the given target is clear
+     *
+     * @param pos The position to test from
+     * @param target The target to test the line to
+     * @return The target that will be hit first from the given position along the line
+     */
+    com::Combatant* lineOfSightIsClear(const glm::vec2& pos, com::Combatant* target) const;
+
+    /**
      * @brief Queries the world and returns the units contained within the given region
      *
      * @param area The region to query, in world coordinates
