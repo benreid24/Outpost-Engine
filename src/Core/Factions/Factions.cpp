@@ -24,7 +24,7 @@ Faction* Factions::createFaction(std::string_view name) {
     }
 
     const FactionId::IdType index = freeIds.allocate();
-    const FactionId newId(0x1 << index);
+    const FactionId newId(0x1ll << index);
     auto& factionSlot = factions[index];
     factionSlot.emplace(bl::util::EmplaceHelper([newId]() { return Faction(newId); }));
     Faction& faction = factionSlot.get();

@@ -46,6 +46,11 @@ void MidBrain::notify(const Notification& n) {
     }
 }
 
+void MidBrain::makeIdle() {
+    enterState(Done);
+    lowBrain.makeIdle();
+}
+
 void MidBrain::attackTarget(com::Combatant* t) {
     enterState(MovingToKill);
     targetEntity = t->getId();

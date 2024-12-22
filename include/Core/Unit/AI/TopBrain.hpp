@@ -17,6 +17,10 @@ namespace ai
  */
 class TopBrain {
 public:
+    /// The state of the most recently issued command
+    enum struct CommandState { Done, Executing, Failed };
+
+    /// The state of the AI
     enum State {
         // Idle states
         Idle,
@@ -51,6 +55,11 @@ public:
     State getState() const { return state; }
 
     /**
+     * @brief Returns the execution state of the most recent command
+     */
+    CommandState getCommandState() const { return commandState; }
+
+    /**
      * @brief Performs the top level AI update
      *
      * @param ctx The update context
@@ -71,11 +80,21 @@ public:
      */
     void issueCommand(const cmd::UnitCommand& cmd);
 
+    /**
+     * @brief Cancels the current action of the brain
+     *
+     * @param commandState The new command state to enter
+     */
+    void makeIdle(CommandState commandState = CommandState::Done);
+
 private:
     com::Unit& owner;
     MidBrain& midBrain;
+    CommandState commandState;
     State state;
     cmd::AggroLevel stance;
+
+    void checkMidBrainResult();
 };
 
 } // namespace ai

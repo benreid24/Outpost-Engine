@@ -72,6 +72,11 @@ public:
     void notify(const Notification& notification);
 
     /**
+     * @brief Cancels the current action of the brain
+     */
+    void makeIdle();
+
+    /**
      * @brief Commands the low level brain to move directly to the given position. Does not path
      * find
      *

@@ -11,7 +11,27 @@ UnitAI::UnitAI(com::Unit& owner)
 , lowBrain(owner) {}
 
 void UnitAI::update(const unit::ai::UpdateContext& ctx) {
-    // TODO - command queue management
+    if (commandQueue.hasCommand()) {
+        using State           = unit::ai::TopBrain::CommandState;
+        bool issueNextCommand = false;
+        switch (topBrain.getCommandState()) {
+        case State::Done:
+            commandQueue.completeCurrentCommand();
+            issueNextCommand = true;
+            break;
+        case State::Failed:
+            commandQueue.failCurrentCommand();
+            issueNextCommand = true;
+            break;
+        case State::Executing:
+        default:
+            break;
+        }
+
+        if (issueNextCommand && commandQueue.hasCommand()) {
+            topBrain.issueCommand(commandQueue.getCurrentCommand());
+        }
+    }
 
     topBrain.update(ctx);
     midBrain.update(ctx);
@@ -26,7 +46,14 @@ void UnitAI::notify(const unit::ai::Notification& n) {
 
 void UnitAI::queueCommand(const cmd::UnitCommandHandle& cmd, cmd::AddMode addMode) {
     auto local = cmd;
-    commandQueue.queueCommand(std::move(local), addMode);
+    if (commandQueue.queueCommand(std::move(local), addMode)) {
+        topBrain.issueCommand(commandQueue.getCurrentCommand());
+    }
+}
+
+void UnitAI::startNextCommand() {
+    topBrain.makeIdle();
+    topBrain.issueCommand(commandQueue.getCurrentCommand());
 }
 
 } // namespace com

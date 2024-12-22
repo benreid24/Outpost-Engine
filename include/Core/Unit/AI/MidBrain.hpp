@@ -72,6 +72,11 @@ public:
     void notify(const Notification& notification);
 
     /**
+     * @brief Cancels the current action of the brain
+     */
+    void makeIdle();
+
+    /**
      * @brief Commands the brain to attack a target, possibly moving to get a better angle
      *
      * @param target The target to attack

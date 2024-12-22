@@ -51,6 +51,8 @@ void LowBrain::notify(const Notification& n) {
     }
 }
 
+void LowBrain::makeIdle() { state = Done; }
+
 void LowBrain::moveToPosition(const glm::vec2& pos) {
     state          = Moving;
     targetPosition = pos;

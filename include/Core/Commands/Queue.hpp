@@ -62,42 +62,46 @@ public:
      *
      * @param command The command to queue
      * @param addType How to do the add
+     * @return Whether the current command changed or not
      */
-    void queueCommand(ExternalHandle<T>&& command, AddMode addType = AddMode::QueueEnd) {
+    bool queueCommand(ExternalHandle<T>&& command, AddMode addType = AddMode::QueueEnd) {
         const auto makeCurrent = [this, &command]() {
             currentCommand = std::forward<ExternalHandle<T>>(command);
             currentCommand.markQueued();
             currentCommand.markInProgress();
         };
 
-        if (!currentCommand) { makeCurrent(); }
+        if (!currentCommand) {
+            makeCurrent();
+            return true;
+        }
         else {
             switch (addType) {
             case AddMode::QueueEnd:
                 queue.emplace_back(ExecutorHandle<T>(std::forward<ExternalHandle<T>>(command)));
                 queue.back().markQueued();
-                break;
+                return false;
 
             case AddMode::QueueStart:
                 queue.emplace_front(ExecutorHandle<T>(std::forward<ExternalHandle<T>>(command)));
                 queue.front().markQueued();
-                break;
+                return false;
 
             case AddMode::Immediate:
                 currentCommand.markQueued();
                 queue.emplace_front(std::move(currentCommand));
                 makeCurrent();
-                break;
+                return true;
 
             case AddMode::ReplaceAll:
                 currentCommand.markCanceled();
                 for (unsigned int i = 0; i < queue.size(); ++i) { queue[i].markCanceled(); }
                 queue.clear();
                 makeCurrent();
-                break;
+                return true;
 
             default:
-                break;
+                return false;
             }
         }
     }
@@ -107,7 +111,7 @@ private:
     bl::ctr::StaticRingBuffer<ExecutorHandle<T>, Size> queue;
 
     void popQueue() {
-        currentCommand->release();
+        currentCommand.release();
         if (!queue.empty()) {
             currentCommand = std::move(queue.front());
             queue.pop_front();

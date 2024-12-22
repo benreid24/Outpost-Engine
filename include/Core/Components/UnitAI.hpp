@@ -57,6 +57,8 @@ private:
     unit::ai::MidBrain midBrain;
     unit::ai::LowBrain lowBrain;
     cmd::Queue<cmd::UnitCommand, CommandQueueSize> commandQueue;
+
+    void startNextCommand();
 };
 
 } // namespace com
