@@ -32,7 +32,7 @@ public:
     : acceleration(Properties.UnitAccelerationDefault.get())
     , maxSpeed(Properties.UnitMaxSpeedDefault.get())
     , directionCorrectionFactor(Properties.UnitDirCorrectFactorDefault.get())
-    , damping(Properties.UnitDampingFactor.get())
+    , damping(Properties.UnitDampingFactor.get() * maxSpeed)
     , moveDir(NoMove)
     , moveFactor(1.f)
     , slowdownStart(-1.f) {}

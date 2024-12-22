@@ -54,8 +54,8 @@ void LowBrain::notify(const Notification& n) {
 void LowBrain::makeIdle() { state = Done; }
 
 void LowBrain::moveToPosition(const glm::vec2& pos) {
-    state          = Moving;
-    targetPosition = pos;
+    state                   = Moving;
+    movement.targetPosition = pos;
 }
 
 void LowBrain::fireAtTarget(com::Combatant* target) {
@@ -73,15 +73,15 @@ void LowBrain::processMove(float dt) {
     }
 
     const glm::vec2 pos     = owner.getPosition();
-    const float distance    = glm::distance(pos, targetPosition);
-    const float targetAngle = bl::math::computeAngle(pos, targetPosition);
+    const float distance    = glm::distance(pos, movement.targetPosition);
+    const float targetAngle = bl::math::computeAngle(pos, movement.targetPosition);
 
     // point towards position
     const float angle     = owner.getRotation();
     const float angleDiff = std::abs(angle - targetAngle);
     if (angleDiff > 1.f) {
         rotate(targetAngle, dt);
-        if (distance / mover->maxSpeed < angleDiff / rotater->rotateRate) { return; }
+        if (distance / mover->maxSpeed < angleDiff / rotater->rotateRate * 0.4f) { return; }
     }
 
     // check if done
@@ -91,7 +91,7 @@ void LowBrain::processMove(float dt) {
     }
 
     // move towards position
-    mover->move(able::Move::Forward);
+    mover->move(able::Move::Forward, 1.f - angleDiff / 180.f);
 }
 
 void LowBrain::processFire(float dt) {

@@ -55,16 +55,12 @@ void Unit::init(bl::engine::Engine& e) {
     units  = &e.ecs().getAllComponents<com::Unit>();
 }
 
-void Unit::update(std::mutex&, float dt, float, float, float) {
-    // TODO - build tiered AI state machine
-    // processAI(dt);
-    doCapabilities(dt);
-}
+void Unit::update(std::mutex&, float dt, float, float, float) { doCapabilities(dt); }
 
 void Unit::doCapabilities(float dt) {
     units->forEach([this, dt](bl::ecs::Entity entity, com::Unit& unit) {
         auto* rotater = unit.capabilities().get<unit::Capability::Rotate>();
-        if (rotater) {
+        if (rotater && rotater->rotateDir != unit::able::Rotate::NoRotate) {
             using Dir        = unit::able::Rotate::RotateDirection;
             const float sign = rotater->rotateDir == Dir::Clockwise ? 1.f : -1.f;
             unit.physics.getTransform().rotate(sign * rotater->rotateRate * rotater->rotateFactor *
@@ -162,42 +158,6 @@ void Unit::doCapabilities(float dt) {
         }
     });
 }
-
-// void Unit::processHighLevelAI(bl::ecs::Entity entity, com::Unit& unit, float dt) {
-//     // first move queued actions into slots if possible
-//     while (!unit.queuedCommands.empty()) {
-//         auto& cmd  = unit.queuedCommands.front();
-//         auto& slot = unit.activeCommands[cmd->getConcurrencyType()];
-//         if (!slot || slot->isTerminal()) {
-//             slot = std::move(cmd);
-//             slot.markInProgress();
-//             unit.commandStates[slot->getConcurrencyType()].init(*slot);
-//             unit.queuedCommands.pop_front();
-//         }
-//         else { break; }
-//     }
-//
-//     // process active commands
-//     using Type = cmd::UnitCommand::Type;
-//     for (int i = 0; i < cmd::UnitCommand::ConcurrencyType::COUNT; ++i) {
-//         auto& cmd = unit.activeCommands[i];
-//         if (cmd && !cmd->isTerminal()) {
-//             switch (cmd->getType()) {
-//             case Type::MoveToPosition:
-//                 processMoveToNodeCommand(entity, unit, cmd, dt);
-//                 break;
-//             case Type::KillUnit:
-//                 processKillUnitCommand(unit, cmd, dt);
-//                 break;
-//             default:
-//                 BL_LOG_ERROR << "Invalid command type: " << cmd->getType();
-//                 cmd.markFailed();
-//                 cmd.release();
-//                 break;
-//             }
-//         }
-//     }
-// }
 
 } // namespace sys
 } // namespace core

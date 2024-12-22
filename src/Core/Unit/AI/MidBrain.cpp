@@ -52,7 +52,7 @@ void MidBrain::makeIdle() {
 }
 
 void MidBrain::attackTarget(com::Combatant* t) {
-    enterState(MovingToKill);
+    enterState(ShootingToKill);
     targetEntity = t->getId();
     target       = t;
 }

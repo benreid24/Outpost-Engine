@@ -205,6 +205,8 @@ bool DebugMenu::processEvent(const Event& event) {
         controlling.unit->capabilities().add<unit::Capability::Rotate>();
         controlling.unit->capabilities().add<unit::Capability::Shoot>();
 
+        ecs.emplaceComponent<core::com::UnitAI>(newEntity, *controlling.unit);
+
         onEntityControl(newEntity);
     };
 

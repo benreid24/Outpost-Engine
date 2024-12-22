@@ -56,7 +56,7 @@ public:
     UnitCommand(Type type, AggroLevel aggroLevel, com::Combatant* target)
     : Command(aggroLevel)
     , type(type) {
-        target = target;
+        targetCombatant = target;
     }
 
     /**
@@ -72,14 +72,14 @@ public:
     /**
      * @brief Returns the target of this command
      */
-    com::Combatant* getTarget() const { return target; }
+    com::Combatant* getTarget() const { return targetCombatant; }
 
 private:
     Type type;
 
     union {
         glm::vec2 targetPosition;
-        com::Combatant* target;
+        com::Combatant* targetCombatant;
     };
 };
 

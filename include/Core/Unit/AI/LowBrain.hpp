@@ -96,7 +96,10 @@ private:
     State state;
     com::Unit& owner;
     union {
-        glm::vec2 targetPosition;
+        struct {
+            glm::vec2 targetPosition;
+        } movement;
+
         struct {
             bl::ecs::Entity entity;
             com::Combatant* target;
