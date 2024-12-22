@@ -29,8 +29,6 @@ namespace com
  */
 class Unit {
 public:
-    static constexpr std::size_t CommandQueueSize = 4;
-
     /**
      * @brief Creates a unit that cannot move or shoot
      *
@@ -64,25 +62,12 @@ public:
      */
     unit::Capabilities& capabilities() { return abilities; }
 
-    /**
-     * @brief Queues a command to be carried out by the unit
-     *
-     * @param command The command to perform
-     * @param addMode How to add the command to the queue
-     */
-    void queueCommand(const cmd::UnitCommandHandle& command,
-                      cmd::AddMode addMode = cmd::AddMode::QueueEnd);
-
 private:
     bl::com::Physics2D& physics;
 
     // unit data and components
     fcn::FactionId faction;
     unit::Capabilities abilities;
-
-    // unit AI & command state
-    cmd::Queue<cmd::UnitCommand, CommandQueueSize> commandQueue;
-    // TODO - AI state
 
     friend class sys::Unit;
 };

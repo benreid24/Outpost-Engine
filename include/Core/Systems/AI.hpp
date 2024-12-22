@@ -1,34 +1,31 @@
-#ifndef CORE_SYSTEMS_UNIT_HPP
-#define CORE_SYSTEMS_UNIT_HPP
+#ifndef CORE_SYSTEMS_AI_HPP
+#define CORE_SYSTEMS_AI_HPP
 
-#include <BLIB/ECS.hpp>
 #include <BLIB/Engine/System.hpp>
-#include <Core/Components/Unit.hpp>
+#include <Core/Components/UnitAI.hpp>
 
 namespace core
 {
 namespace sys
 {
 /**
- * @brief System that handles unit level AI and resolves unit actions
+ * @brief System that performs AI for units, squads, and actors
  *
  * @ingroup Systems
- * @ingroup Unit
  */
-class Unit : public bl::engine::System {
+class AI : public bl::engine::System {
 public:
     /**
      * @brief Destroys the system
      */
-    virtual ~Unit() = default;
+    virtual ~AI() = default;
 
 private:
     bl::engine::Engine* engine;
-    bl::ecs::ComponentPool<com::Unit>* units;
+    bl::ecs::ComponentPool<com::UnitAI>* unitAIs;
 
     void init(bl::engine::Engine& engine) override;
     void update(std::mutex&, float dt, float, float, float) override;
-    void doCapabilities(float dt);
 };
 
 } // namespace sys

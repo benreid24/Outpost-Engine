@@ -51,7 +51,7 @@ bool TempUnitController::processEvent(const Event& event) {
     if (event.source().type == sf::Event::MouseMoved) {
         if (controlling) {
             if (event.target()) {
-                auto* unit = game.engine().ecs().getComponent<com::Unit>(event.target()->getId());
+                auto* unit = game.engine().ecs().getComponent<com::UnitAI>(event.target()->getId());
                 if (unit != controlling) { makeAttackState(); }
                 else { makeMoveState(); }
             }
@@ -75,7 +75,7 @@ bool TempUnitController::processEvent(const Event& event) {
                 self = event.target();
                 controlling =
                     event.target() ?
-                        game.engine().ecs().getComponent<com::Unit>(event.target()->getId()) :
+                        game.engine().ecs().getComponent<com::UnitAI>(event.target()->getId()) :
                         nullptr;
                 if (controlling) { makeMoveState(); }
                 return true;
@@ -91,7 +91,7 @@ bool TempUnitController::processEvent(const Event& event) {
     return false;
 }
 
-void TempUnitController::observe(const bl::ecs::event::ComponentRemoved<com::Unit>& event) {
+void TempUnitController::observe(const bl::ecs::event::ComponentRemoved<com::UnitAI>& event) {
     if (&event.component == controlling) {
         controlling = nullptr;
         makeEmptyState();

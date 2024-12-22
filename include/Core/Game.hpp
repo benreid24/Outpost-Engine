@@ -6,6 +6,7 @@
 #include <BLIB/Systems/Physics2D.hpp>
 #include <Core/Commands/CommandStore.hpp>
 #include <Core/Factions/Factions.hpp>
+#include <Core/Systems/AI.hpp>
 #include <Core/Systems/Damage.hpp>
 #include <Core/Systems/Movement.hpp>
 #include <Core/Systems/Render.hpp>
@@ -72,6 +73,11 @@ public:
      */
     unit::SquadManager& squadManager() { return *squads; }
 
+    /**
+     * @brief Returns the AI system
+     */
+    sys::AI& aiSystem() { return *ai; }
+
 protected:
     /**
      * @brief Early startup tasks shared by both editor and game go in here
@@ -110,6 +116,7 @@ private:
     cmd::CommandStore commands;
     fcn::Factions factionStore;
     unit::SquadManager* squads;
+    sys::AI* ai;
 };
 
 } // namespace core
