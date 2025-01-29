@@ -152,7 +152,7 @@ private:
         return *this;
     }
 
-    template<typename T, std::size_t N>
+    template<typename U, std::size_t N>
     friend class Queue;
 };
 
