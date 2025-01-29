@@ -5,12 +5,15 @@
 #include <Core/Commands/Queue.hpp>
 #include <Core/Commands/SquadCommand.hpp>
 #include <Core/Components/Unit.hpp>
+#include <Core/Components/UnitAI.hpp>
 #include <vector>
 
 namespace core
 {
 namespace unit
 {
+class SquadManager;
+
 /**
  * @brief A collection of units that can be issued higher level commands
  *
@@ -62,9 +65,17 @@ public:
                       cmd::AddMode addMode = cmd::AddMode::QueueEnd);
 
 private:
+    struct SquadUnit {
+        com::Unit* unit;
+        com::UnitAI* ai;
+    };
+
     fcn::FactionId faction;
-    std::vector<com::Unit*> units;
+    std::vector<SquadUnit> units;
     cmd::Queue<cmd::SquadCommand, CommandQueueSize> commandQueue;
+    std::vector<cmd::UnitCommandHandle> unitCommands;
+
+    friend class SquadManager;
 };
 
 } // namespace unit

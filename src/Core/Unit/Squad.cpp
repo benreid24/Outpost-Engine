@@ -1,5 +1,7 @@
 #include <Core/Unit/Squad.hpp>
 
+#include <Core/Game.hpp>
+
 namespace core
 {
 namespace unit
@@ -9,16 +11,18 @@ Squad::Squad(fcn::FactionId faction)
 
 bool Squad::addUnit(com::Unit* unit) {
     if (unit->getFaction() != faction) { return false; }
-    for (com::Unit* u : units) {
-        if (u == unit) { return true; }
+    for (auto& u : units) {
+        if (u.unit == unit) { return true; }
     }
-    units.emplace_back(unit);
+
+    auto& game = bl::game::Game::getInstance<Game>();
+    units.emplace_back(unit, game.engine().ecs().getComponent<com::UnitAI>(unit->getId()));
     return true;
 }
 
 void Squad::removeUnit(com::Unit* unit) {
     for (auto it = units.begin(); it != units.end(); ++it) {
-        if (*it == unit) {
+        if (it->unit == unit) {
             units.erase(it);
             return;
         }

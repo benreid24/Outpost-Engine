@@ -61,7 +61,12 @@ public:
     /**
      * @brief Returns the target position of the command
      */
-    const glm::vec2& getTargetPosition() { return position; }
+    const glm::vec2& getTargetPosition() const { return position; }
+
+    /**
+     * @brief Returns the target of the command
+     */
+    com::Combatant* getTarget() const { return target; }
 
 private:
     Type type;

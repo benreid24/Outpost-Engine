@@ -51,6 +51,19 @@ private:
 
     virtual void init(bl::engine::Engine& engine) override;
     virtual void update(std::mutex&, float dt, float, float, float) override;
+
+    void issueUnitCommands(Squad& squad);
+    void checkUnitCommands(Squad& squad);
+
+    template<typename CommandFactory>
+    void doCommandCreateAndIssue(Squad& squad, CommandFactory&& factory) {
+        for (auto& unit : squad.units) {
+            if (unit.ai) {
+                auto& unitCmd = squad.unitCommands.emplace_back(factory());
+                unit.ai->queueCommand(unitCmd);
+            }
+        }
+    }
 };
 
 } // namespace unit
