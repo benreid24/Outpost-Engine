@@ -68,6 +68,14 @@ private:
     struct SquadUnit {
         com::Unit* unit;
         com::UnitAI* ai;
+
+        SquadUnit()
+        : unit(nullptr)
+        , ai(nullptr) {}
+
+        SquadUnit(com::Unit* unit, com::UnitAI* ai)
+        : unit(unit)
+        , ai(ai) {}
     };
 
     fcn::FactionId faction;
