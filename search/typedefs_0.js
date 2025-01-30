@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['entitycontrol_632',['EntityControl',['../a00200.html#a362a94172d86c7b7662228aeab1b7516',1,'core::input']]]
+  ['capabilities_0',['Capabilities',['../a00282.html#ga17bb1f8b45c39692bb407bf24d200a61',1,'core::unit']]]
 ];

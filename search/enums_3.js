@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rotatedirection_637',['RotateDirection',['../a00351.html#aad2f0ba262db6036806dc5724c7e22a2',1,'core::unit::Moveable']]]
+  ['movedirection_0',['MoveDirection',['../a00527.html#a2c16281c76635a722a1a781cd166d1e5',1,'core::unit::able::Move']]]
 ];

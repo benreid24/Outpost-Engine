@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['right_672',['Right',['../a00351.html#ad5cbe3c2b12c98f5c1ee598b7ae1a623aa7dbf5180e7fc284c9daf3bb3dd435d4',1,'core::unit::Moveable']]]
+  ['path_0',['Path',['../a00567.html#aaf7bf4950c4a2bf777e6018296ef2c72a8fa9238f3458937c9b29c35ae2db66cd',1,'core::world::Node']]],
+  ['pause_1',['Pause',['../a00285.html#ggaf9a43071401d217a03ca35e89affedf2a49a69734c9eaf47436751b36372b85d7',1,'core::input::Control']]]
 ];
