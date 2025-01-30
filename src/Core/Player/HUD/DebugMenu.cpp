@@ -31,8 +31,14 @@ void DebugMenu::init(GUI& gui) {
     tabs->addPage(
         "console", "Console", createConsoleTab(), [this]() { currentTopTab = TopTab::Console; });
     tabs->addPage("world", "World", createWorldTab(), [this]() { currentTopTab = TopTab::World; });
-    tabs->addPage(
-        "entity", "Entity", createEntityTab(), [this]() { currentTopTab = TopTab::Entity; });
+    tabs->addPage("factions", "Factions", createFactionsTab(), [this]() {
+        currentTopTab = TopTab::Factions;
+        refreshFactions();
+    });
+    tabs->addPage("entity", "Entity", createEntityTab(), [this]() {
+        currentTopTab = TopTab::Entity;
+        refreshFactions();
+    });
     currentTopTab = TopTab::Console;
 
     window->pack(tabs, true, true);
@@ -91,6 +97,28 @@ Element::Ptr DebugMenu::createWorldTab() {
     return worldTabs;
 }
 
+Element::Ptr DebugMenu::createFactionsTab() {
+    auto content = makeBoxV();
+
+    auto row    = makeBoxH();
+    factionName = TextEntry::create();
+    factionName->setRequisition({120.f, 30.f});
+    auto createBut = Button::create("Create");
+    createBut->getSignal(bl::gui::Event::LeftClicked)
+        .willCall(std::bind(&DebugMenu::onFactionCreate, this));
+    row->pack(Label::create("Name:"), false, true);
+    row->pack(factionName, true, true);
+    row->pack(createBut, false, true);
+    content->pack(row, true, false);
+
+    factionBox = ScrollArea::create(LinePacker::create(LinePacker::Vertical, 4.f));
+    factionBox->setMaxSize({600.f, 200.f});
+    content->pack(Label::create("Factions:"), true, false);
+    content->pack(factionBox, true, false);
+
+    return content;
+}
+
 Element::Ptr DebugMenu::createEntityTab() {
     auto entityBox = makeBoxH();
     auto leftBox   = makeBoxV();
@@ -104,7 +132,11 @@ Element::Ptr DebugMenu::createEntityTab() {
     auto controlEntity = RadioButton::create("Control", "control", entityRadioGroup);
     auto killEntity    = RadioButton::create("Kill", "kill", entityRadioGroup);
     placeEntity->setValue(true);
-    leftBox->pack(placeEntity);
+    auto createRow      = makeBoxH();
+    entityFactionSelect = ComboBox::create();
+    createRow->pack(entityFactionSelect);
+    createRow->pack(placeEntity);
+    leftBox->pack(createRow);
     leftBox->pack(controlEntity);
     leftBox->pack(killEntity);
 
@@ -148,6 +180,9 @@ bool DebugMenu::processEvent(const Event& event) {
     core::world::World& world = static_cast<core::world::World&>(player.getCurrentWorld());
 
     const auto createEntity = [this, &player, &event, &ecs, &game]() {
+        const int fi = entityFactionSelect->getSelectedOption();
+        if (fi < 0 || fi >= factions.size()) { return; }
+
         constexpr float Radius = 30.f;
         const auto newEntity   = player.getCurrentWorld().createEntity();
         auto* transform =
@@ -162,11 +197,15 @@ bool DebugMenu::processEvent(const Event& event) {
 
         ecs.emplaceComponent<bl::com::Hitbox2D>(newEntity, transform, Radius);
         auto physics = game.physicsSystem().addPhysicsToEntity(newEntity, bodyDef, shapeDef);
-        ecs.emplaceComponent<core::com::Mortal>(newEntity, 100.f);
+        game.damageSystem().makeMortal(newEntity, factions[fi]->getId(), *physics, 100.f);
 
-        controlling.unit = ecs.emplaceComponent<core::com::Unit>(newEntity, *physics);
-        controlling.unit->makeMoveable(320.f, 1920.f / 6.f, 270.f, 0.9f);
-        controlling.unit->makeShooter(3.f, 20.f, Radius * 2.f);
+        controlling.unit =
+            ecs.emplaceComponent<core::com::Unit>(newEntity, factions[fi]->getId(), *physics);
+        controlling.unit->capabilities().add<unit::Capability::Move>();
+        controlling.unit->capabilities().add<unit::Capability::Rotate>();
+        controlling.unit->capabilities().add<unit::Capability::Shoot>();
+
+        ecs.emplaceComponent<core::com::UnitAI>(newEntity, *controlling.unit);
 
         onEntityControl(newEntity);
     };
@@ -205,19 +244,25 @@ bool DebugMenu::processEvent(const Event& event) {
         return false;
     };
 
-    const auto controlEntity = [this, &event]() -> bool {
-        if (event.unit()) {
-            controlling.unit = event.unit();
-            onEntityControl(event.unit()->getId());
-            return true;
+    const auto controlEntity = [this, &event, &ecs]() -> bool {
+        if (event.target()) {
+            auto* unit = ecs.getComponent<com::Unit>(event.target()->getId());
+            if (unit) {
+                controlling.unit = unit;
+                onEntityControl(event.target()->getId());
+                return true;
+            }
         }
         return false;
     };
 
-    const auto killEntity = [&engine, &event]() -> bool {
-        if (event.unit()) {
-            engine.ecs().destroyEntity(event.unit()->getId());
-            return true;
+    const auto killEntity = [&engine, &event, &ecs]() -> bool {
+        if (event.target()) {
+            auto* unit = ecs.getComponent<com::Unit>(event.target()->getId());
+            if (unit) {
+                engine.ecs().destroyEntity(event.target()->getId());
+                return true;
+            }
         }
         return false;
     };
@@ -313,32 +358,35 @@ void DebugMenu::update(float) {
     if (!window->visible()) { return; }
 
     if (controlling.unit) {
-        if (controlling.unit->canMove()) {
+        auto* mover = controlling.unit->capabilities().get<unit::Capability::Move>();
+        if (mover) {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-                controlling.unit->getMover().move(core::unit::Moveable::Forward);
+                mover->move(unit::able::Move::Forward);
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-                controlling.unit->getMover().move(core::unit::Moveable::Backward);
+                mover->move(unit::able::Move::Backward);
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-                controlling.unit->getMover().move(core::unit::Moveable::Left);
+                mover->move(unit::able::Move::Left);
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-                controlling.unit->getMover().move(core::unit::Moveable::Right);
-            }
-
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-                controlling.unit->getMover().rotate(core::unit::Moveable::CounterClockwise);
-            }
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
-                controlling.unit->getMover().rotate(core::unit::Moveable::Clockwise);
+                mover->move(unit::able::Move::Right);
             }
         }
 
-        if (controlling.unit->canShoot()) {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-                controlling.unit->getShooter().fire();
+        auto* rotater = controlling.unit->capabilities().get<unit::Capability::Rotate>();
+        if (rotater) {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+                rotater->rotate(unit::able::Rotate::CounterClockwise);
             }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
+                rotater->rotate(unit::able::Rotate::Clockwise);
+            }
+        }
+
+        auto* shooter = controlling.unit->capabilities().get<unit::Capability::Shoot>();
+        if (shooter) {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) { shooter->fire(); }
         }
     }
 }
@@ -379,6 +427,45 @@ void DebugMenu::observe(const bl::ecs::event::EntityDestroyed& event) {
     if (event.entity == controlling.entity) {
         controlling.reset();
         controlNameLabel->setText("<none>");
+    }
+}
+
+void DebugMenu::onFactionCreate() {
+    const std::string& name = factionName->getInput();
+    if (name.empty()) { return; }
+
+    auto& game    = bl::game::Game::getInstance<Game>();
+    auto* faction = game.factions().createFaction(name.c_str());
+    if (faction) {
+        factionName->setInput("");
+        refreshFactions();
+    }
+}
+
+void DebugMenu::onFactionDelete(fcn::FactionId id) {
+    auto& game = bl::game::Game::getInstance<Game>();
+    game.factions().destroyFaction(id);
+    refreshFactions();
+}
+
+void DebugMenu::refreshFactions() {
+    factionBox->clearChildren(true);
+    entityFactionSelect->clearOptions();
+
+    auto& game = bl::game::Game::getInstance<Game>();
+    game.factions().enumerateFactions(factions);
+    for (auto& faction : factions) {
+        const std::string name =
+            faction->getName() + " (" + std::to_string(faction->getId().getIndex()) + ")";
+        entityFactionSelect->addOption(name);
+
+        auto row = makeBoxH();
+        auto but = Button::create("Destroy");
+        but->getSignal(bl::gui::Event::LeftClicked)
+            .willCall(std::bind(&DebugMenu::onFactionDelete, this, faction->getId()));
+        row->pack(Label::create(name), true, true);
+        row->pack(but, false, true);
+        factionBox->pack(row, true, false);
     }
 }
 

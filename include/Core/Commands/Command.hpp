@@ -1,6 +1,8 @@
 #ifndef CORE_COMMANDS_COMMAND_HPP
 #define CORE_COMMANDS_COMMAND_HPP
 
+#include <Core/Commands/AggroLevel.hpp>
+
 /**
  * @addtogroup Commands
  * @ingroup Core
@@ -36,6 +38,11 @@ public:
     Status getStatus() const { return status; }
 
     /**
+     * @brief Returns how aggressively the command should be executed
+     */
+    AggroLevel getAggroLevel() const { return aggroLevel; }
+
+    /**
      * @brief Returns whether this command is terminated or not
      */
     bool isTerminal() const { return isTerminal(status); }
@@ -52,11 +59,13 @@ protected:
     /**
      * @brief Creates the command in the Invalid state
      */
-    Command()
-    : status(Invalid) {}
+    Command(AggroLevel aggroLevel)
+    : status(Invalid)
+    , aggroLevel(aggroLevel) {}
 
 private:
     Status status;
+    AggroLevel aggroLevel;
 
     template<typename T>
     friend class ExecutorHandle;

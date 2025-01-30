@@ -12,10 +12,24 @@ namespace world
 {
 namespace
 {
-using PathFinder = bl::ai::PathFinder<unit::Path::Waypoint, unit::Path::WaypointHash>;
+using PathFinder = bl::ai::PathFinder<Path::Waypoint, Path::WaypointHash>;
 
 const bl::rc::Color NodeFreeColor     = sf::Color(20, 230, 65);
 const bl::rc::Color NodeOccupiedColor = sf::Color(230, 65, 20);
+
+struct UnitQueryContext {
+    bl::ecs::Registry* ecs;
+    std::vector<com::Unit*>* result;
+    bl::ecs::Transaction<bl::ecs::tx::EntityUnlocked, bl::ecs::tx::ComponentRead<com::Unit>>* tx;
+};
+
+bool unitQueryCallback(bl::com::Physics2D* physics, void* ctx) {
+    UnitQueryContext* queryCtx = static_cast<UnitQueryContext*>(ctx);
+    com::Unit* unit = queryCtx->ecs->getComponent<com::Unit>(physics->getOwner(), *queryCtx->tx);
+    if (unit) { queryCtx->result->emplace_back(unit); }
+    return true;
+}
+
 } // namespace
 
 World::World(bl::engine::Engine& e)
@@ -64,7 +78,7 @@ void World::addCover(glm::vec2 pos, glm::vec2 size, float angle) {
     auto bodyDef      = b2DefaultBodyDef();
     auto shapeDef     = b2DefaultShapeDef();
     bodyDef.type      = b2_staticBody;
-    shapeDef.filter   = Collisions::getCoverFilter();
+    shapeDef.filter   = Collisions::getTallCoverFilter(); // TODO - parameterize
     shapeDef.friction = 0.f;
     engine().ecs().emplaceComponent<bl::com::Hitbox2D>(entity, transform, size);
     game.physicsSystem().addPhysicsToEntity(entity, bodyDef, shapeDef);
@@ -212,6 +226,33 @@ void World::repopulateAllNodeEdges() {
     }
 }
 
+const Node* World::pickFiringPosition(const glm::vec2& comingFrom, const glm::vec2& firingOn,
+                                      float maxDistance, bl::ecs::Entity searcher,
+                                      float distanceWeight, float coverWeight) const {
+    const Node* best = nullptr;
+    float bestScore  = std::numeric_limits<float>::max();
+    distanceWeight   = 1.f - distanceWeight;
+    coverWeight      = 1.f - coverWeight;
+
+    for (const Node& node : nodes) {
+        if (node.getOccupier() != bl::ecs::InvalidEntity && node.getOccupier() != searcher) {
+            continue;
+        }
+
+        // TODO - set/check targeting entity? or drop concept?
+        const float d = glm::distance(comingFrom, node.getPosition());
+        const float c =
+            node.getDistanceToCover(bl::math::computeAngle(node.getPosition(), firingOn));
+        const float score = d * distanceWeight + c * coverWeight;
+        if (score <= bestScore) {
+            best      = &node;
+            bestScore = score;
+        }
+    }
+
+    return best;
+}
+
 void World::addDebugGraphicsToNode(Node& node) {
     constexpr unsigned int CircleTriangleCount = 100;
     constexpr unsigned int CircleVertexCount   = CircleTriangleCount * 3;
@@ -309,8 +350,8 @@ const Node* World::getClosestReachableNode(const glm::vec2& position,
     return closest;
 }
 
-bool World::computePath(const glm::vec2& startPos, const glm::vec2& dst, unit::Path& path) {
-    using Waypoint = unit::Path::Waypoint;
+bool World::computePath(const glm::vec2& startPos, const glm::vec2& dst, Path& path) {
+    using Waypoint = Path::Waypoint;
 
     // perform path finding
     const auto distanceCb = [](const Waypoint& a, const Waypoint& b) -> int {
@@ -345,6 +386,7 @@ bool World::computePath(const glm::vec2& startPos, const glm::vec2& dst, unit::P
         }
     };
 
+    path.currentWaypoint = 0;
     return PathFinder::findPath({startPos, getNodeAtPosition(startPos)},
                                 {dst, getNodeAtPosition(dst)},
                                 adjacentNodeCb,
@@ -362,8 +404,28 @@ bool World::pathToPositionIsClear(const glm::vec2& start, const glm::vec2& end) 
     return !result.hit;
 }
 
+com::Combatant* World::lineOfSightIsClear(const glm::vec2& pos, com::Combatant* target) const {
+    const float s        = getWorldToBoxScale();
+    const glm::vec2 diff = (target->getPosition() - pos) * s;
+    const auto result    = b2World_CastRayClosest(getBox2dWorldId(),
+                                                  {pos.x * s, pos.y * s},
+                                                  {diff.x, diff.y},
+                                               Collisions::getLineOfSightQueryFilter());
+    if (!result.hit) { return target; }
+    auto* phys = bl::sys::Physics2D::getPhysicsComponentFromShape(result.shapeId);
+    return engine().ecs().getComponent<com::Combatant>(phys->getOwner());
+}
+
 bool World::pathToNodeIsClear(const glm::vec2& pos, const Node& node) const {
     return pathToPositionIsClear(pos, node.position);
+}
+
+com::Combatant* World::getTargetAtPosition(const glm::vec2& pos) const {
+    auto& game = bl::game::Game::getInstance<Game>();
+    auto* phys =
+        game.physicsSystem().findEntityAtPosition(*this, pos, Collisions::getTargetQueryFilter());
+    return phys != nullptr ? engine().ecs().getComponent<com::Combatant>(phys->getOwner()) :
+                             nullptr;
 }
 
 com::Unit* World::getUnitAtPosition(const glm::vec2& pos) const {
@@ -386,6 +448,22 @@ const Node* World::getNodeAtPosition(const glm::vec2& pos, float thresh) const {
         }
     }
     return closest;
+}
+
+std::vector<com::Unit*> World::getUnitsInArea(const sf::FloatRect& region) const {
+    std::vector<com::Unit*> result;
+    result.reserve(64);
+
+    bl::ecs::Transaction<bl::ecs::tx::EntityUnlocked, bl::ecs::tx::ComponentRead<com::Unit>> tx(
+        engine().ecs());
+    UnitQueryContext ctx{&engine().ecs(), &result, &tx};
+    queryAABB({region.left, region.top},
+              {region.left + region.width, region.top + region.height},
+              Collisions::getUnitQueryFilter(),
+              &unitQueryCallback,
+              &ctx);
+
+    return result;
 }
 
 } // namespace world

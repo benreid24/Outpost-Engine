@@ -12,7 +12,8 @@ namespace hud
 {
 TempUnitController::TempUnitController(Player& owner)
 : owner(owner)
-, controlling(nullptr) {}
+, controlling(nullptr)
+, self(nullptr) {}
 
 void TempUnitController::init() {
     auto& game  = bl::game::Game::getInstance<Game>();
@@ -25,7 +26,7 @@ void TempUnitController::init() {
     background.setOutlineThickness(1.f);
     background.getTransform().setOrigin(100.f, 0.f);
     background.getOverlayScaler().positionInParentSpace({1.f, 0.f});
-    background.getOverlayScaler().scaleToHeightPercent(0.15f);
+    background.getOverlayScaler().scaleToWidthPercent(0.11f);
     background.addToScene(scene, bl::rc::UpdateSpeed::Static);
 
     hint.create(world, game.defaultFont(), "", 36);
@@ -40,16 +41,18 @@ void TempUnitController::init() {
 void TempUnitController::reset() {
     hint.destroy();
     background.destroy();
+    controlling = nullptr;
+    self        = nullptr;
 }
 
 bool TempUnitController::processEvent(const Event& event) {
-    auto& game  = bl::game::Game::getInstance<Game>();
-    auto& world = owner.getCurrentWorld<world::World>();
+    auto& game = bl::game::Game::getInstance<Game>();
 
     if (event.source().type == sf::Event::MouseMoved) {
         if (controlling) {
-            if (event.unit()) {
-                if (event.unit() != controlling) { makeAttackState(); }
+            if (event.target()) {
+                auto* unit = game.engine().ecs().getComponent<com::UnitAI>(event.target()->getId());
+                if (unit != controlling) { makeAttackState(); }
                 else { makeMoveState(); }
             }
             else { makeMoveState(); }
@@ -59,22 +62,28 @@ bool TempUnitController::processEvent(const Event& event) {
     else if (event.source().type == sf::Event::MouseButtonPressed) {
         if (event.source().mouseButton.button == sf::Mouse::Left) {
             if (controlling) {
-                if (event.unit() && controlling != event.unit()) {
-                    controlling->queueCommand(game.commandStore().unitMakeAttack(event.unit()));
+                if (event.target() && self != event.target()) {
+                    controlling->queueCommand(game.commandStore().unitMakeAttack(
+                        event.target(), cmd::AggroLevel::Aggressive));
                 }
                 else {
                     controlling->queueCommand(game.commandStore().unitMakeMove(
-                        event.worldPosition(), world.getNodeAtPosition(event.worldPosition())));
+                        event.worldPosition(), cmd::AggroLevel::Neutral));
                 }
             }
             else {
-                controlling = event.unit();
+                self = event.target();
+                controlling =
+                    event.target() ?
+                        game.engine().ecs().getComponent<com::UnitAI>(event.target()->getId()) :
+                        nullptr;
                 if (controlling) { makeMoveState(); }
                 return true;
             }
         }
         else if (event.source().mouseButton.button == sf::Mouse::Right && controlling) {
             controlling = nullptr;
+            self        = nullptr;
             makeEmptyState();
             return true;
         }
@@ -82,7 +91,7 @@ bool TempUnitController::processEvent(const Event& event) {
     return false;
 }
 
-void TempUnitController::observe(const bl::ecs::event::ComponentRemoved<com::Unit>& event) {
+void TempUnitController::observe(const bl::ecs::event::ComponentRemoved<com::UnitAI>& event) {
     if (&event.component == controlling) {
         controlling = nullptr;
         makeEmptyState();

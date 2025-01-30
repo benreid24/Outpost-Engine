@@ -5,10 +5,13 @@
 
 #include <BLIB/Systems/Physics2D.hpp>
 #include <Core/Commands/CommandStore.hpp>
+#include <Core/Factions/Factions.hpp>
+#include <Core/Systems/AI.hpp>
 #include <Core/Systems/Damage.hpp>
 #include <Core/Systems/Movement.hpp>
 #include <Core/Systems/Render.hpp>
 #include <Core/Systems/Unit.hpp>
+#include <Core/Unit/SquadManager.hpp>
 
 /**
  * @defgroup Core
@@ -60,6 +63,21 @@ public:
      */
     cmd::CommandStore& commandStore() { return commands; }
 
+    /**
+     * @brief Returns the factions store
+     */
+    fcn::Factions& factions() { return factionStore; }
+
+    /**
+     * @brief Returns the squad manager
+     */
+    unit::SquadManager& squadManager() { return *squads; }
+
+    /**
+     * @brief Returns the AI system
+     */
+    sys::AI& aiSystem() { return *ai; }
+
 protected:
     /**
      * @brief Early startup tasks shared by both editor and game go in here
@@ -96,6 +114,9 @@ private:
     sys::Movement* movement;
     sf::VulkanFont font;
     cmd::CommandStore commands;
+    fcn::Factions factionStore;
+    unit::SquadManager* squads;
+    sys::AI* ai;
 };
 
 } // namespace core

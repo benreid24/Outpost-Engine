@@ -1,15 +1,11 @@
 #ifndef CORE_COMPONENTS_UNIT_HPP
 #define CORE_COMPONENTS_UNIT_HPP
 
-#include <BLIB/Containers/StaticRingBuffer.hpp>
-#include <Core/Commands/Executor.hpp>
-#include <Core/Commands/ExecutorHandle.hpp>
+#include <BLIB/Components/Physics2D.hpp>
+#include <Core/Commands/Queue.hpp>
 #include <Core/Commands/UnitCommand.hpp>
-#include <Core/Unit/CommandContext.hpp>
-#include <Core/Unit/Moveable.hpp>
-#include <Core/Unit/Shooter.hpp>
-#include <Core/World/Node.hpp>
-#include <optional>
+#include <Core/Factions/FactionId.hpp>
+#include <Core/Unit/Capabilities.hpp>
 
 /**
  * @addtogroup Unit
@@ -31,16 +27,15 @@ namespace com
  * @ingroup Components
  * @ingroup Unit
  */
-class Unit : public cmd::Executor<cmd::UnitCommand> {
+class Unit {
 public:
-    static constexpr std::size_t CommandQueueSize = 4;
-
     /**
      * @brief Creates a unit that cannot move or shoot
      *
+     * @param faction The id of the faction that this unit belongs to
      * @param physics The physics component of the unit
      */
-    Unit(bl::com::Physics2D& physics);
+    Unit(fcn::FactionId faction, bl::com::Physics2D& physics);
 
     /**
      * @brief Returns the entity id of this unit
@@ -48,66 +43,31 @@ public:
     bl::ecs::Entity getId() const { return physics.getOwner(); }
 
     /**
-     * @brief Allows the unit to move with the following parameters
-     *
-     * @param acceleration The rate of acceleration for movement, in world space units
-     * @param maxSpeed The maximum movement speed to enforce, in world space units
-     * @param rotateRate The rotation speed in degrees per second
-     * @param directionAdjustSpeed How quickly the entity velocity changes direction. In range [0,1]
-     * @param damping The damping factor to use to stop the entity when not moving
+     * @brief Returns the position of the unit in world coordinates
      */
-    void makeMoveable(float acceleration, float maxSpeed, float rotateRate,
-                      float directionAdjustSpeed, float damping = -1.f);
+    glm::vec2 getPosition() const { return physics.getTransform().getGlobalPosition(); }
 
     /**
-     * @brief Allows the unit to shoot with the following parameters
-     *
-     * @param fireRate The fire rate in bullets per second
-     * @param damage The damage applied by each bullet
-     * @param bulletOffset The distance from the shooter to spawn bullets
+     * @brief Returns the rotation of the unit in degrees
      */
-    void makeShooter(float fireRate, float damage, float bulletOffset);
+    float getRotation() const { return physics.getTransform().getRotation(); }
 
     /**
-     * @brief Returns whether this unit can move or not
+     * @brief Returns the id of the faction the unit belongs to
      */
-    bool canMove() const { return mover.has_value(); }
+    fcn::FactionId getFaction() const { return faction; }
 
     /**
-     * @brief Returns the movement component for this unit. Only call if this unit can move
+     * @brief Returns the units capabilities
      */
-    unit::Moveable& getMover() { return mover.value(); }
-
-    /**
-     * @brief Returns whether this unit can fire or not
-     */
-    bool canShoot() const { return shooter.has_value(); }
-
-    /**
-     * @brief Returns the shooter component for this unit. Only call if this unit can fire
-     */
-    unit::Shooter& getShooter() { return shooter.value(); }
-
-    /**
-     * @brief Queues a command to be carried out by the unit
-     *
-     * @param command The command to perform
-     * @return Whether or not the command was able to be queued
-     */
-    bool queueCommand(const cmd::ExternalHandle<cmd::UnitCommand>& command);
+    unit::Capabilities& capabilities() { return abilities; }
 
 private:
-    using CmdHandle = cmd::ExecutorHandle<cmd::UnitCommand>;
+    bl::com::Physics2D& physics;
 
     // unit data and components
-    bl::com::Physics2D& physics;
-    std::optional<unit::Moveable> mover;
-    std::optional<unit::Shooter> shooter;
-
-    // unit AI & command state
-    CmdHandle activeCommands[cmd::UnitCommand::ConcurrencyType::COUNT];
-    unit::CommandContext commandStates[cmd::UnitCommand::ConcurrencyType::COUNT];
-    bl::ctr::StaticRingBuffer<CmdHandle, CommandQueueSize> queuedCommands;
+    fcn::FactionId faction;
+    unit::Capabilities abilities;
 
     friend class sys::Unit;
 };

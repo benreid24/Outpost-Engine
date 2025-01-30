@@ -1,6 +1,9 @@
 target_sources(Core PUBLIC
-    CommandContext.hpp
-    Moveable.hpp
-    Path.hpp
-    Shooter.hpp
+    Capability.hpp
+    Capabilities.hpp
+    Squad.hpp
+    SquadManager.hpp
 )
+
+add_subdirectory(AI)
+add_subdirectory(Capabilities)

@@ -44,11 +44,14 @@ bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
     physics  = &engine.systems().getSystem<bl::sys::Physics2D>();
     units    = &engine.systems().registerSystem<sys::Unit>(Stage::Update1, Mask::Running);
     movement = &engine.systems().registerSystem<sys::Movement>(Stage::Update2, Mask::Running);
+    squads   = &engine.systems().registerSystem<unit::SquadManager>(Stage::Update0, Mask::Running);
+    ai       = &engine.systems().registerSystem<sys::AI>(Stage::Update0, Mask::Running);
 
     font.loadFromFile("Resources/font.ttf");
 
     bl::event::Dispatcher::subscribe(&windowSizePersister);
     bl::event::Dispatcher::subscribe(&damage);
+    bl::event::Dispatcher::subscribe(&factionStore);
 
     return true;
 }
@@ -58,6 +61,7 @@ void Game::startShutdown() {
 
     bl::event::Dispatcher::unsubscribe(&windowSizePersister);
     bl::event::Dispatcher::unsubscribe(&damage);
+    bl::event::Dispatcher::unsubscribe(&factionStore);
 }
 
 void Game::completeShutdown() {

@@ -28,17 +28,7 @@ private:
 
     void init(bl::engine::Engine& engine) override;
     void update(std::mutex&, float dt, float, float, float) override;
-
-    void processAI(float dt);
-    void processHighLevelAI(bl::ecs::Entity entity, com::Unit& unit, float dt);
-    void processKillUnitCommand(com::Unit& unit, com::Unit::CmdHandle& cmd, float dt);
-    void processMoveToNodeCommand(bl::ecs::Entity entity, com::Unit& unit,
-                                  com::Unit::CmdHandle& cmd, float dt);
-    void rotateUnit(com::Unit& unit, float target, float dt);
-
-    void resolveActions(float dt);
-    void resolveUnitMovement(com::Unit& unit, float dt);
-    void resolveUnitShoot(bl::ecs::Entity entity, com::Unit& unit, float dt);
+    void doCapabilities(float dt);
 };
 
 } // namespace sys

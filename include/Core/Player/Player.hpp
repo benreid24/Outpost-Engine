@@ -2,6 +2,7 @@
 #define CORE_PLAYER_PLAYER_HPP
 
 #include <BLIB/Engine/Player.hpp>
+#include <Core/Factions/FactionId.hpp>
 #include <Core/Player/HUD.hpp>
 
 /**
@@ -41,8 +42,14 @@ public:
      */
     HUD& getHud() { return hud; }
 
+    /**
+     * @brief Returns the faction controlled by this player
+     */
+    fcn::FactionId getFaction() const { return faction; }
+
 private:
     HUD hud;
+    fcn::FactionId faction;
 
     virtual void onWorldChange(bl::engine::World* prev, bl::engine::World* next) override;
 };

@@ -2,9 +2,9 @@
 #define CORE_COMMANDS_EXTERNALHANDLE_HPP
 
 #include <BLIB/Events.hpp>
-#include <Core/Commands/Events.hpp>
 #include <Core/Commands/Ref.hpp>
 #include <Core/Commands/SingleStore.hpp>
+#include <Core/Events/CommandStatusChange.hpp>
 
 namespace core
 {
@@ -84,7 +84,8 @@ public:
     void cancel() {
         if (isValid() && (ref == Command::Queued || ref == Command::Current)) {
             ref->status = Command::Canceled;
-            bl::event::Dispatcher::dispatch<CommandStatusChange<T, Command::Canceled>>({*ref});
+            bl::event::Dispatcher::dispatch<event::CommandStatusChange<T, Command::Canceled>>(
+                {*ref});
         }
     }
 

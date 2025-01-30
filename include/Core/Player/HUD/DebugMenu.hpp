@@ -4,6 +4,7 @@
 #include <BLIB/Graphics/Rectangle.hpp>
 #include <BLIB/Interfaces/GUI.hpp>
 #include <Core/Components/Unit.hpp>
+#include <Core/Factions/Faction.hpp>
 #include <Core/Player/HUD/Event.hpp>
 
 namespace core
@@ -61,6 +62,7 @@ private:
     enum struct TopTab {
         Console,
         World,
+        Factions,
         Entity,
     } currentTopTab;
 
@@ -76,6 +78,7 @@ private:
 
     enum struct EntityTool { Create, Control, Kill };
     bl::gui::RadioButton::Group* entityRadioGroup;
+    bl::gui::ComboBox::Ptr entityFactionSelect;
     EntityTool getCurrentEntityTool() const;
 
     bl::gui::Window::Ptr window;
@@ -88,6 +91,13 @@ private:
     bl::gui::Label::Ptr hoverIdLabel;
     bl::gui::Label::Ptr controlNameLabel;
     void onEntityControl(bl::ecs::Entity control);
+
+    std::vector<fcn::Faction*> factions;
+    bl::gui::ScrollArea::Ptr factionBox;
+    bl::gui::TextEntry::Ptr factionName;
+    void onFactionCreate();
+    void onFactionDelete(fcn::FactionId id);
+    void refreshFactions();
 
     struct Controlling {
         bl::ecs::Entity entity;
@@ -107,6 +117,7 @@ private:
 
     bl::gui::Element::Ptr createConsoleTab();
     bl::gui::Element::Ptr createWorldTab();
+    bl::gui::Element::Ptr createFactionsTab();
     bl::gui::Element::Ptr createEntityTab();
 
     virtual void observe(const bl::ecs::event::EntityDestroyed& event) override;

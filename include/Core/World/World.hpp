@@ -4,9 +4,9 @@
 #include <BLIB/Engine/Worlds/World2D.hpp>
 #include <BLIB/Graphics/VertexBuffer2D.hpp>
 #include <Core/Components/Unit.hpp>
-#include <Core/Unit/Path.hpp>
 #include <Core/World/Cover.hpp>
 #include <Core/World/Node.hpp>
+#include <Core/World/Path.hpp>
 #include <list>
 #include <vector>
 
@@ -117,7 +117,15 @@ public:
      * @param path Vector to store the path of nodes in
      * @return Whether a path could be found or not
      */
-    bool computePath(const glm::vec2& startPos, const glm::vec2& targetPosition, unit::Path& path);
+    bool computePath(const glm::vec2& startPos, const glm::vec2& targetPosition, Path& path);
+
+    /**
+     * @brief Returns the target at the given world position
+     *
+     * @param worldPos The world position to query
+     * @return The target at the position. May be nullptr
+     */
+    com::Combatant* getTargetAtPosition(const glm::vec2& worldPos) const;
 
     /**
      * @brief Returns the unit at the given world position
@@ -144,6 +152,39 @@ public:
      * @return True if there are no units or cover blocking the path, false otherwise
      */
     bool pathToNodeIsClear(const glm::vec2& pos, const Node& node) const;
+
+    /**
+     * @brief Tests whether the line of sight to the given target is clear
+     *
+     * @param pos The position to test from
+     * @param target The target to test the line to
+     * @return The target that will be hit first from the given position along the line
+     */
+    com::Combatant* lineOfSightIsClear(const glm::vec2& pos, com::Combatant* target) const;
+
+    /**
+     * @brief Queries the world and returns the units contained within the given region
+     *
+     * @param area The region to query, in world coordinates
+     * @return The list of units in the region
+     */
+    std::vector<com::Unit*> getUnitsInArea(const sf::FloatRect& area) const;
+
+    /**
+     * @brief Picks a node to fire on, prioritizing cover and distance to target
+     *
+     * @param comingFrom The position the unit is starting at
+     * @param firingOn The position to fire on
+     * @param maxDistance The max distance to consider nodes for
+     * @param searcher The entity searching for a spot
+     * @param distanceWeight [0, 1] weight to prioritize distance when choosing node
+     * @param coverWeight [0, 1] weight to prioritize cover when choosing node
+     * @return The node best suited to fire from
+     */
+    const Node* pickFiringPosition(const glm::vec2& comingFrom, const glm::vec2& firingOn,
+                                   float maxDistance,
+                                   bl::ecs::Entity searcher = bl::ecs::InvalidEntity,
+                                   float distanceWeight = 0.35f, float coverWeight = 0.65f) const;
 
 private:
     std::vector<Cover> covers;
