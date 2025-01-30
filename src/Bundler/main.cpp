@@ -4,12 +4,22 @@
 #include <Game/ConstantsGame.hpp>
 #include <iostream>
 
+// TODO - fix BLIB Game::instance* def when not using game entrypoint
+#include <BLIB/Game.hpp>
+namespace bl
+{
+namespace game
+{
+Game* Game::instance = nullptr;
+}
+} // namespace bl
+
 namespace
 {
 constexpr const char* BundlePath = "data";
 } // namespace
 
-int main() {
+int main(int, char**) {
     bl::logging::Config::rollLogs("logs", "bundle", 3);
     bl::logging::Config::configureOutput(std::cout, bl::logging::Config::Info);
     bl::logging::Config::addFileOutput("logs/bundle.log", bl::logging::Config::Debug);
