@@ -3,10 +3,12 @@
 
 #include <BLIB/Components/MarkedForDeath.hpp>
 #include <BLIB/Engine.hpp>
-#include <BLIB/Events.hpp>
+#include <BLIB/Signals.hpp>
 #include <BLIB/Systems/Physics2D.hpp>
 #include <Core/Components/Combatant.hpp>
 #include <Core/Components/Damager.hpp>
+#include <Core/Events/EntityDamaged.hpp>
+#include <Core/Events/EntityKilled.hpp>
 
 namespace core
 {
@@ -17,7 +19,7 @@ namespace sys
  *
  * @ingroup Systems
  */
-class Damage : public bl::event::Listener<bl::sys::Physics2D::EntityCollisionBeginEvent> {
+class Damage : public bl::sig::Listener<bl::sys::Physics2D::EntityCollisionBeginEvent> {
 public:
     /**
      * @brief Creates the system
@@ -58,6 +60,7 @@ public:
 
 private:
     bl::engine::Engine* engine;
+    bl::sig::Emitter<event::EntityDamaged, event::EntityKilled> emitter;
 
     using Transaction = bl::ecs::Transaction<
         bl::ecs::tx::EntityWrite, bl::ecs::tx::ComponentRead<>,
@@ -65,7 +68,7 @@ private:
 
     void applyDamage(bl::ecs::Entity mortalEntity, com::Combatant& victim,
                      bl::ecs::Entity damagerEntity, com::Damager& damager, Transaction& tx);
-    virtual void observe(const bl::sys::Physics2D::EntityCollisionBeginEvent& event) override;
+    virtual void process(const bl::sys::Physics2D::EntityCollisionBeginEvent& event) override;
 };
 
 } // namespace sys

@@ -19,7 +19,7 @@ namespace hud
  *
  * @ingroup Player
  */
-class DebugMenu : public bl::event::Listener<bl::ecs::event::EntityDestroyed> {
+class DebugMenu : public bl::sig::Listener<bl::ecs::event::EntityDestroyed> {
 public:
     /**
      * @brief Initializes some default state
@@ -120,7 +120,7 @@ private:
     bl::gui::Element::Ptr createFactionsTab();
     bl::gui::Element::Ptr createEntityTab();
 
-    virtual void observe(const bl::ecs::event::EntityDestroyed& event) override;
+    virtual void process(const bl::ecs::event::EntityDestroyed& event) override;
 };
 
 } // namespace hud

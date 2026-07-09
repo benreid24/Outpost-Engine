@@ -1,8 +1,8 @@
 #ifndef CORE_COMMANDS_EXECUTORHANDLE_HPP
 #define CORE_COMMANDS_EXECUTORHANDLE_HPP
 
-#include <BLIB/Events.hpp>
 #include <BLIB/Logging.hpp>
+#include <BLIB/Signals.hpp>
 #include <Core/Commands/ExternalHandle.hpp>
 #include <Core/Commands/Ref.hpp>
 #include <Core/Commands/SingleStore.hpp>
@@ -79,8 +79,7 @@ public:
     void markInProgress() {
         if (ref->getStatus() == Command::Queued) {
             ref->status = Command::Current;
-            bl::event::Dispatcher::dispatch<event::CommandStatusChange<T, Command::Current>>(
-                {*ref});
+            emitter.emit<event::CommandStatusChange<T>>({Command::Current, *ref});
         }
         else {
             BL_LOG_ERROR << "Cannot move command to Current from invalid state: "
@@ -94,8 +93,7 @@ public:
     void markComplete() {
         if (ref->getStatus() == Command::Current) {
             ref->status = Command::Complete;
-            bl::event::Dispatcher::dispatch<event::CommandStatusChange<T, Command::Complete>>(
-                {*ref});
+            emitter.emit<event::CommandStatusChange<T>>({Command::Complete, *ref});
         }
         else {
             BL_LOG_ERROR << "Cannot move command to Complete from invalid state: "
@@ -109,7 +107,7 @@ public:
     void markFailed() {
         if (ref->getStatus() == Command::Current) {
             ref->status = Command::Failed;
-            bl::event::Dispatcher::dispatch<event::CommandStatusChange<T, Command::Failed>>({*ref});
+            emitter.emit<event::CommandStatusChange<T>>({Command::Failed, *ref});
         }
         else {
             BL_LOG_ERROR << "Cannot move command to Failed from invalid state: "
@@ -122,7 +120,7 @@ public:
      */
     void markCanceled() {
         ref->status = Command::Canceled;
-        bl::event::Dispatcher::dispatch<event::CommandStatusChange<T, Command::Canceled>>({*ref});
+        emitter.emit<event::CommandStatusChange<T>>({Command::Canceled, *ref});
     }
 
     /**
@@ -130,17 +128,22 @@ public:
      */
     void markQueued() {
         ref->status = Command::Queued;
-        bl::event::Dispatcher::dispatch<event::CommandStatusChange<T, Command::Queued>>({*ref});
+        emitter.emit<event::CommandStatusChange<T>>({Command::Queued, *ref});
     }
 
 private:
     Ref<T> ref;
+    bl::sig::Emitter<event::CommandStatusChange<T>> emitter;
 
-    ExecutorHandle(ExternalHandle<T>&& ext)
-    : ref(std::move(ext.ref)) {}
+    ExecutorHandle(bl::sig::Channel& channel, ExternalHandle<T>&& ext)
+    : ref(std::move(ext.ref)) {
+        emitter.connect(channel);
+    }
 
-    ExecutorHandle(const ExternalHandle<T>& ext)
-    : ref(ext.ref) {}
+    ExecutorHandle(bl::sig::Channel& channel, const ExternalHandle<T>& ext)
+    : ref(ext.ref) {
+        emitter.connect(channel);
+    }
 
     ExecutorHandle& operator=(ExternalHandle<T>&& ext) {
         ref = std::move(ext.ref);

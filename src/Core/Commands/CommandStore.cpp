@@ -1,5 +1,7 @@
 #include <Core/Commands/CommandStore.hpp>
 
+#include <Core/Game.hpp>
+
 namespace core
 {
 namespace cmd
@@ -9,48 +11,57 @@ CommandStore::CommandStore()
 
 UnitCommandHandle CommandStore::unitMakeMove(const glm::vec2& position, AggroLevel aggroLevel) {
     Ref<UnitCommand> ref = unitCommands.allocate(UnitCommand::Type::Move, aggroLevel, position);
-    return UnitCommandHandle(std::move(ref));
+    return UnitCommandHandle(bl::game::Game::getInstance<core::Game>().gameSignalChannel(),
+                             std::move(ref));
 }
 
 UnitCommandHandle CommandStore::unitMakeAttack(com::Combatant* target, AggroLevel aggroLevel) {
     Ref<UnitCommand> ref = unitCommands.allocate(UnitCommand::Type::Attack, aggroLevel, target);
-    return UnitCommandHandle(std::move(ref));
+    return UnitCommandHandle(bl::game::Game::getInstance<core::Game>().gameSignalChannel(),
+                             std::move(ref));
 }
 
 UnitCommandHandle CommandStore::unitMakeIdle(AggroLevel aggroLevel) {
     Ref<UnitCommand> ref = unitCommands.allocate(UnitCommand::Type::Idle, aggroLevel);
-    return UnitCommandHandle(std::move(ref));
+    return UnitCommandHandle(bl::game::Game::getInstance<core::Game>().gameSignalChannel(),
+                             std::move(ref));
 }
 
 UnitCommandHandle CommandStore::unitMakeSuppress(const glm::vec2& pos, AggroLevel aggroLevel) {
     Ref<UnitCommand> ref = unitCommands.allocate(UnitCommand::Type::Suppress, aggroLevel, pos);
-    return UnitCommandHandle(std::move(ref));
+    return UnitCommandHandle(bl::game::Game::getInstance<core::Game>().gameSignalChannel(),
+                             std::move(ref));
 }
 
 SquadCommandHandle CommandStore::squadMakeIdle(AggroLevel aggroLevel) {
     Ref<SquadCommand> ref = squadCommands.allocate(SquadCommand::Type::Idle, aggroLevel);
-    return SquadCommandHandle(std::move(ref));
+    return SquadCommandHandle(bl::game::Game::getInstance<core::Game>().gameSignalChannel(),
+                              std::move(ref));
 }
 
 SquadCommandHandle CommandStore::squadMakeMove(const glm::vec2& pos, AggroLevel aggroLevel) {
     Ref<SquadCommand> ref = squadCommands.allocate(SquadCommand::Type::Move, aggroLevel, pos);
-    return SquadCommandHandle(std::move(ref));
+    return SquadCommandHandle(bl::game::Game::getInstance<core::Game>().gameSignalChannel(),
+                              std::move(ref));
 }
 
 SquadCommandHandle CommandStore::squadMakeAttack(const glm::vec2& pos, AggroLevel aggroLevel) {
     Ref<SquadCommand> ref = squadCommands.allocate(SquadCommand::Type::AttackArea, aggroLevel, pos);
-    return SquadCommandHandle(std::move(ref));
+    return SquadCommandHandle(bl::game::Game::getInstance<core::Game>().gameSignalChannel(),
+                              std::move(ref));
 }
 
 SquadCommandHandle CommandStore::squadMakeAttack(com::Combatant* unit, AggroLevel aggroLevel) {
     Ref<SquadCommand> ref =
         squadCommands.allocate(SquadCommand::Type::AttackUnit, aggroLevel, unit);
-    return SquadCommandHandle(std::move(ref));
+    return SquadCommandHandle(bl::game::Game::getInstance<core::Game>().gameSignalChannel(),
+                              std::move(ref));
 }
 
 SquadCommandHandle CommandStore::squadMakeSuppress(const glm::vec2& pos, AggroLevel aggroLevel) {
     Ref<SquadCommand> ref = squadCommands.allocate(SquadCommand::Type::Suppress, aggroLevel, pos);
-    return SquadCommandHandle(std::move(ref));
+    return SquadCommandHandle(bl::game::Game::getInstance<core::Game>().gameSignalChannel(),
+                              std::move(ref));
 }
 
 } // namespace cmd

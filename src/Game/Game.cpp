@@ -43,16 +43,17 @@ bool Game::performEarlyStartup(int, char**) {
 }
 
 bl::engine::Settings Game::createStartupParameters() {
-    return bl::engine::Settings().fromConfig().withWindowParameters(
-        bl::engine::Settings::WindowParameters()
-            .withVideoMode(sf::VideoMode(
-                core::Properties.WindowWidth.get(), core::Properties.WindowHeight.get(), 32))
-            .fromConfig()
-            .withStyle(sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize)
-            .withTitle("Outpost Engine")
-            .withLetterBoxOnResize(true)
-            .withInitialViewSize(
-                sf::Vector2f(ConstantsGame::WindowWidth, ConstantsGame::WindowHeight)));
+    return bl::engine::Settings().fromConfig().withRenderer(
+        bl::rc::CreationSettings().withWindowSettings(
+            bl::rc::WindowSettings()
+                .fromConfig("game")
+                .withVideoMode(sf::VideoMode(
+                    {core::Properties.WindowWidth.get(), core::Properties.WindowHeight.get()}, 32))
+                .withStyle(sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize)
+                .withTitle("Outpost Engine")
+                .withLetterBoxOnResize(true)
+                .withInitialViewSize(
+                    sf::Vector2f(ConstantsGame::WindowWidth, ConstantsGame::WindowHeight))));
 }
 
 bool Game::completeStartup(bl::engine::Engine& engine) {

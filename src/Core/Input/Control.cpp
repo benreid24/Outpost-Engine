@@ -22,14 +22,14 @@ void configureInputSystem(bl::input::InputSystem& system) {
     bl::input::Actor& user = system.getActor();
 
     // set keyboard and mouse defaults. no defaults for controller
-    user.getKBMTriggerControl(Control::MoveUp).triggerOnKey(sf::Keyboard::W);
-    user.getKBMTriggerControl(Control::MoveRight).triggerOnKey(sf::Keyboard::D);
-    user.getKBMTriggerControl(Control::MoveDown).triggerOnKey(sf::Keyboard::S);
-    user.getKBMTriggerControl(Control::MoveLeft).triggerOnKey(sf::Keyboard::A);
-    user.getKBMTriggerControl(Control::Sprint).triggerOnKey(sf::Keyboard::LShift);
-    user.getKBMTriggerControl(Control::Interact).triggerOnKey(sf::Keyboard::Space);
-    user.getKBMTriggerControl(Control::Pause).triggerOnKey(sf::Keyboard::Enter);
-    user.getKBMTriggerControl(Control::Back).triggerOnKey(sf::Keyboard::LControl);
+    user.getKBMTriggerControl(Control::MoveUp).triggerOnKey(sf::Keyboard::Key::W);
+    user.getKBMTriggerControl(Control::MoveRight).triggerOnKey(sf::Keyboard::Key::D);
+    user.getKBMTriggerControl(Control::MoveDown).triggerOnKey(sf::Keyboard::Key::S);
+    user.getKBMTriggerControl(Control::MoveLeft).triggerOnKey(sf::Keyboard::Key::A);
+    user.getKBMTriggerControl(Control::Sprint).triggerOnKey(sf::Keyboard::Key::LShift);
+    user.getKBMTriggerControl(Control::Interact).triggerOnKey(sf::Keyboard::Key::Space);
+    user.getKBMTriggerControl(Control::Pause).triggerOnKey(sf::Keyboard::Key::Enter);
+    user.getKBMTriggerControl(Control::Back).triggerOnKey(sf::Keyboard::Key::LControl);
 
     // load user preferences from config
     system.loadFromConfig();

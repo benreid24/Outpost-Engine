@@ -2,9 +2,9 @@
 #define CORE_PLAYER_HUD_TEMPUNITCONTROLLER_HPP
 
 #include <BLIB/ECS/Events.hpp>
-#include <BLIB/Events.hpp>
 #include <BLIB/Graphics/Rectangle.hpp>
 #include <BLIB/Graphics/Text.hpp>
+#include <BLIB/Signals.hpp>
 #include <Core/Components/UnitAI.hpp>
 #include <Core/Player/HUD/Event.hpp>
 
@@ -16,8 +16,7 @@ class Player;
 
 namespace hud
 {
-class TempUnitController
-: public bl::event::Listener<bl::ecs::event::ComponentRemoved<com::UnitAI>> {
+class TempUnitController : public bl::sig::Listener<bl::ecs::event::ComponentRemoved<com::UnitAI>> {
 public:
     TempUnitController(Player& owner);
 
@@ -38,7 +37,7 @@ private:
     void makeMoveState();
     void makeAttackState();
     void centerText();
-    virtual void observe(const bl::ecs::event::ComponentRemoved<com::UnitAI>& event) override;
+    virtual void process(const bl::ecs::event::ComponentRemoved<com::UnitAI>& event) override;
 };
 
 } // namespace hud

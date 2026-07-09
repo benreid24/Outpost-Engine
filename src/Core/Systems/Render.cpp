@@ -4,6 +4,7 @@
 #include <BLIB/Graphics/Circle.hpp>
 #include <BLIB/Graphics/Rectangle.hpp>
 #include <BLIB/Graphics/VertexBuffer2D.hpp>
+#include <BLIB/Render/Config/ShaderIds.hpp>
 #include <BLIB/Render/Descriptors/Builtin/Object2DFactory.hpp>
 #include <BLIB/Render/Descriptors/Builtin/Scene2DFactory.hpp>
 
@@ -52,22 +53,21 @@ void Render::init(bl::engine::Engine& e) {
     lineRasterizer.depthClampEnable = VK_FALSE;
     lineRasterizer.rasterizerDiscardEnable = VK_FALSE;
     lineRasterizer.polygonMode             = VK_POLYGON_MODE_FILL;
-    lineRasterizer.lineWidth =
-        std::min(e.renderer().vulkanState().physicalDeviceProperties.limits.lineWidthRange[1], 3.f);
+    lineRasterizer.lineWidth               = std::min(
+        e.renderer().vulkanState().getPhysicalDeviceProperties().limits.lineWidthRange[1], 3.f);
     lineRasterizer.cullMode        = VK_CULL_MODE_NONE;
     lineRasterizer.frontFace       = VK_FRONT_FACE_COUNTER_CLOCKWISE;
     lineRasterizer.depthBiasEnable = VK_FALSE;
 
-    e.renderer().pipelineCache().createPipline(
+    e.renderer().pipelineCache().createPipeline(
         NodeEdgesPipelineId,
         bl::rc::vk::PipelineParameters()
-            .withShaders(bl::rc::Config::ShaderIds::Vertex2D,
-                         bl::rc::Config::ShaderIds::Fragment2DUnlit)
+            .withShaders(bl::rc::cfg::ShaderIds::Vertex2D, bl::rc::cfg::ShaderIds::Fragment2DUnlit)
             .withPrimitiveType(VK_PRIMITIVE_TOPOLOGY_LINE_LIST)
             .withSimpleDepthStencil(false)
             .withRasterizer(lineRasterizer)
-            .addDescriptorSet<bl::rc::ds::Scene2DFactory>()
-            .addDescriptorSet<bl::rc::ds::Object2DFactory>()
+            .addDescriptorSet<bl::rc::dsi::Scene2DFactory>()
+            .addDescriptorSet<bl::rc::dsi::Object2DFactory>()
             .build());
 }
 

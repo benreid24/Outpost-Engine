@@ -3,6 +3,7 @@
 
 #include <BLIB/Game.hpp>
 
+#include <BLIB/Assets/Builtin/FontPayload.hpp>
 #include <BLIB/Systems/Physics2D.hpp>
 #include <Core/Commands/CommandStore.hpp>
 #include <Core/Factions/Factions.hpp>
@@ -56,7 +57,7 @@ public:
     /**
      * @brief Returns the default font
      */
-    sf::VulkanFont& defaultFont() { return font; }
+    bl::as::TypedRef<bl::asi::FontPayload> defaultFont() { return font; }
 
     /**
      * @brief Returns the command store
@@ -77,6 +78,11 @@ public:
      * @brief Returns the AI system
      */
     sys::AI& aiSystem() { return *ai; }
+
+    /**
+     * @brief The event channel for game events
+     */
+    bl::sig::Channel& gameSignalChannel() { return gameChannel; }
 
 protected:
     /**
@@ -107,12 +113,13 @@ protected:
 
 private:
     bl::engine::Engine* enginePtr;
+    bl::sig::Channel gameChannel;
     sys::Damage damage;
     sys::Render* render;
     bl::sys::Physics2D* physics;
     sys::Unit* units;
     sys::Movement* movement;
-    sf::VulkanFont font;
+    bl::as::TypedRef<bl::asi::FontPayload> font;
     cmd::CommandStore commands;
     fcn::Factions factionStore;
     unit::SquadManager* squads;

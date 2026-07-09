@@ -24,11 +24,11 @@ void CombatDemo::activate(bl::engine::Engine& engine) {
     auto world = engine.getPlayer().enterWorld<core::world::World>();
     world->setLengthUnitScale(60.f / 1920.f);
     engine.renderer().getObserver().setClearColor({0.9f, 0.9f, 1.f, 1.f});
-    bl::event::Dispatcher::subscribe(this);
+    subscribe(engine.getSignalChannel());
 }
 
 void CombatDemo::deactivate(bl::engine::Engine& engine) {
-    bl::event::Dispatcher::unsubscribe(this);
+    unsubscribe();
     engine.getPlayer().leaveWorld();
 }
 
@@ -36,9 +36,9 @@ void CombatDemo::update(bl::engine::Engine& engine, float dt, float) {
     engine.getPlayer<core::player::Player>().getHud().update(dt);
 }
 
-void CombatDemo::observe(const sf::Event& event) {
-    if (event.type == sf::Event::KeyPressed) {
-        if (event.key.code == sf::Keyboard::Tilde) {
+void CombatDemo::process(const sf::Event& event) {
+    if (auto* key = event.getIf<sf::Event::KeyPressed>()) {
+        if (key->code == sf::Keyboard::Key::Grave) {
             engine.getPlayer<core::player::Player>().getHud().toggleDebugMenu();
         }
     }

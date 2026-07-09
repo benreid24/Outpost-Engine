@@ -48,7 +48,7 @@ void TempUnitController::reset() {
 bool TempUnitController::processEvent(const Event& event) {
     auto& game = bl::game::Game::getInstance<Game>();
 
-    if (event.source().type == sf::Event::MouseMoved) {
+    if (event.source().is<sf::Event::MouseMoved>()) {
         if (controlling) {
             if (event.target()) {
                 auto* unit = game.engine().ecs().getComponent<com::UnitAI>(event.target()->getId());
@@ -59,8 +59,8 @@ bool TempUnitController::processEvent(const Event& event) {
         }
         return true;
     }
-    else if (event.source().type == sf::Event::MouseButtonPressed) {
-        if (event.source().mouseButton.button == sf::Mouse::Left) {
+    else if (auto* mouseButton = event.source().getIf<sf::Event::MouseButtonPressed>()) {
+        if (mouseButton->button == sf::Mouse::Button::Left) {
             if (controlling) {
                 if (event.target() && self != event.target()) {
                     controlling->queueCommand(game.commandStore().unitMakeAttack(
@@ -81,7 +81,7 @@ bool TempUnitController::processEvent(const Event& event) {
                 return true;
             }
         }
-        else if (event.source().mouseButton.button == sf::Mouse::Right && controlling) {
+        else if (mouseButton->button == sf::Mouse::Button::Right && controlling) {
             controlling = nullptr;
             self        = nullptr;
             makeEmptyState();
@@ -91,7 +91,7 @@ bool TempUnitController::processEvent(const Event& event) {
     return false;
 }
 
-void TempUnitController::observe(const bl::ecs::event::ComponentRemoved<com::UnitAI>& event) {
+void TempUnitController::process(const bl::ecs::event::ComponentRemoved<com::UnitAI>& event) {
     if (&event.component == controlling) {
         controlling = nullptr;
         makeEmptyState();

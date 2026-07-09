@@ -1,6 +1,6 @@
 #include <Core/Game.hpp>
 
-#include <BLIB/Events.hpp>
+#include <BLIB/Signals.hpp>
 #include <Core/Input/Control.hpp>
 #include <Core/Player/Player.hpp>
 #include <Core/Properties.hpp>
@@ -9,10 +9,10 @@ namespace core
 {
 namespace
 {
-struct WindowSizePersister : public bl::event::Listener<bl::engine::event::WindowResized> {
+struct WindowSizePersister : public bl::sig::Listener<bl::rc::event::WindowResized> {
     const char* configFilename;
 
-    virtual void observe(const bl::engine::event::WindowResized& event) override {
+    virtual void process(const bl::rc::event::WindowResized& event) override {
         core::Properties.WindowWidth.set(event.window.getSfWindow().getSize().x);
         core::Properties.WindowHeight.set(event.window.getSfWindow().getSize().y);
         core::Properties.save(configFilename);
@@ -39,7 +39,7 @@ bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
     using Stage = bl::engine::FrameStage;
     using Mask  = bl::engine::StateMask::V;
     enginePtr   = &engine;
-    render = &engine.systems().registerSystem<sys::Render>(Stage::RenderEarlyRefresh, Mask::All);
+    render      = &engine.systems().registerSystem<sys::Render>(Stage::RendererDataSync, Mask::All);
     damage.init(engine);
     physics  = &engine.systems().getSystem<bl::sys::Physics2D>();
     units    = &engine.systems().registerSystem<sys::Unit>(Stage::Update1, Mask::Running);
@@ -47,11 +47,13 @@ bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
     squads   = &engine.systems().registerSystem<unit::SquadManager>(Stage::Update0, Mask::Running);
     ai       = &engine.systems().registerSystem<sys::AI>(Stage::Update0, Mask::Running);
 
-    font.loadFromFile("Resources/font.ttf");
+    font = engine.assets().getAssetFromSourcePath<bl::asi::FontPayload>("Resources/font.ttf");
 
-    bl::event::Dispatcher::subscribe(&windowSizePersister);
-    bl::event::Dispatcher::subscribe(&damage);
-    bl::event::Dispatcher::subscribe(&factionStore);
+    windowSizePersister.subscribe(engine.renderer().getSignalChannel());
+
+    // TODO - create dedicated channels for certain event streams
+    damage.subscribe(engine.getSignalChannel());
+    factionStore.subscribe(engine.getSignalChannel());
 
     return true;
 }
@@ -59,9 +61,9 @@ bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
 void Game::startShutdown() {
     // TODO - SETUP_TASK - any early shutdown tasks
 
-    bl::event::Dispatcher::unsubscribe(&windowSizePersister);
-    bl::event::Dispatcher::unsubscribe(&damage);
-    bl::event::Dispatcher::unsubscribe(&factionStore);
+    windowSizePersister.unsubscribe();
+    damage.unsubscribe();
+    factionStore.unsubscribe();
 }
 
 void Game::completeShutdown() {

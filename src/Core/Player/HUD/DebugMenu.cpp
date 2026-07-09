@@ -162,11 +162,11 @@ Element::Ptr DebugMenu::createEntityTab() {
 void DebugMenu::toggle() {
     if (window->visible()) {
         window->setVisible(false);
-        bl::event::Dispatcher::unsubscribe(this);
+        unsubscribe();
     }
     else {
         window->setVisible(true);
-        bl::event::Dispatcher::subscribe(this);
+        subscribe(bl::engine::Engine::getInstance()->getSignalChannel());
     }
 }
 
@@ -211,8 +211,8 @@ bool DebugMenu::processEvent(const Event& event) {
     };
 
     const auto createCover = [this, &event, &world]() -> bool {
-        if (event.source().type == sf::Event::MouseButtonPressed) {
-            if (event.source().mouseButton.button == sf::Mouse::Left) {
+        if (auto* mouseButton = event.source().getIf<sf::Event::MouseButtonPressed>()) {
+            if (mouseButton->button == sf::Mouse::Button::Left) {
                 clickStart = event.worldPosition();
                 dragBox.setHidden(false);
                 dragBox.getTransform().setPosition(clickStart);
@@ -220,24 +220,22 @@ bool DebugMenu::processEvent(const Event& event) {
             }
         }
         else if (!dragBox.component().isHidden()) {
-            if (event.source().type == sf::Event::MouseButtonReleased) {
-                if (event.source().mouseButton.button == sf::Mouse::Left) {
+            if (auto* mouseButton = event.source().getIf<sf::Event::MouseButtonReleased>()) {
+                if (mouseButton->button == sf::Mouse::Button::Left) {
                     const glm::vec2 size = glm::abs(clickStart - event.worldPosition());
                     world.addCover(clickStart, size, getCoverAngle());
                     dragBox.setHidden(true);
                     return true;
                 }
             }
-            else if (event.source().type == sf::Event::MouseMoved) {
+            else if (event.source().is<sf::Event::MouseMoved>()) {
                 const glm::vec2 size = glm::abs(clickStart - event.worldPosition());
                 dragBox.setSize(size);
                 dragBox.getTransform().setOrigin(size * 0.5f);
                 return true;
             }
-            else if (event.source().type == sf::Event::MouseWheelScrolled) {
-                if (event.source().mouseWheelScroll.delta > 0.f) {
-                    coverAngle->incrementValue(1.f);
-                }
+            else if (auto* mouseScroll = event.source().getIf<sf::Event::MouseWheelScrolled>()) {
+                if (mouseScroll->delta > 0.f) { coverAngle->incrementValue(1.f); }
                 else { coverAngle->incrementValue(-1.f); }
             }
         }
@@ -268,7 +266,7 @@ bool DebugMenu::processEvent(const Event& event) {
     };
 
     // update hover entity
-    if (event.source().type == sf::Event::MouseMoved) {
+    if (event.source().is<sf::Event::MouseMoved>()) {
         const auto* phys = game.physicsSystem().findEntityAtPosition(world, event.worldPosition());
         if (phys) { hoverIdLabel->setText(phys->getOwner().toString()); }
         else { hoverIdLabel->setText("<none>"); }
@@ -281,8 +279,8 @@ bool DebugMenu::processEvent(const Event& event) {
         case WorldTab::Nodes:
             switch (getCurrentNodeTool()) {
             case NodeTool::CreatePath:
-                if (event.source().type == sf::Event::MouseButtonPressed) {
-                    if (event.source().mouseButton.button == sf::Mouse::Left) {
+                if (auto* mouseButton = event.source().getIf<sf::Event::MouseButtonPressed>()) {
+                    if (mouseButton->button == sf::Mouse::Button::Left) {
                         world.addNode(core::world::Node::Path, event.worldPosition());
                         return true;
                     }
@@ -290,8 +288,8 @@ bool DebugMenu::processEvent(const Event& event) {
                 break;
 
             case NodeTool::CreateCover:
-                if (event.source().type == sf::Event::MouseButtonPressed) {
-                    if (event.source().mouseButton.button == sf::Mouse::Left) {
+                if (auto* mouseButton = event.source().getIf<sf::Event::MouseButtonPressed>()) {
+                    if (mouseButton->button == sf::Mouse::Button::Left) {
                         world.addNode(core::world::Node::Cover, event.worldPosition());
                         return true;
                     }
@@ -299,8 +297,8 @@ bool DebugMenu::processEvent(const Event& event) {
                 break;
 
             case NodeTool::Remove:
-                if (event.source().type == sf::Event::MouseButtonPressed) {
-                    if (event.source().mouseButton.button == sf::Mouse::Left) {
+                if (auto* mouseButton = event.source().getIf<sf::Event::MouseButtonPressed>()) {
+                    if (mouseButton->button == sf::Mouse::Button::Left) {
                         return world.removeNodeAtPosition(event.worldPosition());
                     }
                 }
@@ -313,8 +311,8 @@ bool DebugMenu::processEvent(const Event& event) {
                 return createCover();
 
             case CoverTool::Remove:
-                if (event.source().type == sf::Event::MouseButtonPressed) {
-                    if (event.source().mouseButton.button == sf::Mouse::Left) {
+                if (auto* mouseButton = event.source().getIf<sf::Event::MouseButtonPressed>()) {
+                    if (mouseButton->button == sf::Mouse::Button::Left) {
                         return world.removeCoverAtPosition(event.worldPosition());
                     }
                 }
@@ -326,22 +324,20 @@ bool DebugMenu::processEvent(const Event& event) {
     case TopTab::Entity:
         switch (getCurrentEntityTool()) {
         case EntityTool::Create:
-            if (event.source().type == sf::Event::MouseButtonPressed) {
-                if (event.source().mouseButton.button == sf::Mouse::Left) {
+            if (auto* mouseButton = event.source().getIf<sf::Event::MouseButtonPressed>()) {
+                if (mouseButton->button == sf::Mouse::Button::Left) {
                     createEntity();
                     return true;
                 }
             }
             break;
         case EntityTool::Control:
-            if (event.source().type == sf::Event::MouseButtonPressed) {
-                if (event.source().mouseButton.button == sf::Mouse::Left) {
-                    return controlEntity();
-                }
+            if (auto* mouseButton = event.source().getIf<sf::Event::MouseButtonPressed>()) {
+                if (mouseButton->button == sf::Mouse::Button::Left) { return controlEntity(); }
             }
         case EntityTool::Kill:
-            if (event.source().type == sf::Event::MouseButtonPressed) {
-                if (event.source().mouseButton.button == sf::Mouse::Left) { return killEntity(); }
+            if (auto* mouseButton = event.source().getIf<sf::Event::MouseButtonPressed>()) {
+                if (mouseButton->button == sf::Mouse::Button::Left) { return killEntity(); }
             }
         }
         break; // TopTab::Entity
@@ -360,33 +356,33 @@ void DebugMenu::update(float) {
     if (controlling.unit) {
         auto* mover = controlling.unit->capabilities().get<unit::Capability::Move>();
         if (mover) {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
                 mover->move(unit::able::Move::Forward);
             }
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
                 mover->move(unit::able::Move::Backward);
             }
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
                 mover->move(unit::able::Move::Left);
             }
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
                 mover->move(unit::able::Move::Right);
             }
         }
 
         auto* rotater = controlling.unit->capabilities().get<unit::Capability::Rotate>();
         if (rotater) {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) {
                 rotater->rotate(unit::able::Rotate::CounterClockwise);
             }
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E)) {
                 rotater->rotate(unit::able::Rotate::Clockwise);
             }
         }
 
         auto* shooter = controlling.unit->capabilities().get<unit::Capability::Shoot>();
         if (shooter) {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) { shooter->fire(); }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) { shooter->fire(); }
         }
     }
 }
@@ -423,7 +419,7 @@ void DebugMenu::onEntityControl(bl::ecs::Entity ent) {
     controlNameLabel->setText(std::to_string(ent.getIndex()));
 }
 
-void DebugMenu::observe(const bl::ecs::event::EntityDestroyed& event) {
+void DebugMenu::process(const bl::ecs::event::EntityDestroyed& event) {
     if (event.entity == controlling.entity) {
         controlling.reset();
         controlNameLabel->setText("<none>");

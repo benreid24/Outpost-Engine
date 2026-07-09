@@ -1,7 +1,7 @@
 #ifndef CORE_COMMANDS_EXTERNALHANDLE_HPP
 #define CORE_COMMANDS_EXTERNALHANDLE_HPP
 
-#include <BLIB/Events.hpp>
+#include <BLIB/Signals.hpp>
 #include <Core/Commands/Ref.hpp>
 #include <Core/Commands/SingleStore.hpp>
 #include <Core/Events/CommandStatusChange.hpp>
@@ -84,16 +84,18 @@ public:
     void cancel() {
         if (isValid() && (ref == Command::Queued || ref == Command::Current)) {
             ref->status = Command::Canceled;
-            bl::event::Dispatcher::dispatch<event::CommandStatusChange<T, Command::Canceled>>(
-                {*ref});
+            emitter.emit<event::CommandStatusChange<T>>({Command::Canceled, *ref});
         }
     }
 
 private:
     Ref<T> ref;
+    bl::sig::Emitter<event::CommandStatusChange<T>> emitter;
 
-    ExternalHandle(Ref<T>&& ref)
-    : ref(std::forward<Ref<T>>(ref)) {}
+    ExternalHandle(bl::sig::Channel& channel, Ref<T>&& ref)
+    : ref(std::forward<Ref<T>>(ref)) {
+        emitter.connect(channel);
+    }
 
     friend class CommandStore;
     friend class ExecutorHandle<T>;

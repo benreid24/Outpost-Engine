@@ -26,11 +26,8 @@ public:
     BLIB_PROPERTY(SpritesheetPath, std::string, "blib.animation.spritesheet_path",
                   Constants::DefaultSpritesheetPath);
 
-    BLIB_PROPERTY(WindowWidth, unsigned int, bl::engine::Settings::WindowParameters::WindowWidthKey,
-                  Constants::UnsetUintProperty);
-    BLIB_PROPERTY(WindowHeight, unsigned int,
-                  bl::engine::Settings::WindowParameters::WindowHeightKey,
-                  Constants::UnsetUintProperty);
+    BLIB_PROPERTY(WindowWidth, unsigned int, "game.window.width", Constants::UnsetUintProperty);
+    BLIB_PROPERTY(WindowHeight, unsigned int, "game.window.height", Constants::UnsetUintProperty);
 
     BLIB_PROPERTY(UnitAiDistanceStopThresh, float, "core.unit.ai_stop_distance",
                   Constants::UnitAiStopDistanceDefault);

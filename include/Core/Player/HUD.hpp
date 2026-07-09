@@ -1,8 +1,8 @@
 #ifndef CORE_PLAYER_HUD_HPP
 #define CORE_PLAYER_HUD_HPP
 
-#include <BLIB/Events.hpp>
 #include <BLIB/Interfaces/GUI.hpp>
+#include <BLIB/Signals.hpp>
 #include <Core/Player/HUD/DebugMenu.hpp>
 #include <Core/Player/HUD/TempUnitController.hpp>
 
@@ -17,7 +17,7 @@ class Player;
  *
  * @ingroup Player
  */
-class HUD : public bl::event::Listener<sf::Event> {
+class HUD : public bl::sig::Listener<sf::Event> {
 public:
     /**
      * @brief Creates the HUD
@@ -54,7 +54,7 @@ private:
     hud::TempUnitController unitController;
     hud::DebugMenu debugMenu;
 
-    virtual void observe(const sf::Event& event);
+    virtual void process(const sf::Event& event);
 };
 
 } // namespace player

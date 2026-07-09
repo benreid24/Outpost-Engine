@@ -1,7 +1,6 @@
 #ifndef CORE_PLAYER_HUD_TEMPSQUADCONTROLLER_HPP
 #define CORE_PLAYER_HUD_TEMPSQUADCONTROLLER_HPP
 
-#include <BLIB/Events.hpp>
 #include <BLIB/Graphics/Rectangle.hpp>
 #include <BLIB/Graphics/Text.hpp>
 #include <Core/Player/HUD/Event.hpp>

@@ -20,17 +20,18 @@ void HUD::addToOverlay() {
     debugMenu.init(*gui);
     unitController.init();
     gui->addToOverlay(nullptr, false);
-    gui->setRegion({0.f, 0.f, 0.f, 0.f});
-    bl::event::Dispatcher::subscribe(this);
+    gui->setRegion({{0.f, 0.f}, {0.f, 0.f}});
+
+    subscribe(bl::engine::Engine::getInstance()->getSignalChannel());
 }
 
 void HUD::removeFromOverlay() {
     gui.reset();
     unitController.reset();
-    bl::event::Dispatcher::unsubscribe(this);
+    unsubscribe();
 }
 
-void HUD::observe(const sf::Event& event) {
+void HUD::process(const sf::Event& event) {
     if (gui && gui->processEvent(event)) { return; }
 
     const hud::Event hudEvent(owner, event);

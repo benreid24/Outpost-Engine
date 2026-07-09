@@ -3,7 +3,7 @@
 
 #include <BLIB/Containers/ObjectWrapper.hpp>
 #include <BLIB/ECS/Events.hpp>
-#include <BLIB/Events.hpp>
+#include <BLIB/Signals.hpp>
 #include <BLIB/Util/IdAllocator.hpp>
 #include <Core/Components/Unit.hpp>
 #include <Core/Factions/Faction.hpp>
@@ -18,8 +18,8 @@ namespace fcn
  * @ingroup Factions
  */
 class Factions
-: public bl::event::Listener<bl::ecs::event::ComponentAdded<com::Unit>,
-                             bl::ecs::event::ComponentRemoved<com::Unit>> {
+: public bl::sig::Listener<bl::ecs::event::ComponentAdded<com::Unit>,
+                           bl::ecs::event::ComponentRemoved<com::Unit>> {
 public:
     /**
      * @brief Creates the faction manager
@@ -83,8 +83,8 @@ private:
     std::vector<bl::ctr::ObjectWrapper<Faction>> factions;
     bl::util::IdAllocator<FactionId::IdType> freeIds;
 
-    virtual void observe(const bl::ecs::event::ComponentAdded<com::Unit>& event) override;
-    virtual void observe(const bl::ecs::event::ComponentRemoved<com::Unit>& event) override;
+    virtual void process(const bl::ecs::event::ComponentAdded<com::Unit>& event) override;
+    virtual void process(const bl::ecs::event::ComponentRemoved<com::Unit>& event) override;
 };
 
 } // namespace fcn
