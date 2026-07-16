@@ -37,14 +37,15 @@ bool Editor::performEarlyStartup(int argc, char** argv) {
 }
 
 bl::engine::Settings Editor::createStartupParameters() {
-    return bl::engine::Settings().fromConfig().withWindowParameters(
-        bl::engine::Settings::WindowParameters()
-            .withVideoMode(sf::VideoMode(
-                core::Properties.WindowWidth.get(), core::Properties.WindowHeight.get(), 32))
-            .fromConfig()
-            .withStyle(sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize)
-            .withTitle("BLIB Editor") // TODO - SETUP_TASK - set window title
-            .withLetterBoxOnResize(false));
+    return bl::engine::Settings().fromConfig().withRenderer(
+        bl::rc::CreationSettings().withWindowSettings(
+            bl::rc::WindowSettings()
+                .fromConfig("editor")
+                .withVideoMode(sf::VideoMode(
+                    {core::Properties.WindowWidth.get(), core::Properties.WindowHeight.get()}, 32))
+                .withStyle(sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize)
+                .withTitle("Outpost Engine Editor")
+                .withLetterBoxOnResize(true)));
 }
 
 bool Editor::completeStartup(bl::engine::Engine& engine) {

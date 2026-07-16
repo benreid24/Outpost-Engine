@@ -26,10 +26,13 @@ if (ON_CI)
     add_compile_definitions(ON_CI)
 endif()
 
-add_subdirectory(lib/BLIB)
-
 include("lib/BLIB/cmake/set_module_path.cmake")
 set_module_path()
+
+include(init_blib_cmake)
+init_blib_cmake()
+
+add_subdirectory(lib/BLIB)
 
 include(configure_blib_target)
 include(create_blib_target)
