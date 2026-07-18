@@ -32,6 +32,9 @@ void HUD::removeFromOverlay() {
 }
 
 void HUD::process(const sf::Event& event) {
+    // TODO - update to new world type
+    return;
+
     if (gui && gui->processEvent(event)) { return; }
 
     const hud::Event hudEvent(owner, event);

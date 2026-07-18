@@ -2,6 +2,7 @@
 
 #include <Core/Properties.hpp>
 #include <Game/ConstantsGame.hpp>
+#include <Game/States/Arena.hpp>
 #include <Game/States/CombatDemo.hpp>
 #include <iostream>
 
@@ -66,7 +67,7 @@ bool Game::completeStartup(bl::engine::Engine& engine) {
 
 bl::engine::State::Ptr Game::createInitialEngineState() {
     // TODO - SETUP_TASK - create actual initial state
-    return std::make_shared<state::CombatDemo>(engine());
+    return std::make_shared<state::Arena>();
 }
 
 } // namespace game

@@ -17,7 +17,7 @@ TempUnitController::TempUnitController(Player& owner)
 
 void TempUnitController::init() {
     auto& game  = bl::game::Game::getInstance<Game>();
-    auto& world = owner.getCurrentWorld<world::World>();
+    auto& world = owner.getCurrentWorld();
     auto scene  = owner.getRenderObserver().getOrCreateSceneOverlay();
 
     background.create(world, {100.f, 60.f});

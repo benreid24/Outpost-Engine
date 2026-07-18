@@ -61,6 +61,7 @@ bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
 void Game::startShutdown() {
     // TODO - SETUP_TASK - any early shutdown tasks
 
+    font.release(); // let go to prevent release after engine is destroyed
     windowSizePersister.unsubscribe();
     damage.unsubscribe();
     factionStore.unsubscribe();

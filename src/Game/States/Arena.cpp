@@ -1,0 +1,83 @@
+#include <Game/States/Arena.hpp>
+
+#include <BLIB/Cameras/3D/Camera3D.hpp>
+#include <BLIB/Engine/Engine.hpp>
+#include <BLIB/Engine/Worlds/World3D.hpp>
+#include <BLIB/Render/Scenes/Scene3D.hpp>
+
+namespace game
+{
+namespace state
+{
+namespace
+{
+constexpr float TerrainWidth          = 1000.f;
+constexpr float TerrainHeight         = 1000.f;
+constexpr float TerrainMaxHeight      = 100.f;
+constexpr float TerrainStep           = 1.f;
+constexpr unsigned int TerrainOctaves = 4;
+constexpr float TerrainPersistence    = 1.f;
+} // namespace
+
+Arena::Arena()
+: State(bl::engine::StateMask::Running) {}
+
+const char* Arena::name() const { return "Arena"; }
+
+void Arena::activate(bl::engine::Engine& engine) {
+    auto world = engine.getPlayer().enterWorld<bl::engine::World3D>();
+
+    engine.getPlayer().getRenderObserver().setCamera<bl::cam::Camera3D>(
+        glm::vec3(0.f, 0.f, TerrainMaxHeight * 1.5f), 0.f, -90.f);
+
+    world->typedScene().getLighting().modifySun().color.setLighting(
+        bl::rc::Color(1.f, 1.f, 1.f), 1.f, 0.25f, 1.f, 0.1f);
+    world->typedScene().getLighting().modifySun().dir =
+        glm::normalize(glm::vec3(-2.f, 0.5f, -1.5f));
+
+    terrain.createFromNoise2d(*world,
+                              perlin,
+                              TerrainWidth,
+                              TerrainHeight,
+                              TerrainMaxHeight,
+                              TerrainStep,
+                              TerrainOctaves,
+                              TerrainPersistence);
+    colorTerrain();
+    terrain.addToScene(world->scene(), bl::rc::UpdateSpeed::Static);
+
+    subscribe(engine.getSignalChannel());
+}
+
+void Arena::deactivate(bl::engine::Engine& engine) {
+    unsubscribe();
+    engine.getPlayer().leaveWorld();
+}
+
+void Arena::update(bl::engine::Engine&, float, float) {}
+
+void Arena::process(const sf::Event& event) {
+    if (auto* key = event.getIf<sf::Event::KeyPressed>()) {
+        if (key->code == sf::Keyboard::Key::G) {
+            terrain.regenerateFromNoise2d(perlin,
+                                          TerrainWidth,
+                                          TerrainHeight,
+                                          TerrainMaxHeight,
+                                          TerrainStep,
+                                          TerrainOctaves,
+                                          TerrainPersistence);
+            colorTerrain();
+        }
+    }
+}
+
+void Arena::colorTerrain() {
+    auto& verts = terrain.component().gpuBuffer.vertices();
+    for (auto& v : verts) {
+        const float h = v.pos.z / TerrainMaxHeight;
+        v.color       = bl::rc::Color(h, h, h);
+    }
+}
+
+} // namespace state
+} // namespace game
