@@ -14,10 +14,10 @@ namespace
 {
 constexpr float TerrainWidth          = 1000.f;
 constexpr float TerrainHeight         = 1000.f;
-constexpr float TerrainMaxHeight      = 100.f;
-constexpr float TerrainStep           = 1.f;
-constexpr unsigned int TerrainOctaves = 4;
-constexpr float TerrainPersistence    = 1.f;
+constexpr float TerrainMaxHeight      = 50.f;
+constexpr float TerrainStep           = 30.f;
+constexpr unsigned int TerrainOctaves = 1;
+constexpr float TerrainPersistence    = 0.5f;
 } // namespace
 
 Arena::Arena()
