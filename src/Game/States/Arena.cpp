@@ -4,6 +4,7 @@
 #include <BLIB/Engine/Engine.hpp>
 #include <BLIB/Engine/Worlds/World3D.hpp>
 #include <BLIB/Render/Scenes/Scene3D.hpp>
+#include <Core/Cameras/ArenaController.hpp>
 
 namespace game
 {
@@ -27,8 +28,11 @@ const char* Arena::name() const { return "Arena"; }
 void Arena::activate(bl::engine::Engine& engine) {
     auto world = engine.getPlayer().enterWorld<bl::engine::World3D>();
 
-    engine.getPlayer().getRenderObserver().setCamera<bl::cam::Camera3D>(
-        glm::vec3(0.f, 0.f, TerrainMaxHeight * 1.5f), 0.f, -90.f);
+    const float camHeight = TerrainMaxHeight * 1.5f;
+    auto* cam             = engine.getPlayer().getRenderObserver().setCamera<bl::cam::Camera3D>(
+        glm::vec3(0.f, camHeight, 0.f), 0.f, -45.f);
+    auto* controller = cam->setController<core::cam::ArenaController>(camHeight, 100.f, 2.f);
+    controller->subscribe(engine.getSignalChannel());
 
     world->typedScene().getLighting().modifySun().color.setLighting(
         bl::rc::Color(1.f, 1.f, 1.f), 1.f, 0.25f, 1.f, 0.1f);
@@ -74,7 +78,7 @@ void Arena::process(const sf::Event& event) {
 void Arena::colorTerrain() {
     auto& verts = terrain.component().gpuBuffer.vertices();
     for (auto& v : verts) {
-        const float h = v.pos.z / TerrainMaxHeight;
+        const float h = v.pos.y / TerrainMaxHeight;
         v.color       = bl::rc::Color(h, h, h);
     }
 }
