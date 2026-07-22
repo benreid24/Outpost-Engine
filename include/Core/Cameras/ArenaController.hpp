@@ -28,11 +28,17 @@ public:
     /**
      * @brief Creates a new arena camera controller
      *
-     * @param initialHeight The initial height of the camera
-     * @param speedFactor The speed factor for camera movement
+     * @param minDistance The minimum distance the camera can be from the target
+     * @param maxDistance The maximum distance the camera can be from the target
+     * @param distanceSteps The number of steps between the min and max distance
+     * @param arenaSize The size of the arena in world coordinates centered on the origin
+     * @param speed The speed for camera movement in world units per second
      * @param dampening The dampening factor for camera movement
+     * @param initialPosition The initial position of the camera in world coordinates
      */
-    ArenaController(float initialHeight, float speedFactor, float dampening = 0.5f);
+    ArenaController(float minDistance, float maxDistance, unsigned int distanceSteps,
+                    glm::vec2 arenaSize, float speed, float dampening,
+                    glm::vec3 initialPosition = glm::vec3(0.f, 0.f, 0.f));
 
     /**
      * @brief Destroys the controller
@@ -40,13 +46,25 @@ public:
     virtual ~ArenaController() = default;
 
 private:
-    float nominalHeight;
-    float speedFactor;
-    glm::vec2 velocity;
-    glm::vec2 targetVelocity;
-    float dampening;
-    float heightFactor;
-    float targetHeightFactor;
+    const float minDistance;
+    const float distancePerStep;
+    const unsigned int distanceSteps;
+    unsigned int currentDistanceStep;
+    float targetDistance;
+    float currentDistance;
+
+    const glm::vec2 arenaSize;
+    glm::vec3 currentPosition;
+    glm::vec3 velocity;
+    glm::vec3 targetVelocity;
+    const float speedPerStep;
+    float speed;
+    const float dampening;
+
+    float currentYaw;
+    float targetYaw;
+    float currentPitch;
+    float targetPitch;
 
     virtual void update(float dt) override;
     virtual void process(const sf::Event& event) override;

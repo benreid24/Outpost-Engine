@@ -31,7 +31,14 @@ void Arena::activate(bl::engine::Engine& engine) {
     const float camHeight = TerrainMaxHeight * 1.5f;
     auto* cam             = engine.getPlayer().getRenderObserver().setCamera<bl::cam::Camera3D>(
         glm::vec3(0.f, camHeight, 0.f), 0.f, -45.f);
-    auto* controller = cam->setController<core::cam::ArenaController>(camHeight, 100.f, 2.f);
+    auto* controller =
+        cam->setController<core::cam::ArenaController>(10.f,
+                                                       1000.f,
+                                                       5,
+                                                       glm::vec2(TerrainWidth, TerrainHeight),
+                                                       100.f,
+                                                       0.05f,
+                                                       glm::vec3(0.f, camHeight, 0.f));
     controller->subscribe(engine.getSignalChannel());
 
     world->typedScene().getLighting().modifySun().color.setLighting(
