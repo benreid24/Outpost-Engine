@@ -1,28 +1,38 @@
-#ifndef GAME_STATES_ARENA_HPP
-#define GAME_STATES_ARENA_HPP
+#ifndef GAME_STATES_ARENASTATE_HPP
+#define GAME_STATES_ARENASTATE_HPP
 
 #include <BLIB/Engine/State.hpp>
 #include <BLIB/Graphics/Terrain.hpp>
 #include <BLIB/Signals.hpp>
+#include <Core/Arena/Arena.hpp>
 #include <SFML/Window/Event.hpp>
 
 namespace game
 {
 namespace state
 {
-class Arena
+/**
+ * @brief Game state for the arena simulation
+ *
+ * @ingroup States
+ */
+class ArenaState
 : public bl::engine::State
 , public bl::sig::Listener<sf::Event> {
 public:
-    Arena();
+    /**
+     * @brief Creates the state
+     */
+    ArenaState();
 
-    virtual ~Arena() = default;
+    /**
+     * @brief Destroys the state
+     */
+    virtual ~ArenaState() = default;
 
 private:
-    bl::util::Perlin<float> perlin;
-    bl::gfx::Terrain terrain;
+    core::arena::Arena arena;
 
-    void colorTerrain();
     const char* name() const override;
     void activate(bl::engine::Engine& engine) override;
     void deactivate(bl::engine::Engine& engine) override;

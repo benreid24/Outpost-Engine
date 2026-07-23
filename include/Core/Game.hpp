@@ -22,6 +22,11 @@
 /// Contains everything shared between the game and editor
 namespace core
 {
+/**
+ * @brief Base instance of the BLIB game class shared by both the game runtime and editor runtime
+ *
+ * @ingroup Core
+ */
 class Game : public bl::game::Game {
 public:
     /**
