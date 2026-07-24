@@ -59,6 +59,7 @@ private:
     glm::vec3 targetVelocity;
     const float speedPerStep;
     float speed;
+    float speedMultiple;
     const float dampening;
 
     float currentYaw;

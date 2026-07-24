@@ -40,6 +40,7 @@ ArenaController::ArenaController(float minDistance, float maxDistance, unsigned 
 , targetVelocity(0.f, 0.f, 0.f)
 , speedPerStep((speed / targetDistance * 2.f) * distancePerStep)
 , speed(speed)
+, speedMultiple(1.f)
 , dampening(dampening)
 , currentYaw(0.f)
 , targetYaw(0.f)
@@ -68,7 +69,7 @@ void ArenaController::update(float dt) {
                                         velocity.y,
                                         velocity.z * yawCos - velocity.x * yawSin);
     speed = speedPerStep * static_cast<float>(currentDistanceStep + 1);
-    currentPosition += yawAdjustedVelocity * speed * dt;
+    currentPosition += yawAdjustedVelocity * speed * speedMultiple * dt;
     currentPosition.y = std::max(currentPosition.y, 0.f); // TODO - get from heightmap
 
     // update camera position and orientation
@@ -106,6 +107,9 @@ void ArenaController::process(const sf::Event& event) {
             break;
         case sf::Keyboard::Key::T:
             targetVelocity.y = -1.f;
+            break;
+        case sf::Keyboard::Key::LShift:
+            speedMultiple = 2.f;
             break;
 
         case sf::Keyboard::Key::Hyphen:
@@ -154,6 +158,9 @@ void ArenaController::process(const sf::Event& event) {
         case sf::Keyboard::Key::R:
         case sf::Keyboard::Key::T:
             targetVelocity.y = 0.f;
+            break;
+        case sf::Keyboard::Key::LShift:
+            speedMultiple = 1.f;
             break;
         default:
             break;

@@ -3,6 +3,7 @@
 
 #include <BLIB/Util/Perlin.hpp>
 #include <cstdint>
+#include <random>
 
 namespace core
 {
@@ -44,9 +45,19 @@ public:
      */
     const bl::util::Perlin<float>& getPerlin() const { return perlin; }
 
+    /**
+     * @brief Returns a random number in the given range of a float type
+     *
+     * @param min Minimum value of the range
+     * @param max Maximum value of the range
+     * @return A random number in the range [min,max]
+     */
+    float getFloat(float min, float max);
+
 private:
     std::uint64_t seed;
     bl::util::Perlin<float> perlin;
+    std::mt19937_64 rng;
 };
 
 } // namespace arena
