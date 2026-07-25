@@ -11,10 +11,14 @@ namespace gen
 Domain::Domain()
 : biomes() {}
 
+float Domain::totalWeight() const {
+    float total = 0.f;
+    for (const auto& wb : biomes) { total += wb.weight; }
+    return total;
+}
+
 Biome Domain::select(Seed& gen) const {
-    float totalWeight = 0.f;
-    for (const auto& wb : biomes) { totalWeight += wb.weight; }
-    const float selection = gen.getFloat(0.f, totalWeight);
+    const float selection = gen.getFloat(0.f, totalWeight());
     float currentWeight   = 0.f;
     for (const auto& wb : biomes) {
         currentWeight += wb.weight;

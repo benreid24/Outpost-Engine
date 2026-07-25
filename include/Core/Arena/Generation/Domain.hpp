@@ -32,6 +32,11 @@ struct Domain {
      * @return The selected biome
      */
     Biome select(Seed& gen) const;
+
+    /**
+     * @brief Returns the sum of weights
+     */
+    float totalWeight() const;
 };
 
 } // namespace gen
