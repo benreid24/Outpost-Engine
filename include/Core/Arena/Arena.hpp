@@ -42,7 +42,7 @@ public:
     void addToWorld(bl::engine::World& world);
 
 private:
-    Generator generator;
+    gen::Seed generator;
     Terrain terrain;
 };
 

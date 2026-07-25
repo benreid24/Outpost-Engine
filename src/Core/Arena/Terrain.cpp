@@ -30,7 +30,7 @@ constexpr float WaterHeight                     = 0.45f;
 
 Terrain::Terrain() {}
 
-void Terrain::generate(const Generator& gen, const glm::vec2& size, float mh) {
+void Terrain::generate(const gen::Seed& gen, const glm::vec2& size, float mh) {
     worldSize                 = size;
     maxHeight                 = mh;
     const unsigned int xCount = std::ceil(size.x / TerrainStep) + 0.1f;

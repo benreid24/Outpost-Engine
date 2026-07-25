@@ -1,5 +1,5 @@
-#ifndef CORE_ARENA_GENERATOR_HPP
-#define CORE_ARENA_GENERATOR_HPP
+#ifndef CORE_ARENA_GENERATION_SEED_HPP
+#define CORE_ARENA_GENERATION_SEED_HPP
 
 #include <BLIB/Util/Perlin.hpp>
 #include <cstdint>
@@ -9,24 +9,26 @@ namespace core
 {
 namespace arena
 {
+namespace gen
+{
 /**
  * @brief Random number generator for world generation
  *
  * @ingroup Arena
  */
-class Generator {
+class Seed {
 public:
     /**
      * @brief Creates the generator with a random seed
      */
-    Generator();
+    Seed();
 
     /**
      * @brief Creates the generator with the given seed
      *
      * @param seed The seed to use
      */
-    Generator(std::uint64_t seed);
+    Seed(std::uint64_t seed);
 
     /**
      * @brief Sets the seed to use
@@ -60,6 +62,7 @@ private:
     std::mt19937_64 rng;
 };
 
+} // namespace gen
 } // namespace arena
 } // namespace core
 

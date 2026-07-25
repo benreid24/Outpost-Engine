@@ -3,7 +3,7 @@
 
 #include <BLIB/Containers/Vector2d.hpp>
 #include <BLIB/Graphics/Terrain.hpp>
-#include <Core/Arena/Generator.hpp>
+#include <Core/Arena/Generation/Seed.hpp>
 
 namespace core
 {
@@ -28,7 +28,7 @@ public:
      * @param size The size of the terrain to generate
      * @param maxHeight The maximum height of the terrain to generate
      */
-    void generate(const Generator& generator, const glm::vec2& size, float maxHeight);
+    void generate(const gen::Seed& generator, const glm::vec2& size, float maxHeight);
 
     /**
      * @brief Creates engine objects for the terrain and adds them to the world

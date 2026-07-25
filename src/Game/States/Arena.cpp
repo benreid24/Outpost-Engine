@@ -43,7 +43,6 @@ void ArenaState::activate(bl::engine::Engine& engine) {
     world->typedScene().getLighting().modifySun().dir =
         glm::normalize(glm::vec3(-2.f, 0.5f, -1.5f));
 
-    core::arena::Generator generator;
     arena.generate(0, glm::vec2(TerrainWidth, TerrainHeight), TerrainMaxHeight);
     arena.addToWorld(*world);
 

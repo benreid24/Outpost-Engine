@@ -8,10 +8,10 @@ namespace core
 {
 namespace arena
 {
-class Generator;
-
 namespace gen
 {
+class Seed;
+
 /**
  * @brief Represents the domain of possible biomes for a node
  *
@@ -31,7 +31,7 @@ struct Domain {
      * @param gen The seeded random number generator to use for selection
      * @return The selected biome
      */
-    Biome select(Generator& gen) const;
+    Biome select(Seed& gen) const;
 };
 
 } // namespace gen
