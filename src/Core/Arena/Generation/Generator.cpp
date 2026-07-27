@@ -1,6 +1,8 @@
 #include <Core/Arena/Generation/Generator.hpp>
 
 #include <Core/Arena/Arena.hpp>
+#include <Core/Arena/Generation/Environment.hpp>
+#include <Core/Arena/Generation/ProtoTerrain.hpp>
 
 /*
  * General approach:
@@ -37,13 +39,66 @@ namespace arena
 {
 namespace gen
 {
+namespace
+{
+void samplePerlin(glm::vec2 worldSize, float step, bl::util::Perlin<float>& noise,
+                  const Parameters::PerlinParameters& params, bl::ctr::Vector2D<float>& output) {
+    const unsigned int xCount = std::ceil(worldSize.x / step) + 0.1f;
+    const unsigned int yCount = std::ceil(worldSize.y / step) + 0.1f;
+
+    output.setSize(xCount, yCount, 0.f);
+    for (unsigned int x = 0; x < xCount; ++x) {
+        for (unsigned int y = 0; y < yCount; ++y) {
+            const float xf = static_cast<float>(x) * step - worldSize.x * 0.5f;
+            const float zf = static_cast<float>(y) * step - worldSize.y * 0.5f;
+            float normal   = noise.octave2DNormalized(
+                xf * params.frequency, zf * params.frequency, params.octaves, params.persistence);
+            normal       = (normal + 1.f) * 0.5f; // map to [0,1]
+            output(x, y) = normal;
+        }
+    }
+}
+} // namespace
+
 Generator::Generator(std::uint64_t seed, const Parameters& parameters)
 : seed(seed)
-, params(parameters) {
-    // TODO - gen heightmap and moisture map
-}
+, params(parameters) {}
 
 void Generator::generate(Arena& output) {
+    // generate perlin noise to seed proto terrain
+    // TODO - does this produce artifacts?
+    bl::util::Perlin<float> heightPerlin   = seed.getPerlin(0);
+    bl::util::Perlin<float> moisturePerlin = seed.getPerlin(1);
+    samplePerlin(params.worldSize, params.worldStep, heightPerlin, params.terrainPerlin, heightmap);
+    samplePerlin(
+        params.worldSize, params.worldStep, moisturePerlin, params.moisturePerlin, moistureMap);
+
+    // populate proto terrain
+    ProtoTerrain terrain;
+    terrain.populate(*this);
+
+    // populate superpositioned node domains
+    Environment environment;
+    for (const auto& biome : params.biomes) { environment.addRuledBiome(biome); }
+    for (unsigned int x = 0; x < terrain.getNodesWidth(); ++x) {
+        for (unsigned int y = 0; y < terrain.getNodesHeight(); ++y) {
+            environment.populateDomain(terrain.getNode(x, y));
+        }
+    }
+
+    // perform domain collapse to assign biomes
+    // TODO
+
+    // postprocess biomes (resample noise, height scale, water, etc)
+    // TODO
+
+    // Select and modify locations for train stops
+    // TODO
+
+    // route train via modified A*
+    // TODO
+
+    // Poisson disk sampling for trees and rocks
     // TODO
 }
 

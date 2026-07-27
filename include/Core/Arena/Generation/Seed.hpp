@@ -44,8 +44,10 @@ public:
 
     /**
      * @brief Returns a Perlin noise generator seeded with the current seed
+     *
+     * @param offset Seed offset for the Perlin noise generator
      */
-    const bl::util::Perlin<float>& getPerlin() const { return perlin; }
+    bl::util::Perlin<float> getPerlin(std::uint64_t offset = 0) const;
 
     /**
      * @brief Returns a random number in the given range of a float type
@@ -56,9 +58,17 @@ public:
      */
     float getFloat(float min, float max);
 
+    /**
+     * @brief Returns a random unsigned 64 bit integer
+     *
+     * @param min The minimum value
+     * @param max The maximum value
+     * @return A random number in the range [min, max]
+     */
+    std::uint64_t getUint64(std::uint64_t min, std::uint64_t max);
+
 private:
     std::uint64_t seed;
-    bl::util::Perlin<float> perlin;
     std::mt19937_64 rng;
 };
 

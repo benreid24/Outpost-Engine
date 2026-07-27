@@ -1,7 +1,9 @@
 #ifndef CORE_ARENA_GENERATION_PARAMETERS_HPP
 #define CORE_ARENA_GENERATION_PARAMETERS_HPP
 
+#include <Core/Arena/Generation/RuledBiome.hpp>
 #include <glm/glm.hpp>
+#include <vector>
 
 namespace core
 {
@@ -39,6 +41,7 @@ struct Parameters {
     float waterHeight;
     PerlinParameters terrainPerlin;
     PerlinParameters moisturePerlin;
+    std::vector<RuledBiome> biomes;
 
     /**
      * @brief Initializes the parameters with sane defaults
