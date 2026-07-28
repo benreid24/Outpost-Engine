@@ -13,6 +13,11 @@ namespace core
 {
 namespace arena
 {
+namespace gen
+{
+class Generator;
+}
+
 /**
  * @brief Represents a single arena in game with terrain, units, tracks, and other data
  *
@@ -44,6 +49,8 @@ public:
 private:
     gen::Seed generator;
     Terrain terrain;
+
+    friend class gen::Generator;
 };
 
 } // namespace arena

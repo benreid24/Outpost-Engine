@@ -65,6 +65,9 @@ Generator::Generator(std::uint64_t seed, const Parameters& parameters)
 , params(parameters) {}
 
 void Generator::generate(Arena& output) {
+    output.terrain.maxHeight = params.maxHeight;
+    output.terrain.worldSize = params.worldSize;
+
     // generate perlin noise to seed proto terrain
     // TODO - does this produce artifacts?
     bl::util::Perlin<float> heightPerlin   = seed.getPerlin(0);
@@ -87,7 +90,13 @@ void Generator::generate(Arena& output) {
     }
 
     // perform domain collapse to assign biomes
-    // TODO
+    unsigned int toCollapse = terrain.getNodesWidth() * terrain.getNodesHeight();
+    while (toCollapse > 0) {
+        SuperpositionedNode& mostConstrained = terrain.getMostConstrainedNode();
+        mostConstrained.collapse(seed);
+        // TODO - we may want to update constraints here
+        --toCollapse;
+    }
 
     // postprocess biomes (resample noise, height scale, water, etc)
     // TODO
@@ -100,6 +109,18 @@ void Generator::generate(Arena& output) {
 
     // Poisson disk sampling for trees and rocks
     // TODO
+
+    // write to terrain
+    output.terrain.heightmap = std::move(heightmap);
+    output.terrain.nodes.setSize(heightmap.getWidth(), heightmap.getHeight());
+    for (unsigned int x = 0; x < output.terrain.nodes.getWidth(); ++x) {
+        for (unsigned int y = 0; y < output.terrain.nodes.getHeight(); ++y) {
+            Node& node    = output.terrain.nodes(x, y);
+            node.index    = {x, y};
+            node.worldPos = glm::vec2(node.index) * params.worldStep;
+            node.biome    = terrain.getNode(x, y).selectedBiome;
+        }
+    }
 }
 
 } // namespace gen

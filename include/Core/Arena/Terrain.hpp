@@ -4,11 +4,16 @@
 #include <BLIB/Containers/Vector2d.hpp>
 #include <BLIB/Graphics/Terrain.hpp>
 #include <Core/Arena/Generation/Seed.hpp>
+#include <Core/Arena/Node.hpp>
 
 namespace core
 {
 namespace arena
 {
+namespace gen
+{
+class Generator;
+}
 /**
  * @brief Representation of the terrain in an arena
  *
@@ -48,10 +53,13 @@ public:
 private:
     glm::vec2 worldSize;
     float maxHeight;
+    bl::ctr::Vector2D<Node> nodes;
     bl::ctr::Vector2D<float> heightmap;
     bl::gfx::Terrain terrainDrawable;
 
     void postprocess();
+
+    friend class gen::Generator;
 };
 
 } // namespace arena

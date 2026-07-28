@@ -120,6 +120,11 @@ public:
     SuperpositionedNode& getNode(unsigned int x, unsigned int y) { return nodes(x, y); }
 
     /**
+     * @brief Finds and returns the most constrained node
+     */
+    SuperpositionedNode& getMostConstrainedNode();
+
+    /**
      * @brief Returns the neighbors of the node at the given position
      *
      * @param x The x index of the node to get neighbors for

@@ -1,5 +1,6 @@
 #include <Core/Arena/Generation/ProtoTerrain.hpp>
 
+#include <BLIB/Logging.hpp>
 #include <Core/Arena/Generation/Generator.hpp>
 
 namespace core
@@ -23,6 +24,29 @@ void ProtoTerrain::populate(Generator& generator) {
                                               generator.getMoistureMap()(x, y));
         }
     }
+}
+
+SuperpositionedNode& ProtoTerrain::getMostConstrainedNode() {
+    SuperpositionedNode* result = nullptr;
+    float resultScore           = 0.f;
+
+    for (unsigned int x = 0; x < nodes.getWidth(); ++x) {
+        for (unsigned int y = 0; y < nodes.getHeight(); ++y) {
+            SuperpositionedNode& node = nodes(x, y);
+            const float nodeScore     = node.domain.totalWeight();
+            if (!result || nodeScore < resultScore) {
+                result      = &node;
+                resultScore = nodeScore;
+            }
+        }
+    }
+
+    if (!result) {
+        BL_LOG_CRITICAL << "Failed to find most constrained node";
+        throw std::runtime_error("Failed to find most constrained node");
+    }
+
+    return *result;
 }
 
 ProtoTerrain::QueryResult ProtoTerrain::getNodeNeighbors(unsigned int x, unsigned int y) {

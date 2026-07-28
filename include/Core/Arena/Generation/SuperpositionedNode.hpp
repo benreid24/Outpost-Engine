@@ -10,6 +10,8 @@ namespace arena
 {
 namespace gen
 {
+class Seed;
+
 /**
  * @brief Represents a node being generated with its possible states and constraints
  *
@@ -20,15 +22,12 @@ struct SuperpositionedNode {
     float height;
     float moisture;
     Domain domain;
+    Biome selectedBiome;
 
     /**
      * @brief Creates a node with sane defaults
      */
-    SuperpositionedNode()
-    : position(0, 0)
-    , height(0.f)
-    , moisture(0.f)
-    , domain() {}
+    SuperpositionedNode();
 
     /**
      * @brief Initializes the node
@@ -37,11 +36,14 @@ struct SuperpositionedNode {
      * @param height The height of the node in normalized coordinates
      * @param moisture The normalized moisture of the node
      */
-    SuperpositionedNode(const glm::u32vec2& position, float height, float moisture)
-    : position(position)
-    , height(height)
-    , moisture(moisture)
-    , domain() {}
+    SuperpositionedNode(const glm::u32vec2& position, float height, float moisture);
+
+    /**
+     * @brief Selects from the domain and assigns a biome
+     *
+     * @param seed The random seed to use
+     */
+    void collapse(Seed& seed);
 };
 
 } // namespace gen

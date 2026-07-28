@@ -5,4 +5,5 @@ target_sources(Core PRIVATE
     ProtoTerrain.cpp
     RuledBiome.cpp
     Seed.cpp
+    SuperpositionedNode.cpp
 )
