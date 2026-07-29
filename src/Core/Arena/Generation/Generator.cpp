@@ -85,17 +85,17 @@ void Generator::generate(Arena& output) {
     for (const auto& biome : params.biomes) { environment.addRuledBiome(biome); }
     for (unsigned int x = 0; x < terrain.getNodesWidth(); ++x) {
         for (unsigned int y = 0; y < terrain.getNodesHeight(); ++y) {
-            environment.populateDomain(terrain.getNode(x, y));
+            environment.domainExpansion(terrain.getNode(x, y));
         }
     }
+    terrain.buildPriorityQueue();
 
     // perform domain collapse to assign biomes
-    unsigned int toCollapse = terrain.getNodesWidth() * terrain.getNodesHeight();
-    while (toCollapse > 0) {
-        SuperpositionedNode& mostConstrained = terrain.getMostConstrainedNode();
-        mostConstrained.collapse(seed);
+    SuperpositionedNode* mostConstrained = terrain.getMostConstrainedNode();
+    while (mostConstrained) {
+        mostConstrained->collapse(seed);
         // TODO - we may want to update constraints here
-        --toCollapse;
+        mostConstrained = terrain.getMostConstrainedNode();
     }
 
     // postprocess biomes (resample noise, height scale, water, etc)

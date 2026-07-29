@@ -12,7 +12,7 @@ Environment::Environment() {}
 
 void Environment::addRuledBiome(const RuledBiome& ruledBiome) { ruledBiomes.push_back(ruledBiome); }
 
-void Environment::populateDomain(SuperpositionedNode& node) const {
+void Environment::domainExpansion(SuperpositionedNode& node) const {
     for (const auto& ruledBiome : ruledBiomes) {
         const float heightWeight   = ruledBiome.heightRule.computeWeight(node.height);
         const float moistureWeight = ruledBiome.moistureRule.computeWeight(node.moisture);

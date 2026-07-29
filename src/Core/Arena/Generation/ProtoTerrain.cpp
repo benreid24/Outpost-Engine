@@ -26,27 +26,29 @@ void ProtoTerrain::populate(Generator& generator) {
     }
 }
 
-SuperpositionedNode& ProtoTerrain::getMostConstrainedNode() {
-    SuperpositionedNode* result = nullptr;
-    float resultScore           = 0.f;
-
+void ProtoTerrain::buildPriorityQueue() {
     for (unsigned int x = 0; x < nodes.getWidth(); ++x) {
-        for (unsigned int y = 0; y < nodes.getHeight(); ++y) {
-            SuperpositionedNode& node = nodes(x, y);
-            const float nodeScore     = node.domain.totalWeight();
-            if (!result || nodeScore < resultScore) {
-                result      = &node;
-                resultScore = nodeScore;
-            }
-        }
+        for (unsigned int y = 0; y < nodes.getHeight(); ++y) { collapseQueue.emplace(nodes(x, y)); }
     }
+}
 
-    if (!result) {
-        BL_LOG_CRITICAL << "Failed to find most constrained node";
-        throw std::runtime_error("Failed to find most constrained node");
+ProtoTerrain::PriorityNode::PriorityNode(SuperpositionedNode& node)
+: node(&node)
+, cachedWeight(node.domain.totalWeight()) {}
+
+void ProtoTerrain::PriorityNode::update() { cachedWeight = node->domain.totalWeight(); }
+
+bool ProtoTerrain::PriorityNode::operator<(const PriorityNode& right) const {
+    return cachedWeight < right.cachedWeight;
+}
+
+SuperpositionedNode* ProtoTerrain::getMostConstrainedNode() {
+    if (!collapseQueue.empty()) {
+        SuperpositionedNode* result = collapseQueue.top().node;
+        collapseQueue.pop();
+        return result;
     }
-
-    return *result;
+    return nullptr;
 }
 
 ProtoTerrain::QueryResult ProtoTerrain::getNodeNeighbors(unsigned int x, unsigned int y) {

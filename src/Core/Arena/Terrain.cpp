@@ -83,6 +83,7 @@ void Terrain::postprocess() {
 
     auto& verts = terrainDrawable.component().gpuBuffer.vertices();
     for (auto& v : verts) {
+        v.pos.y *= maxHeight;
         const glm::u32vec2 i = worldPosToIndex({v.pos.x, v.pos.z});
         const auto it        = BiomeColors.find(nodes(i.x, i.y).biome);
         if (it != BiomeColors.end()) { v.color = it->second; }

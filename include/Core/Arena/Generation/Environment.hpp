@@ -36,7 +36,7 @@ public:
      *
      * @param node The node to populate the domain for
      */
-    void populateDomain(SuperpositionedNode& node) const;
+    void domainExpansion(SuperpositionedNode& node) const;
 
     /**
      * @brief Returns the raw list of ruled biomes in the environment

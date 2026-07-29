@@ -3,6 +3,7 @@
 
 #include <BLIB/Containers/Vector2d.hpp>
 #include <Core/Arena/Generation/SuperpositionedNode.hpp>
+#include <queue>
 
 namespace core
 {
@@ -122,7 +123,12 @@ public:
     /**
      * @brief Finds and returns the most constrained node
      */
-    SuperpositionedNode& getMostConstrainedNode();
+    SuperpositionedNode* getMostConstrainedNode();
+
+    /**
+     * @brief Builsd the priority queue for node domain collapse
+     */
+    void buildPriorityQueue();
 
     /**
      * @brief Returns the neighbors of the node at the given position
@@ -134,7 +140,18 @@ public:
     QueryResult getNodeNeighbors(unsigned int x, unsigned int y);
 
 private:
+    struct PriorityNode {
+        SuperpositionedNode* node;
+        float cachedWeight;
+
+        PriorityNode(SuperpositionedNode& node);
+        void update();
+        bool operator<(const PriorityNode& node) const;
+    };
+
     bl::ctr::Vector2D<SuperpositionedNode> nodes;
+    // TODO - will need different data structure if we can change nodes
+    std::priority_queue<PriorityNode, std::vector<PriorityNode>> collapseQueue;
 };
 
 } // namespace gen
