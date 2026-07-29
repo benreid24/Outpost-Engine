@@ -27,15 +27,6 @@ public:
     Terrain();
 
     /**
-     * @brief Generates the terrain
-     *
-     * @param generator The generator to use
-     * @param size The size of the terrain to generate
-     * @param maxHeight The maximum height of the terrain to generate
-     */
-    void generate(const gen::Seed& generator, const glm::vec2& size, float maxHeight);
-
-    /**
      * @brief Creates engine objects for the terrain and adds them to the world
      *
      * @param world The world to create the objects in
@@ -49,6 +40,14 @@ public:
      * @return The height of the terrain at the given position
      */
     float sampleHeight(const glm::vec2& position) const;
+
+    /**
+     * @brief Returns the node index of the given world position
+     *
+     * @param worldPos The position to get the index for in world coordinates
+     * @return The index of the given world position
+     */
+    glm::u32vec2 worldPosToIndex(const glm::vec2& worldPos) const;
 
 private:
     glm::vec2 worldSize;

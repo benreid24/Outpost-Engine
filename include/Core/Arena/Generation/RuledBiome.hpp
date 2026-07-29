@@ -48,9 +48,9 @@ struct RuledBiome {
         float computeWeight(float value) const;
     };
 
-    Biome biome;
-    Rule heightRule;
-    Rule moistureRule;
+    Biome biome       = Biome::COUNT;
+    Rule heightRule   = Rule();
+    Rule moistureRule = Rule();
 
     /**
      * @brief Creates a ruled biome

@@ -26,34 +26,19 @@ const std::array<TerrainColor, 6> TerrainColors = {{
     {0.65f, 1.1f, bl::rc::Color(1.5f, 1.5f, 1.5f)}        // snow
 }};
 constexpr float WaterHeight                     = 0.45f;
+
+const std::unordered_map<gen::Biome, bl::rc::Color> BiomeColors = {
+    std::make_pair(gen::Biome::Desert, bl::rc::Color(0.965f, 0.828f, 0.45f)),
+    std::make_pair(gen::Biome::Forest, bl::rc::Color(0.15f, 0.68f, 0.1f)),
+    std::make_pair(gen::Biome::Grassland, bl::rc::Color(0.2f, 0.88f, 0.2f)),
+    std::make_pair(gen::Biome::Mountain, bl::rc::Color(0.31f, 0.31f, 0.26f)),
+    std::make_pair(gen::Biome::Snow, bl::rc::Color(1.5f, 1.5f, 1.5f)),
+    std::make_pair(gen::Biome::Beach, bl::rc::Color(0.965f, 0.828f, 0.45f)),
+    std::make_pair(gen::Biome::Water, bl::rc::Color(0.f, 0.f, 0.6f)),
+    std::make_pair(gen::Biome::River, bl::rc::Color(0.f, 0.1f, 0.95f))};
 } // namespace
 
 Terrain::Terrain() {}
-
-void Terrain::generate(const gen::Seed& gen, const glm::vec2& size, float mh) {
-    worldSize                 = size;
-    maxHeight                 = mh;
-    const unsigned int xCount = std::ceil(size.x / TerrainStep) + 0.1f;
-    const unsigned int yCount = std::ceil(size.y / TerrainStep) + 0.1f;
-
-    heightmap.setSize(xCount, yCount, 0.f);
-    for (unsigned int x = 0; x < xCount; ++x) {
-        for (unsigned int y = 0; y < yCount; ++y) {
-            const float xf = static_cast<float>(x) * TerrainStep - size.x * 0.5f;
-            const float zf = static_cast<float>(y) * TerrainStep - size.y * 0.5f;
-            float normal   = gen.getPerlin().octave2DNormalized(
-                xf * TerrainFrequency, zf * TerrainFrequency, TerrainOctaves, TerrainPersistence);
-            normal          = (normal + 1.f) * 0.5f; // map to [0,1]
-            heightmap(x, y) = normal * maxHeight;
-        }
-    }
-
-    if (terrainDrawable.exists()) {
-        terrainDrawable.updateFromHeightmap(
-            heightmap, glm::vec2(-worldSize.x * 0.5f, -worldSize.y * 0.5f), worldSize);
-        postprocess();
-    }
-}
 
 float Terrain::sampleHeight(const glm::vec2& pos) const {
     const glm::vec2 normalPos = pos / worldSize + glm::vec2(0.5f, 0.5f);
@@ -76,6 +61,13 @@ float Terrain::sampleHeight(const glm::vec2& pos) const {
            h11 * xn * yn;
 }
 
+glm::u32vec2 Terrain::worldPosToIndex(const glm::vec2& pos) const {
+    const glm::vec2 normalPos = pos / worldSize + glm::vec2(0.5f, 0.5f);
+    const float xi            = normalPos.x * static_cast<float>(heightmap.getWidth() - 1);
+    const float yi            = normalPos.y * static_cast<float>(heightmap.getHeight() - 1);
+    return {xi, yi};
+}
+
 void Terrain::addToWorld(bl::engine::World& world) {
     terrainDrawable.createFromHeightmap(
         world, heightmap, glm::vec2(-worldSize.x * 0.5f, -worldSize.y * 0.5f), worldSize);
@@ -84,16 +76,17 @@ void Terrain::addToWorld(bl::engine::World& world) {
 }
 
 void Terrain::postprocess() {
+    if (terrainDrawable.exists()) {
+        terrainDrawable.updateFromHeightmap(
+            heightmap, glm::vec2(-worldSize.x * 0.5f, -worldSize.y * 0.5f), worldSize);
+    }
+
     auto& verts = terrainDrawable.component().gpuBuffer.vertices();
     for (auto& v : verts) {
-        const float normalizedHeight = v.pos.y / maxHeight;
-        for (const auto& tc : TerrainColors) {
-            if (normalizedHeight >= tc.minHeight && normalizedHeight < tc.maxHeight) {
-                v.color = tc.color.toVec4();
-                break;
-            }
-        }
-        if (v.pos.y < WaterHeight * maxHeight) { v.pos.y = WaterHeight * maxHeight; }
+        const glm::u32vec2 i = worldPosToIndex({v.pos.x, v.pos.z});
+        const auto it        = BiomeColors.find(nodes(i.x, i.y).biome);
+        if (it != BiomeColors.end()) { v.color = it->second; }
+        else { v.color = bl::rc::Color(0.f, 0.f, 0.f); }
     }
     terrainDrawable.commitUpdate();
 }

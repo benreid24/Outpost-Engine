@@ -20,6 +20,7 @@ enum struct Biome {
     Snow      = 4,
     Beach     = 5,
     Water     = 6,
+    River     = 7,
     COUNT
 };
 
