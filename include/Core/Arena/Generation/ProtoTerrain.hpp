@@ -1,9 +1,9 @@
 #ifndef CORE_ARENA_GENERATION_PROTOTERRAIN_HPP
 #define CORE_ARENA_GENERATION_PROTOTERRAIN_HPP
 
+#include <BLIB/Containers/PriorityQueue.hpp>
 #include <BLIB/Containers/Vector2d.hpp>
 #include <Core/Arena/Generation/SuperpositionedNode.hpp>
-#include <queue>
 
 namespace core
 {
@@ -143,6 +143,7 @@ private:
     struct PriorityNode {
         SuperpositionedNode* node;
         float cachedWeight;
+        bl::ctr::PriorityQueue<PriorityNode>::Reference ref;
 
         PriorityNode(SuperpositionedNode& node);
         void update();
@@ -150,8 +151,7 @@ private:
     };
 
     bl::ctr::Vector2D<SuperpositionedNode> nodes;
-    // TODO - will need different data structure if we can change nodes
-    std::priority_queue<PriorityNode, std::vector<PriorityNode>> collapseQueue;
+    bl::ctr::PriorityQueue<PriorityNode> collapseQueue;
 };
 
 } // namespace gen

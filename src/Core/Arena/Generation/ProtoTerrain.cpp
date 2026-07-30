@@ -28,7 +28,9 @@ void ProtoTerrain::populate(Generator& generator) {
 
 void ProtoTerrain::buildPriorityQueue() {
     for (unsigned int x = 0; x < nodes.getWidth(); ++x) {
-        for (unsigned int y = 0; y < nodes.getHeight(); ++y) { collapseQueue.emplace(nodes(x, y)); }
+        for (unsigned int y = 0; y < nodes.getHeight(); ++y) {
+            collapseQueue.push(PriorityNode(nodes(x, y)));
+        }
     }
 }
 
@@ -36,7 +38,10 @@ ProtoTerrain::PriorityNode::PriorityNode(SuperpositionedNode& node)
 : node(&node)
 , cachedWeight(node.domain.totalWeight()) {}
 
-void ProtoTerrain::PriorityNode::update() { cachedWeight = node->domain.totalWeight(); }
+void ProtoTerrain::PriorityNode::update() {
+    cachedWeight = node->domain.totalWeight();
+    // ref.reposition();
+}
 
 bool ProtoTerrain::PriorityNode::operator<(const PriorityNode& right) const {
     return cachedWeight < right.cachedWeight;
@@ -44,7 +49,7 @@ bool ProtoTerrain::PriorityNode::operator<(const PriorityNode& right) const {
 
 SuperpositionedNode* ProtoTerrain::getMostConstrainedNode() {
     if (!collapseQueue.empty()) {
-        SuperpositionedNode* result = collapseQueue.top().node;
+        SuperpositionedNode* result = collapseQueue.front().node;
         collapseQueue.pop();
         return result;
     }
