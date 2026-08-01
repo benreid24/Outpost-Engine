@@ -143,7 +143,7 @@ private:
     struct PriorityNode {
         SuperpositionedNode* node;
         float cachedWeight;
-        bl::ctr::PriorityQueue<PriorityNode>::Reference ref;
+        // bl::ctr::PriorityQueue<PriorityNode>::Reference ref;
 
         PriorityNode(SuperpositionedNode& node);
         void update();
