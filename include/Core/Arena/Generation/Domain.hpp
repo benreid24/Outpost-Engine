@@ -36,7 +36,7 @@ struct Domain {
     /**
      * @brief Returns the sum of weights
      */
-    float totalWeight() const;
+    std::uint64_t totalWeight() const;
 };
 
 } // namespace gen

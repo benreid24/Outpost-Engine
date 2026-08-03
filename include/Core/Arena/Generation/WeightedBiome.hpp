@@ -16,7 +16,7 @@ namespace gen
  */
 struct WeightedBiome {
     Biome biome;
-    float weight;
+    std::uint64_t weight;
 
     /**
      * @brief Creates the weighted biome
@@ -24,7 +24,7 @@ struct WeightedBiome {
      * @param biome The possible biome
      * @param weight The weight of the biome when selecting a biome for a node
      */
-    WeightedBiome(Biome biome, float weight)
+    WeightedBiome(Biome biome, std::uint64_t weight)
     : biome(biome)
     , weight(weight) {}
 };

@@ -141,17 +141,19 @@ public:
 
 private:
     struct PriorityNode {
+        struct Priority {
+            std::uint64_t operator()(const PriorityNode& node) const;
+        };
+
         SuperpositionedNode* node;
-        float cachedWeight;
-        // bl::ctr::PriorityQueue<PriorityNode>::Reference ref;
+        bl::ctr::PriorityQueueReference<PriorityNode, Priority> ref;
 
         PriorityNode(SuperpositionedNode& node);
         void update();
-        bool operator<(const PriorityNode& node) const;
     };
 
     bl::ctr::Vector2D<SuperpositionedNode> nodes;
-    bl::ctr::PriorityQueue<PriorityNode> collapseQueue;
+    bl::ctr::PriorityQueue<PriorityNode, PriorityNode::Priority> collapseQueue;
 };
 
 } // namespace gen

@@ -11,8 +11,8 @@ namespace gen
 Domain::Domain()
 : biomes() {}
 
-float Domain::totalWeight() const {
-    float total = 0.f;
+std::uint64_t Domain::totalWeight() const {
+    std::uint64_t total = 0;
     for (const auto& wb : biomes) { total += wb.weight; }
     return total;
 }
