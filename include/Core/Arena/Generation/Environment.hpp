@@ -2,6 +2,7 @@
 #define CORE_ARENA_GENERATION_ENVIRONMENT_HPP
 
 #include <Core/Arena/Generation/RuledBiome.hpp>
+#include <array>
 #include <vector>
 
 namespace core
@@ -43,8 +44,20 @@ public:
      */
     const std::vector<RuledBiome>& getRuledBiomes() const { return ruledBiomes; }
 
+    /**
+     * @brief Returns the adjacency bonuses for the given biome
+     *
+     * @param biome The biome to get the adjacency bonuses for
+     * @return The list of adjacency bonuses for the given biome
+     */
+    const std::vector<AdjacencyBonus>& getAdjacencyBonuses(Biome biome) const {
+        return adjacencyBonusMap[static_cast<std::size_t>(biome)];
+    }
+
 private:
     std::vector<RuledBiome> ruledBiomes;
+    std::array<std::vector<AdjacencyBonus>, static_cast<std::size_t>(Biome::COUNT)>
+        adjacencyBonusMap;
 };
 
 } // namespace gen

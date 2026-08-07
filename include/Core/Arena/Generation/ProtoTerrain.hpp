@@ -12,6 +12,7 @@ namespace arena
 namespace gen
 {
 class Generator;
+class Environment;
 
 /**
  * @brief Represents transient terrain during arena generation
@@ -42,12 +43,12 @@ public:
         /**
          * @brief Dereferences the iterator
          */
-        SuperpositionedNode& operator*() { return terrain->getNode(x, y); }
+        SuperpositionedNode& operator*();
 
         /**
          * @brief Dereferences the iterator
          */
-        SuperpositionedNode* operator->() { return &terrain->getNode(x, y); }
+        SuperpositionedNode* operator->();
 
         /**
          * @brief Increments the iterator
@@ -68,8 +69,9 @@ public:
         ProtoTerrain* terrain;
         unsigned int originX;
         unsigned int originY;
-        unsigned int x;
-        unsigned int y;
+        unsigned int i;
+
+        void checkIndex();
     };
 
     /**
@@ -139,21 +141,17 @@ public:
      */
     QueryResult getNodeNeighbors(unsigned int x, unsigned int y);
 
+    /**
+     * @brief Recomputes the adjacency bonuses for the given node and updates the priority queue
+     *
+     * @param environment The environment containing the adjacency bonuses
+     * @param node The node to update
+     */
+    void recomputeAdjacencyBonuses(Environment& environment, SuperpositionedNode& node);
+
 private:
-    struct PriorityNode {
-        struct Priority {
-            std::uint64_t operator()(const PriorityNode& node) const;
-        };
-
-        SuperpositionedNode* node;
-        bl::ctr::PriorityQueueReference<PriorityNode, Priority> ref;
-
-        PriorityNode(SuperpositionedNode& node);
-        void update();
-    };
-
     bl::ctr::Vector2D<SuperpositionedNode> nodes;
-    bl::ctr::PriorityQueue<PriorityNode, PriorityNode::Priority> collapseQueue;
+    bl::ctr::PriorityQueue<SuperpositionedNode*, SuperpositionedNode::Priority> collapseQueue;
 };
 
 } // namespace gen

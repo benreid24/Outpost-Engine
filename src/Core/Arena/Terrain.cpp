@@ -6,27 +6,6 @@ namespace arena
 {
 namespace
 {
-constexpr float TerrainStep           = 1.f;
-constexpr unsigned int TerrainOctaves = 16;
-constexpr float TerrainPersistence    = 0.4f;
-constexpr float TerrainFrequency      = 0.005f;
-
-struct TerrainColor {
-    float minHeight;
-    float maxHeight;
-    bl::rc::Color color;
-};
-
-const std::array<TerrainColor, 6> TerrainColors = {{
-    {0.f, 0.43f, bl::rc::Color(0.f, 0.f, 0.6f)},          // deep water
-    {0.43f, 0.45f, bl::rc::Color(0.f, 0.1f, 0.95f)},      // water
-    {0.45f, 0.47f, bl::rc::Color(0.965f, 0.828f, 0.45f)}, // sand
-    {0.47f, 0.55f, bl::rc::Color(0.2f, 0.8f, 0.2f)},      // grass
-    {0.55f, 0.65f, bl::rc::Color(0.31f, 0.31f, 0.26f)},   // rock
-    {0.65f, 1.1f, bl::rc::Color(1.5f, 1.5f, 1.5f)}        // snow
-}};
-constexpr float WaterHeight                     = 0.45f;
-
 const std::unordered_map<gen::Biome, bl::rc::Color> BiomeColors = {
     std::make_pair(gen::Biome::Desert, bl::rc::Color(0.965f, 0.828f, 0.45f)),
     std::make_pair(gen::Biome::Forest, bl::rc::Color(0.15f, 0.68f, 0.1f)),

@@ -2,6 +2,7 @@
 #define CORE_ARENA_GENERATION_WEIGHTEDBIOME_HPP
 
 #include <Core/Arena/Generation/Biome.hpp>
+#include <cstdint>
 
 namespace core
 {
@@ -16,6 +17,7 @@ namespace gen
  */
 struct WeightedBiome {
     Biome biome;
+    std::uint64_t baseWeight;
     std::uint64_t weight;
 
     /**
@@ -26,6 +28,7 @@ struct WeightedBiome {
      */
     WeightedBiome(Biome biome, std::uint64_t weight)
     : biome(biome)
+    , baseWeight(weight)
     , weight(weight) {}
 };
 

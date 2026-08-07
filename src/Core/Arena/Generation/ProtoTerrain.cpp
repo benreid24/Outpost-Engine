@@ -1,6 +1,7 @@
 #include <Core/Arena/Generation/ProtoTerrain.hpp>
 
 #include <BLIB/Logging.hpp>
+#include <Core/Arena/Generation/Environment.hpp>
 #include <Core/Arena/Generation/Generator.hpp>
 
 namespace core
@@ -29,20 +30,15 @@ void ProtoTerrain::populate(Generator& generator) {
 void ProtoTerrain::buildPriorityQueue() {
     for (unsigned int x = 0; x < nodes.getWidth(); ++x) {
         for (unsigned int y = 0; y < nodes.getHeight(); ++y) {
-            auto ref = collapseQueue.push(PriorityNode(nodes(x, y)));
-            ref->ref = ref;
+            auto ref                 = collapseQueue.push(&nodes(x, y));
+            (*ref)->priorityQueueRef = ref;
         }
     }
 }
 
-ProtoTerrain::PriorityNode::PriorityNode(SuperpositionedNode& node)
-: node(&node) {}
-
-void ProtoTerrain::PriorityNode::update() { ref.reposition(); }
-
 SuperpositionedNode* ProtoTerrain::getMostConstrainedNode() {
     if (!collapseQueue.empty()) {
-        SuperpositionedNode* result = collapseQueue.front().node;
+        SuperpositionedNode* result = collapseQueue.front();
         collapseQueue.pop();
         return result;
     }
@@ -53,48 +49,66 @@ ProtoTerrain::QueryResult ProtoTerrain::getNodeNeighbors(unsigned int x, unsigne
     return QueryResult{Iterator(*this, x, y)};
 }
 
+void ProtoTerrain::recomputeAdjacencyBonuses(Environment& environment, SuperpositionedNode& node) {
+    if (node.selectedBiome == Biome::COUNT) {
+        bool changed = false;
+        for (WeightedBiome& biome : node.domain.biomes) {
+            biome.weight        = biome.baseWeight;
+            const auto& bonuses = environment.getAdjacencyBonuses(biome.biome);
+
+            for (const auto& b : bonuses) {
+                std::uint64_t bonus = b.initialBonus();
+                for (const SuperpositionedNode& neighbor :
+                     getNodeNeighbors(node.position.x, node.position.y)) {
+                    bonus = b.stack(bonus, neighbor.selectedBiome);
+                }
+                biome.weight = b.apply(biome.weight, bonus);
+            }
+            if (biome.weight != biome.baseWeight) { changed = true; }
+        }
+        if (changed) { node.priorityQueueRef.reposition(); }
+    }
+}
+
+namespace
+{
+constexpr std::array<std::pair<int, int>, 8> Offsets(
+    {{-1, -1}, {0, -1}, {1, -1}, {-1, 0}, {1, 0}, {-1, 1}, {0, 1}, {1, 1}});
+}
+
 ProtoTerrain::Iterator::Iterator()
 : terrain(nullptr)
 , originX(0)
 , originY(0)
-, x(0)
-, y(0) {}
+, i(0) {}
 
 ProtoTerrain::Iterator::Iterator(ProtoTerrain& terrain, unsigned int x, unsigned int y)
 : terrain(&terrain)
 , originX(x)
 , originY(y)
-, x(x)
-, y(y) {
-    if (x > 0 && y > 0) { // go up left if possible
-        --this->x;
-        --this->y;
-    }
-    else {
-        if (y > 0) { --this->y; }      // next try go up only
-        else if (x > 0) { --this->x; } // try go left only
-        else {
-            if (y < terrain.getNodesHeight() - 1) { ++this->y; }     // try go down only
-            else if (x < terrain.getNodesWidth() - 1) { ++this->x; } // try go right only
-            else { this->terrain = nullptr; }                        // no more neighbors
+, i(0) {
+    checkIndex();
+}
+
+void ProtoTerrain::Iterator::checkIndex() {
+    while (i < Offsets.size()) {
+        const int nx = static_cast<int>(originX) + Offsets[i].first;
+        const int ny = static_cast<int>(originY) + Offsets[i].second;
+
+        if (nx >= 0 && ny >= 0 && nx < static_cast<int>(terrain->getNodesWidth()) &&
+            ny < static_cast<int>(terrain->getNodesHeight())) {
+            return;
         }
+
+        ++i;
     }
+
+    terrain = nullptr;
 }
 
 ProtoTerrain::Iterator& ProtoTerrain::Iterator::operator++() {
-    // try to go right, if we go past right neighbor or hit edge then go down
-    if (x < originX + 1 && x < terrain->getNodesWidth() - 1) { ++x; }
-    else {
-        if (y < originY + 1 && y < terrain->getNodesHeight() - 1) {
-            ++y;
-            x = originX > 0 ? originX - 1 : originX;
-        }
-        else { terrain = nullptr; } // no more neighbors
-    }
-
-    // skip over origin
-    if (terrain && x == originX && y == originY) { ++(*this); }
-
+    ++i;
+    checkIndex();
     return *this;
 }
 
@@ -104,8 +118,18 @@ ProtoTerrain::Iterator ProtoTerrain::Iterator::operator++(int) {
     return copy;
 }
 
-std::uint64_t ProtoTerrain::PriorityNode::Priority::operator()(const PriorityNode& node) const {
-    return node.node->domain.totalWeight();
+SuperpositionedNode& ProtoTerrain::Iterator::operator*() {
+    const unsigned int nx = static_cast<unsigned int>(static_cast<int>(originX) + Offsets[i].first);
+    const unsigned int ny =
+        static_cast<unsigned int>(static_cast<int>(originY) + Offsets[i].second);
+    return terrain->getNode(nx, ny);
+}
+
+SuperpositionedNode* ProtoTerrain::Iterator::operator->() {
+    const unsigned int nx = static_cast<unsigned int>(static_cast<int>(originX) + Offsets[i].first);
+    const unsigned int ny =
+        static_cast<unsigned int>(static_cast<int>(originY) + Offsets[i].second);
+    return &terrain->getNode(nx, ny);
 }
 
 } // namespace gen

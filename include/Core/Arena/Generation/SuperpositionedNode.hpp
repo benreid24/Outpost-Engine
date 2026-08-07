@@ -1,6 +1,7 @@
 #ifndef CORE_ARENA_GENERATION_SUPERPOSITIONEDNODE_HPP
 #define CORE_ARENA_GENERATION_SUPERPOSITIONEDNODE_HPP
 
+#include <BLIB/Containers/PriorityQueue.hpp>
 #include <Core/Arena/Generation/Domain.hpp>
 #include <glm/glm.hpp>
 
@@ -18,11 +19,18 @@ class Seed;
  * @ingroup Arena
  */
 struct SuperpositionedNode {
+    struct Priority {
+        std::uint64_t operator()(const SuperpositionedNode* node) const {
+            return node->domain.totalWeight();
+        }
+    };
+
     glm::u32vec2 position;
     float height;
     float moisture;
     Domain domain;
     Biome selectedBiome;
+    bl::ctr::PriorityQueueReference<SuperpositionedNode*, Priority> priorityQueueRef;
 
     /**
      * @brief Creates a node with sane defaults

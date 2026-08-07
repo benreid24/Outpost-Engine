@@ -10,13 +10,17 @@ SuperpositionedNode::SuperpositionedNode()
 : position(0, 0)
 , height(0.f)
 , moisture(0.f)
-, domain() {}
+, domain()
+, selectedBiome(Biome::COUNT)
+, priorityQueueRef() {}
 
 SuperpositionedNode::SuperpositionedNode(const glm::u32vec2& position, float height, float moisture)
 : position(position)
 , height(height)
 , moisture(moisture)
-, domain() {}
+, domain()
+, selectedBiome(Biome::COUNT)
+, priorityQueueRef() {}
 
 void SuperpositionedNode::collapse(Seed& seed) { selectedBiome = domain.select(seed); }
 

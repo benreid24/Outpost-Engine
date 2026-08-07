@@ -2,7 +2,10 @@
 #define CORE_ARENA_GENERATION_RULEDBIOME_HPP
 
 #include <BLIB/Math/Range.hpp>
+#include <Core/Arena/Generation/AdjacencyBonus.hpp>
 #include <Core/Arena/Generation/Biome.hpp>
+#include <cstdint>
+#include <vector>
 
 namespace core
 {
@@ -17,27 +20,12 @@ namespace gen
  */
 struct RuledBiome {
     /**
-     * @brief Represents a single rule for a biome. Rules govern likilihood based on scalar params
+     * @brief Represents a single rule for a biome. Rules govern likelihood based on scalar params
      */
     struct Rule {
         bl::math::Range<float> allowedRange;
         float idealValue;
-        float maxWeight;
-
-        /**
-         * @brief Creates a rule with full allowed range and no weight
-         */
-        Rule();
-
-        /**
-         * @brief Creates the rule with the given parameters
-         *
-         * @param min The minimum value of the allowed range
-         * @param max The maximum value of the allowed range
-         * @param ideal The ideal value for the rule
-         * @param weight The maximum weight of the rule when the ideal value is met
-         */
-        Rule(float min, float max, float ideal, float weight);
+        std::uint64_t maxWeight;
 
         /**
          * @brief Computes the weight of the biome being present based on the input value
@@ -45,21 +33,13 @@ struct RuledBiome {
          * @param value The terrain node value to compute the weight for
          * @return The probability weight of the biome being present at the node
          */
-        float computeWeight(float value) const;
+        std::uint64_t computeWeight(float value) const;
     };
 
-    Biome biome       = Biome::COUNT;
-    Rule heightRule   = Rule();
-    Rule moistureRule = Rule();
-
-    /**
-     * @brief Creates a ruled biome
-     *
-     * @param biome The biome to represent
-     * @param heightRule The rule for the allowed heights of the biome
-     * @param moistureRule The rule for the allowed moisture levels of the biome
-     */
-    RuledBiome(Biome biome, const Rule& heightRule = Rule(), const Rule& moistureRule = Rule());
+    Biome biome                                  = Biome::COUNT;
+    Rule heightRule                              = Rule{};
+    Rule moistureRule                            = Rule{};
+    std::vector<AdjacencyBonus> adjacencyBonuses = std::vector<AdjacencyBonus>{};
 };
 
 } // namespace gen

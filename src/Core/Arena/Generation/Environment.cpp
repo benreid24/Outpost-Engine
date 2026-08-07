@@ -10,14 +10,17 @@ namespace gen
 {
 Environment::Environment() {}
 
-void Environment::addRuledBiome(const RuledBiome& ruledBiome) { ruledBiomes.push_back(ruledBiome); }
+void Environment::addRuledBiome(const RuledBiome& ruledBiome) {
+    ruledBiomes.push_back(ruledBiome);
+    adjacencyBonusMap[static_cast<std::size_t>(ruledBiome.biome)] = ruledBiome.adjacencyBonuses;
+}
 
 void Environment::domainExpansion(SuperpositionedNode& node) const {
     for (const auto& ruledBiome : ruledBiomes) {
-        const float heightWeight   = ruledBiome.heightRule.computeWeight(node.height);
-        const float moistureWeight = ruledBiome.moistureRule.computeWeight(node.moisture);
-        const float totalWeight    = heightWeight * moistureWeight;
-        if (totalWeight > 0.f) { node.domain.biomes.emplace_back(ruledBiome.biome, totalWeight); }
+        const std::uint64_t heightWeight   = ruledBiome.heightRule.computeWeight(node.height);
+        const std::uint64_t moistureWeight = ruledBiome.moistureRule.computeWeight(node.moisture);
+        const std::uint64_t totalWeight    = heightWeight * moistureWeight;
+        if (totalWeight > 0) { node.domain.biomes.emplace_back(ruledBiome.biome, totalWeight); }
     }
 }
 

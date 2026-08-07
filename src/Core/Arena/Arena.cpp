@@ -10,25 +10,63 @@ namespace arena
 {
 namespace
 {
-using Rule = gen::RuledBiome::Rule;
+using Rule  = gen::RuledBiome::Rule;
+using Bonus = gen::AdjacencyBonus;
 
-const gen::RuledBiome LakeBiome =
-    gen::RuledBiome(gen::Biome::Water, Rule(0.f, 0.45f, 0.f, 3.f), Rule(0.2f, 1.f, 1.f, 5.f));
+constexpr std::uint64_t NominalWeight = 1000;
+constexpr std::uint64_t HalfWeight    = NominalWeight / 2;
+constexpr std::uint64_t QuarterWeight = NominalWeight / 4;
+constexpr std::uint64_t DoubleWeight  = NominalWeight * 2;
 
-const gen::RuledBiome RiverBiome =
-    gen::RuledBiome(gen::Biome::River, Rule(0.45f, 0.85f, 0.65f, 1.f), Rule(0.8f, 1.f, 1.f, 5.f));
+const gen::RuledBiome LakeBiome = gen::RuledBiome{
+    .biome      = gen::Biome::Water,
+    .heightRule = Rule{.allowedRange = {0.f, 0.45f}, .idealValue = 0.f, .maxWeight = HalfWeight},
+    .moistureRule =
+        Rule{.allowedRange = {0.2f, 1.f}, .idealValue = 1.f, .maxWeight = NominalWeight},
+    .adjacencyBonuses =
+        std::vector<Bonus>{Bonus{.biome = gen::Biome::Water, .bonus = NominalWeight}}};
 
-const gen::RuledBiome DesertBiome =
-    gen::RuledBiome(gen::Biome::Desert, Rule(0.f, 0.75f, 0.35f, 1.f), Rule(0.f, .2f, 0.f, 5.f));
+const gen::RuledBiome RiverBiome = gen::RuledBiome{
+    .biome = gen::Biome::River,
+    .heightRule =
+        Rule{.allowedRange = {0.45f, 0.85f}, .idealValue = 0.65f, .maxWeight = QuarterWeight},
+    .moistureRule =
+        Rule{.allowedRange = {0.8f, 1.f}, .idealValue = 1.f, .maxWeight = NominalWeight},
+    .adjacencyBonuses = std::vector<Bonus>{Bonus{.biome         = gen::Biome::River,
+                                                 .stackBehavior = Bonus::Behavior::Multiplicative,
+                                                 .bonus         = DoubleWeight}}};
 
-const gen::RuledBiome GrasslandBiome =
-    gen::RuledBiome(gen::Biome::Grassland, Rule(0.f, 0.85f, 0.6f, 3.f), Rule(0.4f, 1.f, 0.6f, 3.f));
+const gen::RuledBiome DesertBiome = gen::RuledBiome{
+    .biome = gen::Biome::Desert,
+    .heightRule =
+        Rule{.allowedRange = {0.f, 0.75f}, .idealValue = 0.35f, .maxWeight = QuarterWeight},
+    .moistureRule =
+        Rule{.allowedRange = {0.f, 0.2f}, .idealValue = 0.f, .maxWeight = DoubleWeight}};
 
-const gen::RuledBiome MountainBiome =
-    gen::RuledBiome(gen::Biome::Mountain, Rule(0.8f, 1.f, 1.f, 5.f), Rule(0.f, 1.f, 0.2f, 1.f));
+const gen::RuledBiome GrasslandBiome = gen::RuledBiome{
+    .biome = gen::Biome::Grassland,
+    .heightRule =
+        Rule{.allowedRange = {0.f, 0.75f}, .idealValue = 0.5f, .maxWeight = NominalWeight},
+    .moistureRule = Rule{.allowedRange = {0.4f, 1.f}, .idealValue = 0.6f, .maxWeight = HalfWeight}};
 
-const gen::RuledBiome SnowBiome =
-    gen::RuledBiome(gen::Biome::Snow, Rule(0.65f, 1.f, 0.85f, 5.f), Rule(0.5f, 1.f, 1.f, 5.f));
+const gen::RuledBiome MountainBiome = gen::RuledBiome{
+    .biome = gen::Biome::Mountain,
+    .heightRule =
+        Rule{.allowedRange = {0.75f, 1.f}, .idealValue = 0.85f, .maxWeight = DoubleWeight},
+    .moistureRule =
+        Rule{.allowedRange = {0.f, 1.f}, .idealValue = 0.5f, .maxWeight = NominalWeight},
+    .adjacencyBonuses = std::vector<Bonus>{Bonus{.biome         = gen::Biome::Mountain,
+                                                 .stackBehavior = Bonus::Behavior::Multiplicative,
+                                                 .bonus         = DoubleWeight}}};
+
+const gen::RuledBiome SnowBiome = gen::RuledBiome{
+    .biome = gen::Biome::Snow,
+    .heightRule =
+        Rule{.allowedRange = {0.65f, 1.f}, .idealValue = 0.85f, .maxWeight = DoubleWeight},
+    .moistureRule = Rule{.allowedRange = {0.5f, 1.f}, .idealValue = 1.f, .maxWeight = DoubleWeight},
+    .adjacencyBonuses = std::vector<Bonus>{Bonus{.biome         = gen::Biome::Snow,
+                                                 .stackBehavior = Bonus::Behavior::Multiplicative,
+                                                 .bonus         = DoubleWeight}}};
 
 // TODO - may need inter-biome constraints for beach
 

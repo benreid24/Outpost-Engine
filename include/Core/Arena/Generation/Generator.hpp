@@ -13,6 +13,8 @@ class Arena;
 
 namespace gen
 {
+class ProtoTerrain;
+
 /**
  * @brief Terrain and arena generator
  *
@@ -59,6 +61,8 @@ private:
     Parameters params;
     bl::ctr::Vector2D<float> heightmap;
     bl::ctr::Vector2D<float> moistureMap;
+
+    void raiseLakes(ProtoTerrain& source);
 };
 
 } // namespace gen

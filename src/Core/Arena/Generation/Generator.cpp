@@ -94,11 +94,15 @@ void Generator::generate(Arena& output) {
     SuperpositionedNode* mostConstrained = terrain.getMostConstrainedNode();
     while (mostConstrained) {
         mostConstrained->collapse(seed);
-        // TODO - we may want to update constraints here
+        for (SuperpositionedNode& neighbor :
+             terrain.getNodeNeighbors(mostConstrained->position.x, mostConstrained->position.y)) {
+            terrain.recomputeAdjacencyBonuses(environment, neighbor);
+        }
         mostConstrained = terrain.getMostConstrainedNode();
     }
 
     // postprocess biomes (resample noise, height scale, water, etc)
+    raiseLakes(terrain);
     // TODO
 
     // Select and modify locations for train stops
@@ -119,6 +123,65 @@ void Generator::generate(Arena& output) {
             node.index    = {x, y};
             node.worldPos = glm::vec2(node.index) * params.worldStep;
             node.biome    = terrain.getNode(x, y).selectedBiome;
+        }
+    }
+}
+
+void Generator::raiseLakes(ProtoTerrain& source) {
+    bl::ctr::Vector2D<std::uint8_t> visited(heightmap.getWidth(), heightmap.getHeight(), 0);
+
+    for (unsigned int x = 0; x < heightmap.getWidth(); ++x) {
+        for (unsigned int y = 0; y < heightmap.getHeight(); ++y) {
+            if (visited(x, y) != 0 || source.getNode(x, y).selectedBiome != Biome::Water) {
+                continue;
+            }
+
+            std::stack<glm::u32vec2> toVisit;
+            std::vector<glm::u32vec2> waterNodes;
+            float maxHeight = 0.f;
+
+            toVisit.push({x, y});
+            visited(x, y) = 1;
+
+            while (!toVisit.empty()) {
+                glm::u32vec2 current      = toVisit.top();
+                SuperpositionedNode& node = source.getNode(current.x, current.y);
+                toVisit.pop();
+
+                visited(current.x, current.y) = 1;
+                waterNodes.push_back(current);
+
+                maxHeight = std::max(maxHeight, heightmap(current.x, current.y));
+                for (const auto& neighbor : source.getNodeNeighbors(current.x, current.y)) {
+                    if (visited(neighbor.position.x, neighbor.position.y) == 0 &&
+                        neighbor.selectedBiome == Biome::Water) {
+                        toVisit.push({neighbor.position.x, neighbor.position.y});
+                    }
+                }
+            }
+
+            for (const auto& pos : waterNodes) {
+                heightmap(pos.x, pos.y) = maxHeight;
+                toVisit.push(pos);
+            }
+
+            bl::ctr::Vector2D<std::uint8_t> visitedNonWater(
+                heightmap.getWidth(), heightmap.getHeight(), 0);
+            while (!toVisit.empty()) {
+                glm::u32vec2 current = toVisit.top();
+                toVisit.pop();
+
+                for (auto& neighbor : source.getNodeNeighbors(current.x, current.y)) {
+                    if (visitedNonWater(neighbor.position.x, neighbor.position.y) == 0 &&
+                        neighbor.selectedBiome != Biome::Water && neighbor.height < maxHeight) {
+                        visitedNonWater(neighbor.position.x, neighbor.position.y) = 1;
+                        neighbor.selectedBiome                                    = Biome::Water;
+                        heightmap(neighbor.position.x, neighbor.position.y)       = maxHeight;
+                        neighbor.height                                           = maxHeight;
+                        toVisit.push({neighbor.position.x, neighbor.position.y});
+                    }
+                }
+            }
         }
     }
 }
