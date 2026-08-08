@@ -73,7 +73,7 @@ const gen::RuledBiome SnowBiome = gen::RuledBiome{
 const std::vector<gen::RuledBiome> Biomes = {
     LakeBiome, RiverBiome, DesertBiome, GrasslandBiome, MountainBiome, SnowBiome};
 
-constexpr float Step                  = 1.f;
+constexpr float Step                  = 4.f;
 constexpr unsigned int TerrainOctaves = 16;
 constexpr float TerrainPersistence    = 0.4f;
 constexpr float TerrainFrequency      = 0.005f;
@@ -100,7 +100,7 @@ void Arena::generate(std::uint64_t seed, const glm::vec2& size, float maxHeight)
     generator.generate(*this);
 }
 
-void Arena::addToWorld(bl::engine::World& world) { terrain.addToWorld(world); }
+void Arena::addToWorld(bl::engine::World& world) { terrain.addToWorld(world, 0.5f); }
 
 } // namespace arena
 } // namespace core
