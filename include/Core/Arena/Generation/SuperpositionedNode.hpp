@@ -2,7 +2,9 @@
 #define CORE_ARENA_GENERATION_SUPERPOSITIONEDNODE_HPP
 
 #include <BLIB/Containers/PriorityQueue.hpp>
+#include <Core/Arena/Generation/AdjacencyBonusProxy.hpp>
 #include <Core/Arena/Generation/Domain.hpp>
+#include <array>
 #include <glm/glm.hpp>
 
 namespace core
@@ -12,6 +14,7 @@ namespace arena
 namespace gen
 {
 class Seed;
+class Environment;
 
 /**
  * @brief Represents a node being generated with its possible states and constraints
@@ -30,6 +33,8 @@ struct SuperpositionedNode {
     float moisture;
     Domain domain;
     Biome selectedBiome;
+    std::array<std::vector<AdjacencyBonusProxy>, static_cast<std::size_t>(Biome::COUNT)>
+        adjacencyBonuses;
     bl::ctr::PriorityQueueReference<SuperpositionedNode*, Priority> priorityQueueRef;
 
     /**
@@ -52,6 +57,20 @@ struct SuperpositionedNode {
      * @param seed The random seed to use
      */
     void collapse(Seed& seed);
+
+    /**
+     * @brief Initializes the proxy objects used to speed up terrain generation
+     *
+     * @param environment The environment being used to generate the terrain
+     */
+    void initializeProxies(const Environment& environment);
+
+    /**
+     * @brief Updates adjacency bonuses and repositions in the priority queue if necessary
+     *
+     * @param neighborBiome The newly assigned biome of the neighbor that was collapsed
+     */
+    void onNeighborCollapsed(Biome neighborBiome);
 };
 
 } // namespace gen

@@ -49,27 +49,6 @@ ProtoTerrain::QueryResult ProtoTerrain::getNodeNeighbors(unsigned int x, unsigne
     return QueryResult{Iterator(*this, x, y)};
 }
 
-void ProtoTerrain::recomputeAdjacencyBonuses(Environment& environment, SuperpositionedNode& node) {
-    if (node.selectedBiome == Biome::COUNT) {
-        bool changed = false;
-        for (WeightedBiome& biome : node.domain.biomes) {
-            biome.weight        = biome.baseWeight;
-            const auto& bonuses = environment.getAdjacencyBonuses(biome.biome);
-
-            for (const auto& b : bonuses) {
-                std::uint64_t bonus = b.initialBonus();
-                for (const SuperpositionedNode& neighbor :
-                     getNodeNeighbors(node.position.x, node.position.y)) {
-                    bonus = b.stack(bonus, neighbor.selectedBiome);
-                }
-                biome.weight = b.apply(biome.weight, bonus);
-            }
-            if (biome.weight != biome.baseWeight) { changed = true; }
-        }
-        if (changed) { node.priorityQueueRef.reposition(); }
-    }
-}
-
 namespace
 {
 constexpr std::array<std::pair<int, int>, 8> Offsets(

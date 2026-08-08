@@ -41,16 +41,21 @@ namespace gen
 {
 namespace
 {
+constexpr int SizeReductionFactor = 2;
+
 void samplePerlin(glm::vec2 worldSize, float step, bl::util::Perlin<float>& noise,
-                  const Parameters::PerlinParameters& params, bl::ctr::Vector2D<float>& output) {
-    const unsigned int xCount = std::ceil(worldSize.x / step) + 0.1f;
-    const unsigned int yCount = std::ceil(worldSize.y / step) + 0.1f;
+                  int reductionFactor, const Parameters::PerlinParameters& params,
+                  bl::ctr::Vector2D<float>& output) {
+    const unsigned int xCount =
+        static_cast<unsigned int>(std::ceil(worldSize.x / step) + 0.1f) / reductionFactor;
+    const unsigned int yCount =
+        static_cast<unsigned int>(std::ceil(worldSize.y / step) + 0.1f) / reductionFactor;
 
     output.setSize(xCount, yCount, 0.f);
     for (unsigned int x = 0; x < xCount; ++x) {
         for (unsigned int y = 0; y < yCount; ++y) {
-            const float xf = static_cast<float>(x) * step - worldSize.x * 0.5f;
-            const float zf = static_cast<float>(y) * step - worldSize.y * 0.5f;
+            const float xf = static_cast<float>(x * reductionFactor) * step - worldSize.x * 0.5f;
+            const float zf = static_cast<float>(y * reductionFactor) * step - worldSize.y * 0.5f;
             float normal   = noise.octave2DNormalized(
                 xf * params.frequency, zf * params.frequency, params.octaves, params.persistence);
             normal       = (normal + 1.f) * 0.5f; // map to [0,1]
@@ -72,9 +77,18 @@ void Generator::generate(Arena& output) {
     // TODO - does this produce artifacts?
     bl::util::Perlin<float> heightPerlin   = seed.getPerlin(0);
     bl::util::Perlin<float> moisturePerlin = seed.getPerlin(1);
-    samplePerlin(params.worldSize, params.worldStep, heightPerlin, params.terrainPerlin, heightmap);
-    samplePerlin(
-        params.worldSize, params.worldStep, moisturePerlin, params.moisturePerlin, moistureMap);
+    samplePerlin(params.worldSize,
+                 params.worldStep,
+                 heightPerlin,
+                 SizeReductionFactor,
+                 params.terrainPerlin,
+                 heightmap);
+    samplePerlin(params.worldSize,
+                 params.worldStep,
+                 moisturePerlin,
+                 SizeReductionFactor,
+                 params.moisturePerlin,
+                 moistureMap);
 
     // populate proto terrain
     ProtoTerrain terrain;
@@ -85,7 +99,9 @@ void Generator::generate(Arena& output) {
     for (const auto& biome : params.biomes) { environment.addRuledBiome(biome); }
     for (unsigned int x = 0; x < terrain.getNodesWidth(); ++x) {
         for (unsigned int y = 0; y < terrain.getNodesHeight(); ++y) {
-            environment.domainExpansion(terrain.getNode(x, y));
+            SuperpositionedNode& node = terrain.getNode(x, y);
+            environment.domainExpansion(node);
+            node.initializeProxies(environment);
         }
     }
     terrain.buildPriorityQueue();
@@ -96,7 +112,7 @@ void Generator::generate(Arena& output) {
         mostConstrained->collapse(seed);
         for (SuperpositionedNode& neighbor :
              terrain.getNodeNeighbors(mostConstrained->position.x, mostConstrained->position.y)) {
-            terrain.recomputeAdjacencyBonuses(environment, neighbor);
+            neighbor.onNeighborCollapsed(mostConstrained->selectedBiome);
         }
         mostConstrained = terrain.getMostConstrainedNode();
     }
@@ -115,14 +131,28 @@ void Generator::generate(Arena& output) {
     // TODO
 
     // write to terrain
-    output.terrain.heightmap = std::move(heightmap);
-    output.terrain.nodes.setSize(heightmap.getWidth(), heightmap.getHeight());
+    output.terrain.nodes.setSize(heightmap.getWidth() * SizeReductionFactor,
+                                 heightmap.getHeight() * SizeReductionFactor);
+    samplePerlin(params.worldSize,
+                 params.worldStep,
+                 heightPerlin,
+                 1,
+                 params.terrainPerlin,
+                 output.terrain.heightmap);
     for (unsigned int x = 0; x < output.terrain.nodes.getWidth(); ++x) {
         for (unsigned int y = 0; y < output.terrain.nodes.getHeight(); ++y) {
+            const unsigned int sx = x / SizeReductionFactor;
+            const unsigned int ox = seed.getUint64(0, x % SizeReductionFactor);
+            const unsigned int sy = y / SizeReductionFactor;
+            const unsigned int oy = seed.getUint64(0, y % SizeReductionFactor);
+            const unsigned int rx = std::min(sx + ox, terrain.getNodesWidth() - 1);
+            const unsigned int ry = std::min(sy + oy, terrain.getNodesHeight() - 1);
+
             Node& node    = output.terrain.nodes(x, y);
             node.index    = {x, y};
             node.worldPos = glm::vec2(node.index) * params.worldStep;
-            node.biome    = terrain.getNode(x, y).selectedBiome;
+            node.biome    = terrain.getNode(rx, ry).selectedBiome;
+            if (node.biome == Biome::Water) { output.terrain.heightmap(x, y) = heightmap(rx, ry); }
         }
     }
 }
@@ -144,8 +174,7 @@ void Generator::raiseLakes(ProtoTerrain& source) {
             visited(x, y) = 1;
 
             while (!toVisit.empty()) {
-                glm::u32vec2 current      = toVisit.top();
-                SuperpositionedNode& node = source.getNode(current.x, current.y);
+                glm::u32vec2 current = toVisit.top();
                 toVisit.pop();
 
                 visited(current.x, current.y) = 1;

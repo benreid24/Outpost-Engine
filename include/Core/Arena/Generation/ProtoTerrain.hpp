@@ -141,14 +141,6 @@ public:
      */
     QueryResult getNodeNeighbors(unsigned int x, unsigned int y);
 
-    /**
-     * @brief Recomputes the adjacency bonuses for the given node and updates the priority queue
-     *
-     * @param environment The environment containing the adjacency bonuses
-     * @param node The node to update
-     */
-    void recomputeAdjacencyBonuses(Environment& environment, SuperpositionedNode& node);
-
 private:
     bl::ctr::Vector2D<SuperpositionedNode> nodes;
     bl::ctr::PriorityQueue<SuperpositionedNode*, SuperpositionedNode::Priority> collapseQueue;
