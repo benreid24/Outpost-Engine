@@ -55,6 +55,8 @@ bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
     damage.subscribe(engine.getSignalChannel());
     factionStore.subscribe(engine.getSignalChannel());
 
+    render->setupTerrainRendering();
+
     return true;
 }
 

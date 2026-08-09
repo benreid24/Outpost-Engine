@@ -1,5 +1,7 @@
 #include <Core/Arena/Terrain.hpp>
 
+#include <Core/Rendering/PipelineIds.hpp>
+
 namespace core
 {
 namespace arena
@@ -51,49 +53,23 @@ bl::ctr::StaticVector<Terrain::SampledBiome, 4> Terrain::sampleBiomes(const glm:
 
 std::array<std::pair<glm::u32vec2, float>, 4> Terrain::getPositionWeights(
     const glm::vec2& pos) const {
-    const glm::vec2 normalPos = pos / worldSize + glm::vec2(0.5f, 0.5f);
+    const glm::vec2 normalPos = pos / worldSize + glm::vec2(0.5f);
     if (normalPos.x < 0.f || normalPos.x > 1.f || normalPos.y < 0.f || normalPos.y > 1.f) {
         return {};
     }
     const float xi        = normalPos.x * static_cast<float>(nodes.getWidth() - 1);
     const float yi        = normalPos.y * static_cast<float>(nodes.getHeight() - 1);
-    const unsigned int x0 = std::floor(xi) + 0.01f;
-    const unsigned int y0 = std::floor(yi) + 0.01f;
+    const unsigned int x0 = static_cast<unsigned int>(std::floor(xi));
+    const unsigned int y0 = static_cast<unsigned int>(std::floor(yi));
     const unsigned int x1 = std::min(x0 + 1, nodes.getWidth() - 1);
     const unsigned int y1 = std::min(y0 + 1, nodes.getHeight() - 1);
-    const float xn        = xi - std::floor(xi);
-    const float yn        = yi - std::floor(yi);
-
-    const float d00 = std::sqrt(xn * xn + yn * yn);
-    const float d10 = std::sqrt((1.f - xn) * (1.f - xn) + yn * yn);
-    const float d01 = std::sqrt(xn * xn + (1.f - yn) * (1.f - yn));
-    const float d11 = std::sqrt((1.f - xn) * (1.f - xn) + (1.f - yn) * (1.f - yn));
-
-    // handle the case where the sample lands exactly on a node
-    constexpr float Epsilon = 1e-6f;
-    if (d00 < Epsilon) {
-        return {{{{x0, y0}, 1.f}, {{x1, y0}, 0.f}, {{x0, y1}, 0.f}, {{x1, y1}, 0.f}}};
-    }
-    if (d10 < Epsilon) {
-        return {{{{x0, y0}, 0.f}, {{x1, y0}, 1.f}, {{x0, y1}, 0.f}, {{x1, y1}, 0.f}}};
-    }
-    if (d01 < Epsilon) {
-        return {{{{x0, y0}, 0.f}, {{x1, y0}, 0.f}, {{x0, y1}, 1.f}, {{x1, y1}, 0.f}}};
-    }
-    if (d11 < Epsilon) {
-        return {{{{x0, y0}, 0.f}, {{x1, y0}, 0.f}, {{x0, y1}, 0.f}, {{x1, y1}, 1.f}}};
-    }
-
-    const float w00    = 1.f / d00;
-    const float w10    = 1.f / d10;
-    const float w01    = 1.f / d01;
-    const float w11    = 1.f / d11;
-    const float wTotal = w00 + w10 + w01 + w11;
-
-    return {{{{x0, y0}, w00 / wTotal},
-             {{x1, y0}, w10 / wTotal},
-             {{x0, y1}, w01 / wTotal},
-             {{x1, y1}, w11 / wTotal}}};
+    const float xn        = xi - static_cast<float>(x0);
+    const float yn        = yi - static_cast<float>(y0);
+    const float w00       = (1.f - xn) * (1.f - yn);
+    const float w10       = xn * (1.f - yn);
+    const float w01       = (1.f - xn) * yn;
+    const float w11       = xn * yn;
+    return {{{{x0, y0}, w00}, {{x1, y0}, w10}, {{x0, y1}, w01}, {{x1, y1}, w11}}};
 }
 
 glm::u32vec2 Terrain::worldPosToIndex(const glm::vec2& pos) const {
@@ -110,7 +86,9 @@ void Terrain::addToWorld(bl::engine::World& world, float s) {
         [this](const glm::vec2& pos) { return sampleHeight(pos); },
         glm::vec2(-worldSize.x * 0.5f, -worldSize.y * 0.5f),
         worldSize,
-        step);
+        step,
+        {},
+        render::MaterialPipelineIds::SolidTerrain);
     postprocess();
     terrainDrawable.addToScene(world.scene(), bl::rc::UpdateSpeed::Static);
 }
@@ -126,11 +104,19 @@ void Terrain::postprocess() {
 
     auto& verts = terrainDrawable.component().gpuBuffer.vertices();
     for (auto& v : verts) {
-        v.color     = bl::rc::Color(0.f, 0.f, 0.f);
-        auto biomes = sampleBiomes({v.pos.x, v.pos.z});
+        const int x    = std::floor(v.pos.x / step + 0.01f);
+        const int y    = std::floor(v.pos.z / step + 0.01f);
+        v.texCoord.x   = std::abs(x % 2);
+        v.texCoord.y   = std::abs(y % 2);
+        v.color        = bl::rc::Color(1.f, 1.f, 1.f);
+        v.biomeIndices = glm::u32vec4(0);
+        v.biomeWeights = glm::vec4(0.f);
+        auto biomes    = sampleBiomes({v.pos.x, v.pos.z});
+        unsigned int i = 0;
         for (const auto& b : biomes) {
-            const auto it = BiomeColors.find(b.biome);
-            if (it != BiomeColors.end()) { v.color += it->second.toVec4() * b.weight; }
+            v.biomeIndices[i] = static_cast<std::uint32_t>(b.biome);
+            v.biomeWeights[i] = b.weight;
+            ++i;
         }
     }
     terrainDrawable.commitUpdate();

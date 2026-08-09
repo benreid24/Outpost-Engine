@@ -7,6 +7,7 @@
 #include <Core/Arena/Generation/PerlinSampler.hpp>
 #include <Core/Arena/Generation/Seed.hpp>
 #include <Core/Arena/Node.hpp>
+#include <Core/Components/TerrainMesh.hpp>
 
 namespace core
 {
@@ -74,7 +75,7 @@ private:
     float maxHeight;
     bl::ctr::Vector2D<Node> nodes;
     gen::PerlinSampler heightSampler;
-    bl::gfx::Terrain terrainDrawable;
+    bl::gfx::Terrain<com::TerrainMesh> terrainDrawable;
     float step;
 
     void postprocess();
