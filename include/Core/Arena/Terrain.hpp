@@ -47,6 +47,13 @@ public:
     void addToWorld(bl::engine::World& world, float step);
 
     /**
+     * @brief Generates the geometry for the terrain
+     *
+     * @param threadPool The thread pool to use for generating the geometry
+     */
+    void generateGeometry(bl::util::ThreadPool& threadPool);
+
+    /**
      * @brief Returns the height of the terrain at the given position
      *
      * @param position The world position to sample the height at
@@ -78,7 +85,6 @@ private:
     bl::gfx::Terrain<com::TerrainMesh> terrainDrawable;
     float step;
 
-    void postprocess();
     std::array<std::pair<glm::u32vec2, float>, 4> getPositionWeights(const glm::vec2& pos) const;
 
     friend class gen::Generator;

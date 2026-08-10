@@ -169,7 +169,8 @@ void Render::setupTerrainRendering() {
                                                   const char* texturePath) {
         auto textureAsset =
             engine->assets().getAssetFromSourcePath<bl::asi::TexturePayload>(texturePath);
-        auto texture  = engine->renderer().texturePool().getOrLoadTexture(textureAsset);
+        auto texture = engine->renderer().texturePool().getOrLoadTexture(
+            textureAsset, {.sampler = bl::rc::vk::SamplerOptions::FilteredRepeated});
         auto material = engine->renderer().materialPool().getOrCreateFromTexture(texture);
         biomeInfo->getBuffer()[0][static_cast<std::size_t>(biome)].materialIndex = material.getId();
         terrainBiomeMaterials[static_cast<std::size_t>(biome)]                   = material;

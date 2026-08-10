@@ -27,11 +27,12 @@ const gen::RuledBiome LakeBiome = gen::RuledBiome{
         std::vector<Bonus>{Bonus{.biome = gen::Biome::Water, .bonus = NominalWeight}}};
 
 const gen::RuledBiome RiverBiome = gen::RuledBiome{
+    // TODO - probably better assigned by post processing
     .biome = gen::Biome::River,
     .heightRule =
-        Rule{.allowedRange = {0.45f, 0.85f}, .idealValue = 0.65f, .maxWeight = QuarterWeight},
+        Rule{.allowedRange = {0.45f, 0.85f}, .idealValue = 0.65f, .maxWeight = NominalWeight},
     .moistureRule =
-        Rule{.allowedRange = {0.8f, 1.f}, .idealValue = 1.f, .maxWeight = NominalWeight},
+        Rule{.allowedRange = {0.6f, 1.f}, .idealValue = 0.8f, .maxWeight = DoubleWeight},
     .adjacencyBonuses = std::vector<Bonus>{Bonus{.biome         = gen::Biome::River,
                                                  .stackBehavior = Bonus::Behavior::Multiplicative,
                                                  .bonus         = DoubleWeight}}};
@@ -44,17 +45,25 @@ const gen::RuledBiome DesertBiome = gen::RuledBiome{
         Rule{.allowedRange = {0.f, 0.2f}, .idealValue = 0.f, .maxWeight = DoubleWeight}};
 
 const gen::RuledBiome GrasslandBiome = gen::RuledBiome{
-    .biome = gen::Biome::Grassland,
+    .biome      = gen::Biome::Grassland,
+    .heightRule = Rule{.allowedRange = {0.f, 0.7f}, .idealValue = 0.4f, .maxWeight = NominalWeight},
+    .moistureRule = Rule{.allowedRange = {0.4f, 1.f}, .idealValue = 0.5f, .maxWeight = HalfWeight}};
+
+const gen::RuledBiome ForestBiome = gen::RuledBiome{
+    .biome = gen::Biome::Forest,
     .heightRule =
-        Rule{.allowedRange = {0.f, 0.75f}, .idealValue = 0.5f, .maxWeight = NominalWeight},
-    .moistureRule = Rule{.allowedRange = {0.4f, 1.f}, .idealValue = 0.6f, .maxWeight = HalfWeight}};
+        Rule{.allowedRange = {0.f, 0.6f}, .idealValue = 0.45f, .maxWeight = NominalWeight},
+    .moistureRule = Rule{.allowedRange = {0.5f, 1.f}, .idealValue = 0.8f, .maxWeight = HalfWeight},
+    .adjacencyBonuses = std::vector<Bonus>{Bonus{.biome         = gen::Biome::Forest,
+                                                 .stackBehavior = Bonus::Behavior::Multiplicative,
+                                                 .bonus         = DoubleWeight}}};
 
 const gen::RuledBiome MountainBiome = gen::RuledBiome{
     .biome = gen::Biome::Mountain,
     .heightRule =
-        Rule{.allowedRange = {0.75f, 1.f}, .idealValue = 0.85f, .maxWeight = DoubleWeight},
+        Rule{.allowedRange = {0.65f, 1.f}, .idealValue = 0.75f, .maxWeight = DoubleWeight},
     .moistureRule =
-        Rule{.allowedRange = {0.f, 1.f}, .idealValue = 0.5f, .maxWeight = NominalWeight},
+        Rule{.allowedRange = {0.f, 0.7f}, .idealValue = 0.3f, .maxWeight = NominalWeight},
     .adjacencyBonuses = std::vector<Bonus>{Bonus{.biome         = gen::Biome::Mountain,
                                                  .stackBehavior = Bonus::Behavior::Multiplicative,
                                                  .bonus         = DoubleWeight}}};
@@ -63,15 +72,16 @@ const gen::RuledBiome SnowBiome = gen::RuledBiome{
     .biome = gen::Biome::Snow,
     .heightRule =
         Rule{.allowedRange = {0.65f, 1.f}, .idealValue = 0.85f, .maxWeight = DoubleWeight},
-    .moistureRule = Rule{.allowedRange = {0.5f, 1.f}, .idealValue = 1.f, .maxWeight = DoubleWeight},
+    .moistureRule =
+        Rule{.allowedRange = {0.5f, 1.f}, .idealValue = 0.7f, .maxWeight = DoubleWeight},
     .adjacencyBonuses = std::vector<Bonus>{Bonus{.biome         = gen::Biome::Snow,
                                                  .stackBehavior = Bonus::Behavior::Multiplicative,
                                                  .bonus         = DoubleWeight}}};
 
-// TODO - may need inter-biome constraints for beach
+// TODO - may need inter-biome constraints for beach. Or postprocessing?
 
 const std::vector<gen::RuledBiome> Biomes = {
-    LakeBiome, RiverBiome, DesertBiome, GrasslandBiome, MountainBiome, SnowBiome};
+    LakeBiome, DesertBiome, GrasslandBiome, ForestBiome, MountainBiome, SnowBiome};
 
 constexpr float Step                  = 4.f;
 constexpr unsigned int TerrainOctaves = 16;
@@ -98,9 +108,13 @@ void Arena::generate(std::uint64_t seed, const glm::vec2& size, float maxHeight)
 
     gen::Generator generator(seed, genParams);
     generator.generate(*this);
+    if (threadPool) { terrain.generateGeometry(*threadPool); }
 }
 
-void Arena::addToWorld(bl::engine::World& world) { terrain.addToWorld(world, 0.5f); }
+void Arena::addToWorld(bl::engine::World& world) {
+    threadPool = &world.engine().engineLoopThreadpool();
+    terrain.addToWorld(world, 0.5f);
+}
 
 } // namespace arena
 } // namespace core

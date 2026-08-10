@@ -90,7 +90,7 @@ void Generator::generate(Arena& output) {
     // perform domain collapse to assign biomes
     SuperpositionedNode* mostConstrained = terrain.getMostConstrainedNode();
     while (mostConstrained) {
-        mostConstrained->collapse(seed);
+        mostConstrained->collapse(seed, terrain);
         for (SuperpositionedNode& neighbor :
              terrain.getNodeNeighbors(mostConstrained->position.x, mostConstrained->position.y)) {
             neighbor.onNeighborCollapsed(mostConstrained->selectedBiome);

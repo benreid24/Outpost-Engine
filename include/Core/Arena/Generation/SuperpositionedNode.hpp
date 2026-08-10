@@ -15,6 +15,7 @@ namespace gen
 {
 class Seed;
 class Environment;
+class ProtoTerrain;
 
 /**
  * @brief Represents a node being generated with its possible states and constraints
@@ -55,8 +56,9 @@ struct SuperpositionedNode {
      * @brief Selects from the domain and assigns a biome
      *
      * @param seed The random seed to use
+     * @param terrain The terrain being generated
      */
-    void collapse(Seed& seed);
+    void collapse(Seed& seed, ProtoTerrain& terrain);
 
     /**
      * @brief Initializes the proxy objects used to speed up terrain generation

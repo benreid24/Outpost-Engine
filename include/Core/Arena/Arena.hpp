@@ -49,6 +49,7 @@ public:
 private:
     gen::Seed generator;
     Terrain terrain;
+    bl::util::ThreadPool* threadPool;
 
     friend class gen::Generator;
 };
