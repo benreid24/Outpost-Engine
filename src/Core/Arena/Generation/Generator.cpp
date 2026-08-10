@@ -145,20 +145,21 @@ void Generator::raiseLakes(ProtoTerrain& source) {
                 glm::u32vec2 current = toVisit.top();
                 toVisit.pop();
 
-                visited(current.x, current.y) = 1;
                 waterNodes.push_back(current);
-
                 maxHeight = std::max(maxHeight, heightmap(current.x, current.y));
+
                 for (const auto& neighbor : source.getNodeNeighbors(current.x, current.y)) {
                     if (visited(neighbor.position.x, neighbor.position.y) == 0 &&
                         neighbor.selectedBiome == Biome::Water) {
                         toVisit.push({neighbor.position.x, neighbor.position.y});
+                        visited(neighbor.position.x, neighbor.position.y) = 1;
                     }
                 }
             }
 
             for (const auto& pos : waterNodes) {
-                heightmap(pos.x, pos.y) = maxHeight;
+                heightmap(pos.x, pos.y)             = maxHeight;
+                source.getNode(pos.x, pos.y).height = maxHeight;
                 toVisit.push(pos);
             }
 
@@ -170,7 +171,7 @@ void Generator::raiseLakes(ProtoTerrain& source) {
 
                 for (auto& neighbor : source.getNodeNeighbors(current.x, current.y)) {
                     if (visitedNonWater(neighbor.position.x, neighbor.position.y) == 0 &&
-                        neighbor.selectedBiome != Biome::Water && neighbor.height < maxHeight) {
+                        neighbor.height < maxHeight) {
                         visitedNonWater(neighbor.position.x, neighbor.position.y) = 1;
                         neighbor.selectedBiome                                    = Biome::Water;
                         heightmap(neighbor.position.x, neighbor.position.y)       = maxHeight;
