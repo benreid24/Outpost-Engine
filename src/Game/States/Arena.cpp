@@ -25,16 +25,17 @@ const char* ArenaState::name() const { return "ArenaState"; }
 void ArenaState::activate(bl::engine::Engine& engine) {
     auto world = engine.getPlayer().enterWorld<bl::engine::World3D>();
 
-    const float camHeight = TerrainMaxHeight * 1.5f;
+    const float camHeight = TerrainMaxHeight * 0.5f;
     auto* cam             = engine.getPlayer().getRenderObserver().setCamera<bl::cam::Camera3D>(
         glm::vec3(0.f, camHeight, 0.f), 0.f, -45.f);
     auto* controller =
-        cam->setController<core::cam::ArenaController>(10.f,
+        cam->setController<core::cam::ArenaController>(arena,
+                                                       10.f,
                                                        1000.f,
                                                        5,
                                                        glm::vec2(TerrainWidth, TerrainHeight),
-                                                       100.f,
-                                                       0.05f,
+                                                       10.f,
+                                                       0.03f,
                                                        glm::vec3(0.f, camHeight, 0.f));
     controller->subscribe(engine.getSignalChannel());
 
@@ -60,7 +61,7 @@ void ArenaState::process(const sf::Event& event) {
     if (auto* key = event.getIf<sf::Event::KeyPressed>()) {
         if (key->code == sf::Keyboard::Key::G) {
             arena.generate(
-                bl::util::Random::get<std::uint64_t>(0, std::numeric_limits<std::uint64_t>::max()),
+                bl::rand::Random::get<std::uint64_t>(0, std::numeric_limits<std::uint64_t>::max()),
                 glm::vec2(TerrainWidth, TerrainHeight),
                 TerrainMaxHeight);
         }

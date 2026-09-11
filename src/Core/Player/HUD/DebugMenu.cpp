@@ -1,7 +1,7 @@
 #include <Core/Player/HUD/DebugMenu.hpp>
 
 #include <BLIB/Engine.hpp>
-#include <BLIB/Util/Random.hpp>
+#include <BLIB/Random/Random.hpp>
 #include <Core/Game.hpp>
 #include <Core/World/Collisions.hpp>
 #include <Core/World/World.hpp>

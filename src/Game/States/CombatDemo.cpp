@@ -4,7 +4,7 @@
 #include <BLIB/Game.hpp>
 #include <BLIB/Math.hpp>
 #include <BLIB/Render/Scenes/Scene2D.hpp>
-#include <BLIB/Util/Random.hpp>
+#include <BLIB/Random/Random.hpp>
 #include <Core/Game.hpp>
 #include <Core/Player/Player.hpp>
 #include <Core/World/Collisions.hpp>

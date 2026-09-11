@@ -1,7 +1,7 @@
 #ifndef CORE_ARENA_GENERATION_SEED_HPP
 #define CORE_ARENA_GENERATION_SEED_HPP
 
-#include <BLIB/Util/Perlin.hpp>
+#include <BLIB/Random/Perlin.hpp>
 #include <cstdint>
 #include <random>
 
@@ -47,7 +47,7 @@ public:
      *
      * @param offset Seed offset for the Perlin noise generator
      */
-    bl::util::Perlin<float> getPerlin(std::uint64_t offset = 0) const;
+    bl::rand::Perlin<float> getPerlin(std::uint64_t offset = 0) const;
 
     /**
      * @brief Returns a random number in the given range of a float type

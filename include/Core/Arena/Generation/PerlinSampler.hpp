@@ -1,7 +1,7 @@
 #ifndef CORE_ARENA_GENERATION_PERLINSAMPLER_HPP
 #define CORE_ARENA_GENERATION_PERLINSAMPLER_HPP
 
-#include <BLIB/Util/Perlin.hpp>
+#include <BLIB/Random/Perlin.hpp>
 #include <Core/Arena/Generation/Parameters.hpp>
 #include <glm/glm.hpp>
 
@@ -52,7 +52,7 @@ public:
     float sample(const glm::vec2& pos) const;
 
 private:
-    bl::util::Perlin<float> perlin;
+    bl::rand::Perlin<float> perlin;
     glm::vec2 origin;
     Parameters::PerlinParameters params;
 };

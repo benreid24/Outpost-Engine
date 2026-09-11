@@ -13,6 +13,11 @@
 
 namespace core
 {
+namespace arena
+{
+class Arena;
+}
+
 /// Collection of cameras for the game
 namespace cam
 {
@@ -28,6 +33,7 @@ public:
     /**
      * @brief Creates a new arena camera controller
      *
+     * @param arena The arena the camera is in
      * @param minDistance The minimum distance the camera can be from the target
      * @param maxDistance The maximum distance the camera can be from the target
      * @param distanceSteps The number of steps between the min and max distance
@@ -36,8 +42,8 @@ public:
      * @param dampening The dampening factor for camera movement
      * @param initialPosition The initial position of the camera in world coordinates
      */
-    ArenaController(float minDistance, float maxDistance, unsigned int distanceSteps,
-                    glm::vec2 arenaSize, float speed, float dampening,
+    ArenaController(const arena::Arena& arena, float minDistance, float maxDistance,
+                    unsigned int distanceSteps, glm::vec2 arenaSize, float speed, float dampening,
                     glm::vec3 initialPosition = glm::vec3(0.f, 0.f, 0.f));
 
     /**
@@ -46,6 +52,7 @@ public:
     virtual ~ArenaController() = default;
 
 private:
+    const arena::Arena& arena;
     const float minDistance;
     const float distancePerStep;
     const unsigned int distanceSteps;

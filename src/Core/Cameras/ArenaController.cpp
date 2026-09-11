@@ -1,6 +1,7 @@
 #include <Core/Cameras/ArenaController.hpp>
 
 #include <BLIB/Cameras/3D/Camera3D.hpp>
+#include <Core/Arena/Arena.hpp>
 
 namespace core
 {
@@ -25,10 +26,11 @@ void updateVelocity(float& current, float target, float dampening, float dt) {
 }
 } // namespace
 
-ArenaController::ArenaController(float minDistance, float maxDistance, unsigned int distanceSteps,
-                                 glm::vec2 arenaSize, float speed, float dampening,
-                                 glm::vec3 initialPosition)
-: minDistance(minDistance)
+ArenaController::ArenaController(const arena::Arena& arena, float minDistance, float maxDistance,
+                                 unsigned int distanceSteps, glm::vec2 arenaSize, float speed,
+                                 float dampening, glm::vec3 initialPosition)
+: arena(arena)
+, minDistance(minDistance)
 , distancePerStep((maxDistance - minDistance) / static_cast<float>(distanceSteps))
 , distanceSteps(distanceSteps)
 , currentDistanceStep(distanceSteps / 2)
@@ -70,14 +72,15 @@ void ArenaController::update(float dt) {
                                         velocity.z * yawCos - velocity.x * yawSin);
     speed = speedPerStep * static_cast<float>(currentDistanceStep + 1);
     currentPosition += yawAdjustedVelocity * speed * speedMultiple * dt;
-    currentPosition.y = std::max(currentPosition.y, 0.f); // TODO - get from heightmap
+    currentPosition.y = std::max(currentPosition.y, 0.f);
 
     // update camera position and orientation
     glm::vec3 camPos;
-    camPos.x = currentPosition.x + yawSin * pitchCos * currentDistance;
-    camPos.z = currentPosition.z + yawCos * pitchCos * currentDistance;
-    camPos.y = currentPosition.y + pitchSin * currentDistance;
-    camPos.y = std::max(camPos.y, 1.f);
+    camPos.x                  = currentPosition.x + yawSin * pitchCos * currentDistance;
+    camPos.z                  = currentPosition.z + yawCos * pitchCos * currentDistance;
+    const float terrainHeight = arena.getTerrain().sampleHeight({camPos.x, camPos.z});
+    camPos.y                  = currentPosition.y + pitchSin * currentDistance;
+    camPos.y                  = std::max(camPos.y, terrainHeight + 1.f);
     camera().setPosition(camPos);
     camera().getOrientationForChange().lookAt(currentPosition, camPos);
 

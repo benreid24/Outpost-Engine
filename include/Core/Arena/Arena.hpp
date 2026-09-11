@@ -46,6 +46,11 @@ public:
      */
     void addToWorld(bl::engine::World& world);
 
+    /**
+     * @brief Returns the terrain of the arena
+     */
+    const Terrain& getTerrain() const { return terrain; }
+
 private:
     gen::Seed generator;
     Terrain terrain;

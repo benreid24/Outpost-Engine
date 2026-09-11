@@ -106,8 +106,8 @@ void Terrain::generateGeometry(bl::util::ThreadPool& threadPool) {
             for (unsigned int j = start; j < end; ++j) {
                 auto& v        = verts[j];
                 v.pos.y        = sampleHeight({v.pos.x, v.pos.z});
-                v.texCoord.x   = v.pos.x / step;
-                v.texCoord.y   = v.pos.z / step;
+                v.texCoord.x   = v.pos.x / step / 4.f;
+                v.texCoord.y   = v.pos.z / step / 4.f;
                 v.color        = bl::rc::Color(1.f, 1.f, 1.f);
                 v.biomeIndices = glm::u32vec4(0);
                 v.biomeWeights = glm::vec4(0.f);

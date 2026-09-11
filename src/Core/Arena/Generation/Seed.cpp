@@ -1,6 +1,6 @@
 #include <Core/Arena/Generation/Seed.hpp>
 
-#include <BLIB/Util/Random.hpp>
+#include <BLIB/Random/Random.hpp>
 #include <numeric>
 
 namespace core
@@ -10,7 +10,7 @@ namespace arena
 namespace gen
 {
 Seed::Seed()
-: Seed(bl::util::Random::get<std::uint64_t>(0, std::numeric_limits<std::uint64_t>::max())) {}
+: Seed(bl::rand::Random::get<std::uint64_t>(0, std::numeric_limits<std::uint64_t>::max())) {}
 
 Seed::Seed(std::uint64_t seed)
 : seed(seed)
@@ -21,8 +21,8 @@ void Seed::reseed(std::uint64_t seed) {
     rng.seed(seed);
 }
 
-bl::util::Perlin<float> Seed::getPerlin(std::uint64_t offset) const {
-    bl::util::Perlin<float> perlin(seed + offset);
+bl::rand::Perlin<float> Seed::getPerlin(std::uint64_t offset) const {
+    bl::rand::Perlin<float> perlin(seed + offset);
     return perlin;
 }
 

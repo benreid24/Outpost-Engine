@@ -20,9 +20,9 @@ constexpr std::uint64_t DoubleWeight  = NominalWeight * 2;
 
 const gen::RuledBiome LakeBiome = gen::RuledBiome{
     .biome      = gen::Biome::Water,
-    .heightRule = Rule{.allowedRange = {0.f, 0.45f}, .idealValue = 0.f, .maxWeight = HalfWeight},
+    .heightRule = Rule{.allowedRange = {0.f, 0.4f}, .idealValue = 0.f, .maxWeight = HalfWeight},
     .moistureRule =
-        Rule{.allowedRange = {0.2f, 1.f}, .idealValue = 1.f, .maxWeight = NominalWeight},
+        Rule{.allowedRange = {0.3f, 1.f}, .idealValue = 1.f, .maxWeight = NominalWeight},
     .adjacencyBonuses =
         std::vector<Bonus>{Bonus{.biome = gen::Biome::Water, .bonus = NominalWeight}}};
 
@@ -40,7 +40,7 @@ const gen::RuledBiome RiverBiome = gen::RuledBiome{
 const gen::RuledBiome DesertBiome = gen::RuledBiome{
     .biome = gen::Biome::Desert,
     .heightRule =
-        Rule{.allowedRange = {0.f, 0.75f}, .idealValue = 0.35f, .maxWeight = QuarterWeight},
+        Rule{.allowedRange = {0.f, 0.75f}, .idealValue = 0.35f, .maxWeight = NominalWeight},
     .moistureRule =
         Rule{.allowedRange = {0.f, 0.2f}, .idealValue = 0.f, .maxWeight = DoubleWeight}};
 
@@ -53,7 +53,8 @@ const gen::RuledBiome ForestBiome = gen::RuledBiome{
     .biome = gen::Biome::Forest,
     .heightRule =
         Rule{.allowedRange = {0.f, 0.6f}, .idealValue = 0.45f, .maxWeight = NominalWeight},
-    .moistureRule = Rule{.allowedRange = {0.5f, 1.f}, .idealValue = 0.8f, .maxWeight = HalfWeight},
+    .moistureRule =
+        Rule{.allowedRange = {0.5f, 1.f}, .idealValue = 0.8f, .maxWeight = NominalWeight},
     .adjacencyBonuses = std::vector<Bonus>{Bonus{.biome         = gen::Biome::Forest,
                                                  .stackBehavior = Bonus::Behavior::Multiplicative,
                                                  .bonus         = DoubleWeight}}};
@@ -84,13 +85,13 @@ const std::vector<gen::RuledBiome> Biomes = {
     LakeBiome, DesertBiome, GrasslandBiome, ForestBiome, MountainBiome, SnowBiome};
 
 constexpr float Step                  = 4.f;
-constexpr unsigned int TerrainOctaves = 16;
-constexpr float TerrainPersistence    = 0.4f;
-constexpr float TerrainFrequency      = 0.005f;
+constexpr unsigned int TerrainOctaves = 8;
+constexpr float TerrainPersistence    = 0.5f;
+constexpr float TerrainFrequency      = 0.001f;
 
 constexpr unsigned int MoistureOctaves = 3;
 constexpr float MoisturePersistence    = 0.2f;
-constexpr float MoistureFrequency      = 0.001f;
+constexpr float MoistureFrequency      = 0.002f;
 
 } // namespace
 

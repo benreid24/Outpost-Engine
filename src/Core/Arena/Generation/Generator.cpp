@@ -100,7 +100,8 @@ void Generator::generate(Arena& output) {
 
     // postprocess biomes (resample noise, height scale, water, etc)
     raiseLakes(terrain);
-    // TODO
+    // TODO - resample noise based on biome
+    // TODO - scale heightmap based on biome
 
     // Select and modify locations for train stops
     // TODO
