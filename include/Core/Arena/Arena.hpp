@@ -2,6 +2,7 @@
 #define CORE_ARENA_ARENA_HPP
 
 #include <Core/Arena/Terrain.hpp>
+#include <Core/Arena/Track.hpp>
 
 /**
  * @addtogroup Arena
@@ -51,9 +52,15 @@ public:
      */
     const Terrain& getTerrain() const { return terrain; }
 
+    /**
+     * @brief Returns the train track of the arena
+     */
+    const Track& getTrack() const { return track; }
+
 private:
     gen::Seed generator;
     Terrain terrain;
+    Track track;
     bl::util::ThreadPool* threadPool;
 
     friend class gen::Generator;

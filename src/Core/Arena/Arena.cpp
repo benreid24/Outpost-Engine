@@ -109,6 +109,9 @@ void Arena::generate(std::uint64_t seed, const glm::vec2& size, float maxHeight)
 
     gen::Generator generator(seed, genParams);
     generator.generate(*this);
+
+    track.generate(terrain);
+
     if (threadPool) { terrain.generateGeometry(*threadPool); }
 }
 

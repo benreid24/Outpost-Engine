@@ -77,6 +77,16 @@ public:
      */
     glm::u32vec2 worldPosToIndex(const glm::vec2& worldPos) const;
 
+    /**
+     * @brief Returns the maximum possible height of the terrain
+     */
+    float getMaxHeight() const { return maxHeight; }
+
+    /**
+     * @brief Returns the terrain nodes
+     */
+    const bl::ctr::Vector2D<Node>& getNodes() const { return nodes; }
+
 private:
     glm::vec2 worldSize;
     float maxHeight;

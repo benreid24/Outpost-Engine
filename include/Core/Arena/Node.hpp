@@ -18,6 +18,14 @@ struct Node {
     glm::vec2 worldPos;
     float height;
     gen::Biome biome;
+
+    /**
+     * @brief Equality operator for track path finding
+     *
+     * @param other The other node to compare to
+     * @return True if the nodes are equal, false otherwise
+     */
+    bool operator==(const Node& other) const { return worldPos == other.worldPos; }
 };
 
 } // namespace arena
