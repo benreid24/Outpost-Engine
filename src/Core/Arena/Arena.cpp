@@ -112,12 +112,16 @@ void Arena::generate(std::uint64_t seed, const glm::vec2& size, float maxHeight)
 
     track.generate(terrain);
 
-    if (threadPool) { terrain.generateGeometry(*threadPool); }
+    if (threadPool) {
+        terrain.generateGeometry(*threadPool);
+        track.generateGeometry();
+    }
 }
 
 void Arena::addToWorld(bl::engine::World& world) {
     threadPool = &world.engine().engineLoopThreadpool();
     terrain.addToWorld(world, 0.5f);
+    track.addToWorld(world, 0.1f);
 }
 
 } // namespace arena

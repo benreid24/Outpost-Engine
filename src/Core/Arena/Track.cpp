@@ -23,6 +23,33 @@ constexpr float MaxHeightDiffNormal = 0.05f;
 constexpr int DistanceCost          = 10;
 constexpr int DiagonalCost          = static_cast<int>(static_cast<float>(DistanceCost) * 1.4142f);
 
+constexpr float TrackHeight                = 0.25f;
+constexpr float TrackWidth                 = 1.5f;
+constexpr float TrackHalfWidth             = TrackWidth * 0.5f;
+constexpr float RailSize                   = 0.05f;
+constexpr float RailHalfSize               = RailSize * 0.5f;
+constexpr unsigned int RailNumSides        = 4;
+constexpr unsigned int RailVerticesPerStep = 8 * 2;
+constexpr unsigned int RailIndicesPerStep  = 36 * 2;
+constexpr float TieLength                  = 0.2f;
+constexpr float TieHalfLength              = TieLength * 0.5f;
+constexpr float TieWidth                   = TrackWidth * 1.2;
+constexpr float TieHalfWidth               = TieWidth * 0.5f;
+constexpr float TieSpacing                 = 0.75f;
+constexpr float TieHeight                  = 0.1f;
+constexpr float TieHalfHeight              = TieHeight * 0.5f;
+constexpr unsigned int TieVertices         = 8;
+constexpr unsigned int TieIndices          = 36;
+
+constexpr unsigned int TieFaces[6][4] = {
+    {0, 4, 6, 2}, // +dir
+    {1, 3, 7, 5}, // -dir
+    {0, 1, 5, 4}, // +up
+    {2, 6, 7, 3}, // -up
+    {0, 2, 3, 1}, // +right
+    {4, 5, 7, 6}, // -right
+};
+
 int nodeMovementCost(const Node& from, const Node& to) {
     const float heightDiff = std::abs(from.height - to.height);
     const bool diagonal    = (from.index.x != to.index.x && from.index.y != to.index.y);
@@ -32,6 +59,14 @@ int nodeMovementCost(const Node& from, const Node& to) {
 float getInterpolationFactor(const TrackNode& node, float globalDistance) {
     globalDistance -= node.accumulatedDistance;
     return glm::clamp(globalDistance / node.length, 0.f, 1.f);
+}
+
+unsigned int calculateRailSliceCount(float length, float step) {
+    return static_cast<unsigned int>(std::ceil(length / step)) + 1;
+}
+
+unsigned int calculateTieCount(float length, float spacing) {
+    return static_cast<unsigned int>(std::ceil(length / spacing)) + 1;
 }
 
 } // namespace
@@ -115,7 +150,9 @@ float Track::getTrackLength() const {
 glm::vec3 Track::getPositionAtDistance(float distance) const {
     const TrackNode& node = getNodeAtDistance(distance);
     const float t         = getInterpolationFactor(node, distance);
-    return node.spline.evaluate(t);
+    glm::vec3 pos         = node.spline.evaluate(t);
+    pos.y += TrackHeight;
+    return pos;
 }
 
 glm::vec3 Track::getDirectionAtDistance(float distance) const {
@@ -145,6 +182,118 @@ const TrackNode& Track::getNodeAtDistance(float d) const {
         });
     if (it == nodes.end()) { return nodes.back(); }
     return *it;
+}
+
+void Track::addToWorld(bl::engine::World& world, float s) {
+    step = s;
+
+    const unsigned int steps = calculateRailSliceCount(getTrackLength(), step);
+    railsDrawable.create(world, steps * RailVerticesPerStep, steps * RailIndicesPerStep);
+
+    const unsigned int tieCount = calculateTieCount(getTrackLength(), TieSpacing + TieLength);
+    tiesDrawable.create(world, tieCount * TieVertices, tieCount * TieIndices);
+
+    generateGeometry();
+
+    railsDrawable.addToScene(world.scene(), bl::rc::UpdateSpeed::Static);
+    tiesDrawable.addToScene(world.scene(), bl::rc::UpdateSpeed::Static);
+}
+
+void Track::generateGeometry() {
+    if (nodes.empty()) { return; }
+    if (!railsDrawable.exists()) { return; }
+
+    std::uint32_t railVertexOffset = 0;
+    std::uint32_t railIndexOffset  = 0;
+    generateRail(-TrackHalfWidth, railVertexOffset, railIndexOffset);
+    generateRail(TrackHalfWidth, railVertexOffset, railIndexOffset);
+    generateTies();
+}
+
+void Track::generateRail(float offset, std::uint32_t& vertexOffset, std::uint32_t& indexOffset) {
+    const unsigned int numSlices = calculateRailSliceCount(getTrackLength(), step);
+    const float stepPerSlice     = getTrackLength() / static_cast<float>(numSlices - 1);
+    railsDrawable.resize(numSlices * RailVerticesPerStep, numSlices * RailIndicesPerStep);
+
+    const auto connectSlice = [this, &vertexOffset, &indexOffset]() {
+        // create rectangular prism from the last 8 vertices
+        for (unsigned int side = 0; side < RailNumSides; ++side) {
+            const unsigned int v0 = vertexOffset - 8 + side * 2;
+            const unsigned int v1 = vertexOffset - 8 + ((side + 1) % RailNumSides) * 2;
+            const unsigned int v2 = vertexOffset - 7 + ((side + 1) % RailNumSides) * 2;
+            const unsigned int v3 = vertexOffset - 7 + side * 2;
+            railsDrawable.getIndex(indexOffset++) = v0;
+            railsDrawable.getIndex(indexOffset++) = v1;
+            railsDrawable.getIndex(indexOffset++) = v2;
+            railsDrawable.getIndex(indexOffset++) = v0;
+            railsDrawable.getIndex(indexOffset++) = v2;
+            railsDrawable.getIndex(indexOffset++) = v3;
+        }
+    };
+
+    const auto setVertex = [this, &vertexOffset](const glm::vec3& pos) {
+        auto& v = railsDrawable.getVertex(vertexOffset++);
+        v.pos   = pos;
+        v.color = glm::vec4(0.7f, 0.7f, 0.7f, 1.f);
+    };
+
+    for (unsigned int i = 0; i < numSlices; ++i) {
+        const float distance       = static_cast<float>(i) * stepPerSlice;
+        const glm::vec3 pos        = getPositionAtDistance(distance);
+        const glm::vec3 up         = getUpAtDistance(distance);
+        const glm::vec3 right      = getRightAtDistance(distance);
+        const glm::vec3 railCenter = pos + right * offset;
+
+        setVertex(railCenter + right * RailHalfSize + up * RailHalfSize);
+        setVertex(railCenter + right * RailHalfSize - up * RailHalfSize);
+        setVertex(railCenter - right * RailHalfSize + up * RailHalfSize);
+        setVertex(railCenter - right * RailHalfSize - up * RailHalfSize);
+
+        if (i > 0) { connectSlice(); }
+    }
+}
+
+void Track::generateTies() {
+    const unsigned int tieCount =
+        static_cast<unsigned int>(getTrackLength() / (TieSpacing + TieLength));
+    tiesDrawable.resize(tieCount * TieVertices, tieCount * TieIndices);
+
+    std::uint32_t vertexOffset = 0;
+    std::uint32_t indexOffset  = 0;
+
+    const auto emitVertex = [this, &vertexOffset](const glm::vec3& pos) {
+        auto& v = tiesDrawable.getVertex(vertexOffset++);
+        v.pos   = pos;
+        v.color = glm::vec4(0.5f, 0.3f, 0.2f, 1.f);
+    };
+
+    for (unsigned int i = 0; i < tieCount; ++i) {
+        const float distance  = static_cast<float>(i) * (TieSpacing + TieLength);
+        const glm::vec3 pos   = getPositionAtDistance(distance);
+        const glm::vec3 dir   = getDirectionAtDistance(distance);
+        const glm::vec3 up    = getUpAtDistance(distance);
+        const glm::vec3 right = getRightAtDistance(distance);
+
+        emitVertex(pos + right * TieHalfWidth + up * TieHalfHeight + dir * TieHalfLength);
+        emitVertex(pos + right * TieHalfWidth + up * TieHalfHeight - dir * TieHalfLength);
+        emitVertex(pos + right * TieHalfWidth - up * TieHalfHeight + dir * TieHalfLength);
+        emitVertex(pos + right * TieHalfWidth - up * TieHalfHeight - dir * TieHalfLength);
+        emitVertex(pos - right * TieHalfWidth + up * TieHalfHeight + dir * TieHalfLength);
+        emitVertex(pos - right * TieHalfWidth + up * TieHalfHeight - dir * TieHalfLength);
+        emitVertex(pos - right * TieHalfWidth - up * TieHalfHeight + dir * TieHalfLength);
+        emitVertex(pos - right * TieHalfWidth - up * TieHalfHeight - dir * TieHalfLength);
+
+        const unsigned int baseIndex = vertexOffset - TieVertices;
+        for (const auto& face : TieFaces) {
+            tiesDrawable.getIndex(indexOffset++) = baseIndex + face[0];
+            tiesDrawable.getIndex(indexOffset++) = baseIndex + face[1];
+            tiesDrawable.getIndex(indexOffset++) = baseIndex + face[2];
+
+            tiesDrawable.getIndex(indexOffset++) = baseIndex + face[0];
+            tiesDrawable.getIndex(indexOffset++) = baseIndex + face[2];
+            tiesDrawable.getIndex(indexOffset++) = baseIndex + face[3];
+        }
+    }
 }
 
 } // namespace arena

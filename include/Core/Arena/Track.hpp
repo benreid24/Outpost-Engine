@@ -1,6 +1,7 @@
 #ifndef CORE_ARENA_TRACK_HPP
 #define CORE_ARENA_TRACK_HPP
 
+#include <BLIB/Graphics/IndexBuffer3D.hpp>
 #include <Core/Arena/TrackNode.hpp>
 #include <vector>
 
@@ -71,10 +72,28 @@ public:
      */
     const std::vector<TrackNode>& getNodes() const { return nodes; }
 
+    /**
+     * @brief Creates engine objects for the track and adds them to the world
+     *
+     * @param world The world to create the objects in
+     * @param step The step size for the track
+     */
+    void addToWorld(bl::engine::World& world, float step);
+
+    /**
+     * @brief Generates the geometry for the track
+     */
+    void generateGeometry();
+
 private:
     std::vector<TrackNode> nodes;
+    bl::gfx::IndexBuffer3D railsDrawable;
+    bl::gfx::IndexBuffer3D tiesDrawable;
+    float step;
 
     const TrackNode& getNodeAtDistance(float d) const;
+    void generateRail(float offset, std::uint32_t& vertexOffset, std::uint32_t& indexOffset);
+    void generateTies();
 };
 
 } // namespace arena
