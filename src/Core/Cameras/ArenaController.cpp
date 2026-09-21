@@ -14,6 +14,7 @@ constexpr float MinPitch        = 15.f;
 constexpr float MaxPitch        = 90.f;
 constexpr float PitchIncrement  = 15.f;
 constexpr float YawIncrement    = 45.f;
+constexpr float DebounceTime    = 0.1f;
 
 void updateValue(float& current, float target, float dt) {
     if (std::abs(current - target) < 0.01f) { current = target; }
@@ -44,12 +45,15 @@ ArenaController::ArenaController(const arena::Arena& arena, float minDistance, f
 , speed(speed)
 , speedMultiple(1.f)
 , dampening(dampening)
+, debounce(0.f)
 , currentYaw(0.f)
 , targetYaw(0.f)
 , currentPitch(45.f)
 , targetPitch(45.f) {}
 
 void ArenaController::update(float dt) {
+    debounce -= dt;
+
     // adjust scalars
     updateValue(currentDistance, targetDistance, dt);
     updateValue(currentPitch, targetPitch, dt);
@@ -170,7 +174,9 @@ void ArenaController::process(const sf::Event& event) {
         }
     }
     else if (auto* wheel = event.getIf<sf::Event::MouseWheelScrolled>()) {
-        // TODO - debounce?
+        if (debounce > 0.f) { return; }
+        debounce = DebounceTime;
+
         if (wheel->delta > 0.f && currentDistanceStep > 0) {
             --currentDistanceStep;
             targetDistance = minDistance + distancePerStep * currentDistanceStep;

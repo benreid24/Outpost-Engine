@@ -32,7 +32,7 @@ void ArenaState::activate(bl::engine::Engine& engine) {
         cam->setController<core::cam::ArenaController>(arena,
                                                        10.f,
                                                        1000.f,
-                                                       5,
+                                                       15,
                                                        glm::vec2(TerrainWidth, TerrainHeight),
                                                        10.f,
                                                        0.03f,

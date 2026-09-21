@@ -26,28 +26,30 @@ constexpr int DiagonalCost          = static_cast<int>(static_cast<float>(Distan
 constexpr float TrackHeight                = 0.25f;
 constexpr float TrackWidth                 = 1.5f;
 constexpr float TrackHalfWidth             = TrackWidth * 0.5f;
-constexpr float RailSize                   = 0.05f;
-constexpr float RailHalfSize               = RailSize * 0.5f;
+constexpr float RailWidth                  = 0.08f;
+constexpr float RailHalfWidth              = RailWidth * 0.5f;
+constexpr float RailHeight                 = 0.05f;
+constexpr float RailHalfHeight             = RailHeight * 0.5f;
 constexpr unsigned int RailNumSides        = 4;
 constexpr unsigned int RailVerticesPerStep = 8 * 2;
-constexpr unsigned int RailIndicesPerStep  = 36 * 2;
+constexpr unsigned int RailIndicesPerStep  = 24 * 2;
 constexpr float TieLength                  = 0.2f;
 constexpr float TieHalfLength              = TieLength * 0.5f;
-constexpr float TieWidth                   = TrackWidth * 1.2;
+constexpr float TieWidth                   = TrackWidth * 1.2f;
 constexpr float TieHalfWidth               = TieWidth * 0.5f;
-constexpr float TieSpacing                 = 0.75f;
+constexpr float TieSpacing                 = 1.f;
 constexpr float TieHeight                  = 0.1f;
 constexpr float TieHalfHeight              = TieHeight * 0.5f;
 constexpr unsigned int TieVertices         = 8;
 constexpr unsigned int TieIndices          = 36;
 
 constexpr unsigned int TieFaces[6][4] = {
-    {0, 4, 6, 2}, // +dir
-    {1, 3, 7, 5}, // -dir
-    {0, 1, 5, 4}, // +up
-    {2, 6, 7, 3}, // -up
-    {0, 2, 3, 1}, // +right
-    {4, 5, 7, 6}, // -right
+    {0, 2, 6, 4}, // +dir
+    {1, 5, 7, 3}, // -dir
+    {0, 4, 5, 1}, // +up
+    {2, 3, 7, 6}, // -up
+    {0, 1, 3, 2}, // +right
+    {4, 6, 7, 5}, // -right
 };
 
 int nodeMovementCost(const Node& from, const Node& to) {
@@ -66,7 +68,7 @@ unsigned int calculateRailSliceCount(float length, float step) {
 }
 
 unsigned int calculateTieCount(float length, float spacing) {
-    return static_cast<unsigned int>(std::ceil(length / spacing)) + 1;
+    return static_cast<unsigned int>(length / spacing);
 }
 
 } // namespace
@@ -113,11 +115,13 @@ void Track::generate(const Terrain& terrain) {
     }
 
     float accumulatedDistance = 0.f;
+    nodes.clear();
     nodes.reserve(path.size());
     for (const Node& terrainNode : path) {
-        auto& node = nodes.emplace_back();
-        node.position =
-            glm::vec3(terrainNode.worldPos.x, terrainNode.height, terrainNode.worldPos.y);
+        auto& node    = nodes.emplace_back();
+        node.position = glm::vec3(terrainNode.worldPos.x,
+                                  terrain.sampleHeight(terrainNode.worldPos),
+                                  terrainNode.worldPos.y);
 
         glm::vec3 prevNodePos = node.position - glm::vec3(-1.f, 0.f, 0.f);
         if (nodes.size() > 1) {
@@ -129,11 +133,13 @@ void Track::generate(const Terrain& terrain) {
         glm::vec3 nextNextNodePos = nextNodePos + glm::vec3(1.f, 0.f, 0.f);
         if (nodes.size() < path.size()) {
             const auto& next = path[nodes.size()];
-            nextNodePos      = glm::vec3(next.worldPos.x, next.height, next.worldPos.y);
+            nextNodePos =
+                glm::vec3(next.worldPos.x, terrain.sampleHeight(next.worldPos), next.worldPos.y);
         }
         if (nodes.size() < path.size() - 1) {
             const auto& nextNext = path[nodes.size() + 1];
-            nextNextNodePos = glm::vec3(nextNext.worldPos.x, nextNext.height, nextNext.worldPos.y);
+            nextNextNodePos      = glm::vec3(
+                nextNext.worldPos.x, terrain.sampleHeight(nextNext.worldPos), nextNext.worldPos.y);
         }
 
         node.length              = glm::distance(node.position, nextNodePos);
@@ -181,6 +187,9 @@ const TrackNode& Track::getNodeAtDistance(float d) const {
             return node.accumulatedDistance < distance;
         });
     if (it == nodes.end()) { return nodes.back(); }
+
+    if (it->accumulatedDistance > d && it != nodes.begin()) { return *std::prev(it); }
+
     return *it;
 }
 
@@ -188,7 +197,7 @@ void Track::addToWorld(bl::engine::World& world, float s) {
     step = s;
 
     const unsigned int steps = calculateRailSliceCount(getTrackLength(), step);
-    railsDrawable.create(world, steps * RailVerticesPerStep, steps * RailIndicesPerStep);
+    railsDrawable.create(world, steps * RailVerticesPerStep, (steps - 1) * RailIndicesPerStep);
 
     const unsigned int tieCount = calculateTieCount(getTrackLength(), TieSpacing + TieLength);
     tiesDrawable.create(world, tieCount * TieVertices, tieCount * TieIndices);
@@ -213,22 +222,42 @@ void Track::generateGeometry() {
 void Track::generateRail(float offset, std::uint32_t& vertexOffset, std::uint32_t& indexOffset) {
     const unsigned int numSlices = calculateRailSliceCount(getTrackLength(), step);
     const float stepPerSlice     = getTrackLength() / static_cast<float>(numSlices - 1);
-    railsDrawable.resize(numSlices * RailVerticesPerStep, numSlices * RailIndicesPerStep);
+    railsDrawable.resize(numSlices * RailVerticesPerStep, (numSlices - 1) * RailIndicesPerStep);
 
     const auto connectSlice = [this, &vertexOffset, &indexOffset]() {
-        // create rectangular prism from the last 8 vertices
-        for (unsigned int side = 0; side < RailNumSides; ++side) {
-            const unsigned int v0 = vertexOffset - 8 + side * 2;
-            const unsigned int v1 = vertexOffset - 8 + ((side + 1) % RailNumSides) * 2;
-            const unsigned int v2 = vertexOffset - 7 + ((side + 1) % RailNumSides) * 2;
-            const unsigned int v3 = vertexOffset - 7 + side * 2;
-            railsDrawable.getIndex(indexOffset++) = v0;
-            railsDrawable.getIndex(indexOffset++) = v1;
-            railsDrawable.getIndex(indexOffset++) = v2;
-            railsDrawable.getIndex(indexOffset++) = v0;
-            railsDrawable.getIndex(indexOffset++) = v2;
-            railsDrawable.getIndex(indexOffset++) = v3;
-        }
+        const unsigned int base = vertexOffset - 8;
+
+        // top
+        railsDrawable.getIndex(indexOffset++) = base + 0;
+        railsDrawable.getIndex(indexOffset++) = base + 4;
+        railsDrawable.getIndex(indexOffset++) = base + 6;
+        railsDrawable.getIndex(indexOffset++) = base + 0;
+        railsDrawable.getIndex(indexOffset++) = base + 6;
+        railsDrawable.getIndex(indexOffset++) = base + 2;
+
+        // bottom
+        railsDrawable.getIndex(indexOffset++) = base + 1;
+        railsDrawable.getIndex(indexOffset++) = base + 3;
+        railsDrawable.getIndex(indexOffset++) = base + 7;
+        railsDrawable.getIndex(indexOffset++) = base + 1;
+        railsDrawable.getIndex(indexOffset++) = base + 7;
+        railsDrawable.getIndex(indexOffset++) = base + 5;
+
+        // +right
+        railsDrawable.getIndex(indexOffset++) = base + 0;
+        railsDrawable.getIndex(indexOffset++) = base + 1;
+        railsDrawable.getIndex(indexOffset++) = base + 5;
+        railsDrawable.getIndex(indexOffset++) = base + 0;
+        railsDrawable.getIndex(indexOffset++) = base + 5;
+        railsDrawable.getIndex(indexOffset++) = base + 4;
+
+        // -right
+        railsDrawable.getIndex(indexOffset++) = base + 2;
+        railsDrawable.getIndex(indexOffset++) = base + 6;
+        railsDrawable.getIndex(indexOffset++) = base + 7;
+        railsDrawable.getIndex(indexOffset++) = base + 2;
+        railsDrawable.getIndex(indexOffset++) = base + 7;
+        railsDrawable.getIndex(indexOffset++) = base + 3;
     };
 
     const auto setVertex = [this, &vertexOffset](const glm::vec3& pos) {
@@ -244,18 +273,19 @@ void Track::generateRail(float offset, std::uint32_t& vertexOffset, std::uint32_
         const glm::vec3 right      = getRightAtDistance(distance);
         const glm::vec3 railCenter = pos + right * offset;
 
-        setVertex(railCenter + right * RailHalfSize + up * RailHalfSize);
-        setVertex(railCenter + right * RailHalfSize - up * RailHalfSize);
-        setVertex(railCenter - right * RailHalfSize + up * RailHalfSize);
-        setVertex(railCenter - right * RailHalfSize - up * RailHalfSize);
+        setVertex(railCenter + right * RailHalfWidth + up * RailHalfHeight);
+        setVertex(railCenter + right * RailHalfWidth - up * RailHalfHeight);
+        setVertex(railCenter - right * RailHalfWidth + up * RailHalfHeight);
+        setVertex(railCenter - right * RailHalfWidth - up * RailHalfHeight);
 
         if (i > 0) { connectSlice(); }
     }
+
+    railsDrawable.commit();
 }
 
 void Track::generateTies() {
-    const unsigned int tieCount =
-        static_cast<unsigned int>(getTrackLength() / (TieSpacing + TieLength));
+    const unsigned int tieCount = calculateTieCount(getTrackLength(), TieSpacing + TieLength);
     tiesDrawable.resize(tieCount * TieVertices, tieCount * TieIndices);
 
     std::uint32_t vertexOffset = 0;
@@ -294,6 +324,8 @@ void Track::generateTies() {
             tiesDrawable.getIndex(indexOffset++) = baseIndex + face[3];
         }
     }
+
+    tiesDrawable.commit();
 }
 
 } // namespace arena

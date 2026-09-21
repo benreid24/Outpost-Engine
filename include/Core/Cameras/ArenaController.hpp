@@ -68,6 +68,7 @@ private:
     float speed;
     float speedMultiple;
     const float dampening;
+    float debounce;
 
     float currentYaw;
     float targetYaw;

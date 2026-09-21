@@ -119,7 +119,7 @@ void Generator::generate(Arena& output) {
         for (unsigned int y = 0; y < output.terrain.nodes.getHeight(); ++y) {
             Node& node    = output.terrain.nodes(x, y);
             node.index    = {x, y};
-            node.worldPos = glm::vec2(node.index) * params.worldStep;
+            node.worldPos = glm::vec2(node.index) * params.worldStep - params.worldSize * 0.5f;
             node.height   = heightmap(x, y);
             node.biome    = terrain.getNode(x, y).selectedBiome;
         }
