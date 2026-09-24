@@ -31,6 +31,7 @@ public:
     virtual ~ArenaState() = default;
 
 private:
+    sf::WindowBase* window;
     core::arena::Arena arena;
 
     const char* name() const override;
@@ -38,6 +39,7 @@ private:
     void deactivate(bl::engine::Engine& engine) override;
     void update(bl::engine::Engine& engine, float dt, float realDt) override;
     virtual void process(const sf::Event& event) override;
+    void grabWindow();
 };
 
 } // namespace state

@@ -8,6 +8,8 @@ namespace core
 {
 namespace arena
 {
+namespace train
+{
 /**
  * @brief Represents a node of a train track
  *
@@ -20,6 +22,7 @@ struct TrackNode {
     bl::math::CatmullRomSegment<glm::vec3> spline;
 };
 
+} // namespace train
 } // namespace arena
 } // namespace core
 

@@ -1,4 +1,4 @@
-#include <Core/Arena/Track.hpp>
+#include <Core/Arena/Train/Track.hpp>
 
 #include <BLIB/AI/PathFinder.hpp>
 #include <BLIB/Logging.hpp>
@@ -7,6 +7,8 @@
 namespace core
 {
 namespace arena
+{
+namespace train
 {
 namespace
 {
@@ -154,6 +156,8 @@ float Track::getTrackLength() const {
 }
 
 glm::vec3 Track::getPositionAtDistance(float distance) const {
+    if (nodes.empty()) { return glm::vec3(0.f); }
+
     const TrackNode& node = getNodeAtDistance(distance);
     const float t         = getInterpolationFactor(node, distance);
     glm::vec3 pos         = node.spline.evaluate(t);
@@ -162,17 +166,23 @@ glm::vec3 Track::getPositionAtDistance(float distance) const {
 }
 
 glm::vec3 Track::getDirectionAtDistance(float distance) const {
+    if (nodes.empty()) { return glm::vec3(0.f, 0.f, 1.f); }
+
     const TrackNode& node = getNodeAtDistance(distance);
     const float t         = getInterpolationFactor(node, distance);
     return glm::normalize(node.spline.derivative(t));
 }
 
 glm::vec3 Track::getRightAtDistance(float distance) const {
+    if (nodes.empty()) { return glm::vec3(1.f, 0.f, 0.f); }
+
     const glm::vec3 dir = getDirectionAtDistance(distance);
     return glm::normalize(glm::cross(dir, glm::vec3(0.f, 1.f, 0.f)));
 }
 
 glm::vec3 Track::getUpAtDistance(float distance) const {
+    if (nodes.empty()) { return glm::vec3(0.f, 1.f, 0.f); }
+
     const TrackNode& node = getNodeAtDistance(distance);
     const float t         = getInterpolationFactor(node, distance);
     const glm::vec3 dir   = glm::normalize(node.spline.derivative(t));
@@ -191,6 +201,12 @@ const TrackNode& Track::getNodeAtDistance(float d) const {
     if (it->accumulatedDistance > d && it != nodes.begin()) { return *std::prev(it); }
 
     return *it;
+}
+
+float Track::findDistanceFromOffset(float startDistance, float offset, float threshold) const {
+    // TODO - consider a more robust search method
+    (void)threshold;
+    return startDistance + offset;
 }
 
 void Track::addToWorld(bl::engine::World& world, float s) {
@@ -328,5 +344,6 @@ void Track::generateTies() {
     tiesDrawable.commit();
 }
 
+} // namespace train
 } // namespace arena
 } // namespace core

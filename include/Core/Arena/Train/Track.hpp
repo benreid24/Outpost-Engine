@@ -2,7 +2,7 @@
 #define CORE_ARENA_TRACK_HPP
 
 #include <BLIB/Graphics/IndexBuffer3D.hpp>
-#include <Core/Arena/TrackNode.hpp>
+#include <Core/Arena/Train/TrackNode.hpp>
 #include <vector>
 
 namespace core
@@ -11,6 +11,8 @@ namespace arena
 {
 class Terrain;
 
+namespace train
+{
 /**
  * @brief Representation and storage of the train track in the arena
  *
@@ -68,6 +70,18 @@ public:
     glm::vec3 getRightAtDistance(float distance) const;
 
     /**
+     * @brief Performs a search and returns the distance along the track that is the given world
+     *        coord offset from the starting distance along the track
+     *
+     * @param startDistance The starting distance along the track
+     * @param worldOffset The world distance to search for. Negative means search backwards
+     * @param precision The threshold to stop the search at
+     * @return The distance along the track that is the given world distance from the start distance
+     */
+    float findDistanceFromOffset(float startDistance, float worldOffset,
+                                 float precision = 0.01f) const;
+
+    /**
      * @brief Returns the nodes of the track
      */
     const std::vector<TrackNode>& getNodes() const { return nodes; }
@@ -96,6 +110,7 @@ private:
     void generateTies();
 };
 
+} // namespace train
 } // namespace arena
 } // namespace core
 

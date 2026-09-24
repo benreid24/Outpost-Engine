@@ -1,4 +1,4 @@
 target_sources(OutpostEngine PRIVATE
-    Arena.cpp
+    ArenaState.cpp
     CombatDemo.cpp
 )

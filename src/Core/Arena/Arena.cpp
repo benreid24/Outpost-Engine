@@ -95,7 +95,8 @@ constexpr float MoistureFrequency      = 0.002f;
 
 } // namespace
 
-Arena::Arena() {}
+Arena::Arena()
+: train(track) {}
 
 void Arena::generate(std::uint64_t seed, const glm::vec2& size, float maxHeight) {
     gen::Parameters genParams(size, Step, maxHeight);
@@ -115,6 +116,14 @@ void Arena::generate(std::uint64_t seed, const glm::vec2& size, float maxHeight)
     if (threadPool) {
         terrain.generateGeometry(*threadPool);
         track.generateGeometry();
+
+        train.addCar(train::Car::DefaultPassengerConfig);
+        train.addCar(train::Car::DefaultPassengerConfig);
+        train.addCar(train::Car::DefaultCargoConfig);
+        train.addCar(train::Car::DefaultCargoConfig);
+        train.addCar(train::Car::DefaultCargoConfig);
+        train.setVelocity(5.f);
+        train.setPosition(train.getLength() + 10.f);
     }
 }
 
@@ -122,6 +131,7 @@ void Arena::addToWorld(bl::engine::World& world) {
     threadPool = &world.engine().engineLoopThreadpool();
     terrain.addToWorld(world, 0.5f);
     track.addToWorld(world, 0.1f);
+    train.addToWorld(world);
 }
 
 } // namespace arena
