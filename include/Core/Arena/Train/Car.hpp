@@ -42,8 +42,8 @@ public:
 
     /// The state of a train car
     struct State {
-        float frontAxlePosition;
-        float rearAxlePosition;
+        float frontAxleTrackPosition;
+        float rearAxleTrackPosition;
 
         bl::com::Transform3D carWorldTransform;
         bl::com::Transform3D frontWheelWorldTransform;
@@ -62,6 +62,7 @@ public:
         Config{.type            = Type::Locomotive,
                .length          = DefaultLength,
                .width           = DefaultWidth,
+               .height          = DefaultHeight,
                .wheelHeight     = DefaultWheelHeight,
                .couplerStandoff = DefaultCouplerStandoff,
                .frontAxleOffset = DefaultFrontAxleOffset,
@@ -70,6 +71,7 @@ public:
     static constexpr Config DefaultCargoConfig = Config{.type            = Type::Cargo,
                                                         .length          = DefaultLength,
                                                         .width           = DefaultWidth,
+                                                        .height          = DefaultHeight,
                                                         .wheelHeight     = DefaultWheelHeight,
                                                         .couplerStandoff = DefaultCouplerStandoff,
                                                         .frontAxleOffset = DefaultFrontAxleOffset,
@@ -79,6 +81,7 @@ public:
         Config{.type            = Type::Passenger,
                .length          = DefaultLength,
                .width           = DefaultWidth,
+               .height          = DefaultHeight,
                .wheelHeight     = DefaultWheelHeight,
                .couplerStandoff = DefaultCouplerStandoff,
                .frontAxleOffset = DefaultFrontAxleOffset,
@@ -172,9 +175,10 @@ struct ReflectedObject<core::arena::train::Car::State> {
     inline static const auto spec = makeSpec<core::arena::train::Car::State>(
         "CarState",
         memberList(
-            defineMember(1, "frontAxlePosition",
-                         &core::arena::train::Car::State::frontAxlePosition),
-            defineMember(2, "rearAxlePosition", &core::arena::train::Car::State::rearAxlePosition),
+            defineMember(1, "frontAxleTrackPosition",
+                         &core::arena::train::Car::State::frontAxleTrackPosition),
+            defineMember(2, "rearAxleTrackPosition",
+                         &core::arena::train::Car::State::rearAxleTrackPosition),
             defineMember(3, "carTranform", &core::arena::train::Car::State::carWorldTransform),
             defineMember(4, "frontAxleTransform",
                          &core::arena::train::Car::State::frontWheelWorldTransform),

@@ -134,5 +134,7 @@ void Arena::addToWorld(bl::engine::World& world) {
     train.addToWorld(world);
 }
 
+void Arena::update(float dt) { train.update(dt); }
+
 } // namespace arena
 } // namespace core

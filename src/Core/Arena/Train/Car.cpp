@@ -11,20 +11,25 @@ namespace train
 namespace
 {
 constexpr float WheelEmbedFactor = 0.8f;
-}
+
+constexpr glm::vec4 WheelColor      = {0.1f, 0.1f, 0.1f, 1.f};
+constexpr glm::vec4 LocomotiveColor = {0.6f, 0.6f, 0.6f, 1.f};
+constexpr glm::vec4 PassengerColor  = {0.8f, 0.2f, 0.2f, 1.f};
+constexpr glm::vec4 CargoColor      = {0.6f, 0.35f, 0.f, 1.f};
+} // namespace
 
 Car::Car(const Config& config)
 : config(config)
 , state{} {}
 
 void Car::advance(float distance, const Track& track) {
-    update(state.frontAxlePosition + distance, track);
+    update(state.frontAxleTrackPosition + distance, track);
 }
 
 void Car::update(float position, const Track& track) {
-    state.frontAxlePosition = position;
-    state.rearAxlePosition  = track.findDistanceFromOffset(
-        state.frontAxlePosition, -(config.frontAxleOffset + config.rearAxleOffset));
+    state.frontAxleTrackPosition = position;
+    state.rearAxleTrackPosition  = track.findDistanceFromOffset(
+        state.frontAxleTrackPosition, -(config.frontAxleOffset + config.rearAxleOffset));
 
     updateSpatialState(track);
 }
@@ -38,32 +43,32 @@ void Car::update(const Car& connectedTo, const Track& track) {
     const float ourCouplerOffset = config.length * 0.5f - config.frontAxleOffset;
 
     // track position of rear coupler of the car we are connected to
-    const float connectedCouplerPos =
-        track.findDistanceFromOffset(connectedTo.state.rearAxlePosition, connectedCouplerOffset);
+    const float connectedCouplerPos = track.findDistanceFromOffset(
+        connectedTo.state.rearAxleTrackPosition, -connectedCouplerOffset);
 
     // track position of front coupler of this car based on the other coupler
     const float ourCouplerPos = track.findDistanceFromOffset(
-        connectedCouplerPos, config.couplerStandoff + connectedTo.config.couplerStandoff);
+        connectedCouplerPos, -(config.couplerStandoff + connectedTo.config.couplerStandoff));
 
-    state.frontAxlePosition = track.findDistanceFromOffset(ourCouplerPos, -ourCouplerOffset);
-    state.rearAxlePosition  = track.findDistanceFromOffset(
-        state.frontAxlePosition, -(config.frontAxleOffset + config.rearAxleOffset));
+    state.frontAxleTrackPosition = track.findDistanceFromOffset(ourCouplerPos, -ourCouplerOffset);
+    state.rearAxleTrackPosition  = track.findDistanceFromOffset(
+        state.frontAxleTrackPosition, -(config.frontAxleOffset + config.rearAxleOffset));
 
     updateSpatialState(track);
 }
 
 void Car::updateSpatialState(const Track& track) {
-    const glm::vec3 frontAxlePos = track.getPositionAtDistance(state.frontAxlePosition);
-    const glm::vec3 frontAxleDir = track.getRightAtDistance(state.frontAxlePosition);
-    const glm::vec3 frontAxleUp  = track.getUpAtDistance(state.frontAxlePosition);
-    state.frontWheelWorldTransform.lookAt(frontAxleDir);
+    const glm::vec3 frontAxlePos = track.getPositionAtDistance(state.frontAxleTrackPosition);
+    const glm::vec3 frontAxleDir = track.getRightAtDistance(state.frontAxleTrackPosition);
+    const glm::vec3 frontAxleUp  = track.getUpAtDistance(state.frontAxleTrackPosition);
     state.frontWheelWorldTransform.setPosition(frontAxlePos +
                                                frontAxleUp * config.wheelHeight * 0.5f);
+    state.frontWheelWorldTransform.setForwardDir(frontAxleDir, frontAxleUp);
 
-    const glm::vec3 rearAxlePos = track.getPositionAtDistance(state.rearAxlePosition);
-    const glm::vec3 rearAxleDir = track.getRightAtDistance(state.rearAxlePosition);
-    const glm::vec3 rearAxleUp  = track.getUpAtDistance(state.rearAxlePosition);
-    state.rearWheelWorldTransform.lookAt(rearAxleDir);
+    const glm::vec3 rearAxlePos = track.getPositionAtDistance(state.rearAxleTrackPosition);
+    const glm::vec3 rearAxleDir = track.getRightAtDistance(state.rearAxleTrackPosition);
+    const glm::vec3 rearAxleUp  = track.getUpAtDistance(state.rearAxleTrackPosition);
+    state.rearWheelWorldTransform.setForwardDir(rearAxleDir, rearAxleUp);
     state.rearWheelWorldTransform.setPosition(rearAxlePos + rearAxleUp * config.wheelHeight * 0.5f);
 
     const glm::vec3 rearWheelAttachPos =
@@ -77,7 +82,7 @@ void Car::updateSpatialState(const Track& track) {
     glm::vec3 carWorldPos       = rearAxlePos + rearToFront * config.rearAxleOffset;
     carWorldPos += carUp * carHeight;
     state.carWorldTransform.setPosition(carWorldPos);
-    state.carWorldTransform.lookAt(frontAxlePos, rearAxlePos);
+    state.carWorldTransform.setForwardDir(frontAxlePos - rearAxlePos, carUp);
 
     if (carBody.exists()) {
         carBody.getTransform()    = state.carWorldTransform;
@@ -88,8 +93,22 @@ void Car::updateSpatialState(const Track& track) {
 
 void Car::addToWorld(bl::engine::World& world) {
     carBody.create(world, config.length, {config.width, config.height});
-    frontWheel.create(world, config.width, config.wheelHeight * 0.5f, 300);
-    rearWheel.create(world, config.width, config.wheelHeight * 0.5f, 300);
+    frontWheel.create(world, config.width * WheelEmbedFactor, config.wheelHeight * 0.5f, 300);
+    rearWheel.create(world, config.width * WheelEmbedFactor, config.wheelHeight * 0.5f, 300);
+
+    switch (config.type) {
+    case Type::Locomotive:
+        carBody.setColor({LocomotiveColor});
+        break;
+    case Type::Passenger:
+        carBody.setColor({PassengerColor});
+        break;
+    case Type::Cargo:
+        carBody.setColor({CargoColor});
+        break;
+    }
+    frontWheel.setColor({WheelColor});
+    rearWheel.setColor({WheelColor});
 
     carBody.addToScene(world.scene(), bl::rc::UpdateSpeed::Dynamic);
     frontWheel.addToScene(world.scene(), bl::rc::UpdateSpeed::Dynamic);

@@ -58,6 +58,13 @@ public:
      */
     const train::Track& getTrack() const { return track; }
 
+    /**
+     * @brief Updates per frame arena logic
+     *
+     * @param dt Time elapsed in seconds
+     */
+    void update(float dt);
+
 private:
     gen::Seed generator;
     Terrain terrain;

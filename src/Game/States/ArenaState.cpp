@@ -94,6 +94,9 @@ private:
     float rightFactor   = 0.f;
     float upFactor      = 0.f;
 };
+
+bool trainStopped = false;
+
 } // namespace
 
 ArenaState::ArenaState()
@@ -139,7 +142,9 @@ void ArenaState::deactivate(bl::engine::Engine& engine) {
     engine.getPlayer().leaveWorld();
 }
 
-void ArenaState::update(bl::engine::Engine&, float, float) {}
+void ArenaState::update(bl::engine::Engine&, float dt, float) {
+    if (!trainStopped) { arena.update(dt); }
+}
 
 void ArenaState::process(const sf::Event& event) {
     if (auto* key = event.getIf<sf::Event::KeyPressed>()) {
@@ -153,7 +158,9 @@ void ArenaState::process(const sf::Event& event) {
             window->setMouseCursorGrabbed(false);
             window->setMouseCursorVisible(true);
             cameraActive = false;
+            trainStopped = true;
         }
+        if (key->code == sf::Keyboard::Key::T) { trainStopped = !trainStopped; }
     }
     else if (auto* mouse = event.getIf<sf::Event::MouseButtonPressed>()) {
         if (mouse->button == sf::Mouse::Button::Left) { grabWindow(); }
@@ -165,6 +172,7 @@ void ArenaState::grabWindow() {
     window->setMouseCursorVisible(false);
     window->setMouseCursorGrabbed(true);
     cameraActive = true;
+    trainStopped = false;
 }
 
 } // namespace state
