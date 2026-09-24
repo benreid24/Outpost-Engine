@@ -14,9 +14,11 @@ namespace state
 {
 namespace
 {
-constexpr float TerrainWidth     = 1000.f;
-constexpr float TerrainHeight    = 1000.f;
-constexpr float TerrainMaxHeight = 200.f;
+constexpr float TerrainWidth      = 1000.f;
+constexpr float TerrainHeight     = 1000.f;
+constexpr float TerrainMaxHeight  = 200.f;
+constexpr float TerrainHalfWidth  = TerrainWidth * 0.5f;
+constexpr float TerrainHalfHeight = TerrainHeight * 0.5f;
 
 bool cameraActive = true;
 
@@ -24,9 +26,10 @@ class CustomFreeController
 : public bl::cam::c3d::FreeController
 , public bl::sig::Listener<sf::Event> {
 public:
-    CustomFreeController(sf::WindowBase& window)
+    CustomFreeController(sf::WindowBase& window, const core::arena::Terrain& terrain)
     : bl::cam::c3d::FreeController(500.f, 100.f, 0.2f)
-    , window(window) {}
+    , window(window)
+    , terrain(terrain) {}
 
     virtual ~CustomFreeController() = default;
 
@@ -45,6 +48,15 @@ public:
         moveRight(rightFactor * speedFactor);
         moveUp(upFactor * speedFactor);
         bl::cam::c3d::FreeController::update(dt);
+
+        glm::vec3 pos = camera().getPosition();
+        if (pos.x < -TerrainHalfWidth) { pos.x = -TerrainHalfWidth; }
+        if (pos.x > TerrainHalfWidth) { pos.x = TerrainHalfWidth; }
+        if (pos.z < -TerrainHalfHeight) { pos.z = -TerrainHalfHeight; }
+        if (pos.z > TerrainHalfHeight) { pos.z = TerrainHalfHeight; }
+        const float h = terrain.sampleHeight({pos.x, pos.z});
+        if (pos.y < h + 0.5f) { pos.y = h + 0.5f; }
+        camera().setPosition(pos);
     }
 
     virtual void process(const sf::Event& event) override {
@@ -75,6 +87,7 @@ public:
     }
 
 private:
+    const core::arena::Terrain& terrain;
     sf::WindowBase& window;
     float speedFactor   = 1.f;
     float forwardFactor = 0.f;
@@ -103,8 +116,8 @@ void ArenaState::activate(bl::engine::Engine& engine) {
                                                         10.f,
                                                         0.03f,
                                                         glm::vec3(0.f, camHeight, 0.f));*/
-    auto* controller =
-        cam->setController<CustomFreeController>(engine.renderer().getWindow().getSfWindow());
+    auto* controller = cam->setController<CustomFreeController>(
+        engine.renderer().getWindow().getSfWindow(), arena.getTerrain());
     controller->subscribe(engine.getSignalChannel());
 
     world->typedScene().getLighting().modifySun().color.setLighting(
