@@ -87,7 +87,7 @@ const std::vector<gen::RuledBiome> Biomes = {
 constexpr float Step                  = 4.f;
 constexpr unsigned int TerrainOctaves = 8;
 constexpr float TerrainPersistence    = 0.5f;
-constexpr float TerrainFrequency      = 0.001f;
+constexpr float TerrainFrequency      = 0.0015f;
 
 constexpr unsigned int MoistureOctaves = 3;
 constexpr float MoisturePersistence    = 0.2f;
@@ -122,7 +122,7 @@ void Arena::generate(std::uint64_t seed, const glm::vec2& size, float maxHeight)
         train.addCar(train::Car::DefaultCargoConfig);
         train.addCar(train::Car::DefaultCargoConfig);
         train.addCar(train::Car::DefaultCargoConfig);
-        train.setVelocity(5.f);
+        train.setVelocity(15.f);
         train.setPosition(train.getLength() + 10.f);
     }
 }

@@ -20,10 +20,12 @@ struct NodeHasher {
 
 using PathFinder = bl::ai::PathFinder<Node, NodeHasher>;
 
-constexpr float HeightWeight        = 10.f;
-constexpr float MaxHeightDiffNormal = 0.05f;
-constexpr int DistanceCost          = 10;
-constexpr int DiagonalCost          = static_cast<int>(static_cast<float>(DistanceCost) * 1.4142f);
+constexpr float HeightWeight     = 20.f;
+constexpr float MaxSlope         = 0.5f; // 30 degrees
+constexpr int DistanceCost       = 10;
+constexpr int DiagonalCost       = 14;
+constexpr float IdealNodeGap     = 10.f;
+constexpr float TrackNodeGenStep = 2.f;
 
 constexpr float TrackHeight                = 0.25f;
 constexpr float TrackWidth                 = 1.5f;
@@ -54,12 +56,6 @@ constexpr unsigned int TieFaces[6][4] = {
     {4, 6, 7, 5}, // -right
 };
 
-int nodeMovementCost(const Node& from, const Node& to) {
-    const float heightDiff = std::abs(from.height - to.height);
-    const bool diagonal    = (from.index.x != to.index.x && from.index.y != to.index.y);
-    return static_cast<int>(heightDiff * HeightWeight) + (diagonal ? 14 : 10);
-}
-
 float getInterpolationFactor(const TrackNode& node, float globalDistance) {
     globalDistance -= node.accumulatedDistance;
     return glm::clamp(globalDistance / node.length, 0.f, 1.f);
@@ -73,75 +69,135 @@ unsigned int calculateTieCount(float length, float spacing) {
     return static_cast<unsigned int>(length / spacing);
 }
 
+int getStepSign(unsigned int from, unsigned int to) {
+    if (from == to) { return 0; }
+    return from > to ? -1 : 1;
+}
+
 } // namespace
 
 Track::Track() {}
 
 void Track::generate(const Terrain& terrain) {
-    const float maxHeightDiff = MaxHeightDiffNormal * terrain.getMaxHeight();
+    const unsigned int step = IdealNodeGap / terrain.getStep();
+
+    const auto nodeMovementCost = [&terrain, step](const Node& from, const Node& to) {
+        float totalHeight = 0.f;
+        const Node* prev  = &from;
+        for (unsigned int i = 1; i < step; ++i) {
+            const int xSign      = getStepSign(from.index.x, to.index.x);
+            const unsigned int x = from.index.x + i * xSign;
+            const int ySign      = getStepSign(from.index.y, to.index.y);
+            const unsigned int y = from.index.y + i * ySign;
+            const Node& node     = terrain.getNodes()(x, y);
+
+            const float heightDiff = std::abs(node.height - prev->height);
+            if (heightDiff >= glm::distance(from.worldPos, to.worldPos) * MaxSlope) { return -1; }
+            totalHeight += heightDiff;
+            prev = &node;
+        }
+        const bool diagonal = (from.index.x != to.index.x && from.index.y != to.index.y);
+        return static_cast<int>(totalHeight * HeightWeight) +
+               (diagonal ? DiagonalCost : DistanceCost);
+    };
 
     const auto yieldAdjacentNodes =
-        [&terrain, maxHeightDiff](const Node& node, std::vector<std::pair<Node, int>>& adjacent) {
-            const glm::u32vec2 idx = node.index;
+        [&terrain, &nodeMovementCost, step](const Node& node,
+                                            std::vector<std::pair<Node, int>>& adjacent) {
+            const glm::i32vec2 idx = node.index;
             for (int dx = -1; dx <= 1; ++dx) {
                 for (int dy = -1; dy <= 1; ++dy) {
                     if (dx == 0 && dy == 0) continue;
 
-                    glm::i32vec2 neighborIdx(idx.x + dx, idx.y + dy);
+                    glm::i32vec2 neighborIdx(idx.x + dx * step, idx.y + dy * step);
+                    if (neighborIdx.x < 0 && idx.x != 0) { neighborIdx.x = 0; }
+                    else if (neighborIdx.x >= static_cast<int>(terrain.getNodes().getWidth()) &&
+                             idx.x != static_cast<int>(terrain.getNodes().getWidth() - 1)) {
+                        neighborIdx.x = terrain.getNodes().getWidth() - 1;
+                    }
+                    if (neighborIdx.y < 0 && idx.y != 0) { neighborIdx.y = 0; }
+                    else if (neighborIdx.y >= static_cast<int>(terrain.getNodes().getHeight()) &&
+                             idx.y != static_cast<int>(terrain.getNodes().getHeight() - 1)) {
+                        neighborIdx.y = terrain.getNodes().getHeight() - 1;
+                    }
+
                     if (neighborIdx.x < 0 || neighborIdx.y < 0 ||
-                        neighborIdx.x >= terrain.getNodes().getWidth() ||
-                        neighborIdx.y >= terrain.getNodes().getHeight()) {
+                        neighborIdx.x >= static_cast<int>(terrain.getNodes().getWidth()) ||
+                        neighborIdx.y >= static_cast<int>(terrain.getNodes().getHeight())) {
                         continue;
                     }
 
                     const Node& neighbor = terrain.getNodes()(neighborIdx.x, neighborIdx.y);
+                    const float distance = glm::distance(node.worldPos, neighbor.worldPos);
 
                     // TODO - adjust cost and do bridges or tunnels
-                    if (std::abs(neighbor.height - node.height) >= maxHeightDiff) { continue; }
+                    if (std::abs(neighbor.height - node.height) >= distance * MaxSlope) {
+                        continue;
+                    }
 
                     const int cost = nodeMovementCost(node, neighbor);
+                    if (cost < 0) { continue; }
+
                     adjacent.emplace_back(neighbor, cost);
                 }
             }
         };
 
-    // TODO - better start and end nodes
-    const unsigned int middleY = terrain.getNodes().getHeight() / 2;
+    // TODO - better start and end nodes (could relax end node constraint to entire right edge?)
+    const unsigned int middleY = terrain.getNodes().getHeight() / step / 2 * step;
     const Node& start          = terrain.getNodes()(0, middleY);
     const Node& end            = terrain.getNodes()(terrain.getNodes().getWidth() - 1, middleY);
 
     std::vector<Node> path;
-    if (!PathFinder::findPath(start, end, yieldAdjacentNodes, &nodeMovementCost, path)) {
+    if (!PathFinder::findPath(start, end, yieldAdjacentNodes, nodeMovementCost, path)) {
         BL_LOG_ERROR << "Failed to find a path for the track";
         return;
     }
 
+    // insert nodes along path to better contour to terrain
+    std::vector<glm::vec2> expandedPath;
+    // TODO - scale step by track step to smooth
+    expandedPath.reserve(path.size() * step);
+    expandedPath.emplace_back(path.front().worldPos);
+    for (unsigned int i = 1; i < path.size(); ++i) {
+        const glm::vec2 prior =
+            i > 1 ? path[i - 2].worldPos : path[i - 1].worldPos - glm::vec2(IdealNodeGap, 0.f);
+        const glm::vec2 from = path[i - 1].worldPos;
+        const glm::vec2 to   = path[i].worldPos;
+        const glm::vec2 next = i < path.size() - 1 ?
+                                   path[i + 1].worldPos :
+                                   path[i].worldPos + glm::vec2(IdealNodeGap, 0.f);
+
+        bl::math::CatmullRomSegment<glm::vec2> spline(prior, from, to, next);
+        for (unsigned int j = 0; j < step; ++j) {
+            const float t       = static_cast<float>(j) / static_cast<float>(step);
+            const glm::vec2 pos = spline.evaluate(t);
+            expandedPath.emplace_back(pos);
+        }
+    }
+
     float accumulatedDistance = 0.f;
     nodes.clear();
-    nodes.reserve(path.size());
-    for (const Node& terrainNode : path) {
+    nodes.reserve(expandedPath.size());
+    for (const glm::vec2& terrainNode : expandedPath) {
         auto& node    = nodes.emplace_back();
-        node.position = glm::vec3(terrainNode.worldPos.x,
-                                  terrain.sampleHeight(terrainNode.worldPos),
-                                  terrainNode.worldPos.y);
+        node.position = glm::vec3(terrainNode.x, terrain.sampleHeight(terrainNode), terrainNode.y);
 
-        glm::vec3 prevNodePos = node.position - glm::vec3(-1.f, 0.f, 0.f);
+        glm::vec3 prevNodePos = node.position - glm::vec3(-IdealNodeGap, 0.f, 0.f);
         if (nodes.size() > 1) {
             auto& prev  = nodes[nodes.size() - 2];
             prevNodePos = prev.position;
         }
 
-        glm::vec3 nextNodePos     = node.position + glm::vec3(1.f, 0.f, 0.f);
-        glm::vec3 nextNextNodePos = nextNodePos + glm::vec3(1.f, 0.f, 0.f);
-        if (nodes.size() < path.size()) {
-            const auto& next = path[nodes.size()];
-            nextNodePos =
-                glm::vec3(next.worldPos.x, terrain.sampleHeight(next.worldPos), next.worldPos.y);
+        glm::vec3 nextNodePos     = node.position + glm::vec3(IdealNodeGap, 0.f, 0.f);
+        glm::vec3 nextNextNodePos = nextNodePos + glm::vec3(IdealNodeGap, 0.f, 0.f);
+        if (nodes.size() < expandedPath.size()) {
+            const auto& next = expandedPath[nodes.size()];
+            nextNodePos      = glm::vec3(next.x, terrain.sampleHeight(next), next.y);
         }
-        if (nodes.size() < path.size() - 1) {
-            const auto& nextNext = path[nodes.size() + 1];
-            nextNextNodePos      = glm::vec3(
-                nextNext.worldPos.x, terrain.sampleHeight(nextNext.worldPos), nextNext.worldPos.y);
+        if (nodes.size() < expandedPath.size() - 1) {
+            const auto& nextNext = expandedPath[nodes.size() + 1];
+            nextNextNodePos = glm::vec3(nextNext.x, terrain.sampleHeight(nextNext), nextNext.y);
         }
 
         node.length              = glm::distance(node.position, nextNodePos);

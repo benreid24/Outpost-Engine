@@ -87,6 +87,11 @@ public:
      */
     const bl::ctr::Vector2D<Node>& getNodes() const { return nodes; }
 
+    /**
+     * @brief Returns the step size of the terrain
+     */
+    float getStep() const { return step; }
+
 private:
     glm::vec2 worldSize;
     float maxHeight;

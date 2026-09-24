@@ -126,7 +126,7 @@ void ArenaState::activate(bl::engine::Engine& engine) {
     world->typedScene().getLighting().modifySun().color.setLighting(
         bl::rc::Color(1.f, 1.f, 1.f), 1.f, 0.25f, 1.f, 0.1f);
     world->typedScene().getLighting().modifySun().dir =
-        glm::normalize(glm::vec3(-2.f, 0.5f, -1.5f));
+        glm::normalize(glm::vec3(-2.f, -0.5f, -1.5f));
 
     arena.generate(0, glm::vec2(TerrainWidth, TerrainHeight), TerrainMaxHeight);
     arena.addToWorld(*world);
