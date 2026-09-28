@@ -27,25 +27,30 @@ constexpr int DiagonalCost       = 14;
 constexpr float IdealNodeGap     = 10.f;
 constexpr float TrackNodeGenStep = 2.f;
 
-constexpr float TrackHeight                = 0.25f;
-constexpr float TrackWidth                 = 1.5f;
-constexpr float TrackHalfWidth             = TrackWidth * 0.5f;
-constexpr float RailWidth                  = 0.08f;
-constexpr float RailHalfWidth              = RailWidth * 0.5f;
-constexpr float RailHeight                 = 0.05f;
-constexpr float RailHalfHeight             = RailHeight * 0.5f;
-constexpr unsigned int RailNumSides        = 4;
-constexpr unsigned int RailVerticesPerStep = 8 * 2;
-constexpr unsigned int RailIndicesPerStep  = 24 * 2;
-constexpr float TieLength                  = 0.2f;
-constexpr float TieHalfLength              = TieLength * 0.5f;
-constexpr float TieWidth                   = TrackWidth * 1.2f;
-constexpr float TieHalfWidth               = TieWidth * 0.5f;
-constexpr float TieSpacing                 = 1.f;
-constexpr float TieHeight                  = 0.1f;
-constexpr float TieHalfHeight              = TieHeight * 0.5f;
-constexpr unsigned int TieVertices         = 8;
-constexpr unsigned int TieIndices          = 36;
+constexpr float TrackHeight                 = 0.5f;
+constexpr float TrackWidth                  = 1.5f;
+constexpr float TrackHalfWidth              = TrackWidth * 0.5f;
+constexpr float RailWidth                   = 0.08f;
+constexpr float RailHalfWidth               = RailWidth * 0.5f;
+constexpr float RailHeight                  = 0.05f;
+constexpr float RailHalfHeight              = RailHeight * 0.5f;
+constexpr unsigned int RailNumSides         = 4;
+constexpr unsigned int RailVerticesPerStep  = 8 * 2;
+constexpr unsigned int RailIndicesPerStep   = 24 * 2;
+constexpr float TieLength                   = 0.2f;
+constexpr float TieHalfLength               = TieLength * 0.5f;
+constexpr float TieWidth                    = TrackWidth * 1.2f;
+constexpr float TieHalfWidth                = TieWidth * 0.5f;
+constexpr float TieSpacing                  = 1.f;
+constexpr float TieHeight                   = 0.1f;
+constexpr float TieHalfHeight               = TieHeight * 0.5f;
+constexpr unsigned int TieVertices          = 8;
+constexpr unsigned int TieIndices           = 36;
+constexpr float MoundHeight                 = TrackHeight * 2.f;
+constexpr float MoundTopWidthFactor         = 1.2f;
+constexpr float MoundBottomWidthFactor      = 2.f;
+constexpr unsigned int MoundVerticesPerStep = 4;
+constexpr unsigned int MoundIndicesPerStep  = 18;
 
 constexpr unsigned int TieFaces[6][4] = {
     {0, 2, 6, 4}, // +dir
@@ -155,9 +160,10 @@ void Track::generate(const Terrain& terrain) {
     }
 
     // insert nodes along path to better contour to terrain
+    const unsigned int trackStepsPerStep = std::ceil(static_cast<float>(step) / TrackNodeGenStep);
+    const unsigned int trackNodeCount    = path.size() * trackStepsPerStep;
     std::vector<glm::vec2> expandedPath;
-    // TODO - scale step by track step to smooth
-    expandedPath.reserve(path.size() * step);
+    expandedPath.reserve(trackNodeCount);
     expandedPath.emplace_back(path.front().worldPos);
     for (unsigned int i = 1; i < path.size(); ++i) {
         const glm::vec2 prior =
@@ -169,8 +175,8 @@ void Track::generate(const Terrain& terrain) {
                                    path[i].worldPos + glm::vec2(IdealNodeGap, 0.f);
 
         bl::math::CatmullRomSegment<glm::vec2> spline(prior, from, to, next);
-        for (unsigned int j = 0; j < step; ++j) {
-            const float t       = static_cast<float>(j) / static_cast<float>(step);
+        for (unsigned int j = 0; j < trackStepsPerStep; ++j) {
+            const float t       = static_cast<float>(j) / static_cast<float>(trackStepsPerStep);
             const glm::vec2 pos = spline.evaluate(t);
             expandedPath.emplace_back(pos);
         }
@@ -270,6 +276,7 @@ void Track::addToWorld(bl::engine::World& world, float s) {
 
     const unsigned int steps = calculateRailSliceCount(getTrackLength(), step);
     railsDrawable.create(world, steps * RailVerticesPerStep, (steps - 1) * RailIndicesPerStep);
+    moundDrawable.create(world, steps * MoundVerticesPerStep, (steps - 1) * MoundIndicesPerStep);
 
     const unsigned int tieCount = calculateTieCount(getTrackLength(), TieSpacing + TieLength);
     tiesDrawable.create(world, tieCount * TieVertices, tieCount * TieIndices);
@@ -278,6 +285,7 @@ void Track::addToWorld(bl::engine::World& world, float s) {
 
     railsDrawable.addToScene(world.scene(), bl::rc::UpdateSpeed::Static);
     tiesDrawable.addToScene(world.scene(), bl::rc::UpdateSpeed::Static);
+    moundDrawable.addToScene(world.scene(), bl::rc::UpdateSpeed::Static);
 }
 
 void Track::generateGeometry() {
@@ -289,6 +297,7 @@ void Track::generateGeometry() {
     generateRail(-TrackHalfWidth, railVertexOffset, railIndexOffset);
     generateRail(TrackHalfWidth, railVertexOffset, railIndexOffset);
     generateTies();
+    generateMound();
 }
 
 void Track::generateRail(float offset, std::uint32_t& vertexOffset, std::uint32_t& indexOffset) {
@@ -398,6 +407,57 @@ void Track::generateTies() {
     }
 
     tiesDrawable.commit();
+}
+
+void Track::generateMound() {
+    const unsigned int numSlices = calculateRailSliceCount(getTrackLength(), step);
+    moundDrawable.resize(numSlices * MoundVerticesPerStep, (numSlices - 1) * MoundIndicesPerStep);
+
+    std::uint32_t vertexOffset = 0;
+    std::uint32_t indexOffset  = 0;
+
+    const auto emitVertex = [this, &vertexOffset](const glm::vec3& pos) {
+        auto& v = moundDrawable.getVertex(vertexOffset++);
+        v.pos   = pos;
+        v.color = glm::vec4(0.4f, 0.4f, 0.4f, 1.f);
+    };
+    const auto emitTriange = [this, &indexOffset](unsigned int a, unsigned int b, unsigned int c) {
+        moundDrawable.getIndex(indexOffset++) = a;
+        moundDrawable.getIndex(indexOffset++) = b;
+        moundDrawable.getIndex(indexOffset++) = c;
+    };
+
+    for (unsigned int i = 0; i < numSlices; ++i) {
+        const float distance =
+            static_cast<float>(i) * (getTrackLength() / static_cast<float>(numSlices - 1));
+        const glm::vec3 pos   = getPositionAtDistance(distance);
+        const glm::vec3 up    = getUpAtDistance(distance);
+        const glm::vec3 right = getRightAtDistance(distance);
+
+        emitVertex(pos + right * TrackHalfWidth * MoundTopWidthFactor);
+        emitVertex(pos - right * TrackHalfWidth * MoundTopWidthFactor);
+        emitVertex(pos - right * TrackHalfWidth * MoundBottomWidthFactor - up * MoundHeight);
+        emitVertex(pos + right * TrackHalfWidth * MoundBottomWidthFactor - up * MoundHeight);
+
+        if (i > 0) {
+            const unsigned int baseIndex      = vertexOffset - MoundVerticesPerStep;
+            const unsigned int priorBaseIndex = baseIndex - MoundVerticesPerStep;
+
+            // right face
+            emitTriange(priorBaseIndex + 0, priorBaseIndex + 3, baseIndex + 3);
+            emitTriange(priorBaseIndex + 0, baseIndex + 3, baseIndex + 0);
+
+            // top face
+            emitTriange(priorBaseIndex + 1, priorBaseIndex + 0, baseIndex + 1);
+            emitTriange(priorBaseIndex + 0, baseIndex + 0, baseIndex + 1);
+
+            // left face
+            emitTriange(priorBaseIndex + 2, priorBaseIndex + 1, baseIndex + 2);
+            emitTriange(priorBaseIndex + 1, baseIndex + 1, baseIndex + 2);
+        }
+    }
+
+    moundDrawable.commit();
 }
 
 } // namespace train

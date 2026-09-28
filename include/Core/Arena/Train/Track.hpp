@@ -103,11 +103,13 @@ private:
     std::vector<TrackNode> nodes;
     bl::gfx::IndexBuffer3D railsDrawable;
     bl::gfx::IndexBuffer3D tiesDrawable;
+    bl::gfx::IndexBuffer3D moundDrawable;
     float step;
 
     const TrackNode& getNodeAtDistance(float d) const;
     void generateRail(float offset, std::uint32_t& vertexOffset, std::uint32_t& indexOffset);
     void generateTies();
+    void generateMound();
 };
 
 } // namespace train
