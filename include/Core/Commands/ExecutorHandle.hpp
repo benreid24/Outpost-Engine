@@ -79,7 +79,7 @@ public:
     void markInProgress() {
         if (ref->getStatus() == Command::Queued) {
             ref->status = Command::Current;
-            emitter.emit<event::CommandStatusChange<T>>({Command::Current, *ref});
+            emitter.template emit<event::CommandStatusChange<T>>({Command::Current, *ref});
         }
         else {
             BL_LOG_ERROR << "Cannot move command to Current from invalid state: "
@@ -93,7 +93,7 @@ public:
     void markComplete() {
         if (ref->getStatus() == Command::Current) {
             ref->status = Command::Complete;
-            emitter.emit<event::CommandStatusChange<T>>({Command::Complete, *ref});
+            emitter.template emit<event::CommandStatusChange<T>>({Command::Complete, *ref});
         }
         else {
             BL_LOG_ERROR << "Cannot move command to Complete from invalid state: "
@@ -107,7 +107,7 @@ public:
     void markFailed() {
         if (ref->getStatus() == Command::Current) {
             ref->status = Command::Failed;
-            emitter.emit<event::CommandStatusChange<T>>({Command::Failed, *ref});
+            emitter.template emit<event::CommandStatusChange<T>>({Command::Failed, *ref});
         }
         else {
             BL_LOG_ERROR << "Cannot move command to Failed from invalid state: "
@@ -120,7 +120,7 @@ public:
      */
     void markCanceled() {
         ref->status = Command::Canceled;
-        emitter.emit<event::CommandStatusChange<T>>({Command::Canceled, *ref});
+        emitter.template emit<event::CommandStatusChange<T>>({Command::Canceled, *ref});
     }
 
     /**
@@ -128,7 +128,7 @@ public:
      */
     void markQueued() {
         ref->status = Command::Queued;
-        emitter.emit<event::CommandStatusChange<T>>({Command::Queued, *ref});
+        emitter.template emit<event::CommandStatusChange<T>>({Command::Queued, *ref});
     }
 
 private:
