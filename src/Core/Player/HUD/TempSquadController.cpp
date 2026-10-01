@@ -56,37 +56,35 @@ void TempSquadController::reset() {
 bool TempSquadController::processEvent(const Event& event) {
     switch (state) {
     case Initial:
-        if (event.source().type == sf::Event::MouseButtonPressed &&
-            event.source().mouseButton.button == sf::Mouse::Right) {
-            dragStart = event.worldPosition();
-            state     = Selecting;
-            selectRect.setHidden(false);
-            return true;
+        if (auto* mouseButton = event.source().getIf<sf::Event::MouseButtonPressed>()) {
+            if (mouseButton->button == sf::Mouse::Button::Right) {
+                dragStart = event.worldPosition();
+                state     = Selecting;
+                selectRect.setHidden(false);
+                return true;
+            }
         }
         return false;
 
     case Selecting:
-        switch (event.source().type) {
-        case sf::Event::MouseMoved:
+        if (event.source().is<sf::Event::MouseMoved>()) {
             dragEnd = event.worldPosition();
             selectRect.getTransform().setPosition(glm::min(dragStart, dragEnd));
             selectRect.scaleToSize(glm::abs(dragEnd - dragStart));
-            break;
-        case sf::Event::MouseButtonReleased:
-            if (event.source().mouseButton.button == sf::Mouse::Right) {
+        }
+        else if (auto* mouseButton = event.source().getIf<sf::Event::MouseButtonReleased>())
+            if (mouseButton->button == sf::Mouse::Button::Right) {
                 const glm::vec2 corner = glm::min(dragStart, dragEnd);
                 const glm::vec2 size   = glm::abs(dragStart - dragEnd);
                 std::vector<com::Unit*> units =
                     owner.getCurrentWorld<world::World>().getUnitsInArea(
-                        {corner.x, corner.y, size.x, size.y});
+                        {{corner.x, corner.y}, {size.x, size.y}});
                 controlling->clearUnits();
                 for (com::Unit* unit : units) {
                     if (unit->getFaction() == owner.getFaction()) { controlling->addUnit(unit); }
                 }
                 state = Ordering;
             }
-            break;
-        }
         return true;
 
     case Ordering:

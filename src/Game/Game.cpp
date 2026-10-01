@@ -2,6 +2,7 @@
 
 #include <Core/Properties.hpp>
 #include <Game/ConstantsGame.hpp>
+#include <Game/States/ArenaState.hpp>
 #include <Game/States/CombatDemo.hpp>
 #include <iostream>
 
@@ -43,16 +44,17 @@ bool Game::performEarlyStartup(int, char**) {
 }
 
 bl::engine::Settings Game::createStartupParameters() {
-    return bl::engine::Settings().fromConfig().withWindowParameters(
-        bl::engine::Settings::WindowParameters()
-            .withVideoMode(sf::VideoMode(
-                core::Properties.WindowWidth.get(), core::Properties.WindowHeight.get(), 32))
-            .fromConfig()
-            .withStyle(sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize)
-            .withTitle("Outpost Engine")
-            .withLetterBoxOnResize(true)
-            .withInitialViewSize(
-                sf::Vector2f(ConstantsGame::WindowWidth, ConstantsGame::WindowHeight)));
+    return bl::engine::Settings().fromConfig().withRenderer(
+        bl::rc::CreationSettings().withWindowSettings(
+            bl::rc::WindowSettings()
+                .fromConfig("game")
+                .withVideoMode(sf::VideoMode(
+                    {core::Properties.WindowWidth.get(), core::Properties.WindowHeight.get()}, 32))
+                .withStyle(sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize)
+                .withTitle("Outpost Engine")
+                .withLetterBoxOnResize(true)
+                .withInitialViewSize(
+                    sf::Vector2f(ConstantsGame::WindowWidth, ConstantsGame::WindowHeight))));
 }
 
 bool Game::completeStartup(bl::engine::Engine& engine) {
@@ -65,7 +67,7 @@ bool Game::completeStartup(bl::engine::Engine& engine) {
 
 bl::engine::State::Ptr Game::createInitialEngineState() {
     // TODO - SETUP_TASK - create actual initial state
-    return std::make_shared<state::CombatDemo>(engine());
+    return std::make_shared<state::ArenaState>();
 }
 
 } // namespace game

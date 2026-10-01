@@ -1,0 +1,465 @@
+#include <Core/Arena/Train/Track.hpp>
+
+#include <BLIB/AI/PathFinder.hpp>
+#include <BLIB/Logging.hpp>
+#include <Core/Arena/Terrain.hpp>
+
+namespace core
+{
+namespace arena
+{
+namespace train
+{
+namespace
+{
+struct NodeHasher {
+    std::size_t operator()(const Node& node) const {
+        return bl::util::hashCombine(node.index.x, node.index.y);
+    }
+};
+
+using PathFinder = bl::ai::PathFinder<Node, NodeHasher>;
+
+constexpr float HeightWeight     = 20.f;
+constexpr float MaxSlope         = 0.5f; // 30 degrees
+constexpr int DistanceCost       = 10;
+constexpr int DiagonalCost       = 14;
+constexpr float IdealNodeGap     = 10.f;
+constexpr float TrackNodeGenStep = 2.f;
+
+constexpr float TrackHeight                 = 0.5f;
+constexpr float TrackWidth                  = 1.5f;
+constexpr float TrackHalfWidth              = TrackWidth * 0.5f;
+constexpr float RailWidth                   = 0.08f;
+constexpr float RailHalfWidth               = RailWidth * 0.5f;
+constexpr float RailHeight                  = 0.05f;
+constexpr float RailHalfHeight              = RailHeight * 0.5f;
+constexpr unsigned int RailNumSides         = 4;
+constexpr unsigned int RailVerticesPerStep  = 8 * 2;
+constexpr unsigned int RailIndicesPerStep   = 24 * 2;
+constexpr float TieLength                   = 0.2f;
+constexpr float TieHalfLength               = TieLength * 0.5f;
+constexpr float TieWidth                    = TrackWidth * 1.2f;
+constexpr float TieHalfWidth                = TieWidth * 0.5f;
+constexpr float TieSpacing                  = 1.f;
+constexpr float TieHeight                   = 0.1f;
+constexpr float TieHalfHeight               = TieHeight * 0.5f;
+constexpr unsigned int TieVertices          = 8;
+constexpr unsigned int TieIndices           = 36;
+constexpr float MoundHeight                 = TrackHeight * 2.f;
+constexpr float MoundTopWidthFactor         = 1.2f;
+constexpr float MoundBottomWidthFactor      = 2.f;
+constexpr unsigned int MoundVerticesPerStep = 4;
+constexpr unsigned int MoundIndicesPerStep  = 18;
+
+constexpr unsigned int TieFaces[6][4] = {
+    {0, 2, 6, 4}, // +dir
+    {1, 5, 7, 3}, // -dir
+    {0, 4, 5, 1}, // +up
+    {2, 3, 7, 6}, // -up
+    {0, 1, 3, 2}, // +right
+    {4, 6, 7, 5}, // -right
+};
+
+float getInterpolationFactor(const TrackNode& node, float globalDistance) {
+    globalDistance -= node.accumulatedDistance;
+    return glm::clamp(globalDistance / node.length, 0.f, 1.f);
+}
+
+unsigned int calculateRailSliceCount(float length, float step) {
+    return static_cast<unsigned int>(std::ceil(length / step)) + 1;
+}
+
+unsigned int calculateTieCount(float length, float spacing) {
+    return static_cast<unsigned int>(length / spacing);
+}
+
+int getStepSign(unsigned int from, unsigned int to) {
+    if (from == to) { return 0; }
+    return from > to ? -1 : 1;
+}
+
+} // namespace
+
+Track::Track() {}
+
+void Track::generate(const Terrain& terrain) {
+    const unsigned int step = IdealNodeGap / terrain.getStep();
+
+    const auto nodeMovementCost = [&terrain, step](const Node& from, const Node& to) {
+        float totalHeight = 0.f;
+        const Node* prev  = &from;
+        for (unsigned int i = 1; i < step; ++i) {
+            const int xSign      = getStepSign(from.index.x, to.index.x);
+            const unsigned int x = from.index.x + i * xSign;
+            const int ySign      = getStepSign(from.index.y, to.index.y);
+            const unsigned int y = from.index.y + i * ySign;
+            const Node& node     = terrain.getNodes()(x, y);
+
+            const float heightDiff = std::abs(node.height - prev->height);
+            if (heightDiff >= glm::distance(from.worldPos, to.worldPos) * MaxSlope) { return -1; }
+            totalHeight += heightDiff;
+            prev = &node;
+        }
+        const bool diagonal = (from.index.x != to.index.x && from.index.y != to.index.y);
+        return static_cast<int>(totalHeight * HeightWeight) +
+               (diagonal ? DiagonalCost : DistanceCost);
+    };
+
+    const auto yieldAdjacentNodes =
+        [&terrain, &nodeMovementCost, step](const Node& node,
+                                            std::vector<std::pair<Node, int>>& adjacent) {
+            const glm::i32vec2 idx = node.index;
+            for (int dx = -1; dx <= 1; ++dx) {
+                for (int dy = -1; dy <= 1; ++dy) {
+                    if (dx == 0 && dy == 0) continue;
+
+                    glm::i32vec2 neighborIdx(idx.x + dx * step, idx.y + dy * step);
+                    if (neighborIdx.x < 0 && idx.x != 0) { neighborIdx.x = 0; }
+                    else if (neighborIdx.x >= static_cast<int>(terrain.getNodes().getWidth()) &&
+                             idx.x != static_cast<int>(terrain.getNodes().getWidth() - 1)) {
+                        neighborIdx.x = terrain.getNodes().getWidth() - 1;
+                    }
+                    if (neighborIdx.y < 0 && idx.y != 0) { neighborIdx.y = 0; }
+                    else if (neighborIdx.y >= static_cast<int>(terrain.getNodes().getHeight()) &&
+                             idx.y != static_cast<int>(terrain.getNodes().getHeight() - 1)) {
+                        neighborIdx.y = terrain.getNodes().getHeight() - 1;
+                    }
+
+                    if (neighborIdx.x < 0 || neighborIdx.y < 0 ||
+                        neighborIdx.x >= static_cast<int>(terrain.getNodes().getWidth()) ||
+                        neighborIdx.y >= static_cast<int>(terrain.getNodes().getHeight())) {
+                        continue;
+                    }
+
+                    const Node& neighbor = terrain.getNodes()(neighborIdx.x, neighborIdx.y);
+                    const float distance = glm::distance(node.worldPos, neighbor.worldPos);
+
+                    // TODO - adjust cost and do bridges or tunnels
+                    if (std::abs(neighbor.height - node.height) >= distance * MaxSlope) {
+                        continue;
+                    }
+
+                    const int cost = nodeMovementCost(node, neighbor);
+                    if (cost < 0) { continue; }
+
+                    adjacent.emplace_back(neighbor, cost);
+                }
+            }
+        };
+
+    // TODO - better start and end nodes (could relax end node constraint to entire right edge?)
+    const unsigned int middleY = terrain.getNodes().getHeight() / step / 2 * step;
+    const Node& start          = terrain.getNodes()(0, middleY);
+    const Node& end            = terrain.getNodes()(terrain.getNodes().getWidth() - 1, middleY);
+
+    std::vector<Node> path;
+    if (!PathFinder::findPath(start, end, yieldAdjacentNodes, nodeMovementCost, path)) {
+        BL_LOG_ERROR << "Failed to find a path for the track";
+        return;
+    }
+
+    // insert nodes along path to better contour to terrain
+    const unsigned int trackStepsPerStep = std::ceil(static_cast<float>(step) / TrackNodeGenStep);
+    const unsigned int trackNodeCount    = path.size() * trackStepsPerStep;
+    std::vector<glm::vec2> expandedPath;
+    expandedPath.reserve(trackNodeCount);
+    expandedPath.emplace_back(path.front().worldPos);
+    for (unsigned int i = 1; i < path.size(); ++i) {
+        const glm::vec2 prior =
+            i > 1 ? path[i - 2].worldPos : path[i - 1].worldPos - glm::vec2(IdealNodeGap, 0.f);
+        const glm::vec2 from = path[i - 1].worldPos;
+        const glm::vec2 to   = path[i].worldPos;
+        const glm::vec2 next = i < path.size() - 1 ?
+                                   path[i + 1].worldPos :
+                                   path[i].worldPos + glm::vec2(IdealNodeGap, 0.f);
+
+        bl::math::CatmullRomSegment<glm::vec2> spline(prior, from, to, next);
+        for (unsigned int j = 0; j < trackStepsPerStep; ++j) {
+            const float t       = static_cast<float>(j) / static_cast<float>(trackStepsPerStep);
+            const glm::vec2 pos = spline.evaluate(t);
+            expandedPath.emplace_back(pos);
+        }
+    }
+
+    float accumulatedDistance = 0.f;
+    nodes.clear();
+    nodes.reserve(expandedPath.size());
+    for (const glm::vec2& terrainNode : expandedPath) {
+        auto& node    = nodes.emplace_back();
+        node.position = glm::vec3(terrainNode.x, terrain.sampleHeight(terrainNode), terrainNode.y);
+
+        glm::vec3 prevNodePos = node.position - glm::vec3(-IdealNodeGap, 0.f, 0.f);
+        if (nodes.size() > 1) {
+            auto& prev  = nodes[nodes.size() - 2];
+            prevNodePos = prev.position;
+        }
+
+        glm::vec3 nextNodePos     = node.position + glm::vec3(IdealNodeGap, 0.f, 0.f);
+        glm::vec3 nextNextNodePos = nextNodePos + glm::vec3(IdealNodeGap, 0.f, 0.f);
+        if (nodes.size() < expandedPath.size()) {
+            const auto& next = expandedPath[nodes.size()];
+            nextNodePos      = glm::vec3(next.x, terrain.sampleHeight(next), next.y);
+        }
+        if (nodes.size() < expandedPath.size() - 1) {
+            const auto& nextNext = expandedPath[nodes.size() + 1];
+            nextNextNodePos = glm::vec3(nextNext.x, terrain.sampleHeight(nextNext), nextNext.y);
+        }
+
+        node.length              = glm::distance(node.position, nextNodePos);
+        node.accumulatedDistance = accumulatedDistance;
+        accumulatedDistance += node.length;
+        node.spline.init(prevNodePos, node.position, nextNodePos, nextNextNodePos);
+    }
+}
+
+float Track::getTrackLength() const {
+    return nodes.empty() ? 0.f : nodes.back().accumulatedDistance;
+}
+
+glm::vec3 Track::getPositionAtDistance(float distance) const {
+    if (nodes.empty()) { return glm::vec3(0.f); }
+
+    const TrackNode& node = getNodeAtDistance(distance);
+    const float t         = getInterpolationFactor(node, distance);
+    glm::vec3 pos         = node.spline.evaluate(t);
+    pos.y += TrackHeight;
+    return pos;
+}
+
+glm::vec3 Track::getDirectionAtDistance(float distance) const {
+    if (nodes.empty()) { return glm::vec3(0.f, 0.f, 1.f); }
+
+    const TrackNode& node = getNodeAtDistance(distance);
+    const float t         = getInterpolationFactor(node, distance);
+    return glm::normalize(node.spline.derivative(t));
+}
+
+glm::vec3 Track::getRightAtDistance(float distance) const {
+    if (nodes.empty()) { return glm::vec3(1.f, 0.f, 0.f); }
+
+    const glm::vec3 dir = getDirectionAtDistance(distance);
+    return glm::normalize(glm::cross(dir, glm::vec3(0.f, 1.f, 0.f)));
+}
+
+glm::vec3 Track::getUpAtDistance(float distance) const {
+    if (nodes.empty()) { return glm::vec3(0.f, 1.f, 0.f); }
+
+    const TrackNode& node = getNodeAtDistance(distance);
+    const float t         = getInterpolationFactor(node, distance);
+    const glm::vec3 dir   = glm::normalize(node.spline.derivative(t));
+    const glm::vec3 right = glm::normalize(glm::cross(dir, glm::vec3(0.f, 1.f, 0.f)));
+    return glm::normalize(glm::cross(right, dir));
+}
+
+const TrackNode& Track::getNodeAtDistance(float d) const {
+    // binary search to find node where accumulatedDistance <= d < nextNode.accumulatedDistance
+    const auto it =
+        std::lower_bound(nodes.begin(), nodes.end(), d, [](const TrackNode& node, float distance) {
+            return node.accumulatedDistance < distance;
+        });
+    if (it == nodes.end()) { return nodes.back(); }
+
+    if (it->accumulatedDistance > d && it != nodes.begin()) { return *std::prev(it); }
+
+    return *it;
+}
+
+float Track::findDistanceFromOffset(float startDistance, float offset, float threshold) const {
+    // TODO - consider a more robust search method
+    (void)threshold;
+    return startDistance + offset;
+}
+
+void Track::addToWorld(bl::engine::World& world, float s) {
+    step = s;
+
+    const unsigned int steps = calculateRailSliceCount(getTrackLength(), step);
+    railsDrawable.create(world, steps * RailVerticesPerStep, (steps - 1) * RailIndicesPerStep);
+    moundDrawable.create(world, steps * MoundVerticesPerStep, (steps - 1) * MoundIndicesPerStep);
+
+    const unsigned int tieCount = calculateTieCount(getTrackLength(), TieSpacing + TieLength);
+    tiesDrawable.create(world, tieCount * TieVertices, tieCount * TieIndices);
+
+    generateGeometry();
+
+    railsDrawable.addToScene(world.scene(), bl::rc::UpdateSpeed::Static);
+    tiesDrawable.addToScene(world.scene(), bl::rc::UpdateSpeed::Static);
+    moundDrawable.addToScene(world.scene(), bl::rc::UpdateSpeed::Static);
+}
+
+void Track::generateGeometry() {
+    if (nodes.empty()) { return; }
+    if (!railsDrawable.exists()) { return; }
+
+    std::uint32_t railVertexOffset = 0;
+    std::uint32_t railIndexOffset  = 0;
+    generateRail(-TrackHalfWidth, railVertexOffset, railIndexOffset);
+    generateRail(TrackHalfWidth, railVertexOffset, railIndexOffset);
+    generateTies();
+    generateMound();
+}
+
+void Track::generateRail(float offset, std::uint32_t& vertexOffset, std::uint32_t& indexOffset) {
+    const unsigned int numSlices = calculateRailSliceCount(getTrackLength(), step);
+    const float stepPerSlice     = getTrackLength() / static_cast<float>(numSlices - 1);
+    railsDrawable.resize(numSlices * RailVerticesPerStep, (numSlices - 1) * RailIndicesPerStep);
+
+    const auto connectSlice = [this, &vertexOffset, &indexOffset]() {
+        const unsigned int base = vertexOffset - 8;
+
+        // top
+        railsDrawable.getIndex(indexOffset++) = base + 0;
+        railsDrawable.getIndex(indexOffset++) = base + 4;
+        railsDrawable.getIndex(indexOffset++) = base + 6;
+        railsDrawable.getIndex(indexOffset++) = base + 0;
+        railsDrawable.getIndex(indexOffset++) = base + 6;
+        railsDrawable.getIndex(indexOffset++) = base + 2;
+
+        // bottom
+        railsDrawable.getIndex(indexOffset++) = base + 1;
+        railsDrawable.getIndex(indexOffset++) = base + 3;
+        railsDrawable.getIndex(indexOffset++) = base + 7;
+        railsDrawable.getIndex(indexOffset++) = base + 1;
+        railsDrawable.getIndex(indexOffset++) = base + 7;
+        railsDrawable.getIndex(indexOffset++) = base + 5;
+
+        // +right
+        railsDrawable.getIndex(indexOffset++) = base + 0;
+        railsDrawable.getIndex(indexOffset++) = base + 1;
+        railsDrawable.getIndex(indexOffset++) = base + 5;
+        railsDrawable.getIndex(indexOffset++) = base + 0;
+        railsDrawable.getIndex(indexOffset++) = base + 5;
+        railsDrawable.getIndex(indexOffset++) = base + 4;
+
+        // -right
+        railsDrawable.getIndex(indexOffset++) = base + 2;
+        railsDrawable.getIndex(indexOffset++) = base + 6;
+        railsDrawable.getIndex(indexOffset++) = base + 7;
+        railsDrawable.getIndex(indexOffset++) = base + 2;
+        railsDrawable.getIndex(indexOffset++) = base + 7;
+        railsDrawable.getIndex(indexOffset++) = base + 3;
+    };
+
+    const auto setVertex = [this, &vertexOffset](const glm::vec3& pos) {
+        auto& v = railsDrawable.getVertex(vertexOffset++);
+        v.pos   = pos;
+        v.color = glm::vec4(0.7f, 0.7f, 0.7f, 1.f);
+    };
+
+    for (unsigned int i = 0; i < numSlices; ++i) {
+        const float distance       = static_cast<float>(i) * stepPerSlice;
+        const glm::vec3 pos        = getPositionAtDistance(distance);
+        const glm::vec3 up         = getUpAtDistance(distance);
+        const glm::vec3 right      = getRightAtDistance(distance);
+        const glm::vec3 railCenter = pos + right * offset;
+
+        setVertex(railCenter + right * RailHalfWidth + up * RailHalfHeight);
+        setVertex(railCenter + right * RailHalfWidth - up * RailHalfHeight);
+        setVertex(railCenter - right * RailHalfWidth + up * RailHalfHeight);
+        setVertex(railCenter - right * RailHalfWidth - up * RailHalfHeight);
+
+        if (i > 0) { connectSlice(); }
+    }
+
+    railsDrawable.commit();
+}
+
+void Track::generateTies() {
+    const unsigned int tieCount = calculateTieCount(getTrackLength(), TieSpacing + TieLength);
+    tiesDrawable.resize(tieCount * TieVertices, tieCount * TieIndices);
+
+    std::uint32_t vertexOffset = 0;
+    std::uint32_t indexOffset  = 0;
+
+    const auto emitVertex = [this, &vertexOffset](const glm::vec3& pos) {
+        auto& v = tiesDrawable.getVertex(vertexOffset++);
+        v.pos   = pos;
+        v.color = glm::vec4(0.5f, 0.3f, 0.2f, 1.f);
+    };
+
+    for (unsigned int i = 0; i < tieCount; ++i) {
+        const float distance  = static_cast<float>(i) * (TieSpacing + TieLength);
+        const glm::vec3 pos   = getPositionAtDistance(distance);
+        const glm::vec3 dir   = getDirectionAtDistance(distance);
+        const glm::vec3 up    = getUpAtDistance(distance);
+        const glm::vec3 right = getRightAtDistance(distance);
+
+        emitVertex(pos + right * TieHalfWidth + up * TieHalfHeight + dir * TieHalfLength);
+        emitVertex(pos + right * TieHalfWidth + up * TieHalfHeight - dir * TieHalfLength);
+        emitVertex(pos + right * TieHalfWidth - up * TieHalfHeight + dir * TieHalfLength);
+        emitVertex(pos + right * TieHalfWidth - up * TieHalfHeight - dir * TieHalfLength);
+        emitVertex(pos - right * TieHalfWidth + up * TieHalfHeight + dir * TieHalfLength);
+        emitVertex(pos - right * TieHalfWidth + up * TieHalfHeight - dir * TieHalfLength);
+        emitVertex(pos - right * TieHalfWidth - up * TieHalfHeight + dir * TieHalfLength);
+        emitVertex(pos - right * TieHalfWidth - up * TieHalfHeight - dir * TieHalfLength);
+
+        const unsigned int baseIndex = vertexOffset - TieVertices;
+        for (const auto& face : TieFaces) {
+            tiesDrawable.getIndex(indexOffset++) = baseIndex + face[0];
+            tiesDrawable.getIndex(indexOffset++) = baseIndex + face[1];
+            tiesDrawable.getIndex(indexOffset++) = baseIndex + face[2];
+
+            tiesDrawable.getIndex(indexOffset++) = baseIndex + face[0];
+            tiesDrawable.getIndex(indexOffset++) = baseIndex + face[2];
+            tiesDrawable.getIndex(indexOffset++) = baseIndex + face[3];
+        }
+    }
+
+    tiesDrawable.commit();
+}
+
+void Track::generateMound() {
+    const unsigned int numSlices = calculateRailSliceCount(getTrackLength(), step);
+    moundDrawable.resize(numSlices * MoundVerticesPerStep, (numSlices - 1) * MoundIndicesPerStep);
+
+    std::uint32_t vertexOffset = 0;
+    std::uint32_t indexOffset  = 0;
+
+    const auto emitVertex = [this, &vertexOffset](const glm::vec3& pos) {
+        auto& v = moundDrawable.getVertex(vertexOffset++);
+        v.pos   = pos;
+        v.color = glm::vec4(0.4f, 0.4f, 0.4f, 1.f);
+    };
+    const auto emitTriange = [this, &indexOffset](unsigned int a, unsigned int b, unsigned int c) {
+        moundDrawable.getIndex(indexOffset++) = a;
+        moundDrawable.getIndex(indexOffset++) = b;
+        moundDrawable.getIndex(indexOffset++) = c;
+    };
+
+    for (unsigned int i = 0; i < numSlices; ++i) {
+        const float distance =
+            static_cast<float>(i) * (getTrackLength() / static_cast<float>(numSlices - 1));
+        const glm::vec3 pos   = getPositionAtDistance(distance);
+        const glm::vec3 up    = getUpAtDistance(distance);
+        const glm::vec3 right = getRightAtDistance(distance);
+
+        emitVertex(pos + right * TrackHalfWidth * MoundTopWidthFactor);
+        emitVertex(pos - right * TrackHalfWidth * MoundTopWidthFactor);
+        emitVertex(pos - right * TrackHalfWidth * MoundBottomWidthFactor - up * MoundHeight);
+        emitVertex(pos + right * TrackHalfWidth * MoundBottomWidthFactor - up * MoundHeight);
+
+        if (i > 0) {
+            const unsigned int baseIndex      = vertexOffset - MoundVerticesPerStep;
+            const unsigned int priorBaseIndex = baseIndex - MoundVerticesPerStep;
+
+            // right face
+            emitTriange(priorBaseIndex + 0, priorBaseIndex + 3, baseIndex + 3);
+            emitTriange(priorBaseIndex + 0, baseIndex + 3, baseIndex + 0);
+
+            // top face
+            emitTriange(priorBaseIndex + 1, priorBaseIndex + 0, baseIndex + 1);
+            emitTriange(priorBaseIndex + 0, baseIndex + 0, baseIndex + 1);
+
+            // left face
+            emitTriange(priorBaseIndex + 2, priorBaseIndex + 1, baseIndex + 2);
+            emitTriange(priorBaseIndex + 1, baseIndex + 1, baseIndex + 2);
+        }
+    }
+
+    moundDrawable.commit();
+}
+
+} // namespace train
+} // namespace arena
+} // namespace core

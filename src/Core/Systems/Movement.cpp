@@ -6,21 +6,21 @@ namespace core
 {
 namespace sys
 {
-Movement::~Movement() { bl::event::Dispatcher::unsubscribe(this); }
+Movement::~Movement() {}
 
 void Movement::init(bl::engine::Engine& e) {
     engine = &e;
-    bl::event::Dispatcher::subscribe(this);
+    subscribe(e.getSignalChannel());
 }
 
 void Movement::update(std::mutex&, float dt, float, float, float) {}
 
-void Movement::observe(const bl::sys::Physics2D::SensorEntered& event) {
+void Movement::process(const bl::sys::Physics2D::SensorEntered& event) {
     com::WorldNode* node = engine->ecs().getComponent<com::WorldNode>(event.sensor);
     if (node) { node->world->handleSensorEnter(node->node, event.entity); }
 }
 
-void Movement::observe(const bl::sys::Physics2D::SensorExited& event) {
+void Movement::process(const bl::sys::Physics2D::SensorExited& event) {
     com::WorldNode* node = engine->ecs().getComponent<com::WorldNode>(event.sensor);
     if (node) { node->world->handleSensorExit(node->node, event.entity); }
 }

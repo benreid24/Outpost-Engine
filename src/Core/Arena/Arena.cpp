@@ -1,0 +1,140 @@
+#include <Core/Arena/Arena.hpp>
+
+#include <Core/Arena/Generation/Generator.hpp>
+#include <Core/Arena/Generation/RuledBiome.hpp>
+#include <array>
+
+namespace core
+{
+namespace arena
+{
+namespace
+{
+using Rule  = gen::RuledBiome::Rule;
+using Bonus = gen::AdjacencyBonus;
+
+constexpr std::uint64_t NominalWeight = 1000;
+constexpr std::uint64_t HalfWeight    = NominalWeight / 2;
+constexpr std::uint64_t QuarterWeight = NominalWeight / 4;
+constexpr std::uint64_t DoubleWeight  = NominalWeight * 2;
+
+const gen::RuledBiome LakeBiome = gen::RuledBiome{
+    .biome      = gen::Biome::Water,
+    .heightRule = Rule{.allowedRange = {0.f, 0.4f}, .idealValue = 0.f, .maxWeight = HalfWeight},
+    .moistureRule =
+        Rule{.allowedRange = {0.3f, 1.f}, .idealValue = 1.f, .maxWeight = NominalWeight},
+    .adjacencyBonuses =
+        std::vector<Bonus>{Bonus{.biome = gen::Biome::Water, .bonus = NominalWeight}}};
+
+const gen::RuledBiome RiverBiome = gen::RuledBiome{
+    // TODO - probably better assigned by post processing
+    .biome = gen::Biome::River,
+    .heightRule =
+        Rule{.allowedRange = {0.45f, 0.85f}, .idealValue = 0.65f, .maxWeight = NominalWeight},
+    .moistureRule =
+        Rule{.allowedRange = {0.6f, 1.f}, .idealValue = 0.8f, .maxWeight = DoubleWeight},
+    .adjacencyBonuses = std::vector<Bonus>{Bonus{.biome         = gen::Biome::River,
+                                                 .stackBehavior = Bonus::Behavior::Multiplicative,
+                                                 .bonus         = DoubleWeight}}};
+
+const gen::RuledBiome DesertBiome = gen::RuledBiome{
+    .biome = gen::Biome::Desert,
+    .heightRule =
+        Rule{.allowedRange = {0.f, 0.75f}, .idealValue = 0.35f, .maxWeight = NominalWeight},
+    .moistureRule =
+        Rule{.allowedRange = {0.f, 0.2f}, .idealValue = 0.f, .maxWeight = DoubleWeight}};
+
+const gen::RuledBiome GrasslandBiome = gen::RuledBiome{
+    .biome      = gen::Biome::Grassland,
+    .heightRule = Rule{.allowedRange = {0.f, 0.7f}, .idealValue = 0.4f, .maxWeight = NominalWeight},
+    .moistureRule = Rule{.allowedRange = {0.4f, 1.f}, .idealValue = 0.5f, .maxWeight = HalfWeight}};
+
+const gen::RuledBiome ForestBiome = gen::RuledBiome{
+    .biome = gen::Biome::Forest,
+    .heightRule =
+        Rule{.allowedRange = {0.f, 0.6f}, .idealValue = 0.45f, .maxWeight = NominalWeight},
+    .moistureRule =
+        Rule{.allowedRange = {0.5f, 1.f}, .idealValue = 0.8f, .maxWeight = NominalWeight},
+    .adjacencyBonuses = std::vector<Bonus>{Bonus{.biome         = gen::Biome::Forest,
+                                                 .stackBehavior = Bonus::Behavior::Multiplicative,
+                                                 .bonus         = DoubleWeight}}};
+
+const gen::RuledBiome MountainBiome = gen::RuledBiome{
+    .biome = gen::Biome::Mountain,
+    .heightRule =
+        Rule{.allowedRange = {0.65f, 1.f}, .idealValue = 0.75f, .maxWeight = DoubleWeight},
+    .moistureRule =
+        Rule{.allowedRange = {0.f, 0.7f}, .idealValue = 0.3f, .maxWeight = NominalWeight},
+    .adjacencyBonuses = std::vector<Bonus>{Bonus{.biome         = gen::Biome::Mountain,
+                                                 .stackBehavior = Bonus::Behavior::Multiplicative,
+                                                 .bonus         = DoubleWeight}}};
+
+const gen::RuledBiome SnowBiome = gen::RuledBiome{
+    .biome = gen::Biome::Snow,
+    .heightRule =
+        Rule{.allowedRange = {0.65f, 1.f}, .idealValue = 0.85f, .maxWeight = DoubleWeight},
+    .moistureRule =
+        Rule{.allowedRange = {0.5f, 1.f}, .idealValue = 0.7f, .maxWeight = DoubleWeight},
+    .adjacencyBonuses = std::vector<Bonus>{Bonus{.biome         = gen::Biome::Snow,
+                                                 .stackBehavior = Bonus::Behavior::Multiplicative,
+                                                 .bonus         = DoubleWeight}}};
+
+// TODO - may need inter-biome constraints for beach. Or postprocessing?
+
+const std::vector<gen::RuledBiome> Biomes = {
+    LakeBiome, DesertBiome, GrasslandBiome, ForestBiome, MountainBiome, SnowBiome};
+
+constexpr float Step                  = 4.f;
+constexpr unsigned int TerrainOctaves = 8;
+constexpr float TerrainPersistence    = 0.5f;
+constexpr float TerrainFrequency      = 0.0015f;
+
+constexpr unsigned int MoistureOctaves = 3;
+constexpr float MoisturePersistence    = 0.2f;
+constexpr float MoistureFrequency      = 0.002f;
+
+} // namespace
+
+Arena::Arena()
+: train(track) {}
+
+void Arena::generate(std::uint64_t seed, const glm::vec2& size, float maxHeight) {
+    gen::Parameters genParams(size, Step, maxHeight);
+    genParams.terrainPerlin.frequency    = TerrainFrequency;
+    genParams.terrainPerlin.octaves      = TerrainOctaves;
+    genParams.terrainPerlin.persistence  = TerrainPersistence;
+    genParams.moisturePerlin.frequency   = MoistureFrequency;
+    genParams.moisturePerlin.octaves     = MoistureOctaves;
+    genParams.moisturePerlin.persistence = MoisturePersistence;
+    genParams.biomes                     = Biomes;
+
+    gen::Generator generator(seed, genParams);
+    generator.generate(*this);
+
+    track.generate(terrain);
+
+    if (threadPool) {
+        terrain.generateGeometry(*threadPool);
+        track.generateGeometry();
+
+        train.addCar(train::Car::DefaultPassengerConfig);
+        train.addCar(train::Car::DefaultPassengerConfig);
+        train.addCar(train::Car::DefaultCargoConfig);
+        train.addCar(train::Car::DefaultCargoConfig);
+        train.addCar(train::Car::DefaultCargoConfig);
+        train.setVelocity(15.f);
+        train.setPosition(train.getLength() + 10.f);
+    }
+}
+
+void Arena::addToWorld(bl::engine::World& world) {
+    threadPool = &world.engine().engineLoopThreadpool();
+    terrain.addToWorld(world, 0.5f);
+    track.addToWorld(world, 0.1f);
+    train.addToWorld(world);
+}
+
+void Arena::update(float dt) { train.update(dt); }
+
+} // namespace arena
+} // namespace core

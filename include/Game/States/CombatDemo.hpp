@@ -2,7 +2,7 @@
 #define GAME_STATES_COMBATDEMO_HPP
 
 #include <BLIB/Engine/State.hpp>
-#include <BLIB/Events.hpp>
+#include <BLIB/Signals.hpp>
 #include <SFML/Window/Event.hpp>
 
 namespace game
@@ -11,7 +11,7 @@ namespace state
 {
 class CombatDemo
 : public bl::engine::State
-, public bl::event::Listener<sf::Event> {
+, public bl::sig::Listener<sf::Event> {
 public:
     CombatDemo(bl::engine::Engine& engine);
 
@@ -24,7 +24,7 @@ private:
     void activate(bl::engine::Engine& engine) override;
     void deactivate(bl::engine::Engine& engine) override;
     void update(bl::engine::Engine& engine, float dt, float realDt) override;
-    virtual void observe(const sf::Event& event) override;
+    virtual void process(const sf::Event& event) override;
 };
 
 } // namespace state

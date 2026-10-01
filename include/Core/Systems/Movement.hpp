@@ -2,7 +2,7 @@
 #define CORE_SYSTEMS_MOVEMENT_HPP
 
 #include <BLIB/Engine/System.hpp>
-#include <BLIB/Events.hpp>
+#include <BLIB/Signals.hpp>
 #include <BLIB/Systems/Physics2D.hpp>
 #include <Core/World/World.hpp>
 
@@ -17,7 +17,7 @@ namespace sys
  */
 class Movement
 : public bl::engine::System
-, public bl::event::Listener<bl::sys::Physics2D::SensorEntered, bl::sys::Physics2D::SensorExited> {
+, public bl::sig::Listener<bl::sys::Physics2D::SensorEntered, bl::sys::Physics2D::SensorExited> {
 public:
     /**
      * @brief Destroys the system
@@ -29,8 +29,8 @@ private:
 
     virtual void init(bl::engine::Engine&) override;
     virtual void update(std::mutex&, float dt, float, float, float) override;
-    virtual void observe(const bl::sys::Physics2D::SensorEntered& event) override;
-    virtual void observe(const bl::sys::Physics2D::SensorExited& event) override;
+    virtual void process(const bl::sys::Physics2D::SensorEntered& event) override;
+    virtual void process(const bl::sys::Physics2D::SensorExited& event) override;
 };
 
 } // namespace sys

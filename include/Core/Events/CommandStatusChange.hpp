@@ -19,15 +19,12 @@ namespace event
  *        fired. Subscribable states are Queued, Current, Complete, Failed, Canceled
  *
  * @tparam T The command type to get events for
- * @tparam Status The status to get events for
  * @ingroup Commands
  * @ingroup Events
  */
-template<typename T, cmd::Command::Status Status>
+template<typename T>
 struct CommandStatusChange {
-    static_assert(Status >= cmd::Command::Queued,
-                  "Status must be one of Queued, Current, Complete, Failed, Canceled");
-
+    cmd::Command::Status newStatus;
     const T& command;
 };
 

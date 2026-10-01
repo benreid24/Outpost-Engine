@@ -1,8 +1,8 @@
 #ifndef CORE_UNIT_SQUADMANAGER_HPP
 #define CORE_UNIT_SQUADMANAGER_HPP
 
+#include <BLIB/Containers/RefPool.hpp>
 #include <BLIB/Engine/System.hpp>
-#include <BLIB/Util/RefPool.hpp>
 #include <Core/Unit/Squad.hpp>
 
 namespace core
@@ -17,7 +17,7 @@ namespace unit
 class SquadManager : public bl::engine::System {
 public:
     /// Handle to a squad. Owning a handle keeps the squad in scope
-    using Ref = bl::util::Ref<Squad>;
+    using Ref = bl::ctr::Ref<Squad>;
 
     /**
      * @brief Creates the squad manager
@@ -46,7 +46,7 @@ public:
     const std::vector<Ref>& getAllSquads() const { return internalRefs; }
 
 private:
-    bl::util::RefPool<Squad> squads;
+    bl::ctr::RefPool<Squad> squads;
     std::vector<Ref> internalRefs;
 
     virtual void init(bl::engine::Engine& engine) override;

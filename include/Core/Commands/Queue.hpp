@@ -11,6 +11,11 @@ namespace core
 {
 namespace cmd
 {
+namespace detail
+{
+bl::sig::Channel& getGameChannel();
+}
+
 /**
  * @brief Command queue to be used by classes that can have command queues
  *
@@ -78,12 +83,14 @@ public:
         else {
             switch (addType) {
             case AddMode::QueueEnd:
-                queue.emplace_back(ExecutorHandle<T>(std::forward<ExternalHandle<T>>(command)));
+                queue.emplace_back(ExecutorHandle<T>(detail::getGameChannel(),
+                                                     std::forward<ExternalHandle<T>>(command)));
                 queue.back().markQueued();
                 return false;
 
             case AddMode::QueueStart:
-                queue.emplace_front(ExecutorHandle<T>(std::forward<ExternalHandle<T>>(command)));
+                queue.emplace_front(ExecutorHandle<T>(detail::getGameChannel(),
+                                                      std::forward<ExternalHandle<T>>(command)));
                 queue.front().markQueued();
                 return false;
 

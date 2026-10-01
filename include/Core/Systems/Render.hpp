@@ -4,6 +4,8 @@
 #include <BLIB/ECS/Entity.hpp>
 #include <BLIB/Engine/System.hpp>
 #include <BLIB/Render/Color.hpp>
+#include <BLIB/Render/Resources/MaterialRef.hpp>
+#include <Core/Arena/Generation/Biome.hpp>
 #include <Core/World/Node.hpp>
 #include <glm/glm.hpp>
 
@@ -63,8 +65,15 @@ public:
      */
     void updateTestGraphicsColor(bl::ecs::Entity entity, bl::rc::Color color);
 
+    /**
+     * @brief Creates pipelines and materials for terrain rendering
+     */
+    void setupTerrainRendering();
+
 private:
     bl::engine::Engine* engine;
+    bl::rc::res::MaterialRef
+        terrainBiomeMaterials[static_cast<std::size_t>(arena::gen::Biome::COUNT)];
 
     void init(bl::engine::Engine& engine) override;
     void update(std::mutex& stageMutex, float dt, float realDt, float residual,

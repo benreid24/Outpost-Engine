@@ -3,11 +3,15 @@ target_sources(Core PRIVATE
     Properties.cpp
 )
 
+add_subdirectory(Arena)
+add_subdirectory(Cameras)
 add_subdirectory(Commands)
 add_subdirectory(Components)
 add_subdirectory(Factions)
 add_subdirectory(Input)
 add_subdirectory(Player)
+add_subdirectory(Rendering)
+add_subdirectory(Shaders)
 add_subdirectory(Systems)
 add_subdirectory(Unit)
 add_subdirectory(World)

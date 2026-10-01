@@ -42,14 +42,14 @@ void World::addNode(Node::Type type, glm::vec2 pos) {
         debugNodes.create(*this, 1024);
         debugNodes.resize(0, false);
         debugNodes.getTransform().setDepth(1.f);
-        debugNodes.addToSceneWithCustomPipeline(
-            scene(), bl::rc::UpdateSpeed::Static, bl::rc::Config::PipelineIds::Unlit2DGeometry);
+        debugNodes.material().setPipeline(bl::rc::cfg::PipelineIds::Unlit2DGeometry);
+        debugNodes.addToScene(scene(), bl::rc::UpdateSpeed::Static);
     }
     if (!debugNodeEdges.exists()) {
         debugNodeEdges.create(*this, 128);
         debugNodeEdges.resize(0, false);
-        debugNodeEdges.addToSceneWithCustomPipeline(
-            scene(), bl::rc::UpdateSpeed::Static, sys::Render::NodeEdgesPipelineId);
+        debugNodeEdges.material().setPipeline(sys::Render::NodeEdgesPipelineId);
+        debugNodeEdges.addToScene(scene(), bl::rc::UpdateSpeed::Static);
     }
 
     auto& node = nodes.emplace_back(type, pos);
@@ -457,8 +457,9 @@ std::vector<com::Unit*> World::getUnitsInArea(const sf::FloatRect& region) const
     bl::ecs::Transaction<bl::ecs::tx::EntityUnlocked, bl::ecs::tx::ComponentRead<com::Unit>> tx(
         engine().ecs());
     UnitQueryContext ctx{&engine().ecs(), &result, &tx};
-    queryAABB({region.left, region.top},
-              {region.left + region.width, region.top + region.height},
+
+    queryAABB({region.position.x, region.position.y},
+              {region.position.x + region.size.x, region.position.y + region.size.y},
               Collisions::getUnitQueryFilter(),
               &unitQueryCallback,
               &ctx);

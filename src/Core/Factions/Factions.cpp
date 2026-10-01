@@ -63,7 +63,7 @@ void Factions::destroyFaction(FactionId id) {
     freeIds.release(i);
 }
 
-void Factions::observe(const bl::ecs::event::ComponentAdded<com::Unit>& event) {
+void Factions::process(const bl::ecs::event::ComponentAdded<com::Unit>& event) {
     const auto i = event.component.getFaction().getIndex();
     if (!freeIds.isAllocated(i)) {
         BL_LOG_ERROR << "Unit " << event.entity
@@ -74,7 +74,7 @@ void Factions::observe(const bl::ecs::event::ComponentAdded<com::Unit>& event) {
     factions[i].get().addUnit(&event.component);
 }
 
-void Factions::observe(const bl::ecs::event::ComponentRemoved<com::Unit>& event) {
+void Factions::process(const bl::ecs::event::ComponentRemoved<com::Unit>& event) {
     const auto i = event.component.getFaction().getIndex();
     if (!freeIds.isAllocated(i)) {
         BL_LOG_WARN << "Unit " << event.entity

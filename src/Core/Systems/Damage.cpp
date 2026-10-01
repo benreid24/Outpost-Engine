@@ -1,7 +1,6 @@
 #include <Core/Systems/Damage.hpp>
 
-#include <Core/Events/EntityDamaged.hpp>
-#include <Core/Events/EntityKilled.hpp>
+#include <Core/Game.hpp>
 
 namespace core
 {
@@ -10,7 +9,10 @@ namespace sys
 Damage::Damage()
 : engine(nullptr) {}
 
-void Damage::init(bl::engine::Engine& e) { engine = &e; }
+void Damage::init(bl::engine::Engine& e) {
+    engine = &e;
+    emitter.connect(bl::game::Game::getInstance<core::Game>().gameSignalChannel());
+}
 
 void Damage::makeMortal(bl::ecs::Entity entity, fcn::FactionId faction, bl::com::Physics2D& physics,
                         float health, float deathTime) {
@@ -21,7 +23,7 @@ void Damage::makeDamager(bl::ecs::Entity entity, float damage) {
     engine->ecs().emplaceComponent<com::Damager>(entity, damage);
 }
 
-void Damage::observe(const bl::sys::Physics2D::EntityCollisionBeginEvent& collision) {
+void Damage::process(const bl::sys::Physics2D::EntityCollisionBeginEvent& collision) {
     using namespace bl::ecs;
     Transaction tx(engine->ecs());
 
@@ -55,7 +57,7 @@ void Damage::observe(const bl::sys::Physics2D::EntityCollisionBeginEvent& collis
 
 void Damage::applyDamage(bl::ecs::Entity mortalEntity, com::Combatant& victim,
                          bl::ecs::Entity damagerEntity, com::Damager& damager, Transaction& tx) {
-    bl::event::Dispatcher::dispatch<event::EntityDamaged>({mortalEntity, damagerEntity});
+    emitter.emit<event::EntityDamaged>({mortalEntity, damagerEntity});
     if (victim.applyDamage(damager.damage)) {
         if (victim.getDeathTime() > 0.f) {
             engine->ecs().emplaceComponentWithTx<bl::com::MarkedForDeath>(
@@ -64,7 +66,7 @@ void Damage::applyDamage(bl::ecs::Entity mortalEntity, com::Combatant& victim,
         else { engine->ecs().destroyEntity(mortalEntity, tx); }
 
         engine->ecs().removeComponent<com::Combatant>(mortalEntity);
-        bl::event::Dispatcher::dispatch<event::EntityKilled>({mortalEntity, damagerEntity});
+        emitter.emit<event::EntityKilled>({mortalEntity, damagerEntity});
     }
 }
 
