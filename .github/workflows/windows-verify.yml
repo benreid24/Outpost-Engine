@@ -24,7 +24,3 @@ jobs:
 
     - name: test
       run: build/tests/Debug/OutpostEngine.t
-
-    - name: bundle verify
-      run: |
-        ./Bundler

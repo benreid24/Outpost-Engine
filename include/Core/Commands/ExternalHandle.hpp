@@ -84,7 +84,7 @@ public:
     void cancel() {
         if (isValid() && (ref == Command::Queued || ref == Command::Current)) {
             ref->status = Command::Canceled;
-            emitter.emit<event::CommandStatusChange<T>>({Command::Canceled, *ref});
+            emitter.template emit<event::CommandStatusChange<T>>({Command::Canceled, *ref});
         }
     }
 
