@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Events/CommandStatusChange.hpp Source File</title>
+<title>Outpost Engine: include/Core/Input/Control.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,48 +79,73 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_7d40579ff302046f2f9f8f8501b8cf30.html">Events</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_5a360ce72f845b04181dbb6c528142b3.html">Input</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">CommandStatusChange.hpp</div></div>
+  <div class="headertitle"><div class="title">Control.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="a00146.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_EVENTS_COMMANDSTATUSCHANGE_HPP</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_EVENTS_COMMANDSTATUSCHANGE_HPP</span></div>
+<a href="a00146.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_INPUT_CONTROL_HPP</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_INPUT_CONTROL_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;<a class="code" href="a00110.html">Core/Commands/Command.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00289.html">core</a></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;BLIB/Input.hpp&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00418.html">core</a></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
 <div class="foldopen" id="foldopen00015" data-start="{" data-end="}">
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="a00294.html">   15</a></span><span class="keyword">namespace </span>event</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="a00432.html">   15</a></span><span class="keyword">namespace </span>input</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, cmd::Command::Status Status&gt;</div>
-<div class="foldopen" id="foldopen00027" data-start="{" data-end="};">
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="a00391.html">   27</a></span><span class="keyword">struct </span><a class="code hl_struct" href="a00391.html">CommandStatusChange</a> {</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">static_assert</span>(Status &gt;= <a class="code hl_enumvalue" href="a00327.html#a9db35958d8186930665805f86f8f0a86ad7ac7f4b5e2c91fadff521019f7d7e7f">cmd::Command::Queued</a>,</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                  <span class="stringliteral">&quot;Status must be one of Queued, Current, Complete, Failed, Canceled&quot;</span>);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="a00391.html#a4a3294fdecea80270759fba4faee703b">   31</a></span>    <span class="keyword">const</span> T&amp; <a class="code hl_variable" href="a00391.html#a4a3294fdecea80270759fba4faee703b">command</a>;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>};</div>
+<div class="foldopen" id="foldopen00018" data-start="{" data-end="}">
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="a00433.html">   18</a></span><span class="keyword">namespace </span>Control</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>{</div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="a00413.html#gaf9a43071401d217a03ca35e89affedf2">   25</a></span><span class="keyword">enum</span> <a class="code hl_enumeration" href="a00413.html#gaf9a43071401d217a03ca35e89affedf2">EntityControl</a> : <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="comment">// TODO - SETUP_TASK - define the controls for the game</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4">   27</a></span>    <a class="code hl_enumvalue" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4">MoveUp</a>    = 0,</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f">   28</a></span>    <a class="code hl_enumvalue" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f">MoveRight</a> = 1,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07">   29</a></span>    <a class="code hl_enumvalue" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07">MoveDown</a>  = 2,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee">   30</a></span>    <a class="code hl_enumvalue" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee">MoveLeft</a>  = 3,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a9b882d2a24b5eb81f6582255ed43db8c">   31</a></span>    <a class="code hl_enumvalue" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a9b882d2a24b5eb81f6582255ed43db8c">Sprint</a>    = 4,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223">   32</a></span>    <a class="code hl_enumvalue" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223">Interact</a>  = 5,</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a49a69734c9eaf47436751b36372b85d7">   33</a></span>    <a class="code hl_enumvalue" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a49a69734c9eaf47436751b36372b85d7">Pause</a>     = 6,</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a1899a8772502d8ebc0f31a92bc342868">   34</a></span>    <a class="code hl_enumvalue" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a1899a8772502d8ebc0f31a92bc342868">Back</a>      = 7,</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2ae1b03a6443bb04e423b2b5afba52dd5c">   35</a></span>    <a class="code hl_enumvalue" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2ae1b03a6443bb04e423b2b5afba52dd5c">Count</a>,</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <a class="code hl_enumvalue" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a5c901845de1e00083b7af54583348b8d">None</a> = <a class="code hl_enumvalue" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2ae1b03a6443bb04e423b2b5afba52dd5c">Count</a></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a5c901845de1e00083b7af54583348b8d">   37</a></span>};</div>
 </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>} <span class="comment">// namespace event</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>} <span class="comment">// namespace Control</span></div>
 </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>} <span class="comment">// namespace core</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aa00110_html"><div class="ttname"><a href="a00110.html">Command.hpp</a></div></div>
-<div class="ttc" id="aa00289_html"><div class="ttname"><a href="a00289.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00107_source.html#l00004">AddMode.hpp:5</a></div></div>
-<div class="ttc" id="aa00327_html_a9db35958d8186930665805f86f8f0a86ad7ac7f4b5e2c91fadff521019f7d7e7f"><div class="ttname"><a href="a00327.html#a9db35958d8186930665805f86f8f0a86ad7ac7f4b5e2c91fadff521019f7d7e7f">core::cmd::Command::Queued</a></div><div class="ttdeci">@ Queued</div><div class="ttdef"><b>Definition</b> <a href="a00110_source.html#l00033">Command.hpp:33</a></div></div>
-<div class="ttc" id="aa00391_html"><div class="ttname"><a href="a00391.html">core::event::CommandStatusChange</a></div><div class="ttdoc">Event that is fired when a command changes state. Not all states result in events being fired....</div><div class="ttdef"><b>Definition</b> <a href="a00146_source.html#l00027">CommandStatusChange.hpp:27</a></div></div>
-<div class="ttc" id="aa00391_html_a4a3294fdecea80270759fba4faee703b"><div class="ttname"><a href="a00391.html#a4a3294fdecea80270759fba4faee703b">core::event::CommandStatusChange::command</a></div><div class="ttdeci">const T &amp; command</div><div class="ttdef"><b>Definition</b> <a href="a00146_source.html#l00031">CommandStatusChange.hpp:31</a></div></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="a00432.html#a362a94172d86c7b7662228aeab1b7516">   42</a></span><span class="keyword">using </span><a class="code hl_typedef" href="a00432.html#a362a94172d86c7b7662228aeab1b7516">EntityControl</a> = std::underlying_type_t&lt;Control::EntityControl&gt;;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keywordtype">void</span> <a class="code hl_function" href="a00432.html#a293f677406b187f5aab5509859935f33">configureInputSystem</a>(bl::input::InputSystem&amp; system);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>} <span class="comment">// namespace input</span></div>
+</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>} <span class="comment">// namespace core</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00413_html_gaf9a43071401d217a03ca35e89affedf2"><div class="ttname"><a href="a00413.html#gaf9a43071401d217a03ca35e89affedf2">core::input::Control::EntityControl</a></div><div class="ttdeci">EntityControl</div><div class="ttdoc">Contains the various inputs a player or AI can use to control the game or an NPC.</div><div class="ttdef"><b>Definition</b> <a href="a00146_source.html#l00025">Control.hpp:25</a></div></div>
+<div class="ttc" id="aa00413_html_ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07"><div class="ttname"><a href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07">core::input::Control::MoveDown</a></div><div class="ttdeci">@ MoveDown</div><div class="ttdef"><b>Definition</b> <a href="a00146_source.html#l00029">Control.hpp:29</a></div></div>
+<div class="ttc" id="aa00413_html_ggaf9a43071401d217a03ca35e89affedf2a1899a8772502d8ebc0f31a92bc342868"><div class="ttname"><a href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a1899a8772502d8ebc0f31a92bc342868">core::input::Control::Back</a></div><div class="ttdeci">@ Back</div><div class="ttdef"><b>Definition</b> <a href="a00146_source.html#l00034">Control.hpp:34</a></div></div>
+<div class="ttc" id="aa00413_html_ggaf9a43071401d217a03ca35e89affedf2a49a69734c9eaf47436751b36372b85d7"><div class="ttname"><a href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a49a69734c9eaf47436751b36372b85d7">core::input::Control::Pause</a></div><div class="ttdeci">@ Pause</div><div class="ttdef"><b>Definition</b> <a href="a00146_source.html#l00033">Control.hpp:33</a></div></div>
+<div class="ttc" id="aa00413_html_ggaf9a43071401d217a03ca35e89affedf2a5c901845de1e00083b7af54583348b8d"><div class="ttname"><a href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a5c901845de1e00083b7af54583348b8d">core::input::Control::None</a></div><div class="ttdeci">@ None</div><div class="ttdef"><b>Definition</b> <a href="a00146_source.html#l00037">Control.hpp:36</a></div></div>
+<div class="ttc" id="aa00413_html_ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223"><div class="ttname"><a href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223">core::input::Control::Interact</a></div><div class="ttdeci">@ Interact</div><div class="ttdef"><b>Definition</b> <a href="a00146_source.html#l00032">Control.hpp:32</a></div></div>
+<div class="ttc" id="aa00413_html_ggaf9a43071401d217a03ca35e89affedf2a9b882d2a24b5eb81f6582255ed43db8c"><div class="ttname"><a href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a9b882d2a24b5eb81f6582255ed43db8c">core::input::Control::Sprint</a></div><div class="ttdeci">@ Sprint</div><div class="ttdef"><b>Definition</b> <a href="a00146_source.html#l00031">Control.hpp:31</a></div></div>
+<div class="ttc" id="aa00413_html_ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee"><div class="ttname"><a href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee">core::input::Control::MoveLeft</a></div><div class="ttdeci">@ MoveLeft</div><div class="ttdef"><b>Definition</b> <a href="a00146_source.html#l00030">Control.hpp:30</a></div></div>
+<div class="ttc" id="aa00413_html_ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f"><div class="ttname"><a href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f">core::input::Control::MoveRight</a></div><div class="ttdeci">@ MoveRight</div><div class="ttdef"><b>Definition</b> <a href="a00146_source.html#l00028">Control.hpp:28</a></div></div>
+<div class="ttc" id="aa00413_html_ggaf9a43071401d217a03ca35e89affedf2ae1b03a6443bb04e423b2b5afba52dd5c"><div class="ttname"><a href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2ae1b03a6443bb04e423b2b5afba52dd5c">core::input::Control::Count</a></div><div class="ttdeci">@ Count</div><div class="ttdef"><b>Definition</b> <a href="a00146_source.html#l00035">Control.hpp:35</a></div></div>
+<div class="ttc" id="aa00413_html_ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4"><div class="ttname"><a href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4">core::input::Control::MoveUp</a></div><div class="ttdeci">@ MoveUp</div><div class="ttdef"><b>Definition</b> <a href="a00146_source.html#l00027">Control.hpp:27</a></div></div>
+<div class="ttc" id="aa00418_html"><div class="ttname"><a href="a00418.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00236_source.html#l00014">Arena.hpp:15</a></div></div>
+<div class="ttc" id="aa00432_html_a293f677406b187f5aab5509859935f33"><div class="ttname"><a href="a00432.html#a293f677406b187f5aab5509859935f33">core::input::configureInputSystem</a></div><div class="ttdeci">void configureInputSystem(bl::input::InputSystem &amp;system)</div><div class="ttdoc">Configures the input system and sets default controls.</div><div class="ttdef"><b>Definition</b> <a href="a00341_source.html#l00007">Control.cpp:7</a></div></div>
+<div class="ttc" id="aa00432_html_a362a94172d86c7b7662228aeab1b7516"><div class="ttname"><a href="a00432.html#a362a94172d86c7b7662228aeab1b7516">core::input::EntityControl</a></div><div class="ttdeci">std::underlying_type_t&lt; Control::EntityControl &gt; EntityControl</div><div class="ttdoc">Helper typedef to avoid too much casting boilerplate.</div><div class="ttdef"><b>Definition</b> <a href="a00146_source.html#l00042">Control.hpp:42</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

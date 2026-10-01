@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: Member List</title>
+<title>Outpost Engine: core::arena::train::Car::State Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,27 +74,128 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00289.html">core</a></li><li class="navelem"><a class="el" href="a00293.html">world</a></li><li class="navelem"><a class="el" href="a00563.html">Cover</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00418.html">core</a></li><li class="navelem"><a class="el" href="a00419.html">arena</a></li><li class="navelem"><a class="el" href="a00421.html">train</a></li><li class="navelem"><a class="el" href="a00552.html">Car</a></li><li class="navelem"><a class="el" href="a00560.html">State</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">core::world::Cover Member List</div></div>
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00557.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">core::arena::train::Car::State Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00563.html">core::world::Cover</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00563.html#ab48a79df1fe860830c18bd4942af9520">angle</a></td><td class="entry"><a class="el" href="a00563.html">core::world::Cover</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00563.html#a671388210ab0a99f83b12ea0f92d29d5">center</a></td><td class="entry"><a class="el" href="a00563.html">core::world::Cover</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00563.html#a29415be3461a4ff26a207742d18b557e">Cover</a>()</td><td class="entry"><a class="el" href="a00563.html">core::world::Cover</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00563.html#aaf49ce350035425bcb737e213d66da1e">Cover</a>(bl::ecs::Entity entity, const glm::vec2 &amp;center, const glm::vec2 &amp;size, float angle)</td><td class="entry"><a class="el" href="a00563.html">core::world::Cover</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00563.html#a4a5e64debebb447696a66f005225636d">entity</a></td><td class="entry"><a class="el" href="a00563.html">core::world::Cover</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00563.html#a13f14d9f0c7e73afb31d41f0f1e09174">size</a></td><td class="entry"><a class="el" href="a00563.html">core::world::Cover</a></td><td class="entry"></td></tr>
-</table></div><!-- contents -->
+<p>The state of a train car.  
+ <a href="a00560.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00182_source.html">Car.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a92a61de79676cd742a385ea50e64c891" id="r_a92a61de79676cd742a385ea50e64c891"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00560.html#a92a61de79676cd742a385ea50e64c891">frontAxleTrackPosition</a></td></tr>
+<tr class="separator:a92a61de79676cd742a385ea50e64c891"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad96cc5f5f0436aa4d14faff33b21542e" id="r_ad96cc5f5f0436aa4d14faff33b21542e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00560.html#ad96cc5f5f0436aa4d14faff33b21542e">rearAxleTrackPosition</a></td></tr>
+<tr class="separator:ad96cc5f5f0436aa4d14faff33b21542e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0513fc03f06bc2df0b9f0914df53acbe" id="r_a0513fc03f06bc2df0b9f0914df53acbe"><td class="memItemLeft" align="right" valign="top">bl::com::Transform3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00560.html#a0513fc03f06bc2df0b9f0914df53acbe">carWorldTransform</a></td></tr>
+<tr class="separator:a0513fc03f06bc2df0b9f0914df53acbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25314f8569d6e60a2ec8521838e9745b" id="r_a25314f8569d6e60a2ec8521838e9745b"><td class="memItemLeft" align="right" valign="top">bl::com::Transform3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00560.html#a25314f8569d6e60a2ec8521838e9745b">frontWheelWorldTransform</a></td></tr>
+<tr class="separator:a25314f8569d6e60a2ec8521838e9745b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf81aa64a8884fc85c07df709ce7cdbc" id="r_aaf81aa64a8884fc85c07df709ce7cdbc"><td class="memItemLeft" align="right" valign="top">bl::com::Transform3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00560.html#aaf81aa64a8884fc85c07df709ce7cdbc">rearWheelWorldTransform</a></td></tr>
+<tr class="separator:aaf81aa64a8884fc85c07df709ce7cdbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The state of a train car. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00044">44</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0513fc03f06bc2df0b9f0914df53acbe" name="a0513fc03f06bc2df0b9f0914df53acbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0513fc03f06bc2df0b9f0914df53acbe">&#9670;&#160;</a></span>carWorldTransform</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bl::com::Transform3D core::arena::train::Car::State::carWorldTransform</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00048">48</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a92a61de79676cd742a385ea50e64c891" name="a92a61de79676cd742a385ea50e64c891"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92a61de79676cd742a385ea50e64c891">&#9670;&#160;</a></span>frontAxleTrackPosition</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">float</a> core::arena::train::Car::State::frontAxleTrackPosition</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00045">45</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a25314f8569d6e60a2ec8521838e9745b" name="a25314f8569d6e60a2ec8521838e9745b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25314f8569d6e60a2ec8521838e9745b">&#9670;&#160;</a></span>frontWheelWorldTransform</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bl::com::Transform3D core::arena::train::Car::State::frontWheelWorldTransform</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00049">49</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad96cc5f5f0436aa4d14faff33b21542e" name="ad96cc5f5f0436aa4d14faff33b21542e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad96cc5f5f0436aa4d14faff33b21542e">&#9670;&#160;</a></span>rearAxleTrackPosition</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">float</a> core::arena::train::Car::State::rearAxleTrackPosition</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00046">46</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aaf81aa64a8884fc85c07df709ce7cdbc" name="aaf81aa64a8884fc85c07df709ce7cdbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf81aa64a8884fc85c07df709ce7cdbc">&#9670;&#160;</a></span>rearWheelWorldTransform</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bl::com::Transform3D core::arena::train::Car::State::rearWheelWorldTransform</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00050">50</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/Core/Arena/Train/<a class="el" href="a00182_source.html">Car.hpp</a></li>
+</ul>
+</div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

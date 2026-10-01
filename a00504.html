@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: Member List</title>
+<title>Outpost Engine: core::arena::gen::ProtoTerrain::Iterator Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,24 +74,242 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00289.html">core</a></li><li class="navelem"><a class="el" href="a00300.html">unit</a></li><li class="navelem"><a class="el" href="a00301.html">ai</a></li><li class="navelem"><a class="el" href="a00507.html">UpdateContext</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00418.html">core</a></li><li class="navelem"><a class="el" href="a00419.html">arena</a></li><li class="navelem"><a class="el" href="a00420.html">gen</a></li><li class="navelem"><a class="el" href="a00500.html">ProtoTerrain</a></li><li class="navelem"><a class="el" href="a00504.html">Iterator</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">core::unit::ai::UpdateContext Member List</div></div>
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="a00501.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">core::arena::gen::ProtoTerrain::Iterator Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00507.html">core::unit::ai::UpdateContext</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00507.html#a8ea81b225c9a0e411e9ffaeb8aa35f8d">dt</a></td><td class="entry"><a class="el" href="a00507.html">core::unit::ai::UpdateContext</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00507.html#a90a226c9bc6852d6b82261a9a1d794b1">game</a></td><td class="entry"><a class="el" href="a00507.html">core::unit::ai::UpdateContext</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00507.html#a8e071810460c28265aa130cae84c80e8">world</a></td><td class="entry"><a class="el" href="a00507.html">core::unit::ai::UpdateContext</a></td><td class="entry"></td></tr>
-</table></div><!-- contents -->
+<p>Special iterator for superpositioned nodes in a <a class="el" href="a00500.html" title="Represents transient terrain during arena generation.">ProtoTerrain</a>.  
+ <a href="a00504.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00212_source.html">ProtoTerrain.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aaf8029b38eaf1fa81b64752424cf9e9c" id="r_aaf8029b38eaf1fa81b64752424cf9e9c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00504.html#aaf8029b38eaf1fa81b64752424cf9e9c">Iterator</a> ()</td></tr>
+<tr class="memdesc:aaf8029b38eaf1fa81b64752424cf9e9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an invalid iterator.  <br /></td></tr>
+<tr class="separator:aaf8029b38eaf1fa81b64752424cf9e9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cc80cec19a74c3d899ee058e1123cc8" id="r_a2cc80cec19a74c3d899ee058e1123cc8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00504.html#a2cc80cec19a74c3d899ee058e1123cc8">Iterator</a> (<a class="el" href="a00500.html">ProtoTerrain</a> &amp;terrain, <a class="el" href="a00540.html">unsigned</a> <a class="el" href="a00540.html">int</a> <a class="el" href="a00540.html">x</a>, <a class="el" href="a00540.html">unsigned</a> <a class="el" href="a00540.html">int</a> <a class="el" href="a00540.html">y</a>)</td></tr>
+<tr class="memdesc:a2cc80cec19a74c3d899ee058e1123cc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an iterator for the given range.  <br /></td></tr>
+<tr class="separator:a2cc80cec19a74c3d899ee058e1123cc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb54467db49373da03fd7d80f25c196f" id="r_aeb54467db49373da03fd7d80f25c196f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00524.html">SuperpositionedNode</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00504.html#aeb54467db49373da03fd7d80f25c196f">operator*</a> ()</td></tr>
+<tr class="memdesc:aeb54467db49373da03fd7d80f25c196f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dereferences the iterator.  <br /></td></tr>
+<tr class="separator:aeb54467db49373da03fd7d80f25c196f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f2d02242df6b7ba779f0dafc309b348" id="r_a0f2d02242df6b7ba779f0dafc309b348"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00524.html">SuperpositionedNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00504.html#a0f2d02242df6b7ba779f0dafc309b348">operator-&gt;</a> ()</td></tr>
+<tr class="memdesc:a0f2d02242df6b7ba779f0dafc309b348"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dereferences the iterator.  <br /></td></tr>
+<tr class="separator:a0f2d02242df6b7ba779f0dafc309b348"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4afd1225a2c60fd54070d699484aecd4" id="r_a4afd1225a2c60fd54070d699484aecd4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00504.html">Iterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00504.html#a4afd1225a2c60fd54070d699484aecd4">operator++</a> ()</td></tr>
+<tr class="memdesc:a4afd1225a2c60fd54070d699484aecd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increments the iterator.  <br /></td></tr>
+<tr class="separator:a4afd1225a2c60fd54070d699484aecd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50ceb7d3f6f4b8e3e454f023ab82f011" id="r_a50ceb7d3f6f4b8e3e454f023ab82f011"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00504.html">Iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00504.html#a50ceb7d3f6f4b8e3e454f023ab82f011">operator++</a> (<a class="el" href="a00540.html">int</a>)</td></tr>
+<tr class="memdesc:a50ceb7d3f6f4b8e3e454f023ab82f011"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increments the iterator.  <br /></td></tr>
+<tr class="separator:a50ceb7d3f6f4b8e3e454f023ab82f011"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a620c097e51285293ba4aed0399d9d525" id="r_a620c097e51285293ba4aed0399d9d525"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00504.html#a620c097e51285293ba4aed0399d9d525">operator bool</a> () <a class="el" href="a00540.html">const</a></td></tr>
+<tr class="memdesc:a620c097e51285293ba4aed0399d9d525"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the iterator is valid.  <br /></td></tr>
+<tr class="separator:a620c097e51285293ba4aed0399d9d525"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Special iterator for superpositioned nodes in a <a class="el" href="a00500.html" title="Represents transient terrain during arena generation.">ProtoTerrain</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00212_source.html#l00027">27</a> of file <a class="el" href="a00212_source.html">ProtoTerrain.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aaf8029b38eaf1fa81b64752424cf9e9c" name="aaf8029b38eaf1fa81b64752424cf9e9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf8029b38eaf1fa81b64752424cf9e9c">&#9670;&#160;</a></span>Iterator() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">core::arena::gen::ProtoTerrain::Iterator::Iterator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates an invalid iterator. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00371_source.html#l00058">58</a> of file <a class="el" href="a00371_source.html">ProtoTerrain.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2cc80cec19a74c3d899ee058e1123cc8" name="a2cc80cec19a74c3d899ee058e1123cc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cc80cec19a74c3d899ee058e1123cc8">&#9670;&#160;</a></span>Iterator() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">core::arena::gen::ProtoTerrain::Iterator::Iterator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00500.html">ProtoTerrain</a> &amp;&#160;</td>
+          <td class="paramname"><em>terrain</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00540.html">unsigned</a> <a class="el" href="a00540.html">int</a>&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00540.html">unsigned</a> <a class="el" href="a00540.html">int</a>&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates an iterator for the given range. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">terrain</td><td>The terrain to iterate over </td></tr>
+    <tr><td class="paramname">x</td><td>The x index of the node to iterate around </td></tr>
+    <tr><td class="paramname">y</td><td>The y index of the node to iterate around </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00371_source.html#l00064">64</a> of file <a class="el" href="a00371_source.html">ProtoTerrain.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a620c097e51285293ba4aed0399d9d525" name="a620c097e51285293ba4aed0399d9d525"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a620c097e51285293ba4aed0399d9d525">&#9670;&#160;</a></span>operator bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">core::arena::gen::ProtoTerrain::Iterator::operator <a class="el" href="a00540.html">bool</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns whether the iterator is valid. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00212_source.html#l00066">66</a> of file <a class="el" href="a00212_source.html">ProtoTerrain.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aeb54467db49373da03fd7d80f25c196f" name="aeb54467db49373da03fd7d80f25c196f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb54467db49373da03fd7d80f25c196f">&#9670;&#160;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00524.html">SuperpositionedNode</a> &amp; core::arena::gen::ProtoTerrain::Iterator::operator* </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Dereferences the iterator. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00371_source.html#l00100">100</a> of file <a class="el" href="a00371_source.html">ProtoTerrain.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4afd1225a2c60fd54070d699484aecd4" name="a4afd1225a2c60fd54070d699484aecd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4afd1225a2c60fd54070d699484aecd4">&#9670;&#160;</a></span>operator++() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00504.html">ProtoTerrain::Iterator</a> &amp; core::arena::gen::ProtoTerrain::Iterator::operator++ </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Increments the iterator. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00371_source.html#l00088">88</a> of file <a class="el" href="a00371_source.html">ProtoTerrain.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a50ceb7d3f6f4b8e3e454f023ab82f011" name="a50ceb7d3f6f4b8e3e454f023ab82f011"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50ceb7d3f6f4b8e3e454f023ab82f011">&#9670;&#160;</a></span>operator++() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00504.html">ProtoTerrain::Iterator</a> core::arena::gen::ProtoTerrain::Iterator::operator++ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00540.html">int</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Increments the iterator. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00371_source.html#l00094">94</a> of file <a class="el" href="a00371_source.html">ProtoTerrain.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0f2d02242df6b7ba779f0dafc309b348" name="a0f2d02242df6b7ba779f0dafc309b348"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f2d02242df6b7ba779f0dafc309b348">&#9670;&#160;</a></span>operator-&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00524.html">SuperpositionedNode</a> * core::arena::gen::ProtoTerrain::Iterator::operator-&gt; </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Dereferences the iterator. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00371_source.html#l00107">107</a> of file <a class="el" href="a00371_source.html">ProtoTerrain.cpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>include/Core/Arena/Generation/<a class="el" href="a00212_source.html">ProtoTerrain.hpp</a></li>
+<li>src/Core/Arena/Generation/<a class="el" href="a00371_source.html">ProtoTerrain.cpp</a></li>
+</ul>
+</div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

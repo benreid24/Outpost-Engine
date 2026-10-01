@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: Member List</title>
+<title>Outpost Engine: core::arena::train::Car Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,26 +74,676 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00289.html">core</a></li><li class="navelem"><a class="el" href="a00300.html">unit</a></li><li class="navelem"><a class="el" href="a00555.html">SquadManager</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00418.html">core</a></li><li class="navelem"><a class="el" href="a00419.html">arena</a></li><li class="navelem"><a class="el" href="a00421.html">train</a></li><li class="navelem"><a class="el" href="a00552.html">Car</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">core::unit::SquadManager Member List</div></div>
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="a00549.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">core::arena::train::Car Class Reference<div class="ingroups"><a class="el" href="a00404.html">Core</a> &raquo; <a class="el" href="a00407.html">Arena</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00555.html">core::unit::SquadManager</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00555.html#a6543d24d17b180a254f4ee84995b2e91">getAllSquads</a>() const</td><td class="entry"><a class="el" href="a00555.html">core::unit::SquadManager</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00555.html#ab396465a1efbfd7a4c4b13629213f24f">getFactionSquads</a>(fcn::FactionId faction)</td><td class="entry"><a class="el" href="a00555.html">core::unit::SquadManager</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00555.html#a6ad39447664a1ce019048c29d7f0643f">makeSquad</a>(fcn::FactionId faction)</td><td class="entry"><a class="el" href="a00555.html">core::unit::SquadManager</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00555.html#a121e0dc9d718d86c7d0690af962d873a">Ref</a> typedef</td><td class="entry"><a class="el" href="a00555.html">core::unit::SquadManager</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00555.html#aba39095366384b7cafbd1ad068b80a9e">SquadManager</a>()</td><td class="entry"><a class="el" href="a00555.html">core::unit::SquadManager</a></td><td class="entry"></td></tr>
-</table></div><!-- contents -->
+<p>Representation of a train car and its state.  
+ <a href="a00552.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00182_source.html">Car.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00556.html">Config</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The configuration of a train car.  <a href="a00556.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00560.html">State</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The state of a train car.  <a href="a00560.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:ac4e6019c4c1a07aa4e919b39ad972091" id="r_ac4e6019c4c1a07aa4e919b39ad972091"><td class="memItemLeft" align="right" valign="top">enum struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#ac4e6019c4c1a07aa4e919b39ad972091">Type</a> { <a class="el" href="a00552.html#ac4e6019c4c1a07aa4e919b39ad972091aed24a4645227d44d5e3355720aafc10e">Locomotive</a>
+, <a class="el" href="a00552.html#ac4e6019c4c1a07aa4e919b39ad972091ae9769d75d750d246328fa96e996a5650">Cargo</a>
+, <a class="el" href="a00552.html#ac4e6019c4c1a07aa4e919b39ad972091abf2528a296adb62d041a7519aa77f248">Passenger</a>
+ }</td></tr>
+<tr class="memdesc:ac4e6019c4c1a07aa4e919b39ad972091"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of train car.  <a href="a00552.html#ac4e6019c4c1a07aa4e919b39ad972091">More...</a><br /></td></tr>
+<tr class="separator:ac4e6019c4c1a07aa4e919b39ad972091"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab84110308aa849aedbb065a4a1e31c4c" id="r_ab84110308aa849aedbb065a4a1e31c4c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#ab84110308aa849aedbb065a4a1e31c4c">Car</a> (<a class="el" href="a00540.html">const</a> <a class="el" href="a00556.html">Config</a> &amp;config)</td></tr>
+<tr class="memdesc:ab84110308aa849aedbb065a4a1e31c4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a train car with the given config.  <br /></td></tr>
+<tr class="separator:ab84110308aa849aedbb065a4a1e31c4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fd2eb23f48ed70f3102d390f09c0a98" id="r_a7fd2eb23f48ed70f3102d390f09c0a98"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#a7fd2eb23f48ed70f3102d390f09c0a98">advance</a> (<a class="el" href="a00540.html">float</a> <a class="el" href="a00540.html">distance</a>, <a class="el" href="a00540.html">const</a> <a class="el" href="a00576.html">Track</a> &amp;track)</td></tr>
+<tr class="memdesc:a7fd2eb23f48ed70f3102d390f09c0a98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advances the car along the track by the given distance.  <br /></td></tr>
+<tr class="separator:a7fd2eb23f48ed70f3102d390f09c0a98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59d17e5cc98b6214aeb137f6d131d4fe" id="r_a59d17e5cc98b6214aeb137f6d131d4fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#a59d17e5cc98b6214aeb137f6d131d4fe">update</a> (<a class="el" href="a00540.html">float</a> position, <a class="el" href="a00540.html">const</a> <a class="el" href="a00576.html">Track</a> &amp;track)</td></tr>
+<tr class="memdesc:a59d17e5cc98b6214aeb137f6d131d4fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the car's position and orientation based on the given position along the track.  <br /></td></tr>
+<tr class="separator:a59d17e5cc98b6214aeb137f6d131d4fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaa3140df8836af6ee7c54469cc25ced" id="r_abaa3140df8836af6ee7c54469cc25ced"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#abaa3140df8836af6ee7c54469cc25ced">update</a> (<a class="el" href="a00540.html">const</a> <a class="el" href="a00552.html">Car</a> &amp;<a class="el" href="a00540.html">connectedTo</a>, <a class="el" href="a00540.html">const</a> <a class="el" href="a00576.html">Track</a> &amp;track)</td></tr>
+<tr class="memdesc:abaa3140df8836af6ee7c54469cc25ced"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the car's position and orientation based on the given position along the track.  <br /></td></tr>
+<tr class="separator:abaa3140df8836af6ee7c54469cc25ced"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1029b8990e5018137de3c7f82ad9264" id="r_af1029b8990e5018137de3c7f82ad9264"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">const</a> <a class="el" href="a00556.html">Config</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#af1029b8990e5018137de3c7f82ad9264">getConfig</a> () <a class="el" href="a00540.html">const</a></td></tr>
+<tr class="memdesc:af1029b8990e5018137de3c7f82ad9264"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the train car config.  <br /></td></tr>
+<tr class="separator:af1029b8990e5018137de3c7f82ad9264"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1f7fa1ad807cea93a97fc9bb872c23f" id="r_ad1f7fa1ad807cea93a97fc9bb872c23f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">const</a> <a class="el" href="a00560.html">State</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#ad1f7fa1ad807cea93a97fc9bb872c23f">getState</a> () <a class="el" href="a00540.html">const</a></td></tr>
+<tr class="memdesc:ad1f7fa1ad807cea93a97fc9bb872c23f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the train car state.  <br /></td></tr>
+<tr class="separator:ad1f7fa1ad807cea93a97fc9bb872c23f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4360c11ecb6224e07feddea4cc894c96" id="r_a4360c11ecb6224e07feddea4cc894c96"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#a4360c11ecb6224e07feddea4cc894c96">addToWorld</a> (bl::engine::World &amp;world)</td></tr>
+<tr class="memdesc:a4360c11ecb6224e07feddea4cc894c96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the car to the given world for rendering.  <br /></td></tr>
+<tr class="separator:a4360c11ecb6224e07feddea4cc894c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:abf55eb17f3956c5e4d08a648b3f43384" id="r_abf55eb17f3956c5e4d08a648b3f43384"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">static</a> <a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#abf55eb17f3956c5e4d08a648b3f43384">DefaultLength</a> = 10.<a class="el" href="a00540.html">f</a></td></tr>
+<tr class="separator:abf55eb17f3956c5e4d08a648b3f43384"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3315a2a91471117efff4e5fa719347a8" id="r_a3315a2a91471117efff4e5fa719347a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">static</a> <a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#a3315a2a91471117efff4e5fa719347a8">DefaultWidth</a> = 3.<a class="el" href="a00540.html">f</a></td></tr>
+<tr class="separator:a3315a2a91471117efff4e5fa719347a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c9e7b7136b795310f07835c35b98b3c" id="r_a5c9e7b7136b795310f07835c35b98b3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">static</a> <a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#a5c9e7b7136b795310f07835c35b98b3c">DefaultHeight</a> = 3.<a class="el" href="a00540.html">f</a></td></tr>
+<tr class="separator:a5c9e7b7136b795310f07835c35b98b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a932facd97a0d03f3cf636ed25e116e18" id="r_a932facd97a0d03f3cf636ed25e116e18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">static</a> <a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#a932facd97a0d03f3cf636ed25e116e18">DefaultWheelHeight</a> = 1.<a class="el" href="a00540.html">f</a></td></tr>
+<tr class="separator:a932facd97a0d03f3cf636ed25e116e18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27425eee4a2cc9eacad15cfd2307ee74" id="r_a27425eee4a2cc9eacad15cfd2307ee74"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">static</a> <a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#a27425eee4a2cc9eacad15cfd2307ee74">DefaultCouplerStandoff</a> = 0.5<a class="el" href="a00540.html">f</a></td></tr>
+<tr class="separator:a27425eee4a2cc9eacad15cfd2307ee74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0de318690b25ab06a581a5fc0ff607c" id="r_ae0de318690b25ab06a581a5fc0ff607c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">static</a> <a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#ae0de318690b25ab06a581a5fc0ff607c">DefaultFrontAxleOffset</a> = 4.<a class="el" href="a00540.html">f</a></td></tr>
+<tr class="separator:ae0de318690b25ab06a581a5fc0ff607c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a409918d69b591524040faf525572c2d2" id="r_a409918d69b591524040faf525572c2d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">static</a> <a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#a409918d69b591524040faf525572c2d2">DefaultRearAxleOffset</a> = 4.<a class="el" href="a00540.html">f</a></td></tr>
+<tr class="separator:a409918d69b591524040faf525572c2d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18d378b9842e742934d50440a78b38c0" id="r_a18d378b9842e742934d50440a78b38c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">static</a> <a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00556.html">Config</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#a18d378b9842e742934d50440a78b38c0">DefaultLocomotiveConfig</a></td></tr>
+<tr class="separator:a18d378b9842e742934d50440a78b38c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad87ba4411ce6be708a9145ef4ec8fc04" id="r_ad87ba4411ce6be708a9145ef4ec8fc04"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">static</a> <a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00556.html">Config</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#ad87ba4411ce6be708a9145ef4ec8fc04">DefaultCargoConfig</a></td></tr>
+<tr class="separator:ad87ba4411ce6be708a9145ef4ec8fc04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aece6c6373cc39410d32ee814f1cc6910" id="r_aece6c6373cc39410d32ee814f1cc6910"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">static</a> <a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00556.html">Config</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#aece6c6373cc39410d32ee814f1cc6910">DefaultPassengerConfig</a></td></tr>
+<tr class="separator:aece6c6373cc39410d32ee814f1cc6910"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:aeb5381efbc9de74d2fff2911ffccc366" id="r_aeb5381efbc9de74d2fff2911ffccc366"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html#aeb5381efbc9de74d2fff2911ffccc366">bl::refl::ReflectedObject&lt; Car &gt;</a></td></tr>
+<tr class="separator:aeb5381efbc9de74d2fff2911ffccc366"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Representation of a train car and its state. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00024">24</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="ac4e6019c4c1a07aa4e919b39ad972091" name="ac4e6019c4c1a07aa4e919b39ad972091"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4e6019c4c1a07aa4e919b39ad972091">&#9670;&#160;</a></span>Type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">enum</a> <a class="el" href="a00540.html">struct</a> <a class="el" href="a00552.html#ac4e6019c4c1a07aa4e919b39ad972091">core::arena::train::Car::Type</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The type of train car. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ac4e6019c4c1a07aa4e919b39ad972091aed24a4645227d44d5e3355720aafc10e" name="ac4e6019c4c1a07aa4e919b39ad972091aed24a4645227d44d5e3355720aafc10e"></a>Locomotive&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac4e6019c4c1a07aa4e919b39ad972091ae9769d75d750d246328fa96e996a5650" name="ac4e6019c4c1a07aa4e919b39ad972091ae9769d75d750d246328fa96e996a5650"></a>Cargo&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac4e6019c4c1a07aa4e919b39ad972091abf2528a296adb62d041a7519aa77f248" name="ac4e6019c4c1a07aa4e919b39ad972091abf2528a296adb62d041a7519aa77f248"></a>Passenger&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00027">27</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab84110308aa849aedbb065a4a1e31c4c" name="ab84110308aa849aedbb065a4a1e31c4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab84110308aa849aedbb065a4a1e31c4c">&#9670;&#160;</a></span>Car()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">core::arena::train::Car::Car </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00540.html">const</a> <a class="el" href="a00556.html">Config</a> &amp;&#160;</td>
+          <td class="paramname"><em>config</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates a train car with the given config. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config</td><td>The train car configuration </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00353_source.html#l00021">21</a> of file <a class="el" href="a00353_source.html">Car.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4360c11ecb6224e07feddea4cc894c96" name="a4360c11ecb6224e07feddea4cc894c96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4360c11ecb6224e07feddea4cc894c96">&#9670;&#160;</a></span>addToWorld()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">void</a> core::arena::train::Car::addToWorld </td>
+          <td>(</td>
+          <td class="paramtype">bl::engine::World &amp;&#160;</td>
+          <td class="paramname"><em>world</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds the car to the given world for rendering. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">world</td><td>The world to add the car to </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00353_source.html#l00094">94</a> of file <a class="el" href="a00353_source.html">Car.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a7fd2eb23f48ed70f3102d390f09c0a98" name="a7fd2eb23f48ed70f3102d390f09c0a98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fd2eb23f48ed70f3102d390f09c0a98">&#9670;&#160;</a></span>advance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">void</a> core::arena::train::Car::advance </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00540.html">float</a>&#160;</td>
+          <td class="paramname"><em>distance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00540.html">const</a> <a class="el" href="a00576.html">Track</a> &amp;&#160;</td>
+          <td class="paramname"><em>track</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Advances the car along the track by the given distance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">distance</td><td>The distance to advance </td></tr>
+    <tr><td class="paramname">track</td><td>The track the car is on </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00353_source.html#l00025">25</a> of file <a class="el" href="a00353_source.html">Car.cpp</a>.</p>
+
+</div>
+</div>
+<a id="af1029b8990e5018137de3c7f82ad9264" name="af1029b8990e5018137de3c7f82ad9264"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1029b8990e5018137de3c7f82ad9264">&#9670;&#160;</a></span>getConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">const</a> <a class="el" href="a00556.html">Config</a> &amp; core::arena::train::Car::getConfig </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the train car config. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00124">124</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad1f7fa1ad807cea93a97fc9bb872c23f" name="ad1f7fa1ad807cea93a97fc9bb872c23f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1f7fa1ad807cea93a97fc9bb872c23f">&#9670;&#160;</a></span>getState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">const</a> <a class="el" href="a00560.html">State</a> &amp; core::arena::train::Car::getState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the train car state. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00129">129</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abaa3140df8836af6ee7c54469cc25ced" name="abaa3140df8836af6ee7c54469cc25ced"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abaa3140df8836af6ee7c54469cc25ced">&#9670;&#160;</a></span>update() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">void</a> core::arena::train::Car::update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00540.html">const</a> <a class="el" href="a00552.html">Car</a> &amp;&#160;</td>
+          <td class="paramname"><em>connectedTo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00540.html">const</a> <a class="el" href="a00576.html">Track</a> &amp;&#160;</td>
+          <td class="paramname"><em>track</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the car's position and orientation based on the given position along the track. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connectedTo</td><td>The car this car is connected to </td></tr>
+    <tr><td class="paramname">track</td><td>The track the car is on </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00353_source.html#l00037">37</a> of file <a class="el" href="a00353_source.html">Car.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a59d17e5cc98b6214aeb137f6d131d4fe" name="a59d17e5cc98b6214aeb137f6d131d4fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59d17e5cc98b6214aeb137f6d131d4fe">&#9670;&#160;</a></span>update() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">void</a> core::arena::train::Car::update </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00540.html">float</a>&#160;</td>
+          <td class="paramname"><em>position</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00540.html">const</a> <a class="el" href="a00576.html">Track</a> &amp;&#160;</td>
+          <td class="paramname"><em>track</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the car's position and orientation based on the given position along the track. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>The position along the track </td></tr>
+    <tr><td class="paramname">track</td><td>The track the car is on </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00353_source.html#l00029">29</a> of file <a class="el" href="a00353_source.html">Car.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Symbol Documentation</h2>
+<a id="aeb5381efbc9de74d2fff2911ffccc366" name="aeb5381efbc9de74d2fff2911ffccc366"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb5381efbc9de74d2fff2911ffccc366">&#9670;&#160;</a></span>bl::refl::ReflectedObject&lt; Car &gt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">friend</a> <a class="el" href="a00540.html">struct</a> bl::refl::ReflectedObject&lt; <a class="el" href="a00552.html">Car</a> &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00146">146</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ad87ba4411ce6be708a9145ef4ec8fc04" name="ad87ba4411ce6be708a9145ef4ec8fc04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad87ba4411ce6be708a9145ef4ec8fc04">&#9670;&#160;</a></span>DefaultCargoConfig</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00556.html">Config</a> core::arena::train::Car::DefaultCargoConfig</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= Config{.type            = <a class="code hl_enumvalue" href="a00552.html#ac4e6019c4c1a07aa4e919b39ad972091ae9769d75d750d246328fa96e996a5650">Type::Cargo</a>,</div>
+<div class="line">                                                        .length          = <a class="code hl_variable" href="a00552.html#abf55eb17f3956c5e4d08a648b3f43384">DefaultLength</a>,</div>
+<div class="line">                                                        .width           = <a class="code hl_variable" href="a00552.html#a3315a2a91471117efff4e5fa719347a8">DefaultWidth</a>,</div>
+<div class="line">                                                        .height          = <a class="code hl_variable" href="a00552.html#a5c9e7b7136b795310f07835c35b98b3c">DefaultHeight</a>,</div>
+<div class="line">                                                        .wheelHeight     = <a class="code hl_variable" href="a00552.html#a932facd97a0d03f3cf636ed25e116e18">DefaultWheelHeight</a>,</div>
+<div class="line">                                                        .couplerStandoff = <a class="code hl_variable" href="a00552.html#a27425eee4a2cc9eacad15cfd2307ee74">DefaultCouplerStandoff</a>,</div>
+<div class="line">                                                        .frontAxleOffset = <a class="code hl_variable" href="a00552.html#ae0de318690b25ab06a581a5fc0ff607c">DefaultFrontAxleOffset</a>,</div>
+<div class="line">                                                        .rearAxleOffset  = <a class="code hl_variable" href="a00552.html#a409918d69b591524040faf525572c2d2">DefaultRearAxleOffset</a>}</div>
+<div class="ttc" id="aa00552_html_a27425eee4a2cc9eacad15cfd2307ee74"><div class="ttname"><a href="a00552.html#a27425eee4a2cc9eacad15cfd2307ee74">core::arena::train::Car::DefaultCouplerStandoff</a></div><div class="ttdeci">static constexpr float DefaultCouplerStandoff</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00057">Car.hpp:57</a></div></div>
+<div class="ttc" id="aa00552_html_a3315a2a91471117efff4e5fa719347a8"><div class="ttname"><a href="a00552.html#a3315a2a91471117efff4e5fa719347a8">core::arena::train::Car::DefaultWidth</a></div><div class="ttdeci">static constexpr float DefaultWidth</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00054">Car.hpp:54</a></div></div>
+<div class="ttc" id="aa00552_html_a409918d69b591524040faf525572c2d2"><div class="ttname"><a href="a00552.html#a409918d69b591524040faf525572c2d2">core::arena::train::Car::DefaultRearAxleOffset</a></div><div class="ttdeci">static constexpr float DefaultRearAxleOffset</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00059">Car.hpp:59</a></div></div>
+<div class="ttc" id="aa00552_html_a5c9e7b7136b795310f07835c35b98b3c"><div class="ttname"><a href="a00552.html#a5c9e7b7136b795310f07835c35b98b3c">core::arena::train::Car::DefaultHeight</a></div><div class="ttdeci">static constexpr float DefaultHeight</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00055">Car.hpp:55</a></div></div>
+<div class="ttc" id="aa00552_html_a932facd97a0d03f3cf636ed25e116e18"><div class="ttname"><a href="a00552.html#a932facd97a0d03f3cf636ed25e116e18">core::arena::train::Car::DefaultWheelHeight</a></div><div class="ttdeci">static constexpr float DefaultWheelHeight</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00056">Car.hpp:56</a></div></div>
+<div class="ttc" id="aa00552_html_abf55eb17f3956c5e4d08a648b3f43384"><div class="ttname"><a href="a00552.html#abf55eb17f3956c5e4d08a648b3f43384">core::arena::train::Car::DefaultLength</a></div><div class="ttdeci">static constexpr float DefaultLength</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00053">Car.hpp:53</a></div></div>
+<div class="ttc" id="aa00552_html_ac4e6019c4c1a07aa4e919b39ad972091ae9769d75d750d246328fa96e996a5650"><div class="ttname"><a href="a00552.html#ac4e6019c4c1a07aa4e919b39ad972091ae9769d75d750d246328fa96e996a5650">core::arena::train::Car::Type::Cargo</a></div><div class="ttdeci">@ Cargo</div></div>
+<div class="ttc" id="aa00552_html_ae0de318690b25ab06a581a5fc0ff607c"><div class="ttname"><a href="a00552.html#ae0de318690b25ab06a581a5fc0ff607c">core::arena::train::Car::DefaultFrontAxleOffset</a></div><div class="ttdeci">static constexpr float DefaultFrontAxleOffset</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00058">Car.hpp:58</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00071">71</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a27425eee4a2cc9eacad15cfd2307ee74" name="a27425eee4a2cc9eacad15cfd2307ee74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27425eee4a2cc9eacad15cfd2307ee74">&#9670;&#160;</a></span>DefaultCouplerStandoff</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00540.html">float</a> core::arena::train::Car::DefaultCouplerStandoff = 0.5<a class="el" href="a00540.html">f</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00057">57</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ae0de318690b25ab06a581a5fc0ff607c" name="ae0de318690b25ab06a581a5fc0ff607c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0de318690b25ab06a581a5fc0ff607c">&#9670;&#160;</a></span>DefaultFrontAxleOffset</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00540.html">float</a> core::arena::train::Car::DefaultFrontAxleOffset = 4.<a class="el" href="a00540.html">f</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00058">58</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5c9e7b7136b795310f07835c35b98b3c" name="a5c9e7b7136b795310f07835c35b98b3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c9e7b7136b795310f07835c35b98b3c">&#9670;&#160;</a></span>DefaultHeight</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00540.html">float</a> core::arena::train::Car::DefaultHeight = 3.<a class="el" href="a00540.html">f</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00055">55</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abf55eb17f3956c5e4d08a648b3f43384" name="abf55eb17f3956c5e4d08a648b3f43384"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf55eb17f3956c5e4d08a648b3f43384">&#9670;&#160;</a></span>DefaultLength</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00540.html">float</a> core::arena::train::Car::DefaultLength = 10.<a class="el" href="a00540.html">f</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00053">53</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a18d378b9842e742934d50440a78b38c0" name="a18d378b9842e742934d50440a78b38c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18d378b9842e742934d50440a78b38c0">&#9670;&#160;</a></span>DefaultLocomotiveConfig</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00556.html">Config</a> core::arena::train::Car::DefaultLocomotiveConfig</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">        Config{.type            = <a class="code hl_enumvalue" href="a00552.html#ac4e6019c4c1a07aa4e919b39ad972091aed24a4645227d44d5e3355720aafc10e">Type::Locomotive</a>,</div>
+<div class="line">               .length          = <a class="code hl_variable" href="a00552.html#abf55eb17f3956c5e4d08a648b3f43384">DefaultLength</a>,</div>
+<div class="line">               .width           = <a class="code hl_variable" href="a00552.html#a3315a2a91471117efff4e5fa719347a8">DefaultWidth</a>,</div>
+<div class="line">               .height          = <a class="code hl_variable" href="a00552.html#a5c9e7b7136b795310f07835c35b98b3c">DefaultHeight</a>,</div>
+<div class="line">               .wheelHeight     = <a class="code hl_variable" href="a00552.html#a932facd97a0d03f3cf636ed25e116e18">DefaultWheelHeight</a>,</div>
+<div class="line">               .couplerStandoff = <a class="code hl_variable" href="a00552.html#a27425eee4a2cc9eacad15cfd2307ee74">DefaultCouplerStandoff</a>,</div>
+<div class="line">               .frontAxleOffset = <a class="code hl_variable" href="a00552.html#ae0de318690b25ab06a581a5fc0ff607c">DefaultFrontAxleOffset</a>,</div>
+<div class="line">               .rearAxleOffset  = <a class="code hl_variable" href="a00552.html#a409918d69b591524040faf525572c2d2">DefaultRearAxleOffset</a>}</div>
+<div class="ttc" id="aa00552_html_ac4e6019c4c1a07aa4e919b39ad972091aed24a4645227d44d5e3355720aafc10e"><div class="ttname"><a href="a00552.html#ac4e6019c4c1a07aa4e919b39ad972091aed24a4645227d44d5e3355720aafc10e">core::arena::train::Car::Type::Locomotive</a></div><div class="ttdeci">@ Locomotive</div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00061">61</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aece6c6373cc39410d32ee814f1cc6910" name="aece6c6373cc39410d32ee814f1cc6910"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aece6c6373cc39410d32ee814f1cc6910">&#9670;&#160;</a></span>DefaultPassengerConfig</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00556.html">Config</a> core::arena::train::Car::DefaultPassengerConfig</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">        Config{.type            = <a class="code hl_enumvalue" href="a00552.html#ac4e6019c4c1a07aa4e919b39ad972091abf2528a296adb62d041a7519aa77f248">Type::Passenger</a>,</div>
+<div class="line">               .length          = <a class="code hl_variable" href="a00552.html#abf55eb17f3956c5e4d08a648b3f43384">DefaultLength</a>,</div>
+<div class="line">               .width           = <a class="code hl_variable" href="a00552.html#a3315a2a91471117efff4e5fa719347a8">DefaultWidth</a>,</div>
+<div class="line">               .height          = <a class="code hl_variable" href="a00552.html#a5c9e7b7136b795310f07835c35b98b3c">DefaultHeight</a>,</div>
+<div class="line">               .wheelHeight     = <a class="code hl_variable" href="a00552.html#a932facd97a0d03f3cf636ed25e116e18">DefaultWheelHeight</a>,</div>
+<div class="line">               .couplerStandoff = <a class="code hl_variable" href="a00552.html#a27425eee4a2cc9eacad15cfd2307ee74">DefaultCouplerStandoff</a>,</div>
+<div class="line">               .frontAxleOffset = <a class="code hl_variable" href="a00552.html#ae0de318690b25ab06a581a5fc0ff607c">DefaultFrontAxleOffset</a>,</div>
+<div class="line">               .rearAxleOffset  = <a class="code hl_variable" href="a00552.html#a409918d69b591524040faf525572c2d2">DefaultRearAxleOffset</a>}</div>
+<div class="ttc" id="aa00552_html_ac4e6019c4c1a07aa4e919b39ad972091abf2528a296adb62d041a7519aa77f248"><div class="ttname"><a href="a00552.html#ac4e6019c4c1a07aa4e919b39ad972091abf2528a296adb62d041a7519aa77f248">core::arena::train::Car::Type::Passenger</a></div><div class="ttdeci">@ Passenger</div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00080">80</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a409918d69b591524040faf525572c2d2" name="a409918d69b591524040faf525572c2d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a409918d69b591524040faf525572c2d2">&#9670;&#160;</a></span>DefaultRearAxleOffset</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00540.html">float</a> core::arena::train::Car::DefaultRearAxleOffset = 4.<a class="el" href="a00540.html">f</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00059">59</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a932facd97a0d03f3cf636ed25e116e18" name="a932facd97a0d03f3cf636ed25e116e18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a932facd97a0d03f3cf636ed25e116e18">&#9670;&#160;</a></span>DefaultWheelHeight</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00540.html">float</a> core::arena::train::Car::DefaultWheelHeight = 1.<a class="el" href="a00540.html">f</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00056">56</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3315a2a91471117efff4e5fa719347a8" name="a3315a2a91471117efff4e5fa719347a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3315a2a91471117efff4e5fa719347a8">&#9670;&#160;</a></span>DefaultWidth</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">constexpr</a> <a class="el" href="a00540.html">float</a> core::arena::train::Car::DefaultWidth = 3.<a class="el" href="a00540.html">f</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00054">54</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>include/Core/Arena/Train/<a class="el" href="a00182_source.html">Car.hpp</a></li>
+<li>src/Core/Arena/Train/<a class="el" href="a00353_source.html">Car.cpp</a></li>
+</ul>
+</div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

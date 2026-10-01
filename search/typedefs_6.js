@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['unitcommandhandle_0',['UnitCommandHandle',['../a00281.html#ga6f37b04942f3cb03f1ba62bb6b992d00',1,'core::cmd']]]
+  ['squadcommandhandle_0',['SquadCommandHandle',['../a00409.html#gafae5fe1e4d620906e103d93431e71ebe',1,'core::cmd']]]
 ];

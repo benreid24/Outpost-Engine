@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Player/HUD/Event.hpp Source File</title>
+<title>Outpost Engine: include/Core/Components/Combatant.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,67 +79,92 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_be6ecaab1a4ec5e27af38c3573eadf7d.html">Player</a></li><li class="navelem"><a class="el" href="dir_eeddce6b71639576d56ea59e586fb7d1.html">HUD</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_b572e9e567c53bf52c1d322a7f434893.html">Components</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">Event.hpp</div></div>
+  <div class="headertitle"><div class="title">Combatant.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="a00170.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_PLAYER_HUD_EVENT_HPP</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_PLAYER_HUD_EVENT_HPP</span></div>
+<a href="a00170.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_COMPONENTS_COMBATANT_HPP</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_COMPONENTS_COMBATANT_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;<a class="code" href="a00053.html">Core/Components/Combatant.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;SFML/Window/Event.hpp&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;BLIB/Components/Physics2D.hpp&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="a00245.html">Core/Factions/FactionId.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00289.html">core</a></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00418.html">core</a></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span>player</div>
+<div class="foldopen" id="foldopen00009" data-start="{" data-end="}">
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="a00427.html">    9</a></span><span class="keyword">namespace </span>com</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">class </span>Player;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span>hud</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
-<div class="foldopen" id="foldopen00020" data-start="{" data-end="};">
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="a00435.html">   20</a></span><span class="keyword">class </span><a class="code hl_class" href="a00435.html">Event</a> {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_class" href="a00435.html">Event</a>(<a class="code hl_class" href="a00447.html">Player</a>&amp; owner, <span class="keyword">const</span> sf::Event&amp; event);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="a00435.html#a414b2f77683bfc2f6a98867a30de2d8c">   33</a></span>    <span class="keyword">const</span> sf::Event&amp; <a class="code hl_function" href="a00435.html#a414b2f77683bfc2f6a98867a30de2d8c">source</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> windowEvent; }</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="a00435.html#a5024aa1ae02ff293c71e7f08f52484c9">   38</a></span>    <a class="code hl_class" href="a00363.html">com::Combatant</a>* <a class="code hl_function" href="a00435.html#a5024aa1ae02ff293c71e7f08f52484c9">target</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> overTarget; }</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="a00435.html#a1401a00f5d9a064cd48cd0cb9910dd65">   43</a></span>    <span class="keyword">const</span> glm::vec2&amp; <a class="code hl_function" href="a00435.html#a1401a00f5d9a064cd48cd0cb9910dd65">overlayPosition</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> overlayCoord; }</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="a00435.html#ac41bdc0e7203b14841d1d6e9ea78b18f">   48</a></span>    <span class="keyword">const</span> glm::vec2&amp; <a class="code hl_function" href="a00435.html#ac41bdc0e7203b14841d1d6e9ea78b18f">worldPosition</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> worldCoord; }</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">const</span> sf::Event&amp; windowEvent;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    glm::vec2 overlayCoord;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    glm::vec2 worldCoord;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_class" href="a00363.html">com::Combatant</a>* overTarget;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>};</div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="a00636.html">   16</a></span><span class="keyword">class </span><a class="code hl_class" href="a00636.html">Combatant</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="a00636.html#a253774290c23fe1ff05689e52c07bf83">   26</a></span>    <a class="code hl_function" href="a00636.html#a253774290c23fe1ff05689e52c07bf83">Combatant</a>(<a class="code hl_class" href="a00680.html">fcn::FactionId</a> faction, bl::com::Physics2D&amp; physics, <span class="keywordtype">float</span> health,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>              <span class="keywordtype">float</span> deathTime = 0.f)</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    : faction(faction)</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    , physics(physics)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    , hp(health)</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    , deathTime(deathTime) {}</div>
 </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>} <span class="comment">// namespace hud</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>} <span class="comment">// namespace player</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>} <span class="comment">// namespace core</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aa00053_html"><div class="ttname"><a href="a00053.html">Combatant.hpp</a></div></div>
-<div class="ttc" id="aa00289_html"><div class="ttname"><a href="a00289.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00107_source.html#l00004">AddMode.hpp:5</a></div></div>
-<div class="ttc" id="aa00363_html"><div class="ttname"><a href="a00363.html">core::com::Combatant</a></div><div class="ttdoc">Component that makes an entity target-able and kill-able.</div><div class="ttdef"><b>Definition</b> <a href="a00053_source.html#l00016">Combatant.hpp:16</a></div></div>
-<div class="ttc" id="aa00435_html"><div class="ttname"><a href="a00435.html">core::player::hud::Event</a></div><div class="ttdoc">HUD event. Wrapper around sf::Event with some common fields computed.</div><div class="ttdef"><b>Definition</b> <a href="a00170_source.html#l00020">Event.hpp:20</a></div></div>
-<div class="ttc" id="aa00435_html_a1401a00f5d9a064cd48cd0cb9910dd65"><div class="ttname"><a href="a00435.html#a1401a00f5d9a064cd48cd0cb9910dd65">core::player::hud::Event::overlayPosition</a></div><div class="ttdeci">const glm::vec2 &amp; overlayPosition() const</div><div class="ttdoc">Returns the position of the event in overlay coordinates.</div><div class="ttdef"><b>Definition</b> <a href="a00170_source.html#l00043">Event.hpp:43</a></div></div>
-<div class="ttc" id="aa00435_html_a414b2f77683bfc2f6a98867a30de2d8c"><div class="ttname"><a href="a00435.html#a414b2f77683bfc2f6a98867a30de2d8c">core::player::hud::Event::source</a></div><div class="ttdeci">const sf::Event &amp; source() const</div><div class="ttdoc">Returns the source window event.</div><div class="ttdef"><b>Definition</b> <a href="a00170_source.html#l00033">Event.hpp:33</a></div></div>
-<div class="ttc" id="aa00435_html_a5024aa1ae02ff293c71e7f08f52484c9"><div class="ttname"><a href="a00435.html#a5024aa1ae02ff293c71e7f08f52484c9">core::player::hud::Event::target</a></div><div class="ttdeci">com::Combatant * target() const</div><div class="ttdoc">Returns the target the event occurred over. May be nullptr.</div><div class="ttdef"><b>Definition</b> <a href="a00170_source.html#l00038">Event.hpp:38</a></div></div>
-<div class="ttc" id="aa00435_html_ac41bdc0e7203b14841d1d6e9ea78b18f"><div class="ttname"><a href="a00435.html#ac41bdc0e7203b14841d1d6e9ea78b18f">core::player::hud::Event::worldPosition</a></div><div class="ttdeci">const glm::vec2 &amp; worldPosition() const</div><div class="ttdoc">Returns the position of the event in world coordinates.</div><div class="ttdef"><b>Definition</b> <a href="a00170_source.html#l00048">Event.hpp:48</a></div></div>
-<div class="ttc" id="aa00447_html"><div class="ttname"><a href="a00447.html">core::player::Player</a></div><div class="ttdoc">Player class that owns player specific state and UI.</div><div class="ttdef"><b>Definition</b> <a href="a00155_source.html#l00024">Player.hpp:24</a></div></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="a00636.html#a26da31ada995b2c804c50e20e81d3c62">   36</a></span>    bl::ecs::Entity <a class="code hl_function" href="a00636.html#a26da31ada995b2c804c50e20e81d3c62">getId</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> physics.getOwner(); }</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="a00636.html#a4221665e19ceb67356510689d245f6be">   41</a></span>    <a class="code hl_class" href="a00680.html">fcn::FactionId</a> <a class="code hl_function" href="a00636.html#a4221665e19ceb67356510689d245f6be">getFaction</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> faction; }</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="a00636.html#a57de93b7038303dd73c19ba7c21e79c3">   46</a></span>    glm::vec2 <a class="code hl_function" href="a00636.html#a57de93b7038303dd73c19ba7c21e79c3">getPosition</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> physics.getTransform().getGlobalPosition(); }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="a00636.html#a51d74324235e9ddb15c2b1e8c2ae7deb">   51</a></span>    <span class="keywordtype">float</span> <a class="code hl_function" href="a00636.html#a51d74324235e9ddb15c2b1e8c2ae7deb">getRotation</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> physics.getTransform().getRotation(); }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="a00636.html#a48141d87a3ebb4a1e2af771b734dfdc7">   56</a></span>    <span class="keywordtype">float</span> <a class="code hl_function" href="a00636.html#a48141d87a3ebb4a1e2af771b734dfdc7">getHealth</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> hp; }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="a00636.html#a7d1ab6a05f4ff4f5502a9af489f5d115">   61</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="a00636.html#a7d1ab6a05f4ff4f5502a9af489f5d115">isAlive</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> hp &gt; 0.f; }</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="a00636.html#a8b54c2857c152940eaaa273fa65b3dad">   66</a></span>    <span class="keywordtype">float</span> <a class="code hl_function" href="a00636.html#a8b54c2857c152940eaaa273fa65b3dad">getDeathTime</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> deathTime; }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="foldopen" id="foldopen00074" data-start="{" data-end="}">
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="a00636.html#abf37ee1f1c30c4e3c81694abecef3699">   74</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="a00636.html#abf37ee1f1c30c4e3c81694abecef3699">applyDamage</a>(<span class="keywordtype">float</span> damage) {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">if</span> (hp &gt; damage) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            hp -= damage;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        }</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        hp = 0.f;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    }</div>
+</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <a class="code hl_class" href="a00680.html">fcn::FactionId</a> faction;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    bl::com::Physics2D&amp; physics;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">float</span> hp;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordtype">float</span> deathTime;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>};</div>
+</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>} <span class="comment">// namespace com</span></div>
+</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>} <span class="comment">// namespace core</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00245_html"><div class="ttname"><a href="a00245.html">FactionId.hpp</a></div></div>
+<div class="ttc" id="aa00418_html"><div class="ttname"><a href="a00418.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00236_source.html#l00014">Arena.hpp:15</a></div></div>
+<div class="ttc" id="aa00636_html"><div class="ttname"><a href="a00636.html">core::com::Combatant</a></div><div class="ttdoc">Component that makes an entity target-able and kill-able.</div><div class="ttdef"><b>Definition</b> <a href="a00170_source.html#l00016">Combatant.hpp:16</a></div></div>
+<div class="ttc" id="aa00636_html_a253774290c23fe1ff05689e52c07bf83"><div class="ttname"><a href="a00636.html#a253774290c23fe1ff05689e52c07bf83">core::com::Combatant::Combatant</a></div><div class="ttdeci">Combatant(fcn::FactionId faction, bl::com::Physics2D &amp;physics, float health, float deathTime=0.f)</div><div class="ttdoc">Creates the target component.</div><div class="ttdef"><b>Definition</b> <a href="a00170_source.html#l00026">Combatant.hpp:26</a></div></div>
+<div class="ttc" id="aa00636_html_a26da31ada995b2c804c50e20e81d3c62"><div class="ttname"><a href="a00636.html#a26da31ada995b2c804c50e20e81d3c62">core::com::Combatant::getId</a></div><div class="ttdeci">bl::ecs::Entity getId() const</div><div class="ttdoc">Returns the entity id of this unit.</div><div class="ttdef"><b>Definition</b> <a href="a00170_source.html#l00036">Combatant.hpp:36</a></div></div>
+<div class="ttc" id="aa00636_html_a4221665e19ceb67356510689d245f6be"><div class="ttname"><a href="a00636.html#a4221665e19ceb67356510689d245f6be">core::com::Combatant::getFaction</a></div><div class="ttdeci">fcn::FactionId getFaction() const</div><div class="ttdoc">Returns the faction this combatant belongs to.</div><div class="ttdef"><b>Definition</b> <a href="a00170_source.html#l00041">Combatant.hpp:41</a></div></div>
+<div class="ttc" id="aa00636_html_a48141d87a3ebb4a1e2af771b734dfdc7"><div class="ttname"><a href="a00636.html#a48141d87a3ebb4a1e2af771b734dfdc7">core::com::Combatant::getHealth</a></div><div class="ttdeci">float getHealth() const</div><div class="ttdoc">Returns the current amount of health of the target.</div><div class="ttdef"><b>Definition</b> <a href="a00170_source.html#l00056">Combatant.hpp:56</a></div></div>
+<div class="ttc" id="aa00636_html_a51d74324235e9ddb15c2b1e8c2ae7deb"><div class="ttname"><a href="a00636.html#a51d74324235e9ddb15c2b1e8c2ae7deb">core::com::Combatant::getRotation</a></div><div class="ttdeci">float getRotation() const</div><div class="ttdoc">Returns the rotation of the target in degrees.</div><div class="ttdef"><b>Definition</b> <a href="a00170_source.html#l00051">Combatant.hpp:51</a></div></div>
+<div class="ttc" id="aa00636_html_a57de93b7038303dd73c19ba7c21e79c3"><div class="ttname"><a href="a00636.html#a57de93b7038303dd73c19ba7c21e79c3">core::com::Combatant::getPosition</a></div><div class="ttdeci">glm::vec2 getPosition() const</div><div class="ttdoc">Returns the position of the target in world coordinates.</div><div class="ttdef"><b>Definition</b> <a href="a00170_source.html#l00046">Combatant.hpp:46</a></div></div>
+<div class="ttc" id="aa00636_html_a7d1ab6a05f4ff4f5502a9af489f5d115"><div class="ttname"><a href="a00636.html#a7d1ab6a05f4ff4f5502a9af489f5d115">core::com::Combatant::isAlive</a></div><div class="ttdeci">bool isAlive() const</div><div class="ttdoc">Returns whether the target is still alive.</div><div class="ttdef"><b>Definition</b> <a href="a00170_source.html#l00061">Combatant.hpp:61</a></div></div>
+<div class="ttc" id="aa00636_html_a8b54c2857c152940eaaa273fa65b3dad"><div class="ttname"><a href="a00636.html#a8b54c2857c152940eaaa273fa65b3dad">core::com::Combatant::getDeathTime</a></div><div class="ttdeci">float getDeathTime() const</div><div class="ttdoc">Returns the time left before the body disappears.</div><div class="ttdef"><b>Definition</b> <a href="a00170_source.html#l00066">Combatant.hpp:66</a></div></div>
+<div class="ttc" id="aa00636_html_abf37ee1f1c30c4e3c81694abecef3699"><div class="ttname"><a href="a00636.html#abf37ee1f1c30c4e3c81694abecef3699">core::com::Combatant::applyDamage</a></div><div class="ttdeci">bool applyDamage(float damage)</div><div class="ttdoc">Applies damage to the target.</div><div class="ttdef"><b>Definition</b> <a href="a00170_source.html#l00074">Combatant.hpp:74</a></div></div>
+<div class="ttc" id="aa00680_html"><div class="ttname"><a href="a00680.html">core::fcn::FactionId</a></div><div class="ttdoc">Id for factions in the game. Should be treated as an opaque handle.</div><div class="ttdef"><b>Definition</b> <a href="a00245_source.html#l00030">FactionId.hpp:30</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

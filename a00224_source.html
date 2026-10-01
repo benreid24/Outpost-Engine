@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: src/Core/Input/Control.cpp Source File</title>
+<title>Outpost Engine: include/Core/Arena/Generation/Parameters.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,71 +79,97 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a2f0e5642e47e7ed59fe0f0829eafb5f.html">Core</a></li><li class="navelem"><a class="el" href="dir_c63dcb5b4cedcea86ba79ffba16467b4.html">Input</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_abca691009d11aafdd50b5a787683a53.html">Arena</a></li><li class="navelem"><a class="el" href="dir_2b9b30eea8bdf5f86ca97e62235d9acc.html">Generation</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">Control.cpp</div></div>
+  <div class="headertitle"><div class="title">Parameters.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="a00224.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &lt;<a class="code" href="a00083.html">Core/Input/Control.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00289.html">core</a></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span>{</div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span>input</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>{</div>
-<div class="foldopen" id="foldopen00007" data-start="{" data-end="}">
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="a00296.html#a293f677406b187f5aab5509859935f33">    7</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="a00296.html#a293f677406b187f5aab5509859935f33">configureInputSystem</a>(bl::input::InputSystem&amp; system) {</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="comment">// TODO - SETUP_TASK - configure the controls for the game</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="comment">// register controls</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    system.setControlCount(<a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ae1b03a6443bb04e423b2b5afba52dd5c">Control::Count</a>);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    system.configureTriggerControl(<a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4">Control::MoveUp</a>);</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    system.configureTriggerControl(<a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f">Control::MoveRight</a>);</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    system.configureTriggerControl(<a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07">Control::MoveDown</a>);</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    system.configureTriggerControl(<a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee">Control::MoveLeft</a>);</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    system.configureTriggerControl(<a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a9b882d2a24b5eb81f6582255ed43db8c">Control::Sprint</a>);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    system.configureTriggerControl(<a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223">Control::Interact</a>);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    system.configureTriggerControl(<a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a49a69734c9eaf47436751b36372b85d7">Control::Pause</a>);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    system.configureTriggerControl(<a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a1899a8772502d8ebc0f31a92bc342868">Control::Back</a>);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="comment">// creator the actor. Peoplemon is only 1 player locally</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    bl::input::Actor&amp; user = system.getActor();</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="comment">// set keyboard and mouse defaults. no defaults for controller</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    user.getKBMTriggerControl(<a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4">Control::MoveUp</a>).triggerOnKey(sf::Keyboard::W);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    user.getKBMTriggerControl(<a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f">Control::MoveRight</a>).triggerOnKey(sf::Keyboard::D);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    user.getKBMTriggerControl(<a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07">Control::MoveDown</a>).triggerOnKey(sf::Keyboard::S);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    user.getKBMTriggerControl(<a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee">Control::MoveLeft</a>).triggerOnKey(sf::Keyboard::A);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    user.getKBMTriggerControl(<a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a9b882d2a24b5eb81f6582255ed43db8c">Control::Sprint</a>).triggerOnKey(sf::Keyboard::LShift);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    user.getKBMTriggerControl(<a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223">Control::Interact</a>).triggerOnKey(sf::Keyboard::Space);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    user.getKBMTriggerControl(<a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a49a69734c9eaf47436751b36372b85d7">Control::Pause</a>).triggerOnKey(sf::Keyboard::Enter);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    user.getKBMTriggerControl(<a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a1899a8772502d8ebc0f31a92bc342868">Control::Back</a>).triggerOnKey(sf::Keyboard::LControl);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="comment">// load user preferences from config</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    system.loadFromConfig();</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>}</div>
+<a href="a00224.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_ARENA_GENERATION_PARAMETERS_HPP</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_ARENA_GENERATION_PARAMETERS_HPP</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;<a class="code" href="a00215.html">Core/Arena/Generation/RuledBiome.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00418.html">core</a></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span>arena</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span>gen</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="};">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="a00488.html">   20</a></span><span class="keyword">struct </span><a class="code hl_struct" href="a00488.html">Parameters</a> {</div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="};">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="a00492.html">   24</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="a00492.html">PerlinParameters</a> {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="a00492.html#afc161f53c5af358d414f0bcc1304663c">   25</a></span>        <span class="keywordtype">float</span> <a class="code hl_variable" href="a00492.html#afc161f53c5af358d414f0bcc1304663c">frequency</a>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="a00492.html#abf21766849e9af644c4a46e3f4438e6d">   26</a></span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="a00492.html#abf21766849e9af644c4a46e3f4438e6d">octaves</a>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="a00492.html#a380eff6d75bde78406d94f542ee75f97">   27</a></span>        <span class="keywordtype">float</span> <a class="code hl_variable" href="a00492.html#a380eff6d75bde78406d94f542ee75f97">persistence</a>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="foldopen" id="foldopen00032" data-start="{" data-end="}">
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="a00492.html#a325f00a023e6e2fd9b0bc9d2e6959c2e">   32</a></span>        <a class="code hl_function" href="a00492.html#a325f00a023e6e2fd9b0bc9d2e6959c2e">PerlinParameters</a>()</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        : <a class="code hl_variable" href="a00492.html#afc161f53c5af358d414f0bcc1304663c">frequency</a>(0.01f)</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        , <a class="code hl_variable" href="a00492.html#abf21766849e9af644c4a46e3f4438e6d">octaves</a>(16)</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        , <a class="code hl_variable" href="a00492.html#a380eff6d75bde78406d94f542ee75f97">persistence</a>(0.5f) {}</div>
+</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    };</div>
 </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>} <span class="comment">// namespace input</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>} <span class="comment">// namespace core</span></div>
-<div class="ttc" id="aa00083_html"><div class="ttname"><a href="a00083.html">Control.hpp</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07">core::input::Control::MoveDown</a></div><div class="ttdeci">@ MoveDown</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00029">Control.hpp:29</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2a1899a8772502d8ebc0f31a92bc342868"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a1899a8772502d8ebc0f31a92bc342868">core::input::Control::Back</a></div><div class="ttdeci">@ Back</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00034">Control.hpp:34</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2a49a69734c9eaf47436751b36372b85d7"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a49a69734c9eaf47436751b36372b85d7">core::input::Control::Pause</a></div><div class="ttdeci">@ Pause</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00033">Control.hpp:33</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223">core::input::Control::Interact</a></div><div class="ttdeci">@ Interact</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00032">Control.hpp:32</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2a9b882d2a24b5eb81f6582255ed43db8c"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a9b882d2a24b5eb81f6582255ed43db8c">core::input::Control::Sprint</a></div><div class="ttdeci">@ Sprint</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00031">Control.hpp:31</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee">core::input::Control::MoveLeft</a></div><div class="ttdeci">@ MoveLeft</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00030">Control.hpp:30</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f">core::input::Control::MoveRight</a></div><div class="ttdeci">@ MoveRight</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00028">Control.hpp:28</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2ae1b03a6443bb04e423b2b5afba52dd5c"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ae1b03a6443bb04e423b2b5afba52dd5c">core::input::Control::Count</a></div><div class="ttdeci">@ Count</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00035">Control.hpp:35</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4">core::input::Control::MoveUp</a></div><div class="ttdeci">@ MoveUp</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00027">Control.hpp:27</a></div></div>
-<div class="ttc" id="aa00289_html"><div class="ttname"><a href="a00289.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00107_source.html#l00004">AddMode.hpp:5</a></div></div>
-<div class="ttc" id="aa00296_html_a293f677406b187f5aab5509859935f33"><div class="ttname"><a href="a00296.html#a293f677406b187f5aab5509859935f33">core::input::configureInputSystem</a></div><div class="ttdeci">void configureInputSystem(bl::input::InputSystem &amp;system)</div><div class="ttdoc">Configures the input system and sets default controls.</div><div class="ttdef"><b>Definition</b> <a href="a00224_source.html#l00007">Control.cpp:7</a></div></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="a00488.html#a25b8d345e7d26260593ac73bbea81ea2">   38</a></span>    glm::vec2 <a class="code hl_variable" href="a00488.html#a25b8d345e7d26260593ac73bbea81ea2">worldSize</a>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="a00488.html#a3dbe28f625b37824d4bdfe35dda33cfe">   39</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="a00488.html#a3dbe28f625b37824d4bdfe35dda33cfe">worldStep</a>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="a00488.html#ab8700f8c16106020137734067791ab13">   40</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="a00488.html#ab8700f8c16106020137734067791ab13">maxHeight</a>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="a00488.html#aeef905225625339899b31d2f453bb546">   41</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="a00488.html#aeef905225625339899b31d2f453bb546">waterHeight</a>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="a00488.html#ab00e5bf22e885eb3f6423118c6bbab71">   42</a></span>    <a class="code hl_struct" href="a00492.html">PerlinParameters</a> <a class="code hl_variable" href="a00488.html#ab00e5bf22e885eb3f6423118c6bbab71">terrainPerlin</a>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="a00488.html#a40152a8aa102bd70885a59e24856d883">   43</a></span>    <a class="code hl_struct" href="a00492.html">PerlinParameters</a> <a class="code hl_variable" href="a00488.html#a40152a8aa102bd70885a59e24856d883">moisturePerlin</a>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="a00488.html#ae381f6d320426f7d2516339cc2b02420">   44</a></span>    std::vector&lt;RuledBiome&gt; <a class="code hl_variable" href="a00488.html#ae381f6d320426f7d2516339cc2b02420">biomes</a>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="foldopen" id="foldopen00053" data-start="{" data-end="}">
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="a00488.html#a416dca628023b02f37424ea8b60991e1">   53</a></span>    <a class="code hl_function" href="a00488.html#a416dca628023b02f37424ea8b60991e1">Parameters</a>(<span class="keyword">const</span> glm::vec2&amp; <a class="code hl_variable" href="a00488.html#a25b8d345e7d26260593ac73bbea81ea2">worldSize</a>, <span class="keywordtype">float</span> step, <span class="keywordtype">float</span> <a class="code hl_variable" href="a00488.html#ab8700f8c16106020137734067791ab13">maxHeight</a>)</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    : <a class="code hl_variable" href="a00488.html#a25b8d345e7d26260593ac73bbea81ea2">worldSize</a>(<a class="code hl_variable" href="a00488.html#a25b8d345e7d26260593ac73bbea81ea2">worldSize</a>)</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    , <a class="code hl_variable" href="a00488.html#a3dbe28f625b37824d4bdfe35dda33cfe">worldStep</a>(step)</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    , <a class="code hl_variable" href="a00488.html#ab8700f8c16106020137734067791ab13">maxHeight</a>(<a class="code hl_variable" href="a00488.html#ab8700f8c16106020137734067791ab13">maxHeight</a>)</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    , <a class="code hl_variable" href="a00488.html#aeef905225625339899b31d2f453bb546">waterHeight</a>(<a class="code hl_variable" href="a00488.html#ab8700f8c16106020137734067791ab13">maxHeight</a> * 0.45f)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    , <a class="code hl_variable" href="a00488.html#ab00e5bf22e885eb3f6423118c6bbab71">terrainPerlin</a>()</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    , <a class="code hl_variable" href="a00488.html#a40152a8aa102bd70885a59e24856d883">moisturePerlin</a>() {}</div>
+</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="foldopen" id="foldopen00064" data-start="{" data-end="}">
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="a00488.html#afd0f3f649463b53a89db6588402ddc07">   64</a></span>    glm::u32vec2 <a class="code hl_function" href="a00488.html#afd0f3f649463b53a89db6588402ddc07">getWorldNodeCount</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordflow">return</span> glm::u32vec2(std::ceil(<a class="code hl_variable" href="a00488.html#a25b8d345e7d26260593ac73bbea81ea2">worldSize</a>.x / <a class="code hl_variable" href="a00488.html#a3dbe28f625b37824d4bdfe35dda33cfe">worldStep</a>) + 0.01f,</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                            std::ceil(<a class="code hl_variable" href="a00488.html#a25b8d345e7d26260593ac73bbea81ea2">worldSize</a>.y / <a class="code hl_variable" href="a00488.html#a3dbe28f625b37824d4bdfe35dda33cfe">worldStep</a>) + 0.01f);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>};</div>
+</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>} <span class="comment">// namespace gen</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>} <span class="comment">// namespace arena</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>} <span class="comment">// namespace core</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00215_html"><div class="ttname"><a href="a00215.html">RuledBiome.hpp</a></div></div>
+<div class="ttc" id="aa00418_html"><div class="ttname"><a href="a00418.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00236_source.html#l00014">Arena.hpp:15</a></div></div>
+<div class="ttc" id="aa00488_html"><div class="ttname"><a href="a00488.html">core::arena::gen::Parameters</a></div><div class="ttdoc">Arena and terrain generation parameters.</div><div class="ttdef"><b>Definition</b> <a href="a00224_source.html#l00020">Parameters.hpp:20</a></div></div>
+<div class="ttc" id="aa00488_html_a25b8d345e7d26260593ac73bbea81ea2"><div class="ttname"><a href="a00488.html#a25b8d345e7d26260593ac73bbea81ea2">core::arena::gen::Parameters::worldSize</a></div><div class="ttdeci">glm::vec2 worldSize</div><div class="ttdef"><b>Definition</b> <a href="a00224_source.html#l00038">Parameters.hpp:38</a></div></div>
+<div class="ttc" id="aa00488_html_a3dbe28f625b37824d4bdfe35dda33cfe"><div class="ttname"><a href="a00488.html#a3dbe28f625b37824d4bdfe35dda33cfe">core::arena::gen::Parameters::worldStep</a></div><div class="ttdeci">float worldStep</div><div class="ttdef"><b>Definition</b> <a href="a00224_source.html#l00039">Parameters.hpp:39</a></div></div>
+<div class="ttc" id="aa00488_html_a40152a8aa102bd70885a59e24856d883"><div class="ttname"><a href="a00488.html#a40152a8aa102bd70885a59e24856d883">core::arena::gen::Parameters::moisturePerlin</a></div><div class="ttdeci">PerlinParameters moisturePerlin</div><div class="ttdef"><b>Definition</b> <a href="a00224_source.html#l00043">Parameters.hpp:43</a></div></div>
+<div class="ttc" id="aa00488_html_a416dca628023b02f37424ea8b60991e1"><div class="ttname"><a href="a00488.html#a416dca628023b02f37424ea8b60991e1">core::arena::gen::Parameters::Parameters</a></div><div class="ttdeci">Parameters(const glm::vec2 &amp;worldSize, float step, float maxHeight)</div><div class="ttdoc">Initializes the parameters with sane defaults.</div><div class="ttdef"><b>Definition</b> <a href="a00224_source.html#l00053">Parameters.hpp:53</a></div></div>
+<div class="ttc" id="aa00488_html_ab00e5bf22e885eb3f6423118c6bbab71"><div class="ttname"><a href="a00488.html#ab00e5bf22e885eb3f6423118c6bbab71">core::arena::gen::Parameters::terrainPerlin</a></div><div class="ttdeci">PerlinParameters terrainPerlin</div><div class="ttdef"><b>Definition</b> <a href="a00224_source.html#l00042">Parameters.hpp:42</a></div></div>
+<div class="ttc" id="aa00488_html_ab8700f8c16106020137734067791ab13"><div class="ttname"><a href="a00488.html#ab8700f8c16106020137734067791ab13">core::arena::gen::Parameters::maxHeight</a></div><div class="ttdeci">float maxHeight</div><div class="ttdef"><b>Definition</b> <a href="a00224_source.html#l00040">Parameters.hpp:40</a></div></div>
+<div class="ttc" id="aa00488_html_ae381f6d320426f7d2516339cc2b02420"><div class="ttname"><a href="a00488.html#ae381f6d320426f7d2516339cc2b02420">core::arena::gen::Parameters::biomes</a></div><div class="ttdeci">std::vector&lt; RuledBiome &gt; biomes</div><div class="ttdef"><b>Definition</b> <a href="a00224_source.html#l00044">Parameters.hpp:44</a></div></div>
+<div class="ttc" id="aa00488_html_aeef905225625339899b31d2f453bb546"><div class="ttname"><a href="a00488.html#aeef905225625339899b31d2f453bb546">core::arena::gen::Parameters::waterHeight</a></div><div class="ttdeci">float waterHeight</div><div class="ttdef"><b>Definition</b> <a href="a00224_source.html#l00041">Parameters.hpp:41</a></div></div>
+<div class="ttc" id="aa00488_html_afd0f3f649463b53a89db6588402ddc07"><div class="ttname"><a href="a00488.html#afd0f3f649463b53a89db6588402ddc07">core::arena::gen::Parameters::getWorldNodeCount</a></div><div class="ttdeci">glm::u32vec2 getWorldNodeCount() const</div><div class="ttdoc">Computes and returns the number of nodes to generate with.</div><div class="ttdef"><b>Definition</b> <a href="a00224_source.html#l00064">Parameters.hpp:64</a></div></div>
+<div class="ttc" id="aa00492_html"><div class="ttname"><a href="a00492.html">core::arena::gen::Parameters::PerlinParameters</a></div><div class="ttdoc">Parameters specific to the Perlin noise generator.</div><div class="ttdef"><b>Definition</b> <a href="a00224_source.html#l00024">Parameters.hpp:24</a></div></div>
+<div class="ttc" id="aa00492_html_a325f00a023e6e2fd9b0bc9d2e6959c2e"><div class="ttname"><a href="a00492.html#a325f00a023e6e2fd9b0bc9d2e6959c2e">core::arena::gen::Parameters::PerlinParameters::PerlinParameters</a></div><div class="ttdeci">PerlinParameters()</div><div class="ttdoc">Sets sane defaults.</div><div class="ttdef"><b>Definition</b> <a href="a00224_source.html#l00032">Parameters.hpp:32</a></div></div>
+<div class="ttc" id="aa00492_html_a380eff6d75bde78406d94f542ee75f97"><div class="ttname"><a href="a00492.html#a380eff6d75bde78406d94f542ee75f97">core::arena::gen::Parameters::PerlinParameters::persistence</a></div><div class="ttdeci">float persistence</div><div class="ttdef"><b>Definition</b> <a href="a00224_source.html#l00027">Parameters.hpp:27</a></div></div>
+<div class="ttc" id="aa00492_html_abf21766849e9af644c4a46e3f4438e6d"><div class="ttname"><a href="a00492.html#abf21766849e9af644c4a46e3f4438e6d">core::arena::gen::Parameters::PerlinParameters::octaves</a></div><div class="ttdeci">unsigned int octaves</div><div class="ttdef"><b>Definition</b> <a href="a00224_source.html#l00026">Parameters.hpp:26</a></div></div>
+<div class="ttc" id="aa00492_html_afc161f53c5af358d414f0bcc1304663c"><div class="ttname"><a href="a00492.html#afc161f53c5af358d414f0bcc1304663c">core::arena::gen::Parameters::PerlinParameters::frequency</a></div><div class="ttdeci">float frequency</div><div class="ttdef"><b>Definition</b> <a href="a00224_source.html#l00025">Parameters.hpp:25</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Unit/Capability.hpp File Reference</title>
+<title>Outpost Engine: include/Core/Systems/Render.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,65 +74,46 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_b638a04f7290da32ecfac2df55fb6497.html">Unit</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_9ee9775a41bd202429166df6e1b725b2.html">Systems</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">Capability.hpp File Reference</div></div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a>  </div>
+  <div class="headertitle"><div class="title">Render.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
-<code>#include &lt;type_traits&gt;</code><br />
+<div class="textblock"><code>#include &lt;BLIB/ECS/Entity.hpp&gt;</code><br />
+<code>#include &lt;BLIB/Engine/System.hpp&gt;</code><br />
+<code>#include &lt;BLIB/Render/Color.hpp&gt;</code><br />
+<code>#include &lt;BLIB/Render/Resources/MaterialRef.hpp&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00230_source.html">Core/Arena/Generation/Biome.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a01007_source.html">Core/World/Node.hpp</a>&gt;</code><br />
+<code>#include &lt;glm/glm.hpp&gt;</code><br />
 </div>
 <p><a href="a00014_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00756.html">core::sys::Render</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Core game system that manages how entities are rendered.  <a href="a00756.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00289" id="r_a00289"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00289.html">core</a></td></tr>
-<tr class="memdesc:a00289"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains everything shared between the game and editor. <br /></td></tr>
+<tr class="memitem:a00418" id="r_a00418"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00418.html">core</a></td></tr>
+<tr class="memdesc:a00418"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains everything shared between the game and editor. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00300" id="r_a00300"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00300.html">core::unit</a></td></tr>
-<tr class="memdesc:a00300"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of functionality and behaviors for units. <br /></td></tr>
+<tr class="memitem:a00428" id="r_a00428"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00428.html">core::sys</a></td></tr>
+<tr class="memdesc:a00428"><td class="mdescLeft">&#160;</td><td class="mdescRight">The core game systems. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:gabbac056d8b58ac01b45802842280cdae" id="r_gabbac056d8b58ac01b45802842280cdae"><td class="memItemLeft" align="right" valign="top">enum struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">core::unit::Capability</a> : std::uint32_t { <br />
-&#160;&#160;<a class="el" href="a00282.html#ggabbac056d8b58ac01b45802842280cdaea6adf97f83acf6453d4a6a4b1070f3754">core::unit::Capability::None</a> = 0
-, <a class="el" href="a00282.html#ggabbac056d8b58ac01b45802842280cdaea4bbb8f967da6d1a610596d7257179c2b">core::unit::Capability::Invalid</a> = 0
-, <a class="el" href="a00282.html#ggabbac056d8b58ac01b45802842280cdaea8d2de5368588552fbae54044ac5c7b3d">core::unit::Capability::Rotate</a> = 0x1 &lt;&lt; 0
-, <a class="el" href="a00282.html#ggabbac056d8b58ac01b45802842280cdaea6bc362dbf494c61ea117fe3c71ca48a5">core::unit::Capability::Move</a> = 0x1 &lt;&lt; 1
-, <br />
-&#160;&#160;<a class="el" href="a00282.html#ggabbac056d8b58ac01b45802842280cdaeacf4a0298c82a0d16c03788f8d0ce273c">core::unit::Capability::Shoot</a> = 0x1 &lt;&lt; 2
-<br />
- }</td></tr>
-<tr class="memdesc:gabbac056d8b58ac01b45802842280cdae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum representing a unit's capabilities.  <a href="a00282.html#gabbac056d8b58ac01b45802842280cdae">More...</a><br /></td></tr>
-<tr class="separator:gabbac056d8b58ac01b45802842280cdae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:abfb93ba7ba1b3eb45435163e0cb4ceb9" id="r_abfb93ba7ba1b3eb45435163e0cb4ceb9"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00300.html#abfb93ba7ba1b3eb45435163e0cb4ceb9">core::unit::operator|</a> (<a class="el" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> left, <a class="el" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> right)</td></tr>
-<tr class="memdesc:abfb93ba7ba1b3eb45435163e0cb4ceb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bitwise OR operator for unit capabilities.  <br /></td></tr>
-<tr class="separator:abfb93ba7ba1b3eb45435163e0cb4ceb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a374996d98b0f76f73345e7b71a637201" id="r_a374996d98b0f76f73345e7b71a637201"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00300.html#a374996d98b0f76f73345e7b71a637201">core::unit::operator&amp;</a> (<a class="el" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> left, <a class="el" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> right)</td></tr>
-<tr class="memdesc:a374996d98b0f76f73345e7b71a637201"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bitwise AND operator for unit capabilities.  <br /></td></tr>
-<tr class="separator:a374996d98b0f76f73345e7b71a637201"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99cecf1a64c1df9cc853616b0e341809" id="r_a99cecf1a64c1df9cc853616b0e341809"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00300.html#a99cecf1a64c1df9cc853616b0e341809">core::unit::operator~</a> (<a class="el" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> c)</td></tr>
-<tr class="memdesc:a99cecf1a64c1df9cc853616b0e341809"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bitwise NOT operator for unit capabilities.  <br /></td></tr>
-<tr class="separator:a99cecf1a64c1df9cc853616b0e341809"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b625326b54a079ec9aca8b6a12a9fec" id="r_a1b625326b54a079ec9aca8b6a12a9fec"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00300.html#a1b625326b54a079ec9aca8b6a12a9fec">core::unit::operator&amp;&amp;</a> (<a class="el" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> left, <a class="el" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> right)</td></tr>
-<tr class="memdesc:a1b625326b54a079ec9aca8b6a12a9fec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests whether two capabilities overlap.  <br /></td></tr>
-<tr class="separator:a1b625326b54a079ec9aca8b6a12a9fec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

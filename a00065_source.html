@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Components/Damager.hpp Source File</title>
+<title>Outpost Engine: include/Core/Commands/AddMode.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,50 +79,49 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_b572e9e567c53bf52c1d322a7f434893.html">Components</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_cd42dacb0257cf84a1e4800a9c985ad9.html">Commands</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">Damager.hpp</div></div>
+  <div class="headertitle"><div class="title">AddMode.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="a00065.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_COMPONENTS_DAMAGER_HPP</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_COMPONENTS_DAMAGER_HPP</span></div>
+<a href="a00065.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_COMMANDS_ADDMODE_HPP</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_COMMANDS_ADDMODE_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00289.html">core</a></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00418.html">core</a></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>{</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span>com</div>
+<div class="foldopen" id="foldopen00006" data-start="{" data-end="}">
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="a00425.html">    6</a></span><span class="keyword">namespace </span>cmd</div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>{</div>
 <div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="a00367.html">   13</a></span><span class="keyword">struct </span><a class="code hl_struct" href="a00367.html">Damager</a> {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="a00367.html#a5eadb5db0b1a67937b1ff68e5538da1d">   14</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="a00367.html#a5eadb5db0b1a67937b1ff68e5538da1d">damage</a>;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="a00367.html#abf4a717b1a5b55727b2477383c121ddf">   19</a></span>    <a class="code hl_function" href="a00367.html#abf4a717b1a5b55727b2477383c121ddf">Damager</a>()</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    : <a class="code hl_variable" href="a00367.html#a5eadb5db0b1a67937b1ff68e5538da1d">damage</a>(0.f) {}</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="a00409.html#gae347535f68c89b99694f8d3c8941b372">   13</a></span><span class="keyword">enum struct</span> <a class="code hl_enumeration" href="a00409.html#gae347535f68c89b99694f8d3c8941b372">AddMode</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <a class="code hl_enumvalue" href="a00409.html#ggae347535f68c89b99694f8d3c8941b372ad7ab7f5074314b8dbc02d42b4266127f">QueueEnd</a>,</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_enumvalue" href="a00409.html#ggae347535f68c89b99694f8d3c8941b372a01684d43dc813c78fde5cf84b2c83cfa">QueueStart</a>,</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_enumvalue" href="a00409.html#ggae347535f68c89b99694f8d3c8941b372a43f6615bbb2c40a5306ff804094420b1">Immediate</a>,</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <a class="code hl_enumvalue" href="a00409.html#ggae347535f68c89b99694f8d3c8941b372a77815b63cb6602918ba3a349065258c8">ReplaceAll</a></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>};</div>
 </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="a00367.html#ab264e4cab6c4e480343f0c8070ea83b3">   27</a></span>    <a class="code hl_function" href="a00367.html#ab264e4cab6c4e480343f0c8070ea83b3">Damager</a>(<span class="keywordtype">float</span> <a class="code hl_variable" href="a00367.html#a5eadb5db0b1a67937b1ff68e5538da1d">damage</a>)</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    : <a class="code hl_variable" href="a00367.html#a5eadb5db0b1a67937b1ff68e5538da1d">damage</a>(<a class="code hl_variable" href="a00367.html#a5eadb5db0b1a67937b1ff68e5538da1d">damage</a>) {}</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>} <span class="comment">// namespace cmd</span></div>
 </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
-</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>} <span class="comment">// namespace com</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>} <span class="comment">// namespace core</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aa00289_html"><div class="ttname"><a href="a00289.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00107_source.html#l00004">AddMode.hpp:5</a></div></div>
-<div class="ttc" id="aa00367_html"><div class="ttname"><a href="a00367.html">core::com::Damager</a></div><div class="ttdoc">Component that makes an entity cause damage on collision.</div><div class="ttdef"><b>Definition</b> <a href="a00065_source.html#l00013">Damager.hpp:13</a></div></div>
-<div class="ttc" id="aa00367_html_a5eadb5db0b1a67937b1ff68e5538da1d"><div class="ttname"><a href="a00367.html#a5eadb5db0b1a67937b1ff68e5538da1d">core::com::Damager::damage</a></div><div class="ttdeci">float damage</div><div class="ttdef"><b>Definition</b> <a href="a00065_source.html#l00014">Damager.hpp:14</a></div></div>
-<div class="ttc" id="aa00367_html_ab264e4cab6c4e480343f0c8070ea83b3"><div class="ttname"><a href="a00367.html#ab264e4cab6c4e480343f0c8070ea83b3">core::com::Damager::Damager</a></div><div class="ttdeci">Damager(float damage)</div><div class="ttdoc">Creates the damager component with the given damage.</div><div class="ttdef"><b>Definition</b> <a href="a00065_source.html#l00027">Damager.hpp:27</a></div></div>
-<div class="ttc" id="aa00367_html_abf4a717b1a5b55727b2477383c121ddf"><div class="ttname"><a href="a00367.html#abf4a717b1a5b55727b2477383c121ddf">core::com::Damager::Damager</a></div><div class="ttdeci">Damager()</div><div class="ttdoc">Creates the damager component with 0 damage.</div><div class="ttdef"><b>Definition</b> <a href="a00065_source.html#l00019">Damager.hpp:19</a></div></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>} <span class="comment">// namespace core</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00409_html_gae347535f68c89b99694f8d3c8941b372"><div class="ttname"><a href="a00409.html#gae347535f68c89b99694f8d3c8941b372">core::cmd::AddMode</a></div><div class="ttdeci">AddMode</div><div class="ttdoc">Ways that commands can be added to queues.</div><div class="ttdef"><b>Definition</b> <a href="a00065_source.html#l00013">AddMode.hpp:13</a></div></div>
+<div class="ttc" id="aa00409_html_ggae347535f68c89b99694f8d3c8941b372a01684d43dc813c78fde5cf84b2c83cfa"><div class="ttname"><a href="a00409.html#ggae347535f68c89b99694f8d3c8941b372a01684d43dc813c78fde5cf84b2c83cfa">core::cmd::AddMode::QueueStart</a></div><div class="ttdeci">@ QueueStart</div><div class="ttdoc">The command is added to the front of the queue.</div></div>
+<div class="ttc" id="aa00409_html_ggae347535f68c89b99694f8d3c8941b372a43f6615bbb2c40a5306ff804094420b1"><div class="ttname"><a href="a00409.html#ggae347535f68c89b99694f8d3c8941b372a43f6615bbb2c40a5306ff804094420b1">core::cmd::AddMode::Immediate</a></div><div class="ttdeci">@ Immediate</div><div class="ttdoc">The command replaces the current command (moving it to front of queue)</div></div>
+<div class="ttc" id="aa00409_html_ggae347535f68c89b99694f8d3c8941b372a77815b63cb6602918ba3a349065258c8"><div class="ttname"><a href="a00409.html#ggae347535f68c89b99694f8d3c8941b372a77815b63cb6602918ba3a349065258c8">core::cmd::AddMode::ReplaceAll</a></div><div class="ttdeci">@ ReplaceAll</div><div class="ttdoc">The command replaces the current command and the queue is emptied.</div></div>
+<div class="ttc" id="aa00409_html_ggae347535f68c89b99694f8d3c8941b372ad7ab7f5074314b8dbc02d42b4266127f"><div class="ttname"><a href="a00409.html#ggae347535f68c89b99694f8d3c8941b372ad7ab7f5074314b8dbc02d42b4266127f">core::cmd::AddMode::QueueEnd</a></div><div class="ttdeci">@ QueueEnd</div><div class="ttdoc">The command is added to the end of the queue.</div></div>
+<div class="ttc" id="aa00418_html"><div class="ttname"><a href="a00418.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00236_source.html#l00014">Arena.hpp:15</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

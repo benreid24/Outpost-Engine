@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lowbrain_0',['LowBrain',['../a00475.html',1,'core::unit::ai']]]
+  ['hud_0',['HUD',['../a00696.html',1,'core::player']]]
 ];

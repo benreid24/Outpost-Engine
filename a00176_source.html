@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Factions/Filter.hpp Source File</title>
+<title>Outpost Engine: include/Core/Components/TerrainMesh.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,77 +79,39 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_42ddb363b2c532da72bdbfc7ed778bde.html">Factions</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_b572e9e567c53bf52c1d322a7f434893.html">Components</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">Filter.hpp</div></div>
+  <div class="headertitle"><div class="title">TerrainMesh.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="a00176.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_FACTIONS_FILTER_HPP</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_FACTIONS_FILTER_HPP</span></div>
+<a href="a00176.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_COMPONENTS_TERRAINMESH_HPP</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_COMPONENTS_TERRAINMESH_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;<a class="code" href="a00182.html">Core/Factions/FactionId.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00289.html">core</a></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>{</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span>fcn</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;BLIB/Components/Mesh.hpp&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="a00158.html">Core/Rendering/PipelineIds.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;<a class="code" href="a00155.html">Core/Rendering/TerrainVertex.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00418.html">core</a></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
-<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="a00415.html">   15</a></span><span class="keyword">class </span><a class="code hl_class" href="a00415.html">Filter</a> {</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00020" data-start="{" data-end="}">
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="a00415.html#a13307c22d342e212b6f7eca4dd871855">   20</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="a00415.html#a13307c22d342e212b6f7eca4dd871855">Filter</a>()</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    : mask(0) {}</div>
-</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="a00415.html#a118ef898e810e8bae545c13aa64def93">   28</a></span>    <a class="code hl_function" href="a00415.html#a118ef898e810e8bae545c13aa64def93">Filter</a>(<a class="code hl_class" href="a00407.html">FactionId</a> <span class="keywordtype">id</span>)</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    : mask(id.id) {}</div>
-</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="a00415.html#ae9fb8b4e0ff1df4b020a4ec48e29d741">   36</a></span>    <span class="keyword">constexpr</span> <a class="code hl_function" href="a00415.html#ae9fb8b4e0ff1df4b020a4ec48e29d741">Filter</a>(<a class="code hl_typedef" href="a00407.html#a70a150873675727abd161fcc6a669039">FactionId::IdType</a> mask)</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    : mask(mask) {}</div>
-</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="a00415.html#ae007f401abffa7baef6d8b79f77846ca">   45</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="a00415.html#ae007f401abffa7baef6d8b79f77846ca">matches</a>(<a class="code hl_class" href="a00407.html">FactionId</a> <span class="keywordtype">id</span>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (<span class="keywordtype">id</span>.<span class="keywordtype">id</span> &amp; mask) != 0; }</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="a00415.html#a470162e530e4f3a519ad6c7922eb37a6">   52</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="a00415.html#a470162e530e4f3a519ad6c7922eb37a6">addId</a>(<a class="code hl_class" href="a00407.html">FactionId</a> <span class="keywordtype">id</span>) { mask |= <span class="keywordtype">id</span>.id; }</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="a00415.html#a107ad5a5c7ffb16085eb68c60e848c5b">   59</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="a00415.html#a107ad5a5c7ffb16085eb68c60e848c5b">removeId</a>(<a class="code hl_class" href="a00407.html">FactionId</a> <span class="keywordtype">id</span>) { mask &amp;= ~id.id; }</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <a class="code hl_typedef" href="a00407.html#a70a150873675727abd161fcc6a669039">FactionId::IdType</a> mask;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>};</div>
-</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="a00295.html#a77c17409b7378803bf1be0c563d0227f">   65</a></span><span class="keyword">constexpr</span> <a class="code hl_class" href="a00415.html">Filter</a> <a class="code hl_variable" href="a00295.html#a77c17409b7378803bf1be0c563d0227f">FilterEmpty</a> = <a class="code hl_class" href="a00415.html">Filter</a>();</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="a00295.html#a879106b90882a37e8ea5e3573b5b1c7f">   66</a></span><span class="keyword">constexpr</span> <a class="code hl_class" href="a00415.html">Filter</a> <a class="code hl_variable" href="a00295.html#a879106b90882a37e8ea5e3573b5b1c7f">FilterAll</a>   = <a class="code hl_class" href="a00415.html">Filter</a>(<a class="code hl_variable" href="a00407.html#a80b0211f93432d14c9f5ed4f66f7fee5">FactionId::InternalInvalidId</a>);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>} <span class="comment">// namespace fcn</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>} <span class="comment">// namespace core</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aa00182_html"><div class="ttname"><a href="a00182.html">FactionId.hpp</a></div></div>
-<div class="ttc" id="aa00289_html"><div class="ttname"><a href="a00289.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00107_source.html#l00004">AddMode.hpp:5</a></div></div>
-<div class="ttc" id="aa00295_html_a77c17409b7378803bf1be0c563d0227f"><div class="ttname"><a href="a00295.html#a77c17409b7378803bf1be0c563d0227f">core::fcn::FilterEmpty</a></div><div class="ttdeci">constexpr Filter FilterEmpty</div><div class="ttdef"><b>Definition</b> <a href="a00176_source.html#l00065">Filter.hpp:65</a></div></div>
-<div class="ttc" id="aa00295_html_a879106b90882a37e8ea5e3573b5b1c7f"><div class="ttname"><a href="a00295.html#a879106b90882a37e8ea5e3573b5b1c7f">core::fcn::FilterAll</a></div><div class="ttdeci">constexpr Filter FilterAll</div><div class="ttdef"><b>Definition</b> <a href="a00176_source.html#l00066">Filter.hpp:66</a></div></div>
-<div class="ttc" id="aa00407_html"><div class="ttname"><a href="a00407.html">core::fcn::FactionId</a></div><div class="ttdoc">Id for factions in the game. Should be treated as an opaque handle.</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00030">FactionId.hpp:30</a></div></div>
-<div class="ttc" id="aa00407_html_a70a150873675727abd161fcc6a669039"><div class="ttname"><a href="a00407.html#a70a150873675727abd161fcc6a669039">core::fcn::FactionId::IdType</a></div><div class="ttdeci">std::uint64_t IdType</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00032">FactionId.hpp:32</a></div></div>
-<div class="ttc" id="aa00407_html_a80b0211f93432d14c9f5ed4f66f7fee5"><div class="ttname"><a href="a00407.html#a80b0211f93432d14c9f5ed4f66f7fee5">core::fcn::FactionId::InternalInvalidId</a></div><div class="ttdeci">static constexpr std::uint64_t InternalInvalidId</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00034">FactionId.hpp:34</a></div></div>
-<div class="ttc" id="aa00415_html"><div class="ttname"><a href="a00415.html">core::fcn::Filter</a></div><div class="ttdoc">Filter value to query faction ids with.</div><div class="ttdef"><b>Definition</b> <a href="a00176_source.html#l00015">Filter.hpp:15</a></div></div>
-<div class="ttc" id="aa00415_html_a107ad5a5c7ffb16085eb68c60e848c5b"><div class="ttname"><a href="a00415.html#a107ad5a5c7ffb16085eb68c60e848c5b">core::fcn::Filter::removeId</a></div><div class="ttdeci">void removeId(FactionId id)</div><div class="ttdoc">Removes an id from this filter.</div><div class="ttdef"><b>Definition</b> <a href="a00176_source.html#l00059">Filter.hpp:59</a></div></div>
-<div class="ttc" id="aa00415_html_a118ef898e810e8bae545c13aa64def93"><div class="ttname"><a href="a00415.html#a118ef898e810e8bae545c13aa64def93">core::fcn::Filter::Filter</a></div><div class="ttdeci">Filter(FactionId id)</div><div class="ttdoc">Creates a filter to match the given faction id.</div><div class="ttdef"><b>Definition</b> <a href="a00176_source.html#l00028">Filter.hpp:28</a></div></div>
-<div class="ttc" id="aa00415_html_a13307c22d342e212b6f7eca4dd871855"><div class="ttname"><a href="a00415.html#a13307c22d342e212b6f7eca4dd871855">core::fcn::Filter::Filter</a></div><div class="ttdeci">constexpr Filter()</div><div class="ttdoc">Creates an empty filter.</div><div class="ttdef"><b>Definition</b> <a href="a00176_source.html#l00020">Filter.hpp:20</a></div></div>
-<div class="ttc" id="aa00415_html_a470162e530e4f3a519ad6c7922eb37a6"><div class="ttname"><a href="a00415.html#a470162e530e4f3a519ad6c7922eb37a6">core::fcn::Filter::addId</a></div><div class="ttdeci">void addId(FactionId id)</div><div class="ttdoc">Adds an id to this filter.</div><div class="ttdef"><b>Definition</b> <a href="a00176_source.html#l00052">Filter.hpp:52</a></div></div>
-<div class="ttc" id="aa00415_html_ae007f401abffa7baef6d8b79f77846ca"><div class="ttname"><a href="a00415.html#ae007f401abffa7baef6d8b79f77846ca">core::fcn::Filter::matches</a></div><div class="ttdeci">bool matches(FactionId id) const</div><div class="ttdoc">Tests whether this filter matches the given faction id.</div><div class="ttdef"><b>Definition</b> <a href="a00176_source.html#l00045">Filter.hpp:45</a></div></div>
-<div class="ttc" id="aa00415_html_ae9fb8b4e0ff1df4b020a4ec48e29d741"><div class="ttname"><a href="a00415.html#ae9fb8b4e0ff1df4b020a4ec48e29d741">core::fcn::Filter::Filter</a></div><div class="ttdeci">constexpr Filter(FactionId::IdType mask)</div><div class="ttdoc">Creates a filter from a raw bit mask.</div><div class="ttdef"><b>Definition</b> <a href="a00176_source.html#l00036">Filter.hpp:36</a></div></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span>com</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="a00427.html#a27b8598fddb451f00c12efe48e142f9f">   17</a></span><span class="keyword">using </span><a class="code hl_typedef" href="a00427.html#a27b8598fddb451f00c12efe48e142f9f">TerrainMesh</a> = bl::com::Mesh&lt;render::TerrainVertex, render::MaterialPipelineIds::SolidTerrain&gt;;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>} <span class="comment">// namespace com</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>} <span class="comment">// namespace core</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00155_html"><div class="ttname"><a href="a00155.html">TerrainVertex.hpp</a></div></div>
+<div class="ttc" id="aa00158_html"><div class="ttname"><a href="a00158.html">PipelineIds.hpp</a></div></div>
+<div class="ttc" id="aa00418_html"><div class="ttname"><a href="a00418.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00236_source.html#l00014">Arena.hpp:15</a></div></div>
+<div class="ttc" id="aa00427_html_a27b8598fddb451f00c12efe48e142f9f"><div class="ttname"><a href="a00427.html#a27b8598fddb451f00c12efe48e142f9f">core::com::TerrainMesh</a></div><div class="ttdeci">bl::com::Mesh&lt; render::TerrainVertex, render::MaterialPipelineIds::SolidTerrain &gt; TerrainMesh</div><div class="ttdoc">Component containing a mesh for terrain rendering.</div><div class="ttdef"><b>Definition</b> <a href="a00176_source.html#l00017">TerrainMesh.hpp:17</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

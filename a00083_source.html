@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Input/Control.hpp Source File</title>
+<title>Outpost Engine: include/Core/Player/Player.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,73 +79,60 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_5a360ce72f845b04181dbb6c528142b3.html">Input</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_be6ecaab1a4ec5e27af38c3573eadf7d.html">Player</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">Control.hpp</div></div>
+  <div class="headertitle"><div class="title">Player.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="a00083.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_INPUT_CONTROL_HPP</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_INPUT_CONTROL_HPP</span></div>
+<a href="a00083.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_PLAYER_PLAYER_HPP</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_PLAYER_PLAYER_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;BLIB/Input.hpp&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00289.html">core</a></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
-<div class="foldopen" id="foldopen00015" data-start="{" data-end="}">
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="a00296.html">   15</a></span><span class="keyword">namespace </span>input</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
-<div class="foldopen" id="foldopen00018" data-start="{" data-end="}">
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="a00297.html">   18</a></span><span class="keyword">namespace </span>Control</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>{</div>
-<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="a00285.html#gaf9a43071401d217a03ca35e89affedf2">   25</a></span><span class="keyword">enum</span> <a class="code hl_enumeration" href="a00285.html#gaf9a43071401d217a03ca35e89affedf2">EntityControl</a> : <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="comment">// TODO - SETUP_TASK - define the controls for the game</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4">   27</a></span>    <a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4">MoveUp</a>    = 0,</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f">   28</a></span>    <a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f">MoveRight</a> = 1,</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07">   29</a></span>    <a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07">MoveDown</a>  = 2,</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee">   30</a></span>    <a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee">MoveLeft</a>  = 3,</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a9b882d2a24b5eb81f6582255ed43db8c">   31</a></span>    <a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a9b882d2a24b5eb81f6582255ed43db8c">Sprint</a>    = 4,</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223">   32</a></span>    <a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223">Interact</a>  = 5,</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a49a69734c9eaf47436751b36372b85d7">   33</a></span>    <a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a49a69734c9eaf47436751b36372b85d7">Pause</a>     = 6,</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a1899a8772502d8ebc0f31a92bc342868">   34</a></span>    <a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a1899a8772502d8ebc0f31a92bc342868">Back</a>      = 7,</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ae1b03a6443bb04e423b2b5afba52dd5c">   35</a></span>    <a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ae1b03a6443bb04e423b2b5afba52dd5c">Count</a>,</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a5c901845de1e00083b7af54583348b8d">None</a> = <a class="code hl_enumvalue" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ae1b03a6443bb04e423b2b5afba52dd5c">Count</a></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a5c901845de1e00083b7af54583348b8d">   37</a></span>};</div>
-</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>} <span class="comment">// namespace Control</span></div>
-</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="a00296.html#a362a94172d86c7b7662228aeab1b7516">   42</a></span><span class="keyword">using </span><a class="code hl_typedef" href="a00296.html#a362a94172d86c7b7662228aeab1b7516">EntityControl</a> = std::underlying_type_t&lt;Control::EntityControl&gt;;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keywordtype">void</span> <a class="code hl_function" href="a00296.html#a293f677406b187f5aab5509859935f33">configureInputSystem</a>(bl::input::InputSystem&amp; system);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>} <span class="comment">// namespace input</span></div>
-</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>} <span class="comment">// namespace core</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;BLIB/Engine/Player.hpp&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="a00245.html">Core/Factions/FactionId.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;<a class="code" href="a00080.html">Core/Player/HUD.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00418.html">core</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span>player</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="};">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="a00720.html">   24</a></span><span class="keyword">class </span><a class="code hl_class" href="a00720.html">Player</a> : <span class="keyword">public</span> bl::engine::Player {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_class" href="a00720.html">Player</a>(bl::engine::Engine&amp; engine, bl::rc::Observer* observer, bl::input::Actor* actor);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="a00720.html#ad38000f3d1cf0bfa5b6a82e3a59ba3f9">   38</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="a00720.html#ad38000f3d1cf0bfa5b6a82e3a59ba3f9">~Player</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="a00720.html#a04ac0d669e2838c479558fb54c5695b9">   43</a></span>    <a class="code hl_class" href="a00696.html">HUD</a>&amp; <a class="code hl_function" href="a00720.html#a04ac0d669e2838c479558fb54c5695b9">getHud</a>() { <span class="keywordflow">return</span> hud; }</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="a00720.html#a5e2fbf838d5335ac024ab8814fe951a4">   48</a></span>    <a class="code hl_class" href="a00680.html">fcn::FactionId</a> <a class="code hl_function" href="a00720.html#a5e2fbf838d5335ac024ab8814fe951a4">getFaction</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> faction; }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_class" href="a00696.html">HUD</a> hud;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <a class="code hl_class" href="a00680.html">fcn::FactionId</a> faction;</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aa00285_html_gaf9a43071401d217a03ca35e89affedf2"><div class="ttname"><a href="a00285.html#gaf9a43071401d217a03ca35e89affedf2">core::input::Control::EntityControl</a></div><div class="ttdeci">EntityControl</div><div class="ttdoc">Contains the various inputs a player or AI can use to control the game or an NPC.</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00025">Control.hpp:25</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07">core::input::Control::MoveDown</a></div><div class="ttdeci">@ MoveDown</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00029">Control.hpp:29</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2a1899a8772502d8ebc0f31a92bc342868"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a1899a8772502d8ebc0f31a92bc342868">core::input::Control::Back</a></div><div class="ttdeci">@ Back</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00034">Control.hpp:34</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2a49a69734c9eaf47436751b36372b85d7"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a49a69734c9eaf47436751b36372b85d7">core::input::Control::Pause</a></div><div class="ttdeci">@ Pause</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00033">Control.hpp:33</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2a5c901845de1e00083b7af54583348b8d"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a5c901845de1e00083b7af54583348b8d">core::input::Control::None</a></div><div class="ttdeci">@ None</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00037">Control.hpp:36</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223">core::input::Control::Interact</a></div><div class="ttdeci">@ Interact</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00032">Control.hpp:32</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2a9b882d2a24b5eb81f6582255ed43db8c"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2a9b882d2a24b5eb81f6582255ed43db8c">core::input::Control::Sprint</a></div><div class="ttdeci">@ Sprint</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00031">Control.hpp:31</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee">core::input::Control::MoveLeft</a></div><div class="ttdeci">@ MoveLeft</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00030">Control.hpp:30</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f">core::input::Control::MoveRight</a></div><div class="ttdeci">@ MoveRight</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00028">Control.hpp:28</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2ae1b03a6443bb04e423b2b5afba52dd5c"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2ae1b03a6443bb04e423b2b5afba52dd5c">core::input::Control::Count</a></div><div class="ttdeci">@ Count</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00035">Control.hpp:35</a></div></div>
-<div class="ttc" id="aa00285_html_ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4"><div class="ttname"><a href="a00285.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4">core::input::Control::MoveUp</a></div><div class="ttdeci">@ MoveUp</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00027">Control.hpp:27</a></div></div>
-<div class="ttc" id="aa00289_html"><div class="ttname"><a href="a00289.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00107_source.html#l00004">AddMode.hpp:5</a></div></div>
-<div class="ttc" id="aa00296_html_a293f677406b187f5aab5509859935f33"><div class="ttname"><a href="a00296.html#a293f677406b187f5aab5509859935f33">core::input::configureInputSystem</a></div><div class="ttdeci">void configureInputSystem(bl::input::InputSystem &amp;system)</div><div class="ttdoc">Configures the input system and sets default controls.</div><div class="ttdef"><b>Definition</b> <a href="a00224_source.html#l00007">Control.cpp:7</a></div></div>
-<div class="ttc" id="aa00296_html_a362a94172d86c7b7662228aeab1b7516"><div class="ttname"><a href="a00296.html#a362a94172d86c7b7662228aeab1b7516">core::input::EntityControl</a></div><div class="ttdeci">std::underlying_type_t&lt; Control::EntityControl &gt; EntityControl</div><div class="ttdoc">Helper typedef to avoid too much casting boilerplate.</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00042">Control.hpp:42</a></div></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> onWorldChange(bl::engine::World* prev, bl::engine::World* next) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>};</div>
+</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>} <span class="comment">// namespace player</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>} <span class="comment">// namespace core</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00080_html"><div class="ttname"><a href="a00080.html">HUD.hpp</a></div></div>
+<div class="ttc" id="aa00245_html"><div class="ttname"><a href="a00245.html">FactionId.hpp</a></div></div>
+<div class="ttc" id="aa00418_html"><div class="ttname"><a href="a00418.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00236_source.html#l00014">Arena.hpp:15</a></div></div>
+<div class="ttc" id="aa00680_html"><div class="ttname"><a href="a00680.html">core::fcn::FactionId</a></div><div class="ttdoc">Id for factions in the game. Should be treated as an opaque handle.</div><div class="ttdef"><b>Definition</b> <a href="a00245_source.html#l00030">FactionId.hpp:30</a></div></div>
+<div class="ttc" id="aa00696_html"><div class="ttname"><a href="a00696.html">core::player::HUD</a></div><div class="ttdoc">Top level HUD class for the player.</div><div class="ttdef"><b>Definition</b> <a href="a00080_source.html#l00020">HUD.hpp:20</a></div></div>
+<div class="ttc" id="aa00720_html"><div class="ttname"><a href="a00720.html">core::player::Player</a></div><div class="ttdoc">Player class that owns player specific state and UI.</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00024">Player.hpp:24</a></div></div>
+<div class="ttc" id="aa00720_html_a04ac0d669e2838c479558fb54c5695b9"><div class="ttname"><a href="a00720.html#a04ac0d669e2838c479558fb54c5695b9">core::player::Player::getHud</a></div><div class="ttdeci">HUD &amp; getHud()</div><div class="ttdoc">Returns the HUD for this player.</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00043">Player.hpp:43</a></div></div>
+<div class="ttc" id="aa00720_html_a5e2fbf838d5335ac024ab8814fe951a4"><div class="ttname"><a href="a00720.html#a5e2fbf838d5335ac024ab8814fe951a4">core::player::Player::getFaction</a></div><div class="ttdeci">fcn::FactionId getFaction() const</div><div class="ttdoc">Returns the faction controlled by this player.</div><div class="ttdef"><b>Definition</b> <a href="a00083_source.html#l00048">Player.hpp:48</a></div></div>
+<div class="ttc" id="aa00720_html_ad38000f3d1cf0bfa5b6a82e3a59ba3f9"><div class="ttname"><a href="a00720.html#ad38000f3d1cf0bfa5b6a82e3a59ba3f9">core::player::Player::~Player</a></div><div class="ttdeci">virtual ~Player()=default</div><div class="ttdoc">Destroys the player.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

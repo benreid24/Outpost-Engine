@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Unit/Capability.hpp Source File</title>
+<title>Outpost Engine: include/Core/Systems/Render.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,80 +79,76 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_b638a04f7290da32ecfac2df55fb6497.html">Unit</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_9ee9775a41bd202429166df6e1b725b2.html">Systems</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">Capability.hpp</div></div>
+  <div class="headertitle"><div class="title">Render.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="a00014.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_UNIT_CAPABILITY_HPP</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_UNIT_CAPABILITY_HPP</span></div>
+<a href="a00014.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_SYSTEMS_RENDER_HPP</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_SYSTEMS_RENDER_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00289.html">core</a></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span>unit</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
-<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">   16</a></span><span class="keyword">enum struct</span> <a class="code hl_enumeration" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> : std::uint32_t {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <a class="code hl_enumvalue" href="a00282.html#ggabbac056d8b58ac01b45802842280cdaea6adf97f83acf6453d4a6a4b1070f3754">None</a>    = 0,</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_enumvalue" href="a00282.html#ggabbac056d8b58ac01b45802842280cdaea4bbb8f967da6d1a610596d7257179c2b">Invalid</a> = 0,</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_enumvalue" href="a00282.html#ggabbac056d8b58ac01b45802842280cdaea8d2de5368588552fbae54044ac5c7b3d">Rotate</a>  = 0x1 &lt;&lt; 0,</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_enumvalue" href="a00282.html#ggabbac056d8b58ac01b45802842280cdaea6bc362dbf494c61ea117fe3c71ca48a5">Move</a>    = 0x1 &lt;&lt; 1,</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_enumvalue" href="a00282.html#ggabbac056d8b58ac01b45802842280cdaeacf4a0298c82a0d16c03788f8d0ce273c">Shoot</a>   = 0x1 &lt;&lt; 2</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>};</div>
-</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="foldopen" id="foldopen00031" data-start="{" data-end="}">
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="a00300.html#abfb93ba7ba1b3eb45435163e0cb4ceb9">   31</a></span><span class="keyword">inline</span> <span class="keyword">constexpr</span> <a class="code hl_enumeration" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> <a class="code hl_function" href="a00300.html#abfb93ba7ba1b3eb45435163e0cb4ceb9">operator|</a>(<a class="code hl_enumeration" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> left, <a class="code hl_enumeration" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> right) {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">using </span>T = std::underlying_type_t&lt;Capability&gt;;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a><span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(left) | <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(right));</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>}</div>
-</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="a00300.html#a374996d98b0f76f73345e7b71a637201">   43</a></span><span class="keyword">inline</span> <span class="keyword">constexpr</span> <a class="code hl_enumeration" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> <a class="code hl_function" href="a00300.html#a374996d98b0f76f73345e7b71a637201">operator&amp;</a>(<a class="code hl_enumeration" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> left, <a class="code hl_enumeration" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> right) {</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">using </span>T = std::underlying_type_t&lt;Capability&gt;;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a><span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(left) &amp; <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(right));</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>}</div>
-</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="a00300.html#a99cecf1a64c1df9cc853616b0e341809">   54</a></span><span class="keyword">inline</span> <span class="keyword">constexpr</span> <a class="code hl_enumeration" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> <a class="code hl_function" href="a00300.html#a99cecf1a64c1df9cc853616b0e341809">operator~</a>(<a class="code hl_enumeration" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> c) {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keyword">using </span>T = std::underlying_type_t&lt;Capability&gt;;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code hl_enumeration" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a><span class="keyword">&gt;</span>(~static_cast&lt;T&gt;(c));</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>}</div>
-</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="foldopen" id="foldopen00066" data-start="{" data-end="}">
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="a00300.html#a1b625326b54a079ec9aca8b6a12a9fec">   66</a></span><span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="a00300.html#a1b625326b54a079ec9aca8b6a12a9fec">operator&amp;&amp;</a>(<a class="code hl_enumeration" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> left, <a class="code hl_enumeration" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a> right) {</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">return</span> (left &amp; right) != <a class="code hl_enumvalue" href="a00282.html#ggabbac056d8b58ac01b45802842280cdaea4bbb8f967da6d1a610596d7257179c2b">Capability::Invalid</a>;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}</div>
-</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>} <span class="comment">// namespace unit</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>} <span class="comment">// namespace core</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;BLIB/ECS/Entity.hpp&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;BLIB/Engine/System.hpp&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;BLIB/Render/Color.hpp&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;BLIB/Render/Resources/MaterialRef.hpp&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;<a class="code" href="a00230.html">Core/Arena/Generation/Biome.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;<a class="code" href="a01007.html">Core/World/Node.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00418.html">core</a></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>{</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">namespace </span>sys</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>{</div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="a00756.html">   28</a></span><span class="keyword">class </span><a class="code hl_class" href="a00756.html">Render</a> : <span class="keyword">public</span> bl::engine::System {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="a00756.html#a20ce2362025619c0405e6044fc725316">   30</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> std::uint32_t <a class="code hl_variable" href="a00756.html#a20ce2362025619c0405e6044fc725316">NodeEdgesPipelineId</a> = 1000;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_function" href="a00756.html#abba664f187b6c526cf6e48f1c656ed8c">Render</a>();</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="a00756.html#af5c8cda7cafe49289d24d5ed37fb1897">   40</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="a00756.html#af5c8cda7cafe49289d24d5ed37fb1897">~Render</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="a00756.html#a6b750e9f08d2f0402cdb1a49469fb20e">addTestGraphicsToEntity</a>(bl::ecs::Entity entity, glm::vec2 size, bl::rc::Color color);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="a00756.html#a6b750e9f08d2f0402cdb1a49469fb20e">addTestGraphicsToEntity</a>(bl::ecs::Entity entity, <span class="keywordtype">float</span> radius, bl::rc::Color color);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="a00756.html#a87b0bce84fe2f1d8e6ebdae21eb6c062">updateTestGraphicsColor</a>(bl::ecs::Entity entity, bl::rc::Color color);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="a00756.html#ab7fb4b5dc3e04597a96e0aa5b66f47ad">setupTerrainRendering</a>();</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aa00282_html_gabbac056d8b58ac01b45802842280cdae"><div class="ttname"><a href="a00282.html#gabbac056d8b58ac01b45802842280cdae">core::unit::Capability</a></div><div class="ttdeci">Capability</div><div class="ttdoc">Enum representing a unit's capabilities.</div><div class="ttdef"><b>Definition</b> <a href="a00014_source.html#l00016">Capability.hpp:16</a></div></div>
-<div class="ttc" id="aa00282_html_ggabbac056d8b58ac01b45802842280cdaea4bbb8f967da6d1a610596d7257179c2b"><div class="ttname"><a href="a00282.html#ggabbac056d8b58ac01b45802842280cdaea4bbb8f967da6d1a610596d7257179c2b">core::unit::Capability::Invalid</a></div><div class="ttdeci">@ Invalid</div></div>
-<div class="ttc" id="aa00282_html_ggabbac056d8b58ac01b45802842280cdaea6adf97f83acf6453d4a6a4b1070f3754"><div class="ttname"><a href="a00282.html#ggabbac056d8b58ac01b45802842280cdaea6adf97f83acf6453d4a6a4b1070f3754">core::unit::Capability::None</a></div><div class="ttdeci">@ None</div></div>
-<div class="ttc" id="aa00282_html_ggabbac056d8b58ac01b45802842280cdaea6bc362dbf494c61ea117fe3c71ca48a5"><div class="ttname"><a href="a00282.html#ggabbac056d8b58ac01b45802842280cdaea6bc362dbf494c61ea117fe3c71ca48a5">core::unit::Capability::Move</a></div><div class="ttdeci">@ Move</div></div>
-<div class="ttc" id="aa00282_html_ggabbac056d8b58ac01b45802842280cdaea8d2de5368588552fbae54044ac5c7b3d"><div class="ttname"><a href="a00282.html#ggabbac056d8b58ac01b45802842280cdaea8d2de5368588552fbae54044ac5c7b3d">core::unit::Capability::Rotate</a></div><div class="ttdeci">@ Rotate</div></div>
-<div class="ttc" id="aa00282_html_ggabbac056d8b58ac01b45802842280cdaeacf4a0298c82a0d16c03788f8d0ce273c"><div class="ttname"><a href="a00282.html#ggabbac056d8b58ac01b45802842280cdaeacf4a0298c82a0d16c03788f8d0ce273c">core::unit::Capability::Shoot</a></div><div class="ttdeci">@ Shoot</div></div>
-<div class="ttc" id="aa00289_html"><div class="ttname"><a href="a00289.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00107_source.html#l00004">AddMode.hpp:5</a></div></div>
-<div class="ttc" id="aa00300_html_a1b625326b54a079ec9aca8b6a12a9fec"><div class="ttname"><a href="a00300.html#a1b625326b54a079ec9aca8b6a12a9fec">core::unit::operator&amp;&amp;</a></div><div class="ttdeci">constexpr bool operator&amp;&amp;(Capability left, Capability right)</div><div class="ttdoc">Tests whether two capabilities overlap.</div><div class="ttdef"><b>Definition</b> <a href="a00014_source.html#l00066">Capability.hpp:66</a></div></div>
-<div class="ttc" id="aa00300_html_a374996d98b0f76f73345e7b71a637201"><div class="ttname"><a href="a00300.html#a374996d98b0f76f73345e7b71a637201">core::unit::operator&amp;</a></div><div class="ttdeci">constexpr Capability operator&amp;(Capability left, Capability right)</div><div class="ttdoc">Bitwise AND operator for unit capabilities.</div><div class="ttdef"><b>Definition</b> <a href="a00014_source.html#l00043">Capability.hpp:43</a></div></div>
-<div class="ttc" id="aa00300_html_a99cecf1a64c1df9cc853616b0e341809"><div class="ttname"><a href="a00300.html#a99cecf1a64c1df9cc853616b0e341809">core::unit::operator~</a></div><div class="ttdeci">constexpr Capability operator~(Capability c)</div><div class="ttdoc">Bitwise NOT operator for unit capabilities.</div><div class="ttdef"><b>Definition</b> <a href="a00014_source.html#l00054">Capability.hpp:54</a></div></div>
-<div class="ttc" id="aa00300_html_abfb93ba7ba1b3eb45435163e0cb4ceb9"><div class="ttname"><a href="a00300.html#abfb93ba7ba1b3eb45435163e0cb4ceb9">core::unit::operator|</a></div><div class="ttdeci">constexpr Capability operator|(Capability left, Capability right)</div><div class="ttdoc">Bitwise OR operator for unit capabilities.</div><div class="ttdef"><b>Definition</b> <a href="a00014_source.html#l00031">Capability.hpp:31</a></div></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    bl::engine::Engine* engine;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    bl::rc::res::MaterialRef</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        terrainBiomeMaterials[<span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa4905ac9d6a22bdfc1ae096094ce6248d">arena::gen::Biome::COUNT</a>)];</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordtype">void</span> init(bl::engine::Engine&amp; engine) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordtype">void</span> update(std::mutex&amp; stageMutex, <span class="keywordtype">float</span> dt, <span class="keywordtype">float</span> realDt, <span class="keywordtype">float</span> residual,</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                <span class="keywordtype">float</span> realResidual) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>};</div>
+</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>} <span class="comment">// namespace sys</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>} <span class="comment">// namespace core</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00230_html"><div class="ttname"><a href="a00230.html">Biome.hpp</a></div></div>
+<div class="ttc" id="aa00407_html_ggae80a70a999356090fd444a80e3594f1aa4905ac9d6a22bdfc1ae096094ce6248d"><div class="ttname"><a href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa4905ac9d6a22bdfc1ae096094ce6248d">core::arena::gen::Biome::COUNT</a></div><div class="ttdeci">@ COUNT</div></div>
+<div class="ttc" id="aa00418_html"><div class="ttname"><a href="a00418.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00236_source.html#l00014">Arena.hpp:15</a></div></div>
+<div class="ttc" id="aa00756_html"><div class="ttname"><a href="a00756.html">core::sys::Render</a></div><div class="ttdoc">Core game system that manages how entities are rendered.</div><div class="ttdef"><b>Definition</b> <a href="a00014_source.html#l00028">Render.hpp:28</a></div></div>
+<div class="ttc" id="aa00756_html_a20ce2362025619c0405e6044fc725316"><div class="ttname"><a href="a00756.html#a20ce2362025619c0405e6044fc725316">core::sys::Render::NodeEdgesPipelineId</a></div><div class="ttdeci">static constexpr std::uint32_t NodeEdgesPipelineId</div><div class="ttdef"><b>Definition</b> <a href="a00014_source.html#l00030">Render.hpp:30</a></div></div>
+<div class="ttc" id="aa00756_html_a6b750e9f08d2f0402cdb1a49469fb20e"><div class="ttname"><a href="a00756.html#a6b750e9f08d2f0402cdb1a49469fb20e">core::sys::Render::addTestGraphicsToEntity</a></div><div class="ttdeci">void addTestGraphicsToEntity(bl::ecs::Entity entity, glm::vec2 size, bl::rc::Color color)</div><div class="ttdoc">Adds basic testing graphics to the given entity.</div><div class="ttdef"><b>Definition</b> <a href="a00281_source.html#l00026">Render.cpp:26</a></div></div>
+<div class="ttc" id="aa00756_html_a87b0bce84fe2f1d8e6ebdae21eb6c062"><div class="ttname"><a href="a00756.html#a87b0bce84fe2f1d8e6ebdae21eb6c062">core::sys::Render::updateTestGraphicsColor</a></div><div class="ttdeci">void updateTestGraphicsColor(bl::ecs::Entity entity, bl::rc::Color color)</div><div class="ttdoc">Sets the test graphics for the given entity to the new color.</div><div class="ttdef"><b>Definition</b> <a href="a00281_source.html#l00082">Render.cpp:82</a></div></div>
+<div class="ttc" id="aa00756_html_ab7fb4b5dc3e04597a96e0aa5b66f47ad"><div class="ttname"><a href="a00756.html#ab7fb4b5dc3e04597a96e0aa5b66f47ad">core::sys::Render::setupTerrainRendering</a></div><div class="ttdeci">void setupTerrainRendering()</div><div class="ttdoc">Creates pipelines and materials for terrain rendering.</div><div class="ttdef"><b>Definition</b> <a href="a00281_source.html#l00092">Render.cpp:92</a></div></div>
+<div class="ttc" id="aa00756_html_abba664f187b6c526cf6e48f1c656ed8c"><div class="ttname"><a href="a00756.html#abba664f187b6c526cf6e48f1c656ed8c">core::sys::Render::Render</a></div><div class="ttdeci">Render()</div><div class="ttdoc">Creates the system.</div><div class="ttdef"><b>Definition</b> <a href="a00281_source.html#l00022">Render.cpp:22</a></div></div>
+<div class="ttc" id="aa00756_html_af5c8cda7cafe49289d24d5ed37fb1897"><div class="ttname"><a href="a00756.html#af5c8cda7cafe49289d24d5ed37fb1897">core::sys::Render::~Render</a></div><div class="ttdeci">virtual ~Render()=default</div><div class="ttdoc">Destroys the system.</div></div>
+<div class="ttc" id="aa01007_html"><div class="ttname"><a href="a01007.html">Node.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

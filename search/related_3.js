@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['operator_3c_3c_0',['operator&lt;&lt;',['../a00407.html#a1779d5201352d7455bd9462de1b17892',1,'core::fcn::FactionId']]]
+  ['factions_0',['Factions',['../a00676.html#a0affb64624f2b7e991c349081d1aec6f',1,'core::fcn::Faction']]],
+  ['filter_1',['Filter',['../a00680.html#a34f7bc7cd29643e53d23b7d500d21739',1,'core::fcn::FactionId']]]
 ];

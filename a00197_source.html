@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: src/Core/Unit/SquadManager.cpp Source File</title>
+<title>Outpost Engine: include/Core/Arena/Generation/AdjacencyBonus.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,125 +79,115 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a2f0e5642e47e7ed59fe0f0829eafb5f.html">Core</a></li><li class="navelem"><a class="el" href="dir_f0654ae01a7bcca659aa4ec1de065498.html">Unit</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_abca691009d11aafdd50b5a787683a53.html">Arena</a></li><li class="navelem"><a class="el" href="dir_2b9b30eea8bdf5f86ca97e62235d9acc.html">Generation</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">SquadManager.cpp</div></div>
+  <div class="headertitle"><div class="title">AdjacencyBonus.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="a00197.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &lt;<a class="code" href="a00011.html">Core/Unit/SquadManager.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="a00685.html">Core/Game.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00289.html">core</a></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>{</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span>unit</div>
+<a href="a00197.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_ARENA_GENERATION_ADJACENCYBONUS_HPP</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_ARENA_GENERATION_ADJACENCYBONUS_HPP</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;<a class="code" href="a00230.html">Core/Arena/Generation/Biome.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00418.html">core</a></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="a00555.html#aba39095366384b7cafbd1ad068b80a9e">    9</a></span><a class="code hl_function" href="a00555.html#aba39095366384b7cafbd1ad068b80a9e">SquadManager::SquadManager</a>() { internalRefs.reserve(64); }</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="foldopen" id="foldopen00011" data-start="{" data-end="}">
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="a00555.html#a6ad39447664a1ce019048c29d7f0643f">   11</a></span><a class="code hl_typedef" href="a00555.html#a121e0dc9d718d86c7d0690af962d873a">SquadManager::Ref</a> <a class="code hl_function" href="a00555.html#a6ad39447664a1ce019048c29d7f0643f">SquadManager::makeSquad</a>(<a class="code hl_class" href="a00407.html">fcn::FactionId</a> faction) {</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <a class="code hl_typedef" href="a00555.html#a121e0dc9d718d86c7d0690af962d873a">Ref</a> squad = squads.emplace(faction);</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    internalRefs.emplace_back(squad);</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordflow">return</span> squad;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>}</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span>arena</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span>gen</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
+<div class="foldopen" id="foldopen00018" data-start="{" data-end="};">
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="a00468.html">   18</a></span><span class="keyword">struct </span><a class="code hl_struct" href="a00468.html">AdjacencyBonus</a> {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="a00468.html#a24cea75c8c701340cddc8a558af3121d">   19</a></span>    <span class="keyword">enum struct</span> <a class="code hl_enumeration" href="a00468.html#a24cea75c8c701340cddc8a558af3121d">Relationship</a> { <a class="code hl_enumvalue" href="a00468.html#a24cea75c8c701340cddc8a558af3121dac90a13d8ec8fe53c6bb33fe10af6f2fe">Same</a>, <a class="code hl_enumvalue" href="a00468.html#a24cea75c8c701340cddc8a558af3121da10989754eb9c7a4dfb1092f693ed9e69">Different</a> };</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="a00468.html#a69b593a58dc15a9e635b92687b02b710">   20</a></span>    <span class="keyword">enum struct</span> <a class="code hl_enumeration" href="a00468.html#a69b593a58dc15a9e635b92687b02b710">Behavior</a> { <a class="code hl_enumvalue" href="a00468.html#a69b593a58dc15a9e635b92687b02b710a3f7b3d8ee7bf0d542bd50821c083888f">Additive</a>, <a class="code hl_enumvalue" href="a00468.html#a69b593a58dc15a9e635b92687b02b710a0d73bf5decac382ed6a8adc3838fd7e2">Multiplicative</a> };</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="a00468.html#a00478c3ebbc140e39b9b3a47cdffa72a">   22</a></span>    <a class="code hl_enumeration" href="a00407.html#gae80a70a999356090fd444a80e3594f1a">Biome</a> <a class="code hl_variable" href="a00468.html#a00478c3ebbc140e39b9b3a47cdffa72a">biome</a>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="a00468.html#ab7ead6f8f55b619543a06455836134ef">   23</a></span>    <a class="code hl_enumeration" href="a00468.html#a24cea75c8c701340cddc8a558af3121d">Relationship</a> <a class="code hl_variable" href="a00468.html#ab7ead6f8f55b619543a06455836134ef">relationship</a> = <a class="code hl_enumvalue" href="a00468.html#a24cea75c8c701340cddc8a558af3121dac90a13d8ec8fe53c6bb33fe10af6f2fe">Relationship::Same</a>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="a00468.html#a7d82cab0f1a3b6ce45ffbdcedf8cc408">   24</a></span>    <a class="code hl_enumeration" href="a00468.html#a69b593a58dc15a9e635b92687b02b710">Behavior</a> <a class="code hl_variable" href="a00468.html#a7d82cab0f1a3b6ce45ffbdcedf8cc408">stackBehavior</a>    = <a class="code hl_enumvalue" href="a00468.html#a69b593a58dc15a9e635b92687b02b710a0d73bf5decac382ed6a8adc3838fd7e2">Behavior::Multiplicative</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="a00468.html#a64faf388c7c221d7be8db1046d432386">   25</a></span>    <a class="code hl_enumeration" href="a00468.html#a69b593a58dc15a9e635b92687b02b710">Behavior</a> <a class="code hl_variable" href="a00468.html#a64faf388c7c221d7be8db1046d432386">applyBehavior</a>    = <a class="code hl_enumvalue" href="a00468.html#a69b593a58dc15a9e635b92687b02b710a3f7b3d8ee7bf0d542bd50821c083888f">Behavior::Additive</a>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="a00468.html#aa54b87dfecd8218e4048b7eb6a5d325a">   26</a></span>    std::uint64_t <a class="code hl_variable" href="a00468.html#aa54b87dfecd8218e4048b7eb6a5d325a">bonus</a>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="}">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="a00468.html#a116148277acd0fc858b4098c52fa49b0">   31</a></span>    std::uint64_t <a class="code hl_function" href="a00468.html#a116148277acd0fc858b4098c52fa49b0">initialBonus</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keywordflow">switch</span> (<a class="code hl_variable" href="a00468.html#a7d82cab0f1a3b6ce45ffbdcedf8cc408">stackBehavior</a>) {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="a00468.html#a69b593a58dc15a9e635b92687b02b710a3f7b3d8ee7bf0d542bd50821c083888f">Behavior::Additive</a>:</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="a00468.html#a69b593a58dc15a9e635b92687b02b710a0d73bf5decac382ed6a8adc3838fd7e2">Behavior::Multiplicative</a>:</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
 </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="foldopen" id="foldopen00017" data-start="{" data-end="}">
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="a00555.html#ab396465a1efbfd7a4c4b13629213f24f">   17</a></span>std::vector&lt;SquadManager::Ref&gt; <a class="code hl_function" href="a00555.html#ab396465a1efbfd7a4c4b13629213f24f">SquadManager::getFactionSquads</a>(<a class="code hl_class" href="a00407.html">fcn::FactionId</a> faction) {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    std::vector&lt;SquadManager::Ref&gt; <a class="code hl_variable" href="a00215.html#aec74316d08a12cac990001891c64d891">result</a>;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    std::size_t count = 0;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; squad : internalRefs) {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordflow">if</span> (squad-&gt;getFaction() == faction) { ++count; }</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    }</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_variable" href="a00215.html#aec74316d08a12cac990001891c64d891">result</a>.reserve(count);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; squad : internalRefs) {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordflow">if</span> (squad-&gt;getFaction() == faction) { <a class="code hl_variable" href="a00215.html#aec74316d08a12cac990001891c64d891">result</a>.emplace_back(squad); }</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    }</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="a00215.html#aec74316d08a12cac990001891c64d891">result</a>;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="a00468.html#a703cbd28dc9b1827c49bf6051e08d11a">   50</a></span>    <span class="keyword">static</span> std::uint64_t <a class="code hl_function" href="a00468.html#a703cbd28dc9b1827c49bf6051e08d11a">combine</a>(std::uint64_t weight, std::uint64_t newBonus, <a class="code hl_enumeration" href="a00468.html#a69b593a58dc15a9e635b92687b02b710">Behavior</a> behavior) {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordflow">switch</span> (behavior) {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="a00468.html#a69b593a58dc15a9e635b92687b02b710a3f7b3d8ee7bf0d542bd50821c083888f">Behavior::Additive</a>:</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            <span class="keywordflow">return</span> weight + newBonus;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="a00468.html#a69b593a58dc15a9e635b92687b02b710a0d73bf5decac382ed6a8adc3838fd7e2">Behavior::Multiplicative</a>:</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            <span class="keywordflow">return</span> weight * newBonus;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            <span class="keywordflow">return</span> weight;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
 </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keywordtype">void</span> SquadManager::init(bl::engine::Engine&amp;) {</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="comment">// noop</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>}</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keywordtype">void</span> SquadManager::update(std::mutex&amp;, <span class="keywordtype">float</span> dt, <span class="keywordtype">float</span>, <span class="keywordtype">float</span>, <span class="keywordtype">float</span>) {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    std::erase_if(internalRefs, [](<span class="keyword">auto</span>&amp; squad) { <span class="keywordflow">return</span> squad.refCount() == 1; });</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; squad : internalRefs) {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordflow">if</span> (squad-&gt;commandQueue.hasCommand()) {</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            <span class="keywordflow">if</span> (squad-&gt;units.empty()) {</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                squad-&gt;commandQueue.failCurrentCommand();</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            }</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            <span class="keywordflow">if</span> (squad-&gt;unitCommands.empty()) { issueUnitCommands(*squad); }</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            <span class="keywordflow">else</span> { checkUnitCommands(*squad); }</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        }</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keywordtype">void</span> SquadManager::issueUnitCommands(Squad&amp; squad) {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">auto</span>&amp; <a class="code hl_namespace" href="a00304.html">game</a>      = bl::game::Game::getInstance&lt;Game&gt;();</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; cmd = squad.commandQueue.getCurrentCommand();</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">using </span>T = <a class="code hl_enumeration" href="a00347.html#a1860eaadbfecfcd0d8ac7aa9aceadd42">cmd::SquadCommand::Type</a>;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">switch</span> (cmd.getType()) {</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">case</span> T::Idle:</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        doCommandCreateAndIssue(squad, [&amp;<a class="code hl_namespace" href="a00304.html">game</a>, &amp;cmd]() {</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keywordflow">return</span> <a class="code hl_namespace" href="a00304.html">game</a>.commandStore().unitMakeIdle(cmd.getAggroLevel());</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        });</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">case</span> T::Move:</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="comment">// TODO - area selection algo + issue commands</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">case</span> T::Suppress:</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="comment">// TODO - area selection algo + issue commands</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordflow">case</span> T::AttackArea:</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="comment">// TODO - area selection algo + issue commands</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordflow">case</span> T::AttackUnit:</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        doCommandCreateAndIssue(squad, [&amp;<a class="code hl_namespace" href="a00304.html">game</a>, &amp;cmd]() {</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <span class="keywordflow">return</span> <a class="code hl_namespace" href="a00304.html">game</a>.commandStore().unitMakeAttack(cmd.getTarget(), cmd.getAggroLevel());</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        });</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    }</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>}</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="keywordtype">void</span> SquadManager::checkUnitCommands(Squad&amp; squad) {</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    std::size_t succeeded = 0;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="comment">// TODO - check all terminal + determine result + mark squad command</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>}</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>} <span class="comment">// namespace unit</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>} <span class="comment">// namespace core</span></div>
-<div class="ttc" id="aa00011_html"><div class="ttname"><a href="a00011.html">SquadManager.hpp</a></div></div>
-<div class="ttc" id="aa00215_html_aec74316d08a12cac990001891c64d891"><div class="ttname"><a href="a00215.html#aec74316d08a12cac990001891c64d891">result</a></div><div class="ttdeci">std::vector&lt; com::Unit * &gt; * result</div><div class="ttdef"><b>Definition</b> <a href="a00215_source.html#l00022">World.cpp:22</a></div></div>
-<div class="ttc" id="aa00289_html"><div class="ttname"><a href="a00289.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00107_source.html#l00004">AddMode.hpp:5</a></div></div>
-<div class="ttc" id="aa00304_html"><div class="ttname"><a href="a00304.html">game</a></div><div class="ttdoc">All classes and modules that implement the game itself.</div><div class="ttdef"><b>Definition</b> <a href="a00188_source.html#l00004">ConstantsGame.hpp:5</a></div></div>
-<div class="ttc" id="aa00347_html_a1860eaadbfecfcd0d8ac7aa9aceadd42"><div class="ttname"><a href="a00347.html#a1860eaadbfecfcd0d8ac7aa9aceadd42">core::cmd::SquadCommand::Type</a></div><div class="ttdeci">Type</div><div class="ttdef"><b>Definition</b> <a href="a00134_source.html#l00020">SquadCommand.hpp:20</a></div></div>
-<div class="ttc" id="aa00407_html"><div class="ttname"><a href="a00407.html">core::fcn::FactionId</a></div><div class="ttdoc">Id for factions in the game. Should be treated as an opaque handle.</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00030">FactionId.hpp:30</a></div></div>
-<div class="ttc" id="aa00555_html_a121e0dc9d718d86c7d0690af962d873a"><div class="ttname"><a href="a00555.html#a121e0dc9d718d86c7d0690af962d873a">core::unit::SquadManager::Ref</a></div><div class="ttdeci">bl::util::Ref&lt; Squad &gt; Ref</div><div class="ttdoc">Handle to a squad. Owning a handle keeps the squad in scope.</div><div class="ttdef"><b>Definition</b> <a href="a00011_source.html#l00020">SquadManager.hpp:20</a></div></div>
-<div class="ttc" id="aa00555_html_a6ad39447664a1ce019048c29d7f0643f"><div class="ttname"><a href="a00555.html#a6ad39447664a1ce019048c29d7f0643f">core::unit::SquadManager::makeSquad</a></div><div class="ttdeci">Ref makeSquad(fcn::FactionId faction)</div><div class="ttdoc">Creates a new squad for the given faction.</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00011">SquadManager.cpp:11</a></div></div>
-<div class="ttc" id="aa00555_html_ab396465a1efbfd7a4c4b13629213f24f"><div class="ttname"><a href="a00555.html#ab396465a1efbfd7a4c4b13629213f24f">core::unit::SquadManager::getFactionSquads</a></div><div class="ttdeci">std::vector&lt; Ref &gt; getFactionSquads(fcn::FactionId faction)</div><div class="ttdoc">Returns all the squads owned by the given faction.</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00017">SquadManager.cpp:17</a></div></div>
-<div class="ttc" id="aa00555_html_aba39095366384b7cafbd1ad068b80a9e"><div class="ttname"><a href="a00555.html#aba39095366384b7cafbd1ad068b80a9e">core::unit::SquadManager::SquadManager</a></div><div class="ttdeci">SquadManager()</div><div class="ttdoc">Creates the squad manager.</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00009">SquadManager.cpp:9</a></div></div>
-<div class="ttc" id="aa00685_html"><div class="ttname"><a href="a00685.html">Game.hpp</a></div></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="a00468.html#aeb933e6aa32ab4668ff32c25bf3e4e5c">   68</a></span>    std::uint64_t <a class="code hl_function" href="a00468.html#aeb933e6aa32ab4668ff32c25bf3e4e5c">apply</a>(std::uint64_t baseWeight, std::uint64_t <a class="code hl_variable" href="a00468.html#aa54b87dfecd8218e4048b7eb6a5d325a">bonus</a>)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="a00468.html#a64faf388c7c221d7be8db1046d432386">applyBehavior</a> == <a class="code hl_enumvalue" href="a00468.html#a69b593a58dc15a9e635b92687b02b710a0d73bf5decac382ed6a8adc3838fd7e2">Behavior::Multiplicative</a> &amp;&amp; <a class="code hl_variable" href="a00468.html#aa54b87dfecd8218e4048b7eb6a5d325a">bonus</a> == 1) { <span class="keywordflow">return</span> baseWeight; }</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="a00468.html#a703cbd28dc9b1827c49bf6051e08d11a">combine</a>(baseWeight, <a class="code hl_variable" href="a00468.html#aa54b87dfecd8218e4048b7eb6a5d325a">bonus</a>, <a class="code hl_variable" href="a00468.html#a64faf388c7c221d7be8db1046d432386">applyBehavior</a>);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    }</div>
+</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="foldopen" id="foldopen00080" data-start="{" data-end="}">
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="a00468.html#ad48c25158de36eae74b76e7fc19b3ee3">   80</a></span>    std::uint64_t <a class="code hl_function" href="a00468.html#ad48c25158de36eae74b76e7fc19b3ee3">stack</a>(std::uint64_t currentBonus, <a class="code hl_enumeration" href="a00407.html#gae80a70a999356090fd444a80e3594f1a">Biome</a> neighbor)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">switch</span> (<a class="code hl_variable" href="a00468.html#ab7ead6f8f55b619543a06455836134ef">relationship</a>) {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="a00468.html#a24cea75c8c701340cddc8a558af3121dac90a13d8ec8fe53c6bb33fe10af6f2fe">Relationship::Same</a>:</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keywordflow">if</span> (neighbor == <a class="code hl_variable" href="a00468.html#a00478c3ebbc140e39b9b3a47cdffa72a">biome</a>) { <span class="keywordflow">return</span> <a class="code hl_function" href="a00468.html#a703cbd28dc9b1827c49bf6051e08d11a">combine</a>(currentBonus, <a class="code hl_variable" href="a00468.html#aa54b87dfecd8218e4048b7eb6a5d325a">bonus</a>, <a class="code hl_variable" href="a00468.html#a7d82cab0f1a3b6ce45ffbdcedf8cc408">stackBehavior</a>); }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            <span class="keywordflow">return</span> currentBonus;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="a00468.html#a24cea75c8c701340cddc8a558af3121da10989754eb9c7a4dfb1092f693ed9e69">Relationship::Different</a>:</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <span class="keywordflow">if</span> (neighbor != <a class="code hl_variable" href="a00468.html#a00478c3ebbc140e39b9b3a47cdffa72a">biome</a>) { <span class="keywordflow">return</span> <a class="code hl_function" href="a00468.html#a703cbd28dc9b1827c49bf6051e08d11a">combine</a>(currentBonus, <a class="code hl_variable" href="a00468.html#aa54b87dfecd8218e4048b7eb6a5d325a">bonus</a>, <a class="code hl_variable" href="a00468.html#a7d82cab0f1a3b6ce45ffbdcedf8cc408">stackBehavior</a>); }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <span class="keywordflow">return</span> currentBonus;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <span class="keywordflow">return</span> currentBonus;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        }</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    }</div>
+</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>};</div>
+</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>} <span class="comment">// namespace gen</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>} <span class="comment">// namespace arena</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>} <span class="comment">// namespace core</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00230_html"><div class="ttname"><a href="a00230.html">Biome.hpp</a></div></div>
+<div class="ttc" id="aa00407_html_gae80a70a999356090fd444a80e3594f1a"><div class="ttname"><a href="a00407.html#gae80a70a999356090fd444a80e3594f1a">core::arena::gen::Biome</a></div><div class="ttdeci">Biome</div><div class="ttdoc">Represents the biome of a node.</div><div class="ttdef"><b>Definition</b> <a href="a00230_source.html#l00015">Biome.hpp:15</a></div></div>
+<div class="ttc" id="aa00418_html"><div class="ttname"><a href="a00418.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00236_source.html#l00014">Arena.hpp:15</a></div></div>
+<div class="ttc" id="aa00468_html"><div class="ttname"><a href="a00468.html">core::arena::gen::AdjacencyBonus</a></div><div class="ttdoc">Represents a bonus to a biomes weight based on the biome of an adjacent node.</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00018">AdjacencyBonus.hpp:18</a></div></div>
+<div class="ttc" id="aa00468_html_a00478c3ebbc140e39b9b3a47cdffa72a"><div class="ttname"><a href="a00468.html#a00478c3ebbc140e39b9b3a47cdffa72a">core::arena::gen::AdjacencyBonus::biome</a></div><div class="ttdeci">Biome biome</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00022">AdjacencyBonus.hpp:22</a></div></div>
+<div class="ttc" id="aa00468_html_a116148277acd0fc858b4098c52fa49b0"><div class="ttname"><a href="a00468.html#a116148277acd0fc858b4098c52fa49b0">core::arena::gen::AdjacencyBonus::initialBonus</a></div><div class="ttdeci">std::uint64_t initialBonus() const</div><div class="ttdoc">Returns the initial bonus value to use when computing bonuses.</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00031">AdjacencyBonus.hpp:31</a></div></div>
+<div class="ttc" id="aa00468_html_a24cea75c8c701340cddc8a558af3121d"><div class="ttname"><a href="a00468.html#a24cea75c8c701340cddc8a558af3121d">core::arena::gen::AdjacencyBonus::Relationship</a></div><div class="ttdeci">Relationship</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00019">AdjacencyBonus.hpp:19</a></div></div>
+<div class="ttc" id="aa00468_html_a24cea75c8c701340cddc8a558af3121da10989754eb9c7a4dfb1092f693ed9e69"><div class="ttname"><a href="a00468.html#a24cea75c8c701340cddc8a558af3121da10989754eb9c7a4dfb1092f693ed9e69">core::arena::gen::AdjacencyBonus::Relationship::Different</a></div><div class="ttdeci">@ Different</div></div>
+<div class="ttc" id="aa00468_html_a24cea75c8c701340cddc8a558af3121dac90a13d8ec8fe53c6bb33fe10af6f2fe"><div class="ttname"><a href="a00468.html#a24cea75c8c701340cddc8a558af3121dac90a13d8ec8fe53c6bb33fe10af6f2fe">core::arena::gen::AdjacencyBonus::Relationship::Same</a></div><div class="ttdeci">@ Same</div></div>
+<div class="ttc" id="aa00468_html_a64faf388c7c221d7be8db1046d432386"><div class="ttname"><a href="a00468.html#a64faf388c7c221d7be8db1046d432386">core::arena::gen::AdjacencyBonus::applyBehavior</a></div><div class="ttdeci">Behavior applyBehavior</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00025">AdjacencyBonus.hpp:25</a></div></div>
+<div class="ttc" id="aa00468_html_a69b593a58dc15a9e635b92687b02b710"><div class="ttname"><a href="a00468.html#a69b593a58dc15a9e635b92687b02b710">core::arena::gen::AdjacencyBonus::Behavior</a></div><div class="ttdeci">Behavior</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00020">AdjacencyBonus.hpp:20</a></div></div>
+<div class="ttc" id="aa00468_html_a69b593a58dc15a9e635b92687b02b710a0d73bf5decac382ed6a8adc3838fd7e2"><div class="ttname"><a href="a00468.html#a69b593a58dc15a9e635b92687b02b710a0d73bf5decac382ed6a8adc3838fd7e2">core::arena::gen::AdjacencyBonus::Behavior::Multiplicative</a></div><div class="ttdeci">@ Multiplicative</div></div>
+<div class="ttc" id="aa00468_html_a69b593a58dc15a9e635b92687b02b710a3f7b3d8ee7bf0d542bd50821c083888f"><div class="ttname"><a href="a00468.html#a69b593a58dc15a9e635b92687b02b710a3f7b3d8ee7bf0d542bd50821c083888f">core::arena::gen::AdjacencyBonus::Behavior::Additive</a></div><div class="ttdeci">@ Additive</div></div>
+<div class="ttc" id="aa00468_html_a703cbd28dc9b1827c49bf6051e08d11a"><div class="ttname"><a href="a00468.html#a703cbd28dc9b1827c49bf6051e08d11a">core::arena::gen::AdjacencyBonus::combine</a></div><div class="ttdeci">static std::uint64_t combine(std::uint64_t weight, std::uint64_t newBonus, Behavior behavior)</div><div class="ttdoc">Combines the cumulative bonus with a new bonus based on the behavior.</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00050">AdjacencyBonus.hpp:50</a></div></div>
+<div class="ttc" id="aa00468_html_a7d82cab0f1a3b6ce45ffbdcedf8cc408"><div class="ttname"><a href="a00468.html#a7d82cab0f1a3b6ce45ffbdcedf8cc408">core::arena::gen::AdjacencyBonus::stackBehavior</a></div><div class="ttdeci">Behavior stackBehavior</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00024">AdjacencyBonus.hpp:24</a></div></div>
+<div class="ttc" id="aa00468_html_aa54b87dfecd8218e4048b7eb6a5d325a"><div class="ttname"><a href="a00468.html#aa54b87dfecd8218e4048b7eb6a5d325a">core::arena::gen::AdjacencyBonus::bonus</a></div><div class="ttdeci">std::uint64_t bonus</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00026">AdjacencyBonus.hpp:26</a></div></div>
+<div class="ttc" id="aa00468_html_ab7ead6f8f55b619543a06455836134ef"><div class="ttname"><a href="a00468.html#ab7ead6f8f55b619543a06455836134ef">core::arena::gen::AdjacencyBonus::relationship</a></div><div class="ttdeci">Relationship relationship</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00023">AdjacencyBonus.hpp:23</a></div></div>
+<div class="ttc" id="aa00468_html_ad48c25158de36eae74b76e7fc19b3ee3"><div class="ttname"><a href="a00468.html#ad48c25158de36eae74b76e7fc19b3ee3">core::arena::gen::AdjacencyBonus::stack</a></div><div class="ttdeci">std::uint64_t stack(std::uint64_t currentBonus, Biome neighbor) const</div><div class="ttdoc">Computes the adjacency bonus for the given biome and current bonus.</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00080">AdjacencyBonus.hpp:80</a></div></div>
+<div class="ttc" id="aa00468_html_aeb933e6aa32ab4668ff32c25bf3e4e5c"><div class="ttname"><a href="a00468.html#aeb933e6aa32ab4668ff32c25bf3e4e5c">core::arena::gen::AdjacencyBonus::apply</a></div><div class="ttdeci">std::uint64_t apply(std::uint64_t baseWeight, std::uint64_t bonus) const</div><div class="ttdoc">Applies the bonus from this rule to the base weight for the biome.</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00068">AdjacencyBonus.hpp:68</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

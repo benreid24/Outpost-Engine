@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Unit/Capabilities/Map.hpp Source File</title>
+<title>Outpost Engine: include/Core/World/Path.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,79 +79,95 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_b638a04f7290da32ecfac2df55fb6497.html">Unit</a></li><li class="navelem"><a class="el" href="dir_10e8008337949b6394ad34cd2e0e2a11.html">Capabilities</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_100acb167518532779441d57507c79aa.html">World</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">Map.hpp</div></div>
+  <div class="headertitle"><div class="title">Path.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="a00032.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_UNIT_CAPABILITIES_MAP_HPP</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_UNIT_CAPABILITIES_MAP_HPP</span></div>
+<a href="a00032.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_UNIT_PATH_HPP</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_UNIT_PATH_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;<a class="code" href="a00026.html">Core/Unit/Capabilities/Move.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="a00029.html">Core/Unit/Capabilities/Rotate.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;<a class="code" href="a00023.html">Core/Unit/Capabilities/Shoot.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;<a class="code" href="a00014.html">Core/Unit/Capability.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00289.html">core</a></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span>unit</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
-<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="a00302.html">   14</a></span><span class="keyword">namespace </span>able</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">template</span>&lt;Capability Ability&gt;</div>
-<div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="a00511.html">   23</a></span><span class="keyword">struct </span><a class="code hl_struct" href="a00511.html">Map</a> {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="a00511.html#ab56a07b6f1150cecead4cb523ef5452c">   25</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="a00511.html#ab56a07b6f1150cecead4cb523ef5452c">Info</a> = std::monostate;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>};</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;BLIB/Util/HashCombine.hpp&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="a01007.html">Core/World/Node.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00418.html">core</a></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span>world</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="a00860.html">   16</a></span><span class="keyword">struct </span><a class="code hl_struct" href="a00860.html">Path</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00021" data-start="{" data-end="};">
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="a00864.html">   21</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="a00864.html">Waypoint</a> {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="a00864.html#aa532fdf03eedb406f70c281aa4b2298c">   22</a></span>        glm::vec2 <a class="code hl_variable" href="a00864.html#aa532fdf03eedb406f70c281aa4b2298c">position</a>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="a00864.html#aebacc1c9273387e2883e51aa234deb17">   23</a></span>        <span class="keyword">const</span> <a class="code hl_class" href="a00856.html">Node</a>* <a class="code hl_variable" href="a00864.html#aebacc1c9273387e2883e51aa234deb17">worldNode</a>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="a00864.html#ac1ad3648b1001557cf2c384c9b96c92b">   28</a></span>        <a class="code hl_function" href="a00864.html#ac1ad3648b1001557cf2c384c9b96c92b">Waypoint</a>()</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        : <a class="code hl_variable" href="a00864.html#aa532fdf03eedb406f70c281aa4b2298c">position</a>()</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        , <a class="code hl_variable" href="a00864.html#aebacc1c9273387e2883e51aa234deb17">worldNode</a>(nullptr) {}</div>
 </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">template</span>&lt;&gt;</div>
-<div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="a00515.html">   29</a></span><span class="keyword">struct </span><a class="code hl_struct" href="a00511.html">Map</a>&lt;<a class="code hl_enumeration" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a>::<a class="code hl_class" href="a00527.html">Move</a>&gt; {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="a00515.html#a4ad5e3183641b63d92e147cf5b354c88">   30</a></span>    <span class="keyword">using </span><a class="code hl_class" href="a00527.html">Info</a> = <a class="code hl_class" href="a00527.html">Move</a>;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>};</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="foldopen" id="foldopen00038" data-start="{" data-end="}">
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="a00864.html#acccdb1e8d0893029e9fab5b7721185fe">   38</a></span>        <a class="code hl_function" href="a00864.html#acccdb1e8d0893029e9fab5b7721185fe">Waypoint</a>(<span class="keyword">const</span> glm::vec2&amp; <a class="code hl_variable" href="a00864.html#aa532fdf03eedb406f70c281aa4b2298c">position</a>, <span class="keyword">const</span> <a class="code hl_class" href="a00856.html">Node</a>* <a class="code hl_variable" href="a00864.html#aebacc1c9273387e2883e51aa234deb17">worldNode</a> = <span class="keyword">nullptr</span>)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        : <a class="code hl_variable" href="a00864.html#aa532fdf03eedb406f70c281aa4b2298c">position</a>(<a class="code hl_variable" href="a00864.html#aa532fdf03eedb406f70c281aa4b2298c">position</a>)</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        , <a class="code hl_variable" href="a00864.html#aebacc1c9273387e2883e51aa234deb17">worldNode</a>(<a class="code hl_variable" href="a00864.html#aebacc1c9273387e2883e51aa234deb17">worldNode</a>) {}</div>
 </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">template</span>&lt;&gt;</div>
-<div class="foldopen" id="foldopen00034" data-start="{" data-end="};">
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="a00519.html">   34</a></span><span class="keyword">struct </span><a class="code hl_struct" href="a00511.html">Map</a>&lt;<a class="code hl_enumeration" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a>::<a class="code hl_class" href="a00531.html">Rotate</a>&gt; {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="a00519.html#a791682ee1e20047aa24ad889c53254df">   35</a></span>    <span class="keyword">using </span><a class="code hl_class" href="a00531.html">Info</a> = <a class="code hl_class" href="a00531.html">Rotate</a>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>};</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="a00864.html#a6ef02878dc3ee65e6d5df6433a44e153">   48</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="a00864.html#a6ef02878dc3ee65e6d5df6433a44e153">operator==</a>(<span class="keyword">const</span> <a class="code hl_struct" href="a00864.html">Waypoint</a>&amp; other)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="a00864.html#aa532fdf03eedb406f70c281aa4b2298c">position</a> == other.<a class="code hl_variable" href="a00864.html#aa532fdf03eedb406f70c281aa4b2298c">position</a>; }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="a00864.html#aa21c17d368719f64e718365753959eb3">   56</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="a00864.html#aa21c17d368719f64e718365753959eb3">operator!=</a>(<span class="keyword">const</span> <a class="code hl_struct" href="a00864.html">Waypoint</a>&amp; other)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="a00864.html#aa532fdf03eedb406f70c281aa4b2298c">position</a> != other.<a class="code hl_variable" href="a00864.html#aa532fdf03eedb406f70c281aa4b2298c">position</a>; }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    };</div>
 </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">template</span>&lt;&gt;</div>
-<div class="foldopen" id="foldopen00039" data-start="{" data-end="};">
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="a00523.html">   39</a></span><span class="keyword">struct </span><a class="code hl_struct" href="a00511.html">Map</a>&lt;<a class="code hl_enumeration" href="a00282.html#gabbac056d8b58ac01b45802842280cdae">Capability</a>::<a class="code hl_class" href="a00535.html">Shoot</a>&gt; {</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="a00523.html#a0da2bef86adebfb275428a0f14f9b9b2">   40</a></span>    <span class="keyword">using </span><a class="code hl_class" href="a00535.html">Info</a> = <a class="code hl_class" href="a00535.html">Shoot</a>;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>};</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="foldopen" id="foldopen00062" data-start="{" data-end="};">
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="a00868.html">   62</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="a00868.html">WaypointHash</a> {</div>
+<div class="foldopen" id="foldopen00063" data-start="{" data-end="}">
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="a00868.html#a1e7bad45413ebb9560da6ee2975401c5">   63</a></span>        std::size_t <a class="code hl_function" href="a00868.html#a1e7bad45413ebb9560da6ee2975401c5">operator()</a>(<span class="keyword">const</span> <a class="code hl_struct" href="a00864.html">Waypoint</a>&amp; wp)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            std::hash&lt;float&gt; hasher;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            <span class="keywordflow">return</span> bl::util::hashCombine(hasher(wp.<a class="code hl_variable" href="a00864.html#aa532fdf03eedb406f70c281aa4b2298c">position</a>.x), hasher(wp.<a class="code hl_variable" href="a00864.html#aa532fdf03eedb406f70c281aa4b2298c">position</a>.y));</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        }</div>
 </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>} <span class="comment">// namespace able</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    };</div>
 </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>} <span class="comment">// namespace unit</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>} <span class="comment">// namespace core</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aa00014_html"><div class="ttname"><a href="a00014.html">Capability.hpp</a></div></div>
-<div class="ttc" id="aa00023_html"><div class="ttname"><a href="a00023.html">Shoot.hpp</a></div></div>
-<div class="ttc" id="aa00026_html"><div class="ttname"><a href="a00026.html">Move.hpp</a></div></div>
-<div class="ttc" id="aa00029_html"><div class="ttname"><a href="a00029.html">Rotate.hpp</a></div></div>
-<div class="ttc" id="aa00282_html_gabbac056d8b58ac01b45802842280cdae"><div class="ttname"><a href="a00282.html#gabbac056d8b58ac01b45802842280cdae">core::unit::Capability</a></div><div class="ttdeci">Capability</div><div class="ttdoc">Enum representing a unit's capabilities.</div><div class="ttdef"><b>Definition</b> <a href="a00014_source.html#l00016">Capability.hpp:16</a></div></div>
-<div class="ttc" id="aa00289_html"><div class="ttname"><a href="a00289.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00107_source.html#l00004">AddMode.hpp:5</a></div></div>
-<div class="ttc" id="aa00511_html"><div class="ttname"><a href="a00511.html">core::unit::able::Map</a></div><div class="ttdoc">Helper to map unit capability to info struct at compile time.</div><div class="ttdef"><b>Definition</b> <a href="a00032_source.html#l00023">Map.hpp:23</a></div></div>
-<div class="ttc" id="aa00511_html_ab56a07b6f1150cecead4cb523ef5452c"><div class="ttname"><a href="a00511.html#ab56a07b6f1150cecead4cb523ef5452c">core::unit::able::Map::Info</a></div><div class="ttdeci">std::monostate Info</div><div class="ttdoc">The info struct for the ability type.</div><div class="ttdef"><b>Definition</b> <a href="a00032_source.html#l00025">Map.hpp:25</a></div></div>
-<div class="ttc" id="aa00527_html"><div class="ttname"><a href="a00527.html">core::unit::able::Move</a></div><div class="ttdoc">Capability that allows a unit to be moved.</div><div class="ttdef"><b>Definition</b> <a href="a00026_source.html#l00023">Move.hpp:23</a></div></div>
-<div class="ttc" id="aa00531_html"><div class="ttname"><a href="a00531.html">core::unit::able::Rotate</a></div><div class="ttdef"><b>Definition</b> <a href="a00029_source.html#l00017">Rotate.hpp:17</a></div></div>
-<div class="ttc" id="aa00535_html"><div class="ttname"><a href="a00535.html">core::unit::able::Shoot</a></div><div class="ttdoc">Component that allows a unit to fire bullets.</div><div class="ttdef"><b>Definition</b> <a href="a00023_source.html#l00023">Shoot.hpp:23</a></div></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="a00860.html#a9184c1489e847362ae99487a6a6b720b">   69</a></span>    std::vector&lt;Waypoint&gt; <a class="code hl_variable" href="a00860.html#a9184c1489e847362ae99487a6a6b720b">waypoints</a>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="a00860.html#a6ab13aa01bd82ed28ae25d564e137646">   70</a></span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="a00860.html#a6ab13aa01bd82ed28ae25d564e137646">currentWaypoint</a>;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="foldopen" id="foldopen00075" data-start="{" data-end="}">
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="a00860.html#a75b9c9b81588e6d653d2f9e00153648f">   75</a></span>    <a class="code hl_function" href="a00860.html#a75b9c9b81588e6d653d2f9e00153648f">Path</a>()</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    : <a class="code hl_variable" href="a00860.html#a6ab13aa01bd82ed28ae25d564e137646">currentWaypoint</a>(0) {}</div>
+</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>};</div>
+</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>} <span class="comment">// namespace world</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>} <span class="comment">// namespace core</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00418_html"><div class="ttname"><a href="a00418.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00236_source.html#l00014">Arena.hpp:15</a></div></div>
+<div class="ttc" id="aa00856_html"><div class="ttname"><a href="a00856.html">core::world::Node</a></div><div class="ttdoc">Spatial node in a world. Nodes are used for pathing and cover.</div><div class="ttdef"><b>Definition</b> <a href="a01007_source.html#l00019">Node.hpp:19</a></div></div>
+<div class="ttc" id="aa00860_html"><div class="ttname"><a href="a00860.html">core::world::Path</a></div><div class="ttdoc">Data structure representing a path a unit can take.</div><div class="ttdef"><b>Definition</b> <a href="a00032_source.html#l00016">Path.hpp:16</a></div></div>
+<div class="ttc" id="aa00860_html_a6ab13aa01bd82ed28ae25d564e137646"><div class="ttname"><a href="a00860.html#a6ab13aa01bd82ed28ae25d564e137646">core::world::Path::currentWaypoint</a></div><div class="ttdeci">unsigned int currentWaypoint</div><div class="ttdef"><b>Definition</b> <a href="a00032_source.html#l00070">Path.hpp:70</a></div></div>
+<div class="ttc" id="aa00860_html_a75b9c9b81588e6d653d2f9e00153648f"><div class="ttname"><a href="a00860.html#a75b9c9b81588e6d653d2f9e00153648f">core::world::Path::Path</a></div><div class="ttdeci">Path()</div><div class="ttdoc">Creates an empty path.</div><div class="ttdef"><b>Definition</b> <a href="a00032_source.html#l00075">Path.hpp:75</a></div></div>
+<div class="ttc" id="aa00860_html_a9184c1489e847362ae99487a6a6b720b"><div class="ttname"><a href="a00860.html#a9184c1489e847362ae99487a6a6b720b">core::world::Path::waypoints</a></div><div class="ttdeci">std::vector&lt; Waypoint &gt; waypoints</div><div class="ttdef"><b>Definition</b> <a href="a00032_source.html#l00069">Path.hpp:69</a></div></div>
+<div class="ttc" id="aa00864_html"><div class="ttname"><a href="a00864.html">core::world::Path::Waypoint</a></div><div class="ttdoc">Waypoint along a path.</div><div class="ttdef"><b>Definition</b> <a href="a00032_source.html#l00021">Path.hpp:21</a></div></div>
+<div class="ttc" id="aa00864_html_a6ef02878dc3ee65e6d5df6433a44e153"><div class="ttname"><a href="a00864.html#a6ef02878dc3ee65e6d5df6433a44e153">core::world::Path::Waypoint::operator==</a></div><div class="ttdeci">bool operator==(const Waypoint &amp;other) const</div><div class="ttdoc">Tests whether this waypoint is equal to another by direct position equality.</div><div class="ttdef"><b>Definition</b> <a href="a00032_source.html#l00048">Path.hpp:48</a></div></div>
+<div class="ttc" id="aa00864_html_aa21c17d368719f64e718365753959eb3"><div class="ttname"><a href="a00864.html#aa21c17d368719f64e718365753959eb3">core::world::Path::Waypoint::operator!=</a></div><div class="ttdeci">bool operator!=(const Waypoint &amp;other) const</div><div class="ttdoc">Tests whether this waypoint is equal to another by direct position equality.</div><div class="ttdef"><b>Definition</b> <a href="a00032_source.html#l00056">Path.hpp:56</a></div></div>
+<div class="ttc" id="aa00864_html_aa532fdf03eedb406f70c281aa4b2298c"><div class="ttname"><a href="a00864.html#aa532fdf03eedb406f70c281aa4b2298c">core::world::Path::Waypoint::position</a></div><div class="ttdeci">glm::vec2 position</div><div class="ttdef"><b>Definition</b> <a href="a00032_source.html#l00022">Path.hpp:22</a></div></div>
+<div class="ttc" id="aa00864_html_ac1ad3648b1001557cf2c384c9b96c92b"><div class="ttname"><a href="a00864.html#ac1ad3648b1001557cf2c384c9b96c92b">core::world::Path::Waypoint::Waypoint</a></div><div class="ttdeci">Waypoint()</div><div class="ttdoc">Creates an empty waypoint.</div><div class="ttdef"><b>Definition</b> <a href="a00032_source.html#l00028">Path.hpp:28</a></div></div>
+<div class="ttc" id="aa00864_html_acccdb1e8d0893029e9fab5b7721185fe"><div class="ttname"><a href="a00864.html#acccdb1e8d0893029e9fab5b7721185fe">core::world::Path::Waypoint::Waypoint</a></div><div class="ttdeci">Waypoint(const glm::vec2 &amp;position, const Node *worldNode=nullptr)</div><div class="ttdoc">Creates a waypoint at the given position and optional world node.</div><div class="ttdef"><b>Definition</b> <a href="a00032_source.html#l00038">Path.hpp:38</a></div></div>
+<div class="ttc" id="aa00864_html_aebacc1c9273387e2883e51aa234deb17"><div class="ttname"><a href="a00864.html#aebacc1c9273387e2883e51aa234deb17">core::world::Path::Waypoint::worldNode</a></div><div class="ttdeci">const Node * worldNode</div><div class="ttdef"><b>Definition</b> <a href="a00032_source.html#l00023">Path.hpp:23</a></div></div>
+<div class="ttc" id="aa00868_html"><div class="ttname"><a href="a00868.html">core::world::Path::WaypointHash</a></div><div class="ttdoc">Hash functor for path waypoints.</div><div class="ttdef"><b>Definition</b> <a href="a00032_source.html#l00062">Path.hpp:62</a></div></div>
+<div class="ttc" id="aa00868_html_a1e7bad45413ebb9560da6ee2975401c5"><div class="ttname"><a href="a00868.html#a1e7bad45413ebb9560da6ee2975401c5">core::world::Path::WaypointHash::operator()</a></div><div class="ttdeci">std::size_t operator()(const Waypoint &amp;wp) const</div><div class="ttdef"><b>Definition</b> <a href="a00032_source.html#l00063">Path.hpp:63</a></div></div>
+<div class="ttc" id="aa01007_html"><div class="ttname"><a href="a01007.html">Node.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

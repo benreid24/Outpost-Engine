@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: src/Core/Game.cpp File Reference</title>
+<title>Outpost Engine: core::unit::ai::UpdateContext Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,51 +74,92 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a2f0e5642e47e7ed59fe0f0829eafb5f.html">Core</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00418.html">core</a></li><li class="navelem"><a class="el" href="a00439.html">unit</a></li><li class="navelem"><a class="el" href="a00440.html">ai</a></li><li class="navelem"><a class="el" href="a00796.html">UpdateContext</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a>  </div>
-  <div class="headertitle"><div class="title">Game.cpp File Reference</div></div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00793.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">core::unit::ai::UpdateContext Struct Reference<div class="ingroups"><a class="el" href="a00404.html">Core</a> &raquo; <a class="el" href="a00410.html">Unit</a></div></div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="a00685_source.html">Core/Game.hpp</a>&gt;</code><br />
-<code>#include &lt;BLIB/Events.hpp&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00083_source.html">Core/Input/Control.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00155_source.html">Core/Player/Player.hpp</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="a00143_source.html">Core/Properties.hpp</a>&gt;</code><br />
-</div>
-<p><a href="a00796_source.html">Go to the source code of this file.</a></p>
+
+<p>Simple struct containing parameters for unit AI updates.  
+ <a href="a00796.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00125_source.html">UpdateContext.hpp</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a00289" id="r_a00289"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00289.html">core</a></td></tr>
-<tr class="memdesc:a00289"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains everything shared between the game and editor. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a90a226c9bc6852d6b82261a9a1d794b1" id="r_a90a226c9bc6852d6b82261a9a1d794b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00692.html">Game</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00796.html#a90a226c9bc6852d6b82261a9a1d794b1">game</a></td></tr>
+<tr class="separator:a90a226c9bc6852d6b82261a9a1d794b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e071810460c28265aa130cae84c80e8" id="r_a8e071810460c28265aa130cae84c80e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00872.html">world::World</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00796.html#a8e071810460c28265aa130cae84c80e8">world</a></td></tr>
+<tr class="separator:a8e071810460c28265aa130cae84c80e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ea81b225c9a0e411e9ffaeb8aa35f8d" id="r_a8ea81b225c9a0e411e9ffaeb8aa35f8d"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00796.html#a8ea81b225c9a0e411e9ffaeb8aa35f8d">dt</a></td></tr>
+<tr class="separator:a8ea81b225c9a0e411e9ffaeb8aa35f8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a29c7b37d0cda80bd9dd2eaa1e6029598" name="a29c7b37d0cda80bd9dd2eaa1e6029598"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29c7b37d0cda80bd9dd2eaa1e6029598">&#9670;&#160;</a></span>configFilename</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Simple struct containing parameters for unit AI updates. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00125_source.html#l00021">21</a> of file <a class="el" href="a00125_source.html">UpdateContext.hpp</a>.</p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a8ea81b225c9a0e411e9ffaeb8aa35f8d" name="a8ea81b225c9a0e411e9ffaeb8aa35f8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ea81b225c9a0e411e9ffaeb8aa35f8d">&#9670;&#160;</a></span>dt</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* configFilename</td>
+          <td class="memname">float core::unit::ai::UpdateContext::dt</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00796_source.html#l00013">13</a> of file <a class="el" href="a00796_source.html">Game.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00125_source.html#l00024">24</a> of file <a class="el" href="a00125_source.html">UpdateContext.hpp</a>.</p>
 
 </div>
 </div>
+<a id="a90a226c9bc6852d6b82261a9a1d794b1" name="a90a226c9bc6852d6b82261a9a1d794b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90a226c9bc6852d6b82261a9a1d794b1">&#9670;&#160;</a></span>game</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00692.html">Game</a>&amp; core::unit::ai::UpdateContext::game</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00125_source.html#l00022">22</a> of file <a class="el" href="a00125_source.html">UpdateContext.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8e071810460c28265aa130cae84c80e8" name="a8e071810460c28265aa130cae84c80e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e071810460c28265aa130cae84c80e8">&#9670;&#160;</a></span>world</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00872.html">world::World</a>&amp; core::unit::ai::UpdateContext::world</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00125_source.html#l00023">23</a> of file <a class="el" href="a00125_source.html">UpdateContext.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/Core/Unit/AI/<a class="el" href="a00125_source.html">UpdateContext.hpp</a></li>
+</ul>
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

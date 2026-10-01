@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Components/Damager.hpp File Reference</title>
+<title>Outpost Engine: include/Core/Commands/AddMode.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,38 +74,43 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_b572e9e567c53bf52c1d322a7f434893.html">Components</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_cd42dacb0257cf84a1e4800a9c985ad9.html">Commands</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
-  <div class="headertitle"><div class="title">Damager.hpp File Reference</div></div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
+  <div class="headertitle"><div class="title">AddMode.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p><a href="a00065_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00367.html">core::com::Damager</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Component that makes an entity cause damage on collision.  <a href="a00367.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00289" id="r_a00289"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00289.html">core</a></td></tr>
-<tr class="memdesc:a00289"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains everything shared between the game and editor. <br /></td></tr>
+<tr class="memitem:a00418" id="r_a00418"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00418.html">core</a></td></tr>
+<tr class="memdesc:a00418"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains everything shared between the game and editor. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00291" id="r_a00291"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00291.html">core::com</a></td></tr>
+<tr class="memitem:a00425" id="r_a00425"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00425.html">core::cmd</a></td></tr>
+<tr class="memdesc:a00425"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functionality, storage, and events for commands for units and squads. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:gae347535f68c89b99694f8d3c8941b372" id="r_gae347535f68c89b99694f8d3c8941b372"><td class="memItemLeft" align="right" valign="top">enum struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00409.html#gae347535f68c89b99694f8d3c8941b372">core::cmd::AddMode</a> { <a class="el" href="a00409.html#ggae347535f68c89b99694f8d3c8941b372ad7ab7f5074314b8dbc02d42b4266127f">core::cmd::AddMode::QueueEnd</a>
+, <a class="el" href="a00409.html#ggae347535f68c89b99694f8d3c8941b372a01684d43dc813c78fde5cf84b2c83cfa">core::cmd::AddMode::QueueStart</a>
+, <a class="el" href="a00409.html#ggae347535f68c89b99694f8d3c8941b372a43f6615bbb2c40a5306ff804094420b1">core::cmd::AddMode::Immediate</a>
+, <a class="el" href="a00409.html#ggae347535f68c89b99694f8d3c8941b372a77815b63cb6602918ba3a349065258c8">core::cmd::AddMode::ReplaceAll</a>
+ }</td></tr>
+<tr class="memdesc:gae347535f68c89b99694f8d3c8941b372"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ways that commands can be added to queues.  <a href="a00409.html#gae347535f68c89b99694f8d3c8941b372">More...</a><br /></td></tr>
+<tr class="separator:gae347535f68c89b99694f8d3c8941b372"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['movedirection_0',['MoveDirection',['../a00527.html#a2c16281c76635a722a1a781cd166d1e5',1,'core::unit::able::Move']]]
+  ['entitycontrol_0',['EntityControl',['../a00413.html#gaf9a43071401d217a03ca35e89affedf2',1,'core::input::Control']]]
 ];

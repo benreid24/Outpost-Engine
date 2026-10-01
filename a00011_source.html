@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Unit/SquadManager.hpp Source File</title>
+<title>Outpost Engine: include/Core/Systems/Damage.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,78 +79,81 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_b638a04f7290da32ecfac2df55fb6497.html">Unit</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_9ee9775a41bd202429166df6e1b725b2.html">Systems</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">SquadManager.hpp</div></div>
+  <div class="headertitle"><div class="title">Damage.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="a00011.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_UNIT_SQUADMANAGER_HPP</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_UNIT_SQUADMANAGER_HPP</span></div>
+<a href="a00011.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_SYSTEMS_DAMAGE_HPP</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_SYSTEMS_DAMAGE_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;BLIB/Engine/System.hpp&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;BLIB/Util/RefPool.hpp&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;<a class="code" href="a00035.html">Core/Unit/Squad.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00289.html">core</a></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span>unit</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
-<div class="foldopen" id="foldopen00017" data-start="{" data-end="};">
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="a00555.html">   17</a></span><span class="keyword">class </span><a class="code hl_class" href="a00555.html">SquadManager</a> : <span class="keyword">public</span> bl::engine::System {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="a00555.html#a121e0dc9d718d86c7d0690af962d873a">   20</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="a00555.html#a121e0dc9d718d86c7d0690af962d873a">Ref</a> = bl::util::Ref&lt;Squad&gt;;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <a class="code hl_function" href="a00555.html#aba39095366384b7cafbd1ad068b80a9e">SquadManager</a>();</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_typedef" href="a00555.html#a121e0dc9d718d86c7d0690af962d873a">Ref</a> <a class="code hl_function" href="a00555.html#a6ad39447664a1ce019048c29d7f0643f">makeSquad</a>(<a class="code hl_class" href="a00407.html">fcn::FactionId</a> faction);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    std::vector&lt;Ref&gt; <a class="code hl_function" href="a00555.html#ab396465a1efbfd7a4c4b13629213f24f">getFactionSquads</a>(<a class="code hl_class" href="a00407.html">fcn::FactionId</a> faction);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="a00555.html#a6543d24d17b180a254f4ee84995b2e91">   46</a></span>    <span class="keyword">const</span> std::vector&lt;Ref&gt;&amp; <a class="code hl_function" href="a00555.html#a6543d24d17b180a254f4ee84995b2e91">getAllSquads</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> internalRefs; }</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    bl::util::RefPool&lt;Squad&gt; squads;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    std::vector&lt;Ref&gt; internalRefs;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> init(bl::engine::Engine&amp; engine) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> update(std::mutex&amp;, <span class="keywordtype">float</span> dt, <span class="keywordtype">float</span>, <span class="keywordtype">float</span>, <span class="keywordtype">float</span>) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">void</span> issueUnitCommands(<a class="code hl_class" href="a00547.html">Squad</a>&amp; squad);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">void</span> checkUnitCommands(<a class="code hl_class" href="a00547.html">Squad</a>&amp; squad);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> CommandFactory&gt;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">void</span> doCommandCreateAndIssue(<a class="code hl_class" href="a00547.html">Squad</a>&amp; squad, CommandFactory&amp;&amp; factory) {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; unit : squad.units) {</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            <span class="keywordflow">if</span> (unit.ai) {</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                <span class="keyword">auto</span>&amp; unitCmd = squad.unitCommands.emplace_back(factory());</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                unit.ai-&gt;queueCommand(unitCmd);</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            }</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        }</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    }</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>};</div>
-</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;BLIB/Components/MarkedForDeath.hpp&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;BLIB/Engine.hpp&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;BLIB/Signals.hpp&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;BLIB/Systems/Physics2D.hpp&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;<a class="code" href="a00170.html">Core/Components/Combatant.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;<a class="code" href="a00173.html">Core/Components/Damager.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;<a class="code" href="a00251.html">Core/Events/EntityDamaged.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;<a class="code" href="a00254.html">Core/Events/EntityKilled.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00418.html">core</a></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span>sys</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="a00748.html">   22</a></span><span class="keyword">class </span><a class="code hl_class" href="a00748.html">Damage</a> : <span class="keyword">public</span> bl::sig::Listener&lt;bl::sys::Physics2D::EntityCollisionBeginEvent&gt; {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <a class="code hl_function" href="a00748.html#a9bf57bc9cd5a3c45b7b4f43c7518cdbf">Damage</a>();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="a00748.html#a2ba9220b22c903011dc2ac194ea35931">   32</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="a00748.html#a2ba9220b22c903011dc2ac194ea35931">~Damage</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="a00748.html#a6b7ad7025d6b1d4cf7baedb463fe63e6">init</a>(bl::engine::Engine&amp; engine);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="a00748.html#a9fa20edbe43d25dc77ce3b5de878eb87">makeMortal</a>(bl::ecs::Entity entity, <a class="code hl_class" href="a00680.html">fcn::FactionId</a> faction, bl::com::Physics2D&amp; physics,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                    <span class="keywordtype">float</span> health, <span class="keywordtype">float</span> deathTime = 0.f);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="a00748.html#aabd9a8fbf137af5fa7b0507849c5bdf4">makeDamager</a>(bl::ecs::Entity entity, <span class="keywordtype">float</span> damage);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    bl::engine::Engine* engine;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    bl::sig::Emitter&lt;event::EntityDamaged, event::EntityKilled&gt; emitter;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keyword">using </span>Transaction = bl::ecs::Transaction&lt;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        bl::ecs::tx::EntityWrite, bl::ecs::tx::ComponentRead&lt;&gt;,</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        bl::ecs::tx::ComponentWrite&lt;com::Damager, com::Combatant, bl::com::MarkedForDeath&gt;&gt;;</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>} <span class="comment">// namespace unit</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>} <span class="comment">// namespace core</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aa00035_html"><div class="ttname"><a href="a00035.html">Squad.hpp</a></div></div>
-<div class="ttc" id="aa00289_html"><div class="ttname"><a href="a00289.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00107_source.html#l00004">AddMode.hpp:5</a></div></div>
-<div class="ttc" id="aa00407_html"><div class="ttname"><a href="a00407.html">core::fcn::FactionId</a></div><div class="ttdoc">Id for factions in the game. Should be treated as an opaque handle.</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00030">FactionId.hpp:30</a></div></div>
-<div class="ttc" id="aa00547_html"><div class="ttname"><a href="a00547.html">core::unit::Squad</a></div><div class="ttdoc">A collection of units that can be issued higher level commands.</div><div class="ttdef"><b>Definition</b> <a href="a00035_source.html#l00022">Squad.hpp:22</a></div></div>
-<div class="ttc" id="aa00555_html"><div class="ttname"><a href="a00555.html">core::unit::SquadManager</a></div><div class="ttdoc">Class that owns and manages squads and lifetimes and performs squad AI.</div><div class="ttdef"><b>Definition</b> <a href="a00011_source.html#l00017">SquadManager.hpp:17</a></div></div>
-<div class="ttc" id="aa00555_html_a121e0dc9d718d86c7d0690af962d873a"><div class="ttname"><a href="a00555.html#a121e0dc9d718d86c7d0690af962d873a">core::unit::SquadManager::Ref</a></div><div class="ttdeci">bl::util::Ref&lt; Squad &gt; Ref</div><div class="ttdoc">Handle to a squad. Owning a handle keeps the squad in scope.</div><div class="ttdef"><b>Definition</b> <a href="a00011_source.html#l00020">SquadManager.hpp:20</a></div></div>
-<div class="ttc" id="aa00555_html_a6543d24d17b180a254f4ee84995b2e91"><div class="ttname"><a href="a00555.html#a6543d24d17b180a254f4ee84995b2e91">core::unit::SquadManager::getAllSquads</a></div><div class="ttdeci">const std::vector&lt; Ref &gt; &amp; getAllSquads() const</div><div class="ttdoc">Returns the list of all current squads.</div><div class="ttdef"><b>Definition</b> <a href="a00011_source.html#l00046">SquadManager.hpp:46</a></div></div>
-<div class="ttc" id="aa00555_html_a6ad39447664a1ce019048c29d7f0643f"><div class="ttname"><a href="a00555.html#a6ad39447664a1ce019048c29d7f0643f">core::unit::SquadManager::makeSquad</a></div><div class="ttdeci">Ref makeSquad(fcn::FactionId faction)</div><div class="ttdoc">Creates a new squad for the given faction.</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00011">SquadManager.cpp:11</a></div></div>
-<div class="ttc" id="aa00555_html_ab396465a1efbfd7a4c4b13629213f24f"><div class="ttname"><a href="a00555.html#ab396465a1efbfd7a4c4b13629213f24f">core::unit::SquadManager::getFactionSquads</a></div><div class="ttdeci">std::vector&lt; Ref &gt; getFactionSquads(fcn::FactionId faction)</div><div class="ttdoc">Returns all the squads owned by the given faction.</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00017">SquadManager.cpp:17</a></div></div>
-<div class="ttc" id="aa00555_html_aba39095366384b7cafbd1ad068b80a9e"><div class="ttname"><a href="a00555.html#aba39095366384b7cafbd1ad068b80a9e">core::unit::SquadManager::SquadManager</a></div><div class="ttdeci">SquadManager()</div><div class="ttdoc">Creates the squad manager.</div><div class="ttdef"><b>Definition</b> <a href="a00197_source.html#l00009">SquadManager.cpp:9</a></div></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">void</span> applyDamage(bl::ecs::Entity mortalEntity, <a class="code hl_class" href="a00636.html">com::Combatant</a>&amp; victim,</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                     bl::ecs::Entity damagerEntity, <a class="code hl_struct" href="a00640.html">com::Damager</a>&amp; damager, Transaction&amp; <a class="code hl_variable" href="a00293.html#a2baa1bf01f70bea695e647fb193f730b">tx</a>);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> process(<span class="keyword">const</span> bl::sys::Physics2D::EntityCollisionBeginEvent&amp; event) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>};</div>
+</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>} <span class="comment">// namespace sys</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>} <span class="comment">// namespace core</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00170_html"><div class="ttname"><a href="a00170.html">Combatant.hpp</a></div></div>
+<div class="ttc" id="aa00173_html"><div class="ttname"><a href="a00173.html">Damager.hpp</a></div></div>
+<div class="ttc" id="aa00251_html"><div class="ttname"><a href="a00251.html">EntityDamaged.hpp</a></div></div>
+<div class="ttc" id="aa00254_html"><div class="ttname"><a href="a00254.html">EntityKilled.hpp</a></div></div>
+<div class="ttc" id="aa00293_html_a2baa1bf01f70bea695e647fb193f730b"><div class="ttname"><a href="a00293.html#a2baa1bf01f70bea695e647fb193f730b">tx</a></div><div class="ttdeci">bl::ecs::Transaction&lt; bl::ecs::tx::EntityUnlocked, bl::ecs::tx::ComponentRead&lt; com::Unit &gt; &gt; * tx</div><div class="ttdef"><b>Definition</b> <a href="a00293_source.html#l00023">World.cpp:23</a></div></div>
+<div class="ttc" id="aa00418_html"><div class="ttname"><a href="a00418.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00236_source.html#l00014">Arena.hpp:15</a></div></div>
+<div class="ttc" id="aa00636_html"><div class="ttname"><a href="a00636.html">core::com::Combatant</a></div><div class="ttdoc">Component that makes an entity target-able and kill-able.</div><div class="ttdef"><b>Definition</b> <a href="a00170_source.html#l00016">Combatant.hpp:16</a></div></div>
+<div class="ttc" id="aa00640_html"><div class="ttname"><a href="a00640.html">core::com::Damager</a></div><div class="ttdoc">Component that makes an entity cause damage on collision.</div><div class="ttdef"><b>Definition</b> <a href="a00173_source.html#l00013">Damager.hpp:13</a></div></div>
+<div class="ttc" id="aa00680_html"><div class="ttname"><a href="a00680.html">core::fcn::FactionId</a></div><div class="ttdoc">Id for factions in the game. Should be treated as an opaque handle.</div><div class="ttdef"><b>Definition</b> <a href="a00245_source.html#l00030">FactionId.hpp:30</a></div></div>
+<div class="ttc" id="aa00748_html"><div class="ttname"><a href="a00748.html">core::sys::Damage</a></div><div class="ttdoc">System that applies damage to entities from collisions.</div><div class="ttdef"><b>Definition</b> <a href="a00011_source.html#l00022">Damage.hpp:22</a></div></div>
+<div class="ttc" id="aa00748_html_a2ba9220b22c903011dc2ac194ea35931"><div class="ttname"><a href="a00748.html#a2ba9220b22c903011dc2ac194ea35931">core::sys::Damage::~Damage</a></div><div class="ttdeci">virtual ~Damage()=default</div><div class="ttdoc">Destroys the system.</div></div>
+<div class="ttc" id="aa00748_html_a6b7ad7025d6b1d4cf7baedb463fe63e6"><div class="ttname"><a href="a00748.html#a6b7ad7025d6b1d4cf7baedb463fe63e6">core::sys::Damage::init</a></div><div class="ttdeci">void init(bl::engine::Engine &amp;engine)</div><div class="ttdoc">Initializes the system.</div><div class="ttdef"><b>Definition</b> <a href="a00275_source.html#l00012">Damage.cpp:12</a></div></div>
+<div class="ttc" id="aa00748_html_a9bf57bc9cd5a3c45b7b4f43c7518cdbf"><div class="ttname"><a href="a00748.html#a9bf57bc9cd5a3c45b7b4f43c7518cdbf">core::sys::Damage::Damage</a></div><div class="ttdeci">Damage()</div><div class="ttdoc">Creates the system.</div><div class="ttdef"><b>Definition</b> <a href="a00275_source.html#l00009">Damage.cpp:9</a></div></div>
+<div class="ttc" id="aa00748_html_a9fa20edbe43d25dc77ce3b5de878eb87"><div class="ttname"><a href="a00748.html#a9fa20edbe43d25dc77ce3b5de878eb87">core::sys::Damage::makeMortal</a></div><div class="ttdeci">void makeMortal(bl::ecs::Entity entity, fcn::FactionId faction, bl::com::Physics2D &amp;physics, float health, float deathTime=0.f)</div><div class="ttdoc">Makes the given entity mortal.</div><div class="ttdef"><b>Definition</b> <a href="a00275_source.html#l00017">Damage.cpp:17</a></div></div>
+<div class="ttc" id="aa00748_html_aabd9a8fbf137af5fa7b0507849c5bdf4"><div class="ttname"><a href="a00748.html#aabd9a8fbf137af5fa7b0507849c5bdf4">core::sys::Damage::makeDamager</a></div><div class="ttdeci">void makeDamager(bl::ecs::Entity entity, float damage)</div><div class="ttdoc">Makes the given entity a giver of damage.</div><div class="ttdef"><b>Definition</b> <a href="a00275_source.html#l00022">Damage.cpp:22</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

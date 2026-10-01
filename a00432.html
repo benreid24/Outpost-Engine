@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: Member List</title>
+<title>Outpost Engine: core::input Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,26 +74,97 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00289.html">core</a></li><li class="navelem"><a class="el" href="a00298.html">player</a></li><li class="navelem"><a class="el" href="a00299.html">hud</a></li><li class="navelem"><a class="el" href="a00435.html">Event</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00418.html">core</a></li><li class="navelem"><a class="el" href="a00432.html">input</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">core::player::hud::Event Member List</div></div>
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">core::input Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00435.html">core::player::hud::Event</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00435.html#a77b0b50403088db732e8b33866237d95">Event</a>(Player &amp;owner, const sf::Event &amp;event)</td><td class="entry"><a class="el" href="a00435.html">core::player::hud::Event</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00435.html#a1401a00f5d9a064cd48cd0cb9910dd65">overlayPosition</a>() const</td><td class="entry"><a class="el" href="a00435.html">core::player::hud::Event</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00435.html#a414b2f77683bfc2f6a98867a30de2d8c">source</a>() const</td><td class="entry"><a class="el" href="a00435.html">core::player::hud::Event</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00435.html#a5024aa1ae02ff293c71e7f08f52484c9">target</a>() const</td><td class="entry"><a class="el" href="a00435.html">core::player::hud::Event</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00435.html#ac41bdc0e7203b14841d1d6e9ea78b18f">worldPosition</a>() const</td><td class="entry"><a class="el" href="a00435.html">core::player::hud::Event</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-</table></div><!-- contents -->
+<p>Controls for the BLIB input system.  
+<a href="a00432.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00433" id="r_a00433"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00433.html">Control</a></td></tr>
+<tr class="memdesc:a00433"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper around the enum for player input ids. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a362a94172d86c7b7662228aeab1b7516" id="r_a362a94172d86c7b7662228aeab1b7516"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00432.html#a362a94172d86c7b7662228aeab1b7516">EntityControl</a> = std::underlying_type_t&lt; <a class="el" href="a00413.html#gaf9a43071401d217a03ca35e89affedf2">Control::EntityControl</a> &gt;</td></tr>
+<tr class="memdesc:a362a94172d86c7b7662228aeab1b7516"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper typedef to avoid too much casting boilerplate.  <br /></td></tr>
+<tr class="separator:a362a94172d86c7b7662228aeab1b7516"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4177a2fb4c67d583c7ea3ab587db8791" id="r_ga4177a2fb4c67d583c7ea3ab587db8791"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00413.html#ga4177a2fb4c67d583c7ea3ab587db8791">MenuDriver</a> = bl::menu::TriggerDriver&lt; <a class="el" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2aee8967b5c62d193bc94d7562cb7b68e4">Control::MoveUp</a>, <a class="el" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2ada6387ec73cfdd98077542bb0cea330f">Control::MoveRight</a>, <a class="el" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a0dcfeb8a10ec44b94a8bb7e57e9f9a07">Control::MoveDown</a>, <a class="el" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2ac50384917b108b811c6ee3c6ab6265ee">Control::MoveLeft</a>, <a class="el" href="a00413.html#ggaf9a43071401d217a03ca35e89affedf2a8bafd27a45b38414d9b0359fba45b223">Control::Interact</a> &gt;</td></tr>
+<tr class="memdesc:ga4177a2fb4c67d583c7ea3ab587db8791"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper typedef for menu driving.  <br /></td></tr>
+<tr class="separator:ga4177a2fb4c67d583c7ea3ab587db8791"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a293f677406b187f5aab5509859935f33" id="r_a293f677406b187f5aab5509859935f33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00432.html#a293f677406b187f5aab5509859935f33">configureInputSystem</a> (bl::input::InputSystem &amp;system)</td></tr>
+<tr class="memdesc:a293f677406b187f5aab5509859935f33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the input system and sets default controls.  <br /></td></tr>
+<tr class="separator:a293f677406b187f5aab5509859935f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Controls for the BLIB input system. </p>
+</div><h2 class="groupheader">Typedef Documentation</h2>
+<a id="a362a94172d86c7b7662228aeab1b7516" name="a362a94172d86c7b7662228aeab1b7516"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a362a94172d86c7b7662228aeab1b7516">&#9670;&#160;</a></span>EntityControl</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="a00432.html#a362a94172d86c7b7662228aeab1b7516">core::input::EntityControl</a> = typedef std::underlying_type_t&lt;<a class="el" href="a00413.html#gaf9a43071401d217a03ca35e89affedf2">Control::EntityControl</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper typedef to avoid too much casting boilerplate. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00146_source.html#l00042">42</a> of file <a class="el" href="a00146_source.html">Control.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a293f677406b187f5aab5509859935f33" name="a293f677406b187f5aab5509859935f33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a293f677406b187f5aab5509859935f33">&#9670;&#160;</a></span>configureInputSystem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void core::input::configureInputSystem </td>
+          <td>(</td>
+          <td class="paramtype">bl::input::InputSystem &amp;&#160;</td>
+          <td class="paramname"><em>system</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configures the input system and sets default controls. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">system</td><td>The input system to configure </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00341_source.html#l00007">7</a> of file <a class="el" href="a00341_source.html">Control.cpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

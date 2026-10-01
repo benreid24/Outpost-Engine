@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/World/Cover.hpp File Reference</title>
+<title>Outpost Engine: include/Core/Commands/AggroLevel.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,41 +74,42 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_100acb167518532779441d57507c79aa.html">World</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_cd42dacb0257cf84a1e4800a9c985ad9.html">Commands</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
-  <div class="headertitle"><div class="title">Cover.hpp File Reference</div></div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
+  <div class="headertitle"><div class="title">AggroLevel.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;BLIB/ECS/Entity.hpp&gt;</code><br />
-<code>#include &lt;glm/glm.hpp&gt;</code><br />
-</div>
+
 <p><a href="a00068_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00563.html">core::world::Cover</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Basic rotated rectangle cover struct for prototyping.  <a href="a00563.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00289" id="r_a00289"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00289.html">core</a></td></tr>
-<tr class="memdesc:a00289"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains everything shared between the game and editor. <br /></td></tr>
+<tr class="memitem:a00418" id="r_a00418"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00418.html">core</a></td></tr>
+<tr class="memdesc:a00418"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains everything shared between the game and editor. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00293" id="r_a00293"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00293.html">core::world</a></td></tr>
-<tr class="memdesc:a00293"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collection of classes for the in-game world. <br /></td></tr>
+<tr class="memitem:a00425" id="r_a00425"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00425.html">core::cmd</a></td></tr>
+<tr class="memdesc:a00425"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functionality, storage, and events for commands for units and squads. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ga86b327c31ba27f07016ac257e32cb96f" id="r_ga86b327c31ba27f07016ac257e32cb96f"><td class="memItemLeft" align="right" valign="top">enum struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00409.html#ga86b327c31ba27f07016ac257e32cb96f">core::cmd::AggroLevel</a> { <a class="el" href="a00409.html#gga86b327c31ba27f07016ac257e32cb96fa389a96d0d9b3feb46b8c9d941566a4ae">core::cmd::AggroLevel::Aggressive</a>
+, <a class="el" href="a00409.html#gga86b327c31ba27f07016ac257e32cb96fae9bb5320b3890b6747c91b5a71ae5a01">core::cmd::AggroLevel::Neutral</a>
+, <a class="el" href="a00409.html#gga86b327c31ba27f07016ac257e32cb96fa91156e269529ff2e4742e58f9d65e5ce">core::cmd::AggroLevel::Coward</a>
+ }</td></tr>
+<tr class="memdesc:ga86b327c31ba27f07016ac257e32cb96f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The aggressiveness to perform commands with.  <a href="a00409.html#ga86b327c31ba27f07016ac257e32cb96f">More...</a><br /></td></tr>
+<tr class="separator:ga86b327c31ba27f07016ac257e32cb96f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

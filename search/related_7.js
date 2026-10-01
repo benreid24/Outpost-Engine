@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['world_0',['World',['../a00567.html#a7b4bcdf992c21ae83363f25df05b1d25',1,'core::world::Node']]]
+  ['ref_3c_20t_20_3e_0',['Ref&lt; T &gt;',['../a00612.html#a99229309340c6e682164e71612dca917',1,'core::cmd::SingleStore']]]
 ];

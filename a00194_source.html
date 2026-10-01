@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: src/Core/Unit/Squad.cpp Source File</title>
+<title>Outpost Engine: include/Core/Arena/TerrainNode.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,82 +79,55 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a2f0e5642e47e7ed59fe0f0829eafb5f.html">Core</a></li><li class="navelem"><a class="el" href="dir_f0654ae01a7bcca659aa4ec1de065498.html">Unit</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_abca691009d11aafdd50b5a787683a53.html">Arena</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">Squad.cpp</div></div>
+  <div class="headertitle"><div class="title">TerrainNode.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="a00194.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &lt;<a class="code" href="a00035.html">Core/Unit/Squad.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="a00685.html">Core/Game.hpp</a>&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00289.html">core</a></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>{</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span>unit</div>
+<a href="a00194.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_ARENA_TERRAINNODE_HPP</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_ARENA_TERRAINNODE_HPP</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;<a class="code" href="a00230.html">Core/Arena/Generation/Biome.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00418.html">core</a></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
-<div class="foldopen" id="foldopen00009" data-start="{" data-end="}">
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="a00547.html#aa3936f698db4218e3433a103f7ab516b">    9</a></span><a class="code hl_function" href="a00547.html#aa3936f698db4218e3433a103f7ab516b">Squad::Squad</a>(<a class="code hl_class" href="a00407.html">fcn::FactionId</a> faction)</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>: faction(faction) {}</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span>arena</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="a00548.html">   16</a></span><span class="keyword">struct </span><a class="code hl_struct" href="a00548.html">TerrainNode</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="a00548.html#a38a466fd05cdf8f6f2504590d1a38b92">   17</a></span>    glm::vec2 <a class="code hl_variable" href="a00548.html#a38a466fd05cdf8f6f2504590d1a38b92">position</a>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="a00548.html#aa7e222a923d3825f74fe3f884089df5e">   18</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="a00548.html#aa7e222a923d3825f74fe3f884089df5e">height</a>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="a00548.html#a155c98348069d95fe843ce853338d538">   19</a></span>    <a class="code hl_enumeration" href="a00407.html#gae80a70a999356090fd444a80e3594f1a">gen::Biome</a> <a class="code hl_variable" href="a00548.html#a155c98348069d95fe843ce853338d538">biome</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="a00548.html#a7c2ff74b05f6bdf245d5df08b79273a1">   27</a></span>    <a class="code hl_function" href="a00548.html#a7c2ff74b05f6bdf245d5df08b79273a1">TerrainNode</a>(<span class="keyword">const</span> glm::vec2&amp; <a class="code hl_variable" href="a00548.html#a38a466fd05cdf8f6f2504590d1a38b92">position</a>, <span class="keywordtype">float</span> <a class="code hl_variable" href="a00548.html#aa7e222a923d3825f74fe3f884089df5e">height</a>)</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    : <a class="code hl_variable" href="a00548.html#a38a466fd05cdf8f6f2504590d1a38b92">position</a>(<a class="code hl_variable" href="a00548.html#a38a466fd05cdf8f6f2504590d1a38b92">position</a>)</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    , <a class="code hl_variable" href="a00548.html#aa7e222a923d3825f74fe3f884089df5e">height</a>(<a class="code hl_variable" href="a00548.html#aa7e222a923d3825f74fe3f884089df5e">height</a>)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    , <a class="code hl_variable" href="a00548.html#a155c98348069d95fe843ce853338d538">biome</a>(gen::Biome::COUNT) {}</div>
 </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="a00547.html#a17a55c099d51a8b9258c8067fac54515">   12</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="a00547.html#a17a55c099d51a8b9258c8067fac54515">Squad::addUnit</a>(<a class="code hl_class" href="a00371.html">com::Unit</a>* unit) {</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordflow">if</span> (unit-&gt;<a class="code hl_function" href="a00371.html#ac2eeb7b3c9e2258d53efd46698b64c2b">getFaction</a>() != faction) { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; u : units) {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="keywordflow">if</span> (u.unit == unit) { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    }</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">auto</span>&amp; <a class="code hl_namespace" href="a00304.html">game</a> = bl::game::Game::getInstance&lt;Game&gt;();</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    units.emplace_back(unit, <a class="code hl_namespace" href="a00304.html">game</a>.engine().ecs().getComponent&lt;<a class="code hl_class" href="a00375.html">com::UnitAI</a>&gt;(unit-&gt;<a class="code hl_function" href="a00371.html#a1e7e13620e0eaebd130f73263b5d5034">getId</a>()));</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>}</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>};</div>
 </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="foldopen" id="foldopen00023" data-start="{" data-end="}">
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="a00547.html#a84bd50e6c76617bd4fc9a5e44e432ac4">   23</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="a00547.html#a84bd50e6c76617bd4fc9a5e44e432ac4">Squad::removeUnit</a>(<a class="code hl_class" href="a00371.html">com::Unit</a>* unit) {</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = units.begin(); it != units.end(); ++it) {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordflow">if</span> (it-&gt;unit == unit) {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            units.erase(it);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        }</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
-</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="a00547.html#a89cb1e4de285eec761881bc2a296470a">   32</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="a00547.html#a89cb1e4de285eec761881bc2a296470a">Squad::clearUnits</a>() { units.clear(); }</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="a00547.html#aad238f3d3a01bd68ca9647f229f6919f">   34</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="a00547.html#aad238f3d3a01bd68ca9647f229f6919f">Squad::queueCommand</a>(<span class="keyword">const</span> <a class="code hl_class" href="a00323.html">cmd::SquadCommandHandle</a>&amp; cmd, <a class="code hl_enumeration" href="a00281.html#gae347535f68c89b99694f8d3c8941b372">cmd::AddMode</a> addMode) {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">auto</span> copy = cmd;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    commandQueue.queueCommand(std::move(copy), addMode);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}</div>
-</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>} <span class="comment">// namespace unit</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>} <span class="comment">// namespace core</span></div>
-<div class="ttc" id="aa00035_html"><div class="ttname"><a href="a00035.html">Squad.hpp</a></div></div>
-<div class="ttc" id="aa00281_html_gae347535f68c89b99694f8d3c8941b372"><div class="ttname"><a href="a00281.html#gae347535f68c89b99694f8d3c8941b372">core::cmd::AddMode</a></div><div class="ttdeci">AddMode</div><div class="ttdoc">Ways that commands can be added to queues.</div><div class="ttdef"><b>Definition</b> <a href="a00107_source.html#l00013">AddMode.hpp:13</a></div></div>
-<div class="ttc" id="aa00289_html"><div class="ttname"><a href="a00289.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00107_source.html#l00004">AddMode.hpp:5</a></div></div>
-<div class="ttc" id="aa00304_html"><div class="ttname"><a href="a00304.html">game</a></div><div class="ttdoc">All classes and modules that implement the game itself.</div><div class="ttdef"><b>Definition</b> <a href="a00188_source.html#l00004">ConstantsGame.hpp:5</a></div></div>
-<div class="ttc" id="aa00323_html"><div class="ttname"><a href="a00323.html">core::cmd::ExternalHandle</a></div><div class="ttdoc">Handle to a command. This handle type is for UI, AI, and observers of commands.</div><div class="ttdef"><b>Definition</b> <a href="a00131_source.html#l00024">ExternalHandle.hpp:24</a></div></div>
-<div class="ttc" id="aa00371_html"><div class="ttname"><a href="a00371.html">core::com::Unit</a></div><div class="ttdoc">Component and data storage for in game units.</div><div class="ttdef"><b>Definition</b> <a href="a00679_source.html#l00030">Unit.hpp:30</a></div></div>
-<div class="ttc" id="aa00371_html_a1e7e13620e0eaebd130f73263b5d5034"><div class="ttname"><a href="a00371.html#a1e7e13620e0eaebd130f73263b5d5034">core::com::Unit::getId</a></div><div class="ttdeci">bl::ecs::Entity getId() const</div><div class="ttdoc">Returns the entity id of this unit.</div><div class="ttdef"><b>Definition</b> <a href="a00679_source.html#l00043">Unit.hpp:43</a></div></div>
-<div class="ttc" id="aa00371_html_ac2eeb7b3c9e2258d53efd46698b64c2b"><div class="ttname"><a href="a00371.html#ac2eeb7b3c9e2258d53efd46698b64c2b">core::com::Unit::getFaction</a></div><div class="ttdeci">fcn::FactionId getFaction() const</div><div class="ttdoc">Returns the id of the faction the unit belongs to.</div><div class="ttdef"><b>Definition</b> <a href="a00679_source.html#l00058">Unit.hpp:58</a></div></div>
-<div class="ttc" id="aa00375_html"><div class="ttname"><a href="a00375.html">core::com::UnitAI</a></div><div class="ttdoc">Component that adds AI for units.</div><div class="ttdef"><b>Definition</b> <a href="a00062_source.html#l00019">UnitAI.hpp:19</a></div></div>
-<div class="ttc" id="aa00407_html"><div class="ttname"><a href="a00407.html">core::fcn::FactionId</a></div><div class="ttdoc">Id for factions in the game. Should be treated as an opaque handle.</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00030">FactionId.hpp:30</a></div></div>
-<div class="ttc" id="aa00547_html_a17a55c099d51a8b9258c8067fac54515"><div class="ttname"><a href="a00547.html#a17a55c099d51a8b9258c8067fac54515">core::unit::Squad::addUnit</a></div><div class="ttdeci">bool addUnit(com::Unit *unit)</div><div class="ttdoc">Adds a unit to this squad.</div><div class="ttdef"><b>Definition</b> <a href="a00194_source.html#l00012">Squad.cpp:12</a></div></div>
-<div class="ttc" id="aa00547_html_a84bd50e6c76617bd4fc9a5e44e432ac4"><div class="ttname"><a href="a00547.html#a84bd50e6c76617bd4fc9a5e44e432ac4">core::unit::Squad::removeUnit</a></div><div class="ttdeci">void removeUnit(com::Unit *unit)</div><div class="ttdoc">Removes the unit from the squad.</div><div class="ttdef"><b>Definition</b> <a href="a00194_source.html#l00023">Squad.cpp:23</a></div></div>
-<div class="ttc" id="aa00547_html_a89cb1e4de285eec761881bc2a296470a"><div class="ttname"><a href="a00547.html#a89cb1e4de285eec761881bc2a296470a">core::unit::Squad::clearUnits</a></div><div class="ttdeci">void clearUnits()</div><div class="ttdoc">Removes all units from the squad.</div><div class="ttdef"><b>Definition</b> <a href="a00194_source.html#l00032">Squad.cpp:32</a></div></div>
-<div class="ttc" id="aa00547_html_aa3936f698db4218e3433a103f7ab516b"><div class="ttname"><a href="a00547.html#aa3936f698db4218e3433a103f7ab516b">core::unit::Squad::Squad</a></div><div class="ttdeci">Squad(fcn::FactionId faction)</div><div class="ttdoc">Creates a new empty squad.</div><div class="ttdef"><b>Definition</b> <a href="a00194_source.html#l00009">Squad.cpp:9</a></div></div>
-<div class="ttc" id="aa00547_html_aad238f3d3a01bd68ca9647f229f6919f"><div class="ttname"><a href="a00547.html#aad238f3d3a01bd68ca9647f229f6919f">core::unit::Squad::queueCommand</a></div><div class="ttdeci">void queueCommand(const cmd::SquadCommandHandle &amp;command, cmd::AddMode addMode=cmd::AddMode::QueueEnd)</div><div class="ttdoc">Queues a command to the squad.</div><div class="ttdef"><b>Definition</b> <a href="a00194_source.html#l00034">Squad.cpp:34</a></div></div>
-<div class="ttc" id="aa00685_html"><div class="ttname"><a href="a00685.html">Game.hpp</a></div></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>} <span class="comment">// namespace arena</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>} <span class="comment">// namespace core</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00230_html"><div class="ttname"><a href="a00230.html">Biome.hpp</a></div></div>
+<div class="ttc" id="aa00407_html_gae80a70a999356090fd444a80e3594f1a"><div class="ttname"><a href="a00407.html#gae80a70a999356090fd444a80e3594f1a">core::arena::gen::Biome</a></div><div class="ttdeci">Biome</div><div class="ttdoc">Represents the biome of a node.</div><div class="ttdef"><b>Definition</b> <a href="a00230_source.html#l00015">Biome.hpp:15</a></div></div>
+<div class="ttc" id="aa00418_html"><div class="ttname"><a href="a00418.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00236_source.html#l00014">Arena.hpp:15</a></div></div>
+<div class="ttc" id="aa00548_html"><div class="ttname"><a href="a00548.html">core::arena::TerrainNode</a></div><div class="ttdoc">Represents a single node in the terrain heightmap.</div><div class="ttdef"><b>Definition</b> <a href="a00194_source.html#l00016">TerrainNode.hpp:16</a></div></div>
+<div class="ttc" id="aa00548_html_a155c98348069d95fe843ce853338d538"><div class="ttname"><a href="a00548.html#a155c98348069d95fe843ce853338d538">core::arena::TerrainNode::biome</a></div><div class="ttdeci">gen::Biome biome</div><div class="ttdef"><b>Definition</b> <a href="a00194_source.html#l00019">TerrainNode.hpp:19</a></div></div>
+<div class="ttc" id="aa00548_html_a38a466fd05cdf8f6f2504590d1a38b92"><div class="ttname"><a href="a00548.html#a38a466fd05cdf8f6f2504590d1a38b92">core::arena::TerrainNode::position</a></div><div class="ttdeci">glm::vec2 position</div><div class="ttdef"><b>Definition</b> <a href="a00194_source.html#l00017">TerrainNode.hpp:17</a></div></div>
+<div class="ttc" id="aa00548_html_a7c2ff74b05f6bdf245d5df08b79273a1"><div class="ttname"><a href="a00548.html#a7c2ff74b05f6bdf245d5df08b79273a1">core::arena::TerrainNode::TerrainNode</a></div><div class="ttdeci">TerrainNode(const glm::vec2 &amp;position, float height)</div><div class="ttdoc">Creates the terrain node.</div><div class="ttdef"><b>Definition</b> <a href="a00194_source.html#l00027">TerrainNode.hpp:27</a></div></div>
+<div class="ttc" id="aa00548_html_aa7e222a923d3825f74fe3f884089df5e"><div class="ttname"><a href="a00548.html#aa7e222a923d3825f74fe3f884089df5e">core::arena::TerrainNode::height</a></div><div class="ttdeci">float height</div><div class="ttdef"><b>Definition</b> <a href="a00194_source.html#l00018">TerrainNode.hpp:18</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

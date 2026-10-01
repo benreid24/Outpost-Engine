@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: Member List</title>
+<title>Outpost Engine: core::arena::gen::RuledBiome Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,22 +74,117 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00289.html">core</a></li><li class="navelem"><a class="el" href="a00300.html">unit</a></li><li class="navelem"><a class="el" href="a00302.html">able</a></li><li class="navelem"><a class="el" href="a00515.html">Map&lt; Capability::Move &gt;</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00418.html">core</a></li><li class="navelem"><a class="el" href="a00419.html">arena</a></li><li class="navelem"><a class="el" href="a00420.html">gen</a></li><li class="navelem"><a class="el" href="a00512.html">RuledBiome</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">core::unit::able::Map&lt; Capability::Move &gt; Member List</div></div>
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00509.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">core::arena::gen::RuledBiome Struct Reference<div class="ingroups"><a class="el" href="a00404.html">Core</a> &raquo; <a class="el" href="a00407.html">Arena</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00515.html">core::unit::able::Map&lt; Capability::Move &gt;</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00515.html#a4ad5e3183641b63d92e147cf5b354c88">Info</a> typedef</td><td class="entry"><a class="el" href="a00515.html">core::unit::able::Map&lt; Capability::Move &gt;</a></td><td class="entry"></td></tr>
-</table></div><!-- contents -->
+<p>Represents a ruleset that determines where a biome can be present in the terrain.  
+ <a href="a00512.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00215_source.html">RuledBiome.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00516.html">Rule</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single rule for a biome. Rules govern likelihood based on scalar params.  <a href="a00516.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a06d3663c91932394afa4d4e0e386fea6" id="r_a06d3663c91932394afa4d4e0e386fea6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00407.html#gae80a70a999356090fd444a80e3594f1a">Biome</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00512.html#a06d3663c91932394afa4d4e0e386fea6">biome</a> = <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa4905ac9d6a22bdfc1ae096094ce6248d">Biome::COUNT</a></td></tr>
+<tr class="separator:a06d3663c91932394afa4d4e0e386fea6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ff174e395e6a1bb76c69fe5c35c5f87" id="r_a9ff174e395e6a1bb76c69fe5c35c5f87"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00516.html">Rule</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00512.html#a9ff174e395e6a1bb76c69fe5c35c5f87">heightRule</a> = <a class="el" href="a00516.html">Rule</a>{}</td></tr>
+<tr class="separator:a9ff174e395e6a1bb76c69fe5c35c5f87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4250da88123b3d613741e99da8972c3f" id="r_a4250da88123b3d613741e99da8972c3f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00516.html">Rule</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00512.html#a4250da88123b3d613741e99da8972c3f">moistureRule</a> = <a class="el" href="a00516.html">Rule</a>{}</td></tr>
+<tr class="separator:a4250da88123b3d613741e99da8972c3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0aea7e4543bce0269bded7604ee43305" id="r_a0aea7e4543bce0269bded7604ee43305"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="a00468.html">AdjacencyBonus</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00512.html#a0aea7e4543bce0269bded7604ee43305">adjacencyBonuses</a> = std::vector&lt;<a class="el" href="a00468.html">AdjacencyBonus</a>&gt;{}</td></tr>
+<tr class="separator:a0aea7e4543bce0269bded7604ee43305"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a ruleset that determines where a biome can be present in the terrain. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00215_source.html#l00021">21</a> of file <a class="el" href="a00215_source.html">RuledBiome.hpp</a>.</p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0aea7e4543bce0269bded7604ee43305" name="a0aea7e4543bce0269bded7604ee43305"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0aea7e4543bce0269bded7604ee43305">&#9670;&#160;</a></span>adjacencyBonuses</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="a00468.html">AdjacencyBonus</a>&gt; core::arena::gen::RuledBiome::adjacencyBonuses = std::vector&lt;<a class="el" href="a00468.html">AdjacencyBonus</a>&gt;{}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00215_source.html#l00042">42</a> of file <a class="el" href="a00215_source.html">RuledBiome.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a06d3663c91932394afa4d4e0e386fea6" name="a06d3663c91932394afa4d4e0e386fea6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06d3663c91932394afa4d4e0e386fea6">&#9670;&#160;</a></span>biome</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00407.html#gae80a70a999356090fd444a80e3594f1a">Biome</a> core::arena::gen::RuledBiome::biome = <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa4905ac9d6a22bdfc1ae096094ce6248d">Biome::COUNT</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00215_source.html#l00039">39</a> of file <a class="el" href="a00215_source.html">RuledBiome.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9ff174e395e6a1bb76c69fe5c35c5f87" name="a9ff174e395e6a1bb76c69fe5c35c5f87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ff174e395e6a1bb76c69fe5c35c5f87">&#9670;&#160;</a></span>heightRule</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00516.html">Rule</a> core::arena::gen::RuledBiome::heightRule = <a class="el" href="a00516.html">Rule</a>{}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00215_source.html#l00040">40</a> of file <a class="el" href="a00215_source.html">RuledBiome.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a4250da88123b3d613741e99da8972c3f" name="a4250da88123b3d613741e99da8972c3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4250da88123b3d613741e99da8972c3f">&#9670;&#160;</a></span>moistureRule</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00516.html">Rule</a> core::arena::gen::RuledBiome::moistureRule = <a class="el" href="a00516.html">Rule</a>{}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00215_source.html#l00041">41</a> of file <a class="el" href="a00215_source.html">RuledBiome.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/Core/Arena/Generation/<a class="el" href="a00215_source.html">RuledBiome.hpp</a></li>
+</ul>
+</div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

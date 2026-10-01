@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: Member List</title>
+<title>Outpost Engine: core::arena::Terrain Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,27 +74,367 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00289.html">core</a></li><li class="navelem"><a class="el" href="a00300.html">unit</a></li><li class="navelem"><a class="el" href="a00302.html">able</a></li><li class="navelem"><a class="el" href="a00543.html">Storage</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00418.html">core</a></li><li class="navelem"><a class="el" href="a00419.html">arena</a></li><li class="navelem"><a class="el" href="a00540.html">Terrain</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">core::unit::able::Storage&lt; Cs &gt; Member List</div></div>
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="a00537.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">core::arena::Terrain Class Reference<div class="ingroups"><a class="el" href="a00404.html">Core</a> &raquo; <a class="el" href="a00407.html">Arena</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00543.html">core::unit::able::Storage&lt; Cs &gt;</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00543.html#a09302a833143420875f8af7c367b4bbf">Abilities</a></td><td class="entry"><a class="el" href="a00543.html">core::unit::able::Storage&lt; Cs &gt;</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00543.html#a5e5de104fdbbbe5fb31c33e592c874fb">add</a>()</td><td class="entry"><a class="el" href="a00543.html">core::unit::able::Storage&lt; Cs &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00543.html#a88c66b45c3109a2807c0e37cc7f4df40">get</a>()</td><td class="entry"><a class="el" href="a00543.html">core::unit::able::Storage&lt; Cs &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00543.html#af7d2a1462f17a0d2ba3166019daa8f0a">has</a>()</td><td class="entry"><a class="el" href="a00543.html">core::unit::able::Storage&lt; Cs &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00539.html#addc72fa689e8d14853fb8e05a00a90c4">info</a></td><td class="entry"><a class="el" href="a00539.html">core::unit::able::SingleStorage&lt; Cs &gt;</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00543.html#a4ca38591a486480742b23b3e65dd22f0">Storage</a>()=default</td><td class="entry"><a class="el" href="a00543.html">core::unit::able::Storage&lt; Cs &gt;</a></td><td class="entry"></td></tr>
-</table></div><!-- contents -->
+<p>Representation of the terrain in an arena.  
+ <a href="a00540.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00191_source.html">Terrain.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00544.html">SampledBiome</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a biome sampled from the terrain with its weight.  <a href="a00544.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aafb3b97aa3b93bacc027863232c06c8d" id="r_aafb3b97aa3b93bacc027863232c06c8d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00540.html#aafb3b97aa3b93bacc027863232c06c8d">Terrain</a> ()</td></tr>
+<tr class="memdesc:aafb3b97aa3b93bacc027863232c06c8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the terrain with no data.  <br /></td></tr>
+<tr class="separator:aafb3b97aa3b93bacc027863232c06c8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37c300ee39a1cd1a7868ad43f6e5d0be" id="r_a37c300ee39a1cd1a7868ad43f6e5d0be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00540.html#a37c300ee39a1cd1a7868ad43f6e5d0be">addToWorld</a> (bl::engine::World &amp;world, <a class="el" href="a00540.html">float</a> step)</td></tr>
+<tr class="memdesc:a37c300ee39a1cd1a7868ad43f6e5d0be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates engine objects for the terrain and adds them to the world.  <br /></td></tr>
+<tr class="separator:a37c300ee39a1cd1a7868ad43f6e5d0be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a9c3a62e9c1dfd073ce91708621feb5" id="r_a3a9c3a62e9c1dfd073ce91708621feb5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00540.html#a3a9c3a62e9c1dfd073ce91708621feb5">generateGeometry</a> (bl::util::ThreadPool &amp;threadPool)</td></tr>
+<tr class="memdesc:a3a9c3a62e9c1dfd073ce91708621feb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the geometry for the terrain.  <br /></td></tr>
+<tr class="separator:a3a9c3a62e9c1dfd073ce91708621feb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08332ac10730a91b8a8d3574b0e65ae6" id="r_a08332ac10730a91b8a8d3574b0e65ae6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00540.html#a08332ac10730a91b8a8d3574b0e65ae6">sampleHeight</a> (<a class="el" href="a00540.html">const</a> glm::vec2 &amp;position) <a class="el" href="a00540.html">const</a></td></tr>
+<tr class="memdesc:a08332ac10730a91b8a8d3574b0e65ae6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the height of the terrain at the given position.  <br /></td></tr>
+<tr class="separator:a08332ac10730a91b8a8d3574b0e65ae6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d2b48ac3627e578e5a968476203258e" id="r_a0d2b48ac3627e578e5a968476203258e"><td class="memItemLeft" align="right" valign="top">bl::ctr::StaticVector&lt; <a class="el" href="a00544.html">SampledBiome</a>, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00540.html#a0d2b48ac3627e578e5a968476203258e">sampleBiomes</a> (<a class="el" href="a00540.html">const</a> glm::vec2 &amp;position) <a class="el" href="a00540.html">const</a></td></tr>
+<tr class="memdesc:a0d2b48ac3627e578e5a968476203258e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Samples the biomes at the given world position.  <br /></td></tr>
+<tr class="separator:a0d2b48ac3627e578e5a968476203258e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22de19ff199b4061eb04ab7e2a1282c4" id="r_a22de19ff199b4061eb04ab7e2a1282c4"><td class="memItemLeft" align="right" valign="top">glm::u32vec2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00540.html#a22de19ff199b4061eb04ab7e2a1282c4">worldPosToIndex</a> (<a class="el" href="a00540.html">const</a> glm::vec2 &amp;worldPos) <a class="el" href="a00540.html">const</a></td></tr>
+<tr class="memdesc:a22de19ff199b4061eb04ab7e2a1282c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the node index of the given world position.  <br /></td></tr>
+<tr class="separator:a22de19ff199b4061eb04ab7e2a1282c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81051bdf4f0a70101c8f2d98dd8e2a7b" id="r_a81051bdf4f0a70101c8f2d98dd8e2a7b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00540.html#a81051bdf4f0a70101c8f2d98dd8e2a7b">getMaxHeight</a> () <a class="el" href="a00540.html">const</a></td></tr>
+<tr class="memdesc:a81051bdf4f0a70101c8f2d98dd8e2a7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the maximum possible height of the terrain.  <br /></td></tr>
+<tr class="separator:a81051bdf4f0a70101c8f2d98dd8e2a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76c186b809f1da9e6aaf2f93553c7346" id="r_a76c186b809f1da9e6aaf2f93553c7346"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">const</a> bl::ctr::Vector2D&lt; <a class="el" href="a00536.html">Node</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00540.html#a76c186b809f1da9e6aaf2f93553c7346">getNodes</a> () <a class="el" href="a00540.html">const</a></td></tr>
+<tr class="memdesc:a76c186b809f1da9e6aaf2f93553c7346"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the terrain nodes.  <br /></td></tr>
+<tr class="separator:a76c186b809f1da9e6aaf2f93553c7346"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0c03c47d039180fd9d1588d2db73acf" id="r_af0c03c47d039180fd9d1588d2db73acf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00540.html#af0c03c47d039180fd9d1588d2db73acf">getStep</a> () <a class="el" href="a00540.html">const</a></td></tr>
+<tr class="memdesc:af0c03c47d039180fd9d1588d2db73acf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the step size of the terrain.  <br /></td></tr>
+<tr class="separator:af0c03c47d039180fd9d1588d2db73acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:ab1ffca5709476085cdaada0459796f47" id="r_ab1ffca5709476085cdaada0459796f47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">class</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00540.html#ab1ffca5709476085cdaada0459796f47">gen::Generator</a></td></tr>
+<tr class="separator:ab1ffca5709476085cdaada0459796f47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Representation of the terrain in an arena. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00191_source.html#l00025">25</a> of file <a class="el" href="a00191_source.html">Terrain.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aafb3b97aa3b93bacc027863232c06c8d" name="aafb3b97aa3b93bacc027863232c06c8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafb3b97aa3b93bacc027863232c06c8d">&#9670;&#160;</a></span>Terrain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">core::arena::Terrain::Terrain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates the terrain with no data. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00350_source.html#l00022">22</a> of file <a class="el" href="a00350_source.html">Terrain.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a37c300ee39a1cd1a7868ad43f6e5d0be" name="a37c300ee39a1cd1a7868ad43f6e5d0be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37c300ee39a1cd1a7868ad43f6e5d0be">&#9670;&#160;</a></span>addToWorld()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">void</a> core::arena::Terrain::addToWorld </td>
+          <td>(</td>
+          <td class="paramtype">bl::engine::World &amp;&#160;</td>
+          <td class="paramname"><em>world</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00540.html">float</a>&#160;</td>
+          <td class="paramname"><em>step</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates engine objects for the terrain and adds them to the world. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">world</td><td>The world to create the objects in </td></tr>
+    <tr><td class="paramname">step</td><td>The step size for the terrain </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00350_source.html#l00082">82</a> of file <a class="el" href="a00350_source.html">Terrain.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a3a9c3a62e9c1dfd073ce91708621feb5" name="a3a9c3a62e9c1dfd073ce91708621feb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a9c3a62e9c1dfd073ce91708621feb5">&#9670;&#160;</a></span>generateGeometry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">void</a> core::arena::Terrain::generateGeometry </td>
+          <td>(</td>
+          <td class="paramtype">bl::util::ThreadPool &amp;&#160;</td>
+          <td class="paramname"><em>threadPool</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generates the geometry for the terrain. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">threadPool</td><td>The thread pool to use for generating the geometry </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00350_source.html#l00094">94</a> of file <a class="el" href="a00350_source.html">Terrain.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a81051bdf4f0a70101c8f2d98dd8e2a7b" name="a81051bdf4f0a70101c8f2d98dd8e2a7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81051bdf4f0a70101c8f2d98dd8e2a7b">&#9670;&#160;</a></span>getMaxHeight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">float</a> core::arena::Terrain::getMaxHeight </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the maximum possible height of the terrain. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00191_source.html#l00083">83</a> of file <a class="el" href="a00191_source.html">Terrain.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a76c186b809f1da9e6aaf2f93553c7346" name="a76c186b809f1da9e6aaf2f93553c7346"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76c186b809f1da9e6aaf2f93553c7346">&#9670;&#160;</a></span>getNodes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">const</a> bl::ctr::Vector2D&lt; <a class="el" href="a00536.html">Node</a> &gt; &amp; core::arena::Terrain::getNodes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the terrain nodes. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00191_source.html#l00088">88</a> of file <a class="el" href="a00191_source.html">Terrain.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af0c03c47d039180fd9d1588d2db73acf" name="af0c03c47d039180fd9d1588d2db73acf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0c03c47d039180fd9d1588d2db73acf">&#9670;&#160;</a></span>getStep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">float</a> core::arena::Terrain::getStep </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the step size of the terrain. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00191_source.html#l00093">93</a> of file <a class="el" href="a00191_source.html">Terrain.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0d2b48ac3627e578e5a968476203258e" name="a0d2b48ac3627e578e5a968476203258e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d2b48ac3627e578e5a968476203258e">&#9670;&#160;</a></span>sampleBiomes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bl::ctr::StaticVector&lt; <a class="el" href="a00544.html">Terrain::SampledBiome</a>, 4 &gt; core::arena::Terrain::sampleBiomes </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00540.html">const</a> glm::vec2 &amp;&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Samples the biomes at the given world position. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>The world position to sample the biomes at </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A static vector containing the biomes at the given position </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00350_source.html#l00035">35</a> of file <a class="el" href="a00350_source.html">Terrain.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a08332ac10730a91b8a8d3574b0e65ae6" name="a08332ac10730a91b8a8d3574b0e65ae6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08332ac10730a91b8a8d3574b0e65ae6">&#9670;&#160;</a></span>sampleHeight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">float</a> core::arena::Terrain::sampleHeight </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00540.html">const</a> glm::vec2 &amp;&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the height of the terrain at the given position. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>The world position to sample the height at </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The height of the terrain at the given position </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00350_source.html#l00025">25</a> of file <a class="el" href="a00350_source.html">Terrain.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a22de19ff199b4061eb04ab7e2a1282c4" name="a22de19ff199b4061eb04ab7e2a1282c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22de19ff199b4061eb04ab7e2a1282c4">&#9670;&#160;</a></span>worldPosToIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::u32vec2 core::arena::Terrain::worldPosToIndex </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00540.html">const</a> glm::vec2 &amp;&#160;</td>
+          <td class="paramname"><em>worldPos</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the node index of the given world position. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">worldPos</td><td>The position to get the index for in world coordinates </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The index of the given world position </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00350_source.html#l00075">75</a> of file <a class="el" href="a00350_source.html">Terrain.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Symbol Documentation</h2>
+<a id="ab1ffca5709476085cdaada0459796f47" name="ab1ffca5709476085cdaada0459796f47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1ffca5709476085cdaada0459796f47">&#9670;&#160;</a></span>gen::Generator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">friend</a> <a class="el" href="a00540.html">class</a> <a class="el" href="a00484.html">gen::Generator</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00191_source.html#l00105">105</a> of file <a class="el" href="a00191_source.html">Terrain.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>include/Core/Arena/<a class="el" href="a00191_source.html">Terrain.hpp</a></li>
+<li>src/Core/Arena/<a class="el" href="a00350_source.html">Terrain.cpp</a></li>
+</ul>
+</div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

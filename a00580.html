@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: Member List</title>
+<title>Outpost Engine: core::arena::train::TrackNode Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,39 +74,110 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00289.html">core</a></li><li class="navelem"><a class="el" href="a00293.html">world</a></li><li class="navelem"><a class="el" href="a00583.html">World</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00418.html">core</a></li><li class="navelem"><a class="el" href="a00419.html">arena</a></li><li class="navelem"><a class="el" href="a00421.html">train</a></li><li class="navelem"><a class="el" href="a00580.html">TrackNode</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">core::world::World Member List</div></div>
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00577.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">core::arena::train::TrackNode Struct Reference<div class="ingroups"><a class="el" href="a00404.html">Core</a> &raquo; <a class="el" href="a00407.html">Arena</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00583.html">core::world::World</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00583.html#aaabcdb3c2372e8c546fa2002017a14fb">addCover</a>(glm::vec2 pos, glm::vec2 size, float angle)</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00583.html#ad545b4dea33654764b3a3ffa7399ec4f">addNode</a>(Node::Type type, glm::vec2 position)</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00583.html#a56cad4f81eb83c31ca76975264ed7815">computePath</a>(const glm::vec2 &amp;startPos, const glm::vec2 &amp;targetPosition, Path &amp;path)</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00583.html#aefee58fe09395347dc6e6fcb22f504e4">getClosestReachableNode</a>(const glm::vec2 &amp;position, const glm::vec2 &amp;secondaryPosition) const</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00583.html#af093eb7f2bdbc3ec919b35f2c012df74">getNodeAtPosition</a>(const glm::vec2 &amp;position, float threshold=20.f) const</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00583.html#ae457ec1caa76c89c51607a7ebacb182f">getTargetAtPosition</a>(const glm::vec2 &amp;worldPos) const</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00583.html#a1264a81b3644bacb92dff8ac258c40eb">getUnitAtPosition</a>(const glm::vec2 &amp;worldPos) const</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00583.html#af280661a1958c7af1a08ef6f0df3bbde">getUnitsInArea</a>(const sf::FloatRect &amp;area) const</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00583.html#a752ab89dbf6b096d5bef728b0bd2513c">handleSensorEnter</a>(std::size_t node, bl::ecs::Entity entity)</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00583.html#acd5e80e29ec83ca63dacd75cc7ce8979">handleSensorExit</a>(std::size_t node, bl::ecs::Entity entity)</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00583.html#af2ca42a15e764ed4c29dcf447718e3d9">lineOfSightIsClear</a>(const glm::vec2 &amp;pos, com::Combatant *target) const</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00583.html#a8ce3c66000047a7c22a1be9fd48a7209">pathToNodeIsClear</a>(const glm::vec2 &amp;pos, const Node &amp;node) const</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00583.html#a30a625502e375908066d2815a1653c7c">pathToPositionIsClear</a>(const glm::vec2 &amp;start, const glm::vec2 &amp;end) const</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00583.html#ac34dfd5bb76754de903e172eb71d8212">pickFiringPosition</a>(const glm::vec2 &amp;comingFrom, const glm::vec2 &amp;firingOn, float maxDistance, bl::ecs::Entity searcher=bl::ecs::InvalidEntity, float distanceWeight=0.35f, float coverWeight=0.65f) const</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00583.html#a48530e9cb7481427964eead48ce70bad">removeCoverAtPosition</a>(const glm::vec2 &amp;pos)</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00583.html#ac477475ce4b7b47c6ecebdfb7ec30cd2">removeNodeAtPosition</a>(const glm::vec2 &amp;pos, float threshold=30.f)</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00583.html#af67728b70d74bc580dde76a29c7b86df">World</a>(bl::engine::Engine &amp;engine)</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00583.html#a02bfc3689fcec605b7fe34fa6d5fcfc4">~World</a>()=default</td><td class="entry"><a class="el" href="a00583.html">core::world::World</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-</table></div><!-- contents -->
+<p>Represents a node of a train track.  
+ <a href="a00580.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00185_source.html">TrackNode.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:afad5e53c26d3807bbee09b594c3ed499" id="r_afad5e53c26d3807bbee09b594c3ed499"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00580.html#afad5e53c26d3807bbee09b594c3ed499">position</a></td></tr>
+<tr class="separator:afad5e53c26d3807bbee09b594c3ed499"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef4642b732f44076c903a51d86de4913" id="r_aef4642b732f44076c903a51d86de4913"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00580.html#aef4642b732f44076c903a51d86de4913">accumulatedDistance</a></td></tr>
+<tr class="separator:aef4642b732f44076c903a51d86de4913"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a969db6d5dc0442ec1875415d6ebfe5e8" id="r_a969db6d5dc0442ec1875415d6ebfe5e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00580.html#a969db6d5dc0442ec1875415d6ebfe5e8">length</a></td></tr>
+<tr class="separator:a969db6d5dc0442ec1875415d6ebfe5e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf6647a3de7ec3da8e4fd8b39dac114d" id="r_aaf6647a3de7ec3da8e4fd8b39dac114d"><td class="memItemLeft" align="right" valign="top">bl::math::CatmullRomSegment&lt; glm::vec3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00580.html#aaf6647a3de7ec3da8e4fd8b39dac114d">spline</a></td></tr>
+<tr class="separator:aaf6647a3de7ec3da8e4fd8b39dac114d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a node of a train track. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00185_source.html#l00018">18</a> of file <a class="el" href="a00185_source.html">TrackNode.hpp</a>.</p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="aef4642b732f44076c903a51d86de4913" name="aef4642b732f44076c903a51d86de4913"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef4642b732f44076c903a51d86de4913">&#9670;&#160;</a></span>accumulatedDistance</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">float</a> core::arena::train::TrackNode::accumulatedDistance</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00185_source.html#l00020">20</a> of file <a class="el" href="a00185_source.html">TrackNode.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a969db6d5dc0442ec1875415d6ebfe5e8" name="a969db6d5dc0442ec1875415d6ebfe5e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a969db6d5dc0442ec1875415d6ebfe5e8">&#9670;&#160;</a></span>length</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">float</a> core::arena::train::TrackNode::length</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00185_source.html#l00021">21</a> of file <a class="el" href="a00185_source.html">TrackNode.hpp</a>.</p>
+
+</div>
+</div>
+<a id="afad5e53c26d3807bbee09b594c3ed499" name="afad5e53c26d3807bbee09b594c3ed499"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afad5e53c26d3807bbee09b594c3ed499">&#9670;&#160;</a></span>position</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::vec3 core::arena::train::TrackNode::position</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00185_source.html#l00019">19</a> of file <a class="el" href="a00185_source.html">TrackNode.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aaf6647a3de7ec3da8e4fd8b39dac114d" name="aaf6647a3de7ec3da8e4fd8b39dac114d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf6647a3de7ec3da8e4fd8b39dac114d">&#9670;&#160;</a></span>spline</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bl::math::CatmullRomSegment&lt;glm::vec3&gt; core::arena::train::TrackNode::spline</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00185_source.html#l00022">22</a> of file <a class="el" href="a00185_source.html">TrackNode.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/Core/Arena/Train/<a class="el" href="a00185_source.html">TrackNode.hpp</a></li>
+</ul>
+</div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

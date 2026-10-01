@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['maxcoverdistance_0',['MaxCoverDistance',['../a00567.html#a0cde01a7f11c86e307c0edfe97b8c179',1,'core::world::Node']]],
-  ['maxfactions_1',['MaxFactions',['../a00407.html#a442e182013ec66fc475bc28b21106d73',1,'core::fcn::FactionId']]],
-  ['maxspeed_2',['maxSpeed',['../a00527.html#a0f1e5efef011087637129fd185524c6c',1,'core::unit::able::Move']]],
-  ['movement_3',['movement',['../a00475.html#acdda9680a963b89febe40fe3fc218903',1,'core::unit::ai::LowBrain']]]
+  ['killed_0',['killed',['../a00784.html#a50e2a3863981c7ec65d1fd1b3718b91b',1,'core::unit::ai::Notification']]],
+  ['killer_1',['killer',['../a00672.html#ab4ec4584044ed49d7c68b12422be7edb',1,'core::event::EntityKilled']]],
+  ['killtarget_2',['killTarget',['../a00764.html#a3f18e16c3c985c13a926283cd2450f98',1,'core::unit::ai::LowBrain']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['menudriver_0',['MenuDriver',['../a00285.html#ga4177a2fb4c67d583c7ea3ab587db8791',1,'core::input']]]
+  ['idtype_0',['IdType',['../a00680.html#a70a150873675727abd161fcc6a669039',1,'core::fcn::FactionId']]],
+  ['info_1',['info',['../a00800.html#ab56a07b6f1150cecead4cb523ef5452c',1,'core::unit::able::Map::Info'],['../a00804.html#a4ad5e3183641b63d92e147cf5b354c88',1,'core::unit::able::Map&lt; Capability::Move &gt;::Info'],['../a00808.html#a791682ee1e20047aa24ad889c53254df',1,'core::unit::able::Map&lt; Capability::Rotate &gt;::Info'],['../a00812.html#a0da2bef86adebfb275428a0f14f9b9b2',1,'core::unit::able::Map&lt; Capability::Shoot &gt;::Info']]]
 ];

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: src/Core/Factions/Faction.cpp Source File</title>
+<title>Outpost Engine: src/Editor/Editor.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,49 +79,108 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a2f0e5642e47e7ed59fe0f0829eafb5f.html">Core</a></li><li class="navelem"><a class="el" href="dir_f0035a7bf29ec95138847fd39f4f5f66.html">Factions</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_4bd1ebb85acf5915171c6010ad9053a2.html">Editor</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">Faction.cpp</div></div>
+  <div class="headertitle"><div class="title">Editor.cpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="a00269.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &lt;<a class="code" href="a00179.html">Core/Factions/Faction.hpp</a>&gt;</span></div>
+<a href="a00269.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &lt;<a class="code" href="a00002.html">Editor/Editor.hpp</a>&gt;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00289.html">core</a></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span>{</div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span>fcn</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>{</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>Faction::Faction(FactionId <span class="keywordtype">id</span>)</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>: id(id)</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>, friendlyTo(<a class="code hl_variable" href="a00295.html#a77c17409b7378803bf1be0c563d0227f">FilterEmpty</a>)</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>, hostileTo(<a class="code hl_variable" href="a00295.html#a77c17409b7378803bf1be0c563d0227f">FilterEmpty</a>) {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    units.reserve(32);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>}</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keywordtype">void</span> Faction::addUnit(com::Unit* unit) { units.emplace_back(unit); }</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="a00044.html">Core/DemoEngineState.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;<a class="code" href="a00149.html">Core/Properties.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="a00005.html">Editor/ConstantsEditor.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00442.html">editor</a></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">// one instance should exist globally</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>Editor <a class="code hl_namespace" href="a00442.html">editor</a>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>} <span class="comment">// namespace</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keywordtype">void</span> Faction::removeUnit(<span class="keyword">const</span> com::Unit* unit) {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = units.begin(); it != units.end(); ++it) {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordflow">if</span> (*it == unit) {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>            units.erase(it);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        }</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    }</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>}</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="a00403.html#aaeabf231f6ae32844ffe9f9e0f3aa990">   25</a></span><span class="keywordtype">void</span> Faction::setName(std::string_view n) { name = n; }</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>} <span class="comment">// namespace fcn</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>} <span class="comment">// namespace core</span></div>
-<div class="ttc" id="aa00179_html"><div class="ttname"><a href="a00179.html">Faction.hpp</a></div></div>
-<div class="ttc" id="aa00289_html"><div class="ttname"><a href="a00289.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00107_source.html#l00004">AddMode.hpp:5</a></div></div>
-<div class="ttc" id="aa00295_html_a77c17409b7378803bf1be0c563d0227f"><div class="ttname"><a href="a00295.html#a77c17409b7378803bf1be0c563d0227f">core::fcn::FilterEmpty</a></div><div class="ttdeci">constexpr Filter FilterEmpty</div><div class="ttdef"><b>Definition</b> <a href="a00176_source.html#l00065">Filter.hpp:65</a></div></div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="a00880.html#ab45601f4b78cbada2eeea34744e0f4f3">   16</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="a00880.html#ab45601f4b78cbada2eeea34744e0f4f3">Editor::performEarlyStartup</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv) {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">if</span> (!<a class="code hl_function" href="a00692.html#a3ddaaf5be109707a0b8b1d9bc0961f36">performSharedEarlyStartup</a>(<a class="code hl_variable" href="a00876.html#a94d3096d02fbd3e4c021997441dde372">ConstantsEditor::ConfigFilePath</a>)) { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    bl::logging::Config::rollLogs(<span class="stringliteral">&quot;logs&quot;</span>, <span class="stringliteral">&quot;editor&quot;</span>, 3);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    bl::logging::Config::configureOutput(std::cout, bl::logging::Config::Debug);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    bl::logging::Config::addFileOutput(<span class="stringliteral">&quot;logs/editor.log&quot;</span>, bl::logging::Config::Debug);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="comment">// if no previous value then use default editor specific value</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="a00418.html#a86c7056269a5cbd294c244be1a48497a">core::Properties</a>.WindowWidth.get() == <a class="code hl_variable" href="a00656.html#a2d737dbb76139dad69ca691e6e5afc91">core::Constants::UnsetUintProperty</a> ||</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <a class="code hl_variable" href="a00418.html#a86c7056269a5cbd294c244be1a48497a">core::Properties</a>.WindowHeight.get() == <a class="code hl_variable" href="a00656.html#a2d737dbb76139dad69ca691e6e5afc91">core::Constants::UnsetUintProperty</a>) {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <a class="code hl_variable" href="a00418.html#a86c7056269a5cbd294c244be1a48497a">core::Properties</a>.WindowWidth.set(<a class="code hl_variable" href="a00876.html#afb6b3ec438c639795d383b4b0c54f4b0">ConstantsEditor::WindowWidth</a>);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <a class="code hl_variable" href="a00418.html#a86c7056269a5cbd294c244be1a48497a">core::Properties</a>.WindowHeight.set(<a class="code hl_variable" href="a00876.html#a745f9c23ca95d3c163e08d6da3aa28e7">ConstantsEditor::WindowHeight</a>);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="comment">// we will use a virtual coordinate space for now</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    bl::cam::OverlayCamera::setOverlayCoordinateSpace(<a class="code hl_variable" href="a00876.html#afb6b3ec438c639795d383b4b0c54f4b0">ConstantsEditor::WindowWidth</a>,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                                                      <a class="code hl_variable" href="a00876.html#a745f9c23ca95d3c163e08d6da3aa28e7">ConstantsEditor::WindowHeight</a>);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="comment">// TODO - SETUP_TASK - any other editor specific early setup steps</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}</div>
+</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="a00880.html#af5bea36e3863f1bd8798798970ef70d5">   39</a></span>bl::engine::Settings <a class="code hl_function" href="a00880.html#af5bea36e3863f1bd8798798970ef70d5">Editor::createStartupParameters</a>() {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">return</span> bl::engine::Settings().fromConfig().withRenderer(</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        bl::rc::CreationSettings().withWindowSettings(</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            bl::rc::WindowSettings()</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                .fromConfig(<span class="stringliteral">&quot;editor&quot;</span>)</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                .withVideoMode(sf::VideoMode(</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                    {<a class="code hl_variable" href="a00418.html#a86c7056269a5cbd294c244be1a48497a">core::Properties</a>.WindowWidth.get(), <a class="code hl_variable" href="a00418.html#a86c7056269a5cbd294c244be1a48497a">core::Properties</a>.WindowHeight.get()}, 32))</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                .withStyle(sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize)</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                .withTitle(<span class="stringliteral">&quot;Outpost Engine Editor&quot;</span>)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                .withLetterBoxOnResize(<span class="keyword">true</span>)));</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
+</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="foldopen" id="foldopen00051" data-start="{" data-end="}">
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="a00880.html#a1d09cddcb235384b0f928bdadd94d68a">   51</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="a00880.html#a1d09cddcb235384b0f928bdadd94d68a">Editor::completeStartup</a>(bl::engine::Engine&amp; engine) {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">if</span> (!<a class="code hl_function" href="a00692.html#ab42ae88908c9bc287f2e1ef419b040b4">performSharedStartupCompletion</a>(<a class="code hl_function" href="a00692.html#a357f656b376da3c9c8ae9ce3e50ee1c8">engine</a>)) { <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="comment">// TODO - SETUP_TASK - register editor specific systems</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>}</div>
+</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="a00880.html#a85979448f14f34065a318543ef7d0b1d">   59</a></span>bl::engine::State::Ptr <a class="code hl_function" href="a00880.html#a85979448f14f34065a318543ef7d0b1d">Editor::createInitialEngineState</a>() {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="comment">// TODO - SETUP_TASK - create actual initial state</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="a00660.html#a411ba799e82ebfa91b22bc6f8d9e37e5">core::DemoEngineState::create</a>();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
+</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>} <span class="comment">// namespace editor</span></div>
+<div class="ttc" id="aa00002_html"><div class="ttname"><a href="a00002.html">Editor.hpp</a></div></div>
+<div class="ttc" id="aa00005_html"><div class="ttname"><a href="a00005.html">ConstantsEditor.hpp</a></div></div>
+<div class="ttc" id="aa00044_html"><div class="ttname"><a href="a00044.html">DemoEngineState.hpp</a></div></div>
+<div class="ttc" id="aa00149_html"><div class="ttname"><a href="a00149.html">Properties.hpp</a></div></div>
+<div class="ttc" id="aa00418_html_a86c7056269a5cbd294c244be1a48497a"><div class="ttname"><a href="a00418.html#a86c7056269a5cbd294c244be1a48497a">core::Properties</a></div><div class="ttdeci">PropertiesStore Properties</div><div class="ttdef"><b>Definition</b> <a href="a00320_source.html#l00007">Properties.cpp:7</a></div></div>
+<div class="ttc" id="aa00442_html"><div class="ttname"><a href="a00442.html">editor</a></div><div class="ttdoc">All classes and modules that implement the editor for the game.</div><div class="ttdef"><b>Definition</b> <a href="a00005_source.html#l00004">ConstantsEditor.hpp:5</a></div></div>
+<div class="ttc" id="aa00656_html_a2d737dbb76139dad69ca691e6e5afc91"><div class="ttname"><a href="a00656.html#a2d737dbb76139dad69ca691e6e5afc91">core::Constants::UnsetUintProperty</a></div><div class="ttdeci">static constexpr unsigned int UnsetUintProperty</div><div class="ttdef"><b>Definition</b> <a href="a00026_source.html#l00012">Constants.hpp:12</a></div></div>
+<div class="ttc" id="aa00660_html_a411ba799e82ebfa91b22bc6f8d9e37e5"><div class="ttname"><a href="a00660.html#a411ba799e82ebfa91b22bc6f8d9e37e5">core::DemoEngineState::create</a></div><div class="ttdeci">static bl::engine::State::Ptr create()</div><div class="ttdef"><b>Definition</b> <a href="a00044_source.html#l00017">DemoEngineState.hpp:17</a></div></div>
+<div class="ttc" id="aa00692_html_a357f656b376da3c9c8ae9ce3e50ee1c8"><div class="ttname"><a href="a00692.html#a357f656b376da3c9c8ae9ce3e50ee1c8">core::Game::engine</a></div><div class="ttdeci">bl::engine::Engine &amp; engine()</div><div class="ttdoc">Returns the game engine instance.</div><div class="ttdef"><b>Definition</b> <a href="a00992_source.html#l00035">Game.hpp:35</a></div></div>
+<div class="ttc" id="aa00692_html_a3ddaaf5be109707a0b8b1d9bc0961f36"><div class="ttname"><a href="a00692.html#a3ddaaf5be109707a0b8b1d9bc0961f36">core::Game::performSharedEarlyStartup</a></div><div class="ttdeci">bool performSharedEarlyStartup(const char *configFilename)</div><div class="ttdoc">Early startup tasks shared by both editor and game go in here.</div><div class="ttdef"><b>Definition</b> <a href="a01124_source.html#l00023">Game.cpp:23</a></div></div>
+<div class="ttc" id="aa00692_html_ab42ae88908c9bc287f2e1ef419b040b4"><div class="ttname"><a href="a00692.html#ab42ae88908c9bc287f2e1ef419b040b4">core::Game::performSharedStartupCompletion</a></div><div class="ttdeci">bool performSharedStartupCompletion(bl::engine::Engine &amp;engine)</div><div class="ttdoc">Final startup tasks shared by both editor and game go in here.</div><div class="ttdef"><b>Definition</b> <a href="a01124_source.html#l00035">Game.cpp:35</a></div></div>
+<div class="ttc" id="aa00876_html_a745f9c23ca95d3c163e08d6da3aa28e7"><div class="ttname"><a href="a00876.html#a745f9c23ca95d3c163e08d6da3aa28e7">editor::ConstantsEditor::WindowHeight</a></div><div class="ttdeci">static constexpr unsigned int WindowHeight</div><div class="ttdef"><b>Definition</b> <a href="a00005_source.html#l00014">ConstantsEditor.hpp:14</a></div></div>
+<div class="ttc" id="aa00876_html_a94d3096d02fbd3e4c021997441dde372"><div class="ttname"><a href="a00876.html#a94d3096d02fbd3e4c021997441dde372">editor::ConstantsEditor::ConfigFilePath</a></div><div class="ttdeci">static constexpr const char * ConfigFilePath</div><div class="ttdef"><b>Definition</b> <a href="a00005_source.html#l00012">ConstantsEditor.hpp:12</a></div></div>
+<div class="ttc" id="aa00876_html_afb6b3ec438c639795d383b4b0c54f4b0"><div class="ttname"><a href="a00876.html#afb6b3ec438c639795d383b4b0c54f4b0">editor::ConstantsEditor::WindowWidth</a></div><div class="ttdeci">static constexpr unsigned int WindowWidth</div><div class="ttdef"><b>Definition</b> <a href="a00005_source.html#l00013">ConstantsEditor.hpp:13</a></div></div>
+<div class="ttc" id="aa00880_html_a1d09cddcb235384b0f928bdadd94d68a"><div class="ttname"><a href="a00880.html#a1d09cddcb235384b0f928bdadd94d68a">editor::Editor::completeStartup</a></div><div class="ttdeci">virtual bool completeStartup(bl::engine::Engine &amp;engine) override</div><div class="ttdoc">Creates editor-specific systems and completes startup.</div><div class="ttdef"><b>Definition</b> <a href="a00269_source.html#l00051">Editor.cpp:51</a></div></div>
+<div class="ttc" id="aa00880_html_a85979448f14f34065a318543ef7d0b1d"><div class="ttname"><a href="a00880.html#a85979448f14f34065a318543ef7d0b1d">editor::Editor::createInitialEngineState</a></div><div class="ttdeci">virtual bl::engine::State::Ptr createInitialEngineState() override</div><div class="ttdoc">Creates the engine state to launch the editor with.</div><div class="ttdef"><b>Definition</b> <a href="a00269_source.html#l00059">Editor.cpp:59</a></div></div>
+<div class="ttc" id="aa00880_html_ab45601f4b78cbada2eeea34744e0f4f3"><div class="ttname"><a href="a00880.html#ab45601f4b78cbada2eeea34744e0f4f3">editor::Editor::performEarlyStartup</a></div><div class="ttdeci">virtual bool performEarlyStartup(int argc, char **argv) override</div><div class="ttdoc">Called at the beginning of main(). Loads game config and properties.</div><div class="ttdef"><b>Definition</b> <a href="a00269_source.html#l00016">Editor.cpp:16</a></div></div>
+<div class="ttc" id="aa00880_html_af5bea36e3863f1bd8798798970ef70d5"><div class="ttname"><a href="a00880.html#af5bea36e3863f1bd8798798970ef70d5">editor::Editor::createStartupParameters</a></div><div class="ttdeci">virtual bl::engine::Settings createStartupParameters() override</div><div class="ttdoc">Creates the parameters to launch the engine with.</div><div class="ttdef"><b>Definition</b> <a href="a00269_source.html#l00039">Editor.cpp:39</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

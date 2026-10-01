@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ref_3c_20t_20_3e_0',['Ref&lt; T &gt;',['../a00339.html#a99229309340c6e682164e71612dca917',1,'core::cmd::SingleStore']]]
+  ['operator_3c_3c_0',['operator&lt;&lt;',['../a00680.html#a1779d5201352d7455bd9462de1b17892',1,'core::fcn::FactionId']]]
 ];

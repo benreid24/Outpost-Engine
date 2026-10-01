@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: Member List</title>
+<title>Outpost Engine: bl::refl::ReflectedObject&lt; core::arena::train::Car::State &gt; Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,24 +74,77 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00289.html">core</a></li><li class="navelem"><a class="el" href="a00293.html">world</a></li><li class="navelem"><a class="el" href="a00571.html">Path</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00422.html">bl</a></li><li class="navelem"><a class="el" href="a00423.html">refl</a></li><li class="navelem"><a class="el" href="a00568.html">ReflectedObject&lt; core::arena::train::Car::State &gt;</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">core::world::Path Member List</div></div>
+  <div class="summary">
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="a00565.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">bl::refl::ReflectedObject&lt; core::arena::train::Car::State &gt; Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00571.html">core::world::Path</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00571.html#a6ab13aa01bd82ed28ae25d564e137646">currentWaypoint</a></td><td class="entry"><a class="el" href="a00571.html">core::world::Path</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00571.html#a75b9c9b81588e6d653d2f9e00153648f">Path</a>()</td><td class="entry"><a class="el" href="a00571.html">core::world::Path</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00571.html#a9184c1489e847362ae99487a6a6b720b">waypoints</a></td><td class="entry"><a class="el" href="a00571.html">core::world::Path</a></td><td class="entry"></td></tr>
-</table></div><!-- contents -->
+<p><code>#include &lt;<a class="el" href="a00182_source.html">Car.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:adea2d2da346588b70a7a1bc636b96685" id="r_adea2d2da346588b70a7a1bc636b96685"><td class="memItemLeft" align="right" valign="top">static const auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00568.html#adea2d2da346588b70a7a1bc636b96685">spec</a></td></tr>
+<tr class="separator:adea2d2da346588b70a7a1bc636b96685"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00174">174</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="adea2d2da346588b70a7a1bc636b96685" name="adea2d2da346588b70a7a1bc636b96685"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adea2d2da346588b70a7a1bc636b96685">&#9670;&#160;</a></span>spec</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const auto bl::refl::ReflectedObject&lt; <a class="el" href="a00560.html">core::arena::train::Car::State</a> &gt;::spec</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= makeSpec&lt;core::arena::train::Car::State&gt;(</div>
+<div class="line">        <span class="stringliteral">&quot;CarState&quot;</span>,</div>
+<div class="line">        memberList(</div>
+<div class="line">            defineMember(1, <span class="stringliteral">&quot;frontAxleTrackPosition&quot;</span>,</div>
+<div class="line">                         &amp;<a class="code hl_variable" href="a00560.html#a92a61de79676cd742a385ea50e64c891">core::arena::train::Car::State::frontAxleTrackPosition</a>),</div>
+<div class="line">            defineMember(2, <span class="stringliteral">&quot;rearAxleTrackPosition&quot;</span>,</div>
+<div class="line">                         &amp;<a class="code hl_variable" href="a00560.html#ad96cc5f5f0436aa4d14faff33b21542e">core::arena::train::Car::State::rearAxleTrackPosition</a>),</div>
+<div class="line">            defineMember(3, <span class="stringliteral">&quot;carTranform&quot;</span>, &amp;<a class="code hl_variable" href="a00560.html#a0513fc03f06bc2df0b9f0914df53acbe">core::arena::train::Car::State::carWorldTransform</a>),</div>
+<div class="line">            defineMember(4, <span class="stringliteral">&quot;frontAxleTransform&quot;</span>,</div>
+<div class="line">                         &amp;<a class="code hl_variable" href="a00560.html#a25314f8569d6e60a2ec8521838e9745b">core::arena::train::Car::State::frontWheelWorldTransform</a>),</div>
+<div class="line">            defineMember(5, <span class="stringliteral">&quot;rearAxleTransform&quot;</span>,</div>
+<div class="line">                         &amp;<a class="code hl_variable" href="a00560.html#aaf81aa64a8884fc85c07df709ce7cdbc">core::arena::train::Car::State::rearWheelWorldTransform</a>)))</div>
+<div class="ttc" id="aa00560_html_a0513fc03f06bc2df0b9f0914df53acbe"><div class="ttname"><a href="a00560.html#a0513fc03f06bc2df0b9f0914df53acbe">core::arena::train::Car::State::carWorldTransform</a></div><div class="ttdeci">bl::com::Transform3D carWorldTransform</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00048">Car.hpp:48</a></div></div>
+<div class="ttc" id="aa00560_html_a25314f8569d6e60a2ec8521838e9745b"><div class="ttname"><a href="a00560.html#a25314f8569d6e60a2ec8521838e9745b">core::arena::train::Car::State::frontWheelWorldTransform</a></div><div class="ttdeci">bl::com::Transform3D frontWheelWorldTransform</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00049">Car.hpp:49</a></div></div>
+<div class="ttc" id="aa00560_html_a92a61de79676cd742a385ea50e64c891"><div class="ttname"><a href="a00560.html#a92a61de79676cd742a385ea50e64c891">core::arena::train::Car::State::frontAxleTrackPosition</a></div><div class="ttdeci">float frontAxleTrackPosition</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00045">Car.hpp:45</a></div></div>
+<div class="ttc" id="aa00560_html_aaf81aa64a8884fc85c07df709ce7cdbc"><div class="ttname"><a href="a00560.html#aaf81aa64a8884fc85c07df709ce7cdbc">core::arena::train::Car::State::rearWheelWorldTransform</a></div><div class="ttdeci">bl::com::Transform3D rearWheelWorldTransform</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00050">Car.hpp:50</a></div></div>
+<div class="ttc" id="aa00560_html_ad96cc5f5f0436aa4d14faff33b21542e"><div class="ttname"><a href="a00560.html#ad96cc5f5f0436aa4d14faff33b21542e">core::arena::train::Car::State::rearAxleTrackPosition</a></div><div class="ttdeci">float rearAxleTrackPosition</div><div class="ttdef"><b>Definition</b> <a href="a00182_source.html#l00046">Car.hpp:46</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00175">175</a> of file <a class="el" href="a00182_source.html">Car.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/Core/Arena/Train/<a class="el" href="a00182_source.html">Car.hpp</a></li>
+</ul>
+</div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

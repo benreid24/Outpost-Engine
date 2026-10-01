@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: src/Core/Systems/Render.cpp File Reference</title>
+<title>Outpost Engine: include/Core/Arena/Generation/Biome.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,39 +74,54 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a2f0e5642e47e7ed59fe0f0829eafb5f.html">Core</a></li><li class="navelem"><a class="el" href="dir_5050c667cea7e741a25fe57d926653bc.html">Systems</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_abca691009d11aafdd50b5a787683a53.html">Arena</a></li><li class="navelem"><a class="el" href="dir_2b9b30eea8bdf5f86ca97e62235d9acc.html">Generation</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a>  </div>
-  <div class="headertitle"><div class="title">Render.cpp File Reference</div></div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
+  <div class="headertitle"><div class="title">Biome.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="a00101_source.html">Core/Systems/Render.hpp</a>&gt;</code><br />
-<code>#include &lt;BLIB/Components/Shape2D.hpp&gt;</code><br />
-<code>#include &lt;BLIB/Graphics/Circle.hpp&gt;</code><br />
-<code>#include &lt;BLIB/Graphics/Rectangle.hpp&gt;</code><br />
-<code>#include &lt;BLIB/Graphics/VertexBuffer2D.hpp&gt;</code><br />
-<code>#include &lt;BLIB/Render/Descriptors/Builtin/Object2DFactory.hpp&gt;</code><br />
-<code>#include &lt;BLIB/Render/Descriptors/Builtin/Scene2DFactory.hpp&gt;</code><br />
-</div>
+
 <p><a href="a00230_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a00289" id="r_a00289"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00289.html">core</a></td></tr>
-<tr class="memdesc:a00289"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains everything shared between the game and editor. <br /></td></tr>
+<tr class="memitem:a00418" id="r_a00418"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00418.html">core</a></td></tr>
+<tr class="memdesc:a00418"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains everything shared between the game and editor. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00292" id="r_a00292"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00292.html">core::sys</a></td></tr>
-<tr class="memdesc:a00292"><td class="mdescLeft">&#160;</td><td class="mdescRight">The core game systems. <br /></td></tr>
+<tr class="memitem:a00419" id="r_a00419"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00419.html">core::arena</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00420" id="r_a00420"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00420.html">core::arena::gen</a></td></tr>
+<tr class="memdesc:a00420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains methods and classes for arena generation. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:gae80a70a999356090fd444a80e3594f1a" id="r_gae80a70a999356090fd444a80e3594f1a"><td class="memItemLeft" align="right" valign="top">enum struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html#gae80a70a999356090fd444a80e3594f1a">core::arena::gen::Biome</a> { <br />
+&#160;&#160;<a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa000c016d34ff41e245b69c67f22c83ff">core::arena::gen::Biome::Desert</a> = 0
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aaac12ee4aedb176eb73ce3f6c0d1e9036">core::arena::gen::Biome::Forest</a> = 1
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aad4e3b74fb352a9f0977f9b86258daddb">core::arena::gen::Biome::Grassland</a> = 2
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aaec9903c79dd510ffa43f69ee867a9002">core::arena::gen::Biome::Mountain</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aab46d3c8ee8032551c011745d587705cc">core::arena::gen::Biome::Snow</a> = 4
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa1e7f72cb01415f5e800f3e1e32f91ee9">core::arena::gen::Biome::Beach</a> = 5
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa27634ff8002b12e75d98e07ccd005d18">core::arena::gen::Biome::Water</a> = 6
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa149529f6dcbcc198787e69a11235422e">core::arena::gen::Biome::River</a> = 7
+, <br />
+&#160;&#160;<a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa4905ac9d6a22bdfc1ae096094ce6248d">core::arena::gen::Biome::COUNT</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:gae80a70a999356090fd444a80e3594f1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the biome of a node.  <a href="a00407.html#gae80a70a999356090fd444a80e3594f1a">More...</a><br /></td></tr>
+<tr class="separator:gae80a70a999356090fd444a80e3594f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

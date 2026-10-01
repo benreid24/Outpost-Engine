@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: core::fcn::FactionId Class Reference</title>
+<title>Outpost Engine: Arena</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -51,6 +51,7 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -72,101 +73,101 @@ $(function() {
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="a00289.html">core</a></li><li class="navelem"><a class="el" href="a00295.html">fcn</a></li><li class="navelem"><a class="el" href="a00407.html">FactionId</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
-<a href="#friends">Friends</a> &#124;
-<a href="a00404.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">core::fcn::FactionId Class Reference<div class="ingroups"><a class="el" href="a00278.html">Core</a> &raquo; <a class="el" href="a00284.html">Factions</a></div></div></div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
+  <div class="headertitle"><div class="title">Arena<div class="ingroups"><a class="el" href="a00404.html">Core</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Id for factions in the game. Should be treated as an opaque handle.  
- <a href="a00407.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="a00182_source.html">FactionId.hpp</a>&gt;</code></p>
+<p>Data representation and simulation of in game arenas.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:a70a150873675727abd161fcc6a669039" id="r_a70a150873675727abd161fcc6a669039"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html#a70a150873675727abd161fcc6a669039">IdType</a> = std::uint64_t</td></tr>
-<tr class="separator:a70a150873675727abd161fcc6a669039"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00464.html">core::arena::Arena</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single arena in game with terrain, units, tracks, and other data.  <a href="a00464.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00468.html">core::arena::gen::AdjacencyBonus</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a bonus to a biomes weight based on the biome of an adjacent node.  <a href="a00468.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00472.html">core::arena::gen::AdjacencyBonusProxy</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Proxy object for quickly updating adjacency bonuses for a node.  <a href="a00472.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00476.html">core::arena::gen::Domain</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the domain of possible biomes for a node.  <a href="a00476.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00480.html">core::arena::gen::Environment</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the environment of the arena and its biomes.  <a href="a00480.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00484.html">core::arena::gen::Generator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a00540.html" title="Representation of the terrain in an arena.">Terrain</a> and arena generator.  <a href="a00484.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00488.html">core::arena::gen::Parameters</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a00464.html" title="Represents a single arena in game with terrain, units, tracks, and other data.">Arena</a> and terrain generation parameters.  <a href="a00488.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00496.html">core::arena::gen::PerlinSampler</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper class to encode perlin parameters for easy sampling.  <a href="a00496.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00500.html">core::arena::gen::ProtoTerrain</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents transient terrain during arena generation.  <a href="a00500.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00512.html">core::arena::gen::RuledBiome</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a ruleset that determines where a biome can be present in the terrain.  <a href="a00512.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00520.html">core::arena::gen::Seed</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Random number generator for world generation.  <a href="a00520.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00524.html">core::arena::gen::SuperpositionedNode</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a node being generated with its possible states and constraints.  <a href="a00524.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00532.html">core::arena::gen::WeightedBiome</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a possible biome and its weight for a node.  <a href="a00532.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00536.html">core::arena::Node</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single node in the arena terrain.  <a href="a00536.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00540.html">core::arena::Terrain</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representation of the terrain in an arena.  <a href="a00540.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00548.html">core::arena::TerrainNode</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single node in the terrain heightmap.  <a href="a00548.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00552.html">core::arena::train::Car</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representation of a train car and its state.  <a href="a00552.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00576.html">core::arena::train::Track</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Representation and storage of the train track in the arena.  <a href="a00576.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00580.html">core::arena::train::TrackNode</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a node of a train track.  <a href="a00580.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a6273e6ae08f0a65c1066a4fe542171c5" id="r_a6273e6ae08f0a65c1066a4fe542171c5"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html#a6273e6ae08f0a65c1066a4fe542171c5">FactionId</a> ()</td></tr>
-<tr class="memdesc:a6273e6ae08f0a65c1066a4fe542171c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an invalid factions id.  <br /></td></tr>
-<tr class="separator:a6273e6ae08f0a65c1066a4fe542171c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1da4579c1ac8ac9e8094e7651ddf8f1" id="r_ab1da4579c1ac8ac9e8094e7651ddf8f1"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html#ab1da4579c1ac8ac9e8094e7651ddf8f1">FactionId</a> (<a class="el" href="a00407.html#a70a150873675727abd161fcc6a669039">IdType</a> internalId)</td></tr>
-<tr class="memdesc:ab1da4579c1ac8ac9e8094e7651ddf8f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a faction from an internal id. Should not be used.  <br /></td></tr>
-<tr class="separator:ab1da4579c1ac8ac9e8094e7651ddf8f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a763d7c1237f8f2ce574ee3ac980bbcf5" id="r_a763d7c1237f8f2ce574ee3ac980bbcf5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html#a763d7c1237f8f2ce574ee3ac980bbcf5">FactionId</a> (const <a class="el" href="a00407.html">FactionId</a> &amp;)=default</td></tr>
-<tr class="memdesc:a763d7c1237f8f2ce574ee3ac980bbcf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the faction id.  <br /></td></tr>
-<tr class="separator:a763d7c1237f8f2ce574ee3ac980bbcf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a675bd1bf753608c1fe216faf3bfbc0b5" id="r_a675bd1bf753608c1fe216faf3bfbc0b5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html#a675bd1bf753608c1fe216faf3bfbc0b5">FactionId</a> (<a class="el" href="a00407.html">FactionId</a> &amp;&amp;)=default</td></tr>
-<tr class="memdesc:a675bd1bf753608c1fe216faf3bfbc0b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the faction id.  <br /></td></tr>
-<tr class="separator:a675bd1bf753608c1fe216faf3bfbc0b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a615471280eef75f3622cd22d65649983" id="r_a615471280eef75f3622cd22d65649983"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00407.html">FactionId</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html#a615471280eef75f3622cd22d65649983">operator=</a> (const <a class="el" href="a00407.html">FactionId</a> &amp;)=default</td></tr>
-<tr class="memdesc:a615471280eef75f3622cd22d65649983"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the faction id.  <br /></td></tr>
-<tr class="separator:a615471280eef75f3622cd22d65649983"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6cdef565734887fe30efa3640eb8232" id="r_ae6cdef565734887fe30efa3640eb8232"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00407.html#a70a150873675727abd161fcc6a669039">IdType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html#ae6cdef565734887fe30efa3640eb8232">getIndex</a> () const</td></tr>
-<tr class="memdesc:ae6cdef565734887fe30efa3640eb8232"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a 0-based index for this faction id.  <br /></td></tr>
-<tr class="separator:ae6cdef565734887fe30efa3640eb8232"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a362022057629d9f5f41f2c160ae66079" id="r_a362022057629d9f5f41f2c160ae66079"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00407.html#a70a150873675727abd161fcc6a669039">IdType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html#a362022057629d9f5f41f2c160ae66079">getRaw</a> () const</td></tr>
-<tr class="memdesc:a362022057629d9f5f41f2c160ae66079"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the underlying faction id value.  <br /></td></tr>
-<tr class="separator:a362022057629d9f5f41f2c160ae66079"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef79a562fe2879746f0fa1d1491a7aec" id="r_aef79a562fe2879746f0fa1d1491a7aec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html#aef79a562fe2879746f0fa1d1491a7aec">operator==</a> (<a class="el" href="a00407.html">FactionId</a> right)</td></tr>
-<tr class="memdesc:aef79a562fe2879746f0fa1d1491a7aec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests whether two faction ids are equal.  <br /></td></tr>
-<tr class="separator:aef79a562fe2879746f0fa1d1491a7aec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05fdd8e2282d957848d07d47b77c9fb0" id="r_a05fdd8e2282d957848d07d47b77c9fb0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html#a05fdd8e2282d957848d07d47b77c9fb0">operator!=</a> (<a class="el" href="a00407.html">FactionId</a> right)</td></tr>
-<tr class="memdesc:a05fdd8e2282d957848d07d47b77c9fb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests whether two faction ids are not equal.  <br /></td></tr>
-<tr class="separator:a05fdd8e2282d957848d07d47b77c9fb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
-Static Public Attributes</h2></td></tr>
-<tr class="memitem:a442e182013ec66fc475bc28b21106d73" id="r_a442e182013ec66fc475bc28b21106d73"><td class="memItemLeft" align="right" valign="top">static constexpr std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html#a442e182013ec66fc475bc28b21106d73">MaxFactions</a> = sizeof(<a class="el" href="a00407.html#a70a150873675727abd161fcc6a669039">IdType</a>) * 8</td></tr>
-<tr class="separator:a442e182013ec66fc475bc28b21106d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80b0211f93432d14c9f5ed4f66f7fee5" id="r_a80b0211f93432d14c9f5ed4f66f7fee5"><td class="memItemLeft" align="right" valign="top">static constexpr std::uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html#a80b0211f93432d14c9f5ed4f66f7fee5">InternalInvalidId</a> = std::numeric_limits&lt;<a class="el" href="a00407.html#a70a150873675727abd161fcc6a669039">IdType</a>&gt;::max()</td></tr>
-<tr class="separator:a80b0211f93432d14c9f5ed4f66f7fee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:a34f7bc7cd29643e53d23b7d500d21739" id="r_a34f7bc7cd29643e53d23b7d500d21739"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html#a34f7bc7cd29643e53d23b7d500d21739">Filter</a></td></tr>
-<tr class="separator:a34f7bc7cd29643e53d23b7d500d21739"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1779d5201352d7455bd9462de1b17892" id="r_a1779d5201352d7455bd9462de1b17892"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html#a1779d5201352d7455bd9462de1b17892">operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="a00407.html">FactionId</a> id)</td></tr>
-<tr class="memdesc:a1779d5201352d7455bd9462de1b17892"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the id.  <br /></td></tr>
-<tr class="separator:a1779d5201352d7455bd9462de1b17892"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:gae80a70a999356090fd444a80e3594f1a" id="r_gae80a70a999356090fd444a80e3594f1a"><td class="memItemLeft" align="right" valign="top">enum struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html#gae80a70a999356090fd444a80e3594f1a">core::arena::gen::Biome</a> { <br />
+&#160;&#160;<a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa000c016d34ff41e245b69c67f22c83ff">core::arena::gen::Biome::Desert</a> = 0
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aaac12ee4aedb176eb73ce3f6c0d1e9036">core::arena::gen::Biome::Forest</a> = 1
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aad4e3b74fb352a9f0977f9b86258daddb">core::arena::gen::Biome::Grassland</a> = 2
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aaec9903c79dd510ffa43f69ee867a9002">core::arena::gen::Biome::Mountain</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aab46d3c8ee8032551c011745d587705cc">core::arena::gen::Biome::Snow</a> = 4
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa1e7f72cb01415f5e800f3e1e32f91ee9">core::arena::gen::Biome::Beach</a> = 5
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa27634ff8002b12e75d98e07ccd005d18">core::arena::gen::Biome::Water</a> = 6
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa149529f6dcbcc198787e69a11235422e">core::arena::gen::Biome::River</a> = 7
+, <br />
+&#160;&#160;<a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa4905ac9d6a22bdfc1ae096094ce6248d">core::arena::gen::Biome::COUNT</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:gae80a70a999356090fd444a80e3594f1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the biome of a node.  <a href="a00407.html#gae80a70a999356090fd444a80e3594f1a">More...</a><br /></td></tr>
+<tr class="separator:gae80a70a999356090fd444a80e3594f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Id for factions in the game. Should be treated as an opaque handle. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00030">30</a> of file <a class="el" href="a00182_source.html">FactionId.hpp</a>.</p>
-</div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a70a150873675727abd161fcc6a669039" name="a70a150873675727abd161fcc6a669039"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70a150873675727abd161fcc6a669039">&#9670;&#160;</a></span>IdType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="a00407.html#a70a150873675727abd161fcc6a669039">core::fcn::FactionId::IdType</a> =  std::uint64_t</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00032">32</a> of file <a class="el" href="a00182_source.html">FactionId.hpp</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a6273e6ae08f0a65c1066a4fe542171c5" name="a6273e6ae08f0a65c1066a4fe542171c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6273e6ae08f0a65c1066a4fe542171c5">&#9670;&#160;</a></span>FactionId() <span class="overload">[1/4]</span></h2>
+<p>Data representation and simulation of in game arenas. </p>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="gae80a70a999356090fd444a80e3594f1a" name="gae80a70a999356090fd444a80e3594f1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae80a70a999356090fd444a80e3594f1a">&#9670;&#160;</a></span>Biome</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -175,408 +176,38 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr core::fcn::FactionId::FactionId </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="memname"><a class="el" href="a00540.html">enum</a> <a class="el" href="a00540.html">struct</a> <a class="el" href="a00407.html#gae80a70a999356090fd444a80e3594f1a">core::arena::gen::Biome</a></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Creates an invalid factions id. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00039">39</a> of file <a class="el" href="a00182_source.html">FactionId.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ab1da4579c1ac8ac9e8094e7651ddf8f1" name="ab1da4579c1ac8ac9e8094e7651ddf8f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab1da4579c1ac8ac9e8094e7651ddf8f1">&#9670;&#160;</a></span>FactionId() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr core::fcn::FactionId::FactionId </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00407.html#a70a150873675727abd161fcc6a669039">IdType</a>&#160;</td>
-          <td class="paramname"><em>internalId</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
+<p>Represents the biome of a node. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggae80a70a999356090fd444a80e3594f1aa000c016d34ff41e245b69c67f22c83ff" name="ggae80a70a999356090fd444a80e3594f1aa000c016d34ff41e245b69c67f22c83ff"></a>Desert&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggae80a70a999356090fd444a80e3594f1aaac12ee4aedb176eb73ce3f6c0d1e9036" name="ggae80a70a999356090fd444a80e3594f1aaac12ee4aedb176eb73ce3f6c0d1e9036"></a>Forest&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggae80a70a999356090fd444a80e3594f1aad4e3b74fb352a9f0977f9b86258daddb" name="ggae80a70a999356090fd444a80e3594f1aad4e3b74fb352a9f0977f9b86258daddb"></a>Grassland&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggae80a70a999356090fd444a80e3594f1aaec9903c79dd510ffa43f69ee867a9002" name="ggae80a70a999356090fd444a80e3594f1aaec9903c79dd510ffa43f69ee867a9002"></a>Mountain&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggae80a70a999356090fd444a80e3594f1aab46d3c8ee8032551c011745d587705cc" name="ggae80a70a999356090fd444a80e3594f1aab46d3c8ee8032551c011745d587705cc"></a>Snow&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggae80a70a999356090fd444a80e3594f1aa1e7f72cb01415f5e800f3e1e32f91ee9" name="ggae80a70a999356090fd444a80e3594f1aa1e7f72cb01415f5e800f3e1e32f91ee9"></a>Beach&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggae80a70a999356090fd444a80e3594f1aa27634ff8002b12e75d98e07ccd005d18" name="ggae80a70a999356090fd444a80e3594f1aa27634ff8002b12e75d98e07ccd005d18"></a>Water&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggae80a70a999356090fd444a80e3594f1aa149529f6dcbcc198787e69a11235422e" name="ggae80a70a999356090fd444a80e3594f1aa149529f6dcbcc198787e69a11235422e"></a>River&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggae80a70a999356090fd444a80e3594f1aa4905ac9d6a22bdfc1ae096094ce6248d" name="ggae80a70a999356090fd444a80e3594f1aa4905ac9d6a22bdfc1ae096094ce6248d"></a>COUNT&#160;</td><td class="fielddoc"></td></tr>
 </table>
-</div><div class="memdoc">
 
-<p>Creates a faction from an internal id. Should not be used. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">internalId</td><td>The internal faction id </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00047">47</a> of file <a class="el" href="a00182_source.html">FactionId.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00230_source.html#l00015">15</a> of file <a class="el" href="a00230_source.html">Biome.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a763d7c1237f8f2ce574ee3ac980bbcf5" name="a763d7c1237f8f2ce574ee3ac980bbcf5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a763d7c1237f8f2ce574ee3ac980bbcf5">&#9670;&#160;</a></span>FactionId() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">core::fcn::FactionId::FactionId </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a00407.html">FactionId</a> &amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Copies the faction id. </p>
-
-</div>
-</div>
-<a id="a675bd1bf753608c1fe216faf3bfbc0b5" name="a675bd1bf753608c1fe216faf3bfbc0b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a675bd1bf753608c1fe216faf3bfbc0b5">&#9670;&#160;</a></span>FactionId() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">core::fcn::FactionId::FactionId </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00407.html">FactionId</a> &amp;&amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Copies the faction id. </p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae6cdef565734887fe30efa3640eb8232" name="ae6cdef565734887fe30efa3640eb8232"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6cdef565734887fe30efa3640eb8232">&#9670;&#160;</a></span>getIndex()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00407.html#a70a150873675727abd161fcc6a669039">IdType</a> core::fcn::FactionId::getIndex </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns a 0-based index for this faction id. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00062">62</a> of file <a class="el" href="a00182_source.html">FactionId.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a362022057629d9f5f41f2c160ae66079" name="a362022057629d9f5f41f2c160ae66079"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a362022057629d9f5f41f2c160ae66079">&#9670;&#160;</a></span>getRaw()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00407.html#a70a150873675727abd161fcc6a669039">IdType</a> core::fcn::FactionId::getRaw </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the underlying faction id value. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00076">76</a> of file <a class="el" href="a00182_source.html">FactionId.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a05fdd8e2282d957848d07d47b77c9fb0" name="a05fdd8e2282d957848d07d47b77c9fb0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05fdd8e2282d957848d07d47b77c9fb0">&#9670;&#160;</a></span>operator!=()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool core::fcn::FactionId::operator!= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00407.html">FactionId</a>&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Tests whether two faction ids are not equal. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">right</td><td>The id to compare to </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the ids are different, false if the same </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00092">92</a> of file <a class="el" href="a00182_source.html">FactionId.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a615471280eef75f3622cd22d65649983" name="a615471280eef75f3622cd22d65649983"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a615471280eef75f3622cd22d65649983">&#9670;&#160;</a></span>operator=()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00407.html">FactionId</a> &amp; core::fcn::FactionId::operator= </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="a00407.html">FactionId</a> &amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Copies the faction id. </p>
-
-</div>
-</div>
-<a id="aef79a562fe2879746f0fa1d1491a7aec" name="aef79a562fe2879746f0fa1d1491a7aec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef79a562fe2879746f0fa1d1491a7aec">&#9670;&#160;</a></span>operator==()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool core::fcn::FactionId::operator== </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00407.html">FactionId</a>&#160;</td>
-          <td class="paramname"><em>right</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Tests whether two faction ids are equal. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">right</td><td>The id to compare to </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if the ids are the same, false if different </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00084">84</a> of file <a class="el" href="a00182_source.html">FactionId.hpp</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Friends And Related Symbol Documentation</h2>
-<a id="a34f7bc7cd29643e53d23b7d500d21739" name="a34f7bc7cd29643e53d23b7d500d21739"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34f7bc7cd29643e53d23b7d500d21739">&#9670;&#160;</a></span>Filter</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">friend class <a class="el" href="a00415.html">Filter</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00109">109</a> of file <a class="el" href="a00182_source.html">FactionId.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a1779d5201352d7455bd9462de1b17892" name="a1779d5201352d7455bd9462de1b17892"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1779d5201352d7455bd9462de1b17892">&#9670;&#160;</a></span>operator&lt;&lt;</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::ostream &amp; operator&lt;&lt; </td>
-          <td>(</td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>os</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00407.html">FactionId</a>&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Outputs the id. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">os</td><td>Output stream to write to </td></tr>
-    <tr><td class="paramname">id</td><td>The id to write </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The same output stream </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00101">101</a> of file <a class="el" href="a00182_source.html">FactionId.hpp</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a80b0211f93432d14c9f5ed4f66f7fee5" name="a80b0211f93432d14c9f5ed4f66f7fee5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80b0211f93432d14c9f5ed4f66f7fee5">&#9670;&#160;</a></span>InternalInvalidId</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr std::uint64_t core::fcn::FactionId::InternalInvalidId = std::numeric_limits&lt;<a class="el" href="a00407.html#a70a150873675727abd161fcc6a669039">IdType</a>&gt;::max()</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00034">34</a> of file <a class="el" href="a00182_source.html">FactionId.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a442e182013ec66fc475bc28b21106d73" name="a442e182013ec66fc475bc28b21106d73"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a442e182013ec66fc475bc28b21106d73">&#9670;&#160;</a></span>MaxFactions</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr std::size_t core::fcn::FactionId::MaxFactions = sizeof(<a class="el" href="a00407.html#a70a150873675727abd161fcc6a669039">IdType</a>) * 8</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00182_source.html#l00033">33</a> of file <a class="el" href="a00182_source.html">FactionId.hpp</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>include/Core/Factions/<a class="el" href="a00182_source.html">FactionId.hpp</a></li>
-</ul>
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

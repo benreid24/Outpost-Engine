@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: Member List</title>
+<title>Outpost Engine: core::arena::train::Track Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,22 +74,395 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00289.html">core</a></li><li class="navelem"><a class="el" href="a00293.html">world</a></li><li class="navelem"><a class="el" href="a00571.html">Path</a></li><li class="navelem"><a class="el" href="a00579.html">WaypointHash</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00418.html">core</a></li><li class="navelem"><a class="el" href="a00419.html">arena</a></li><li class="navelem"><a class="el" href="a00421.html">train</a></li><li class="navelem"><a class="el" href="a00576.html">Track</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">core::world::Path::WaypointHash Member List</div></div>
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="a00573.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">core::arena::train::Track Class Reference<div class="ingroups"><a class="el" href="a00404.html">Core</a> &raquo; <a class="el" href="a00407.html">Arena</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00579.html">core::world::Path::WaypointHash</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00579.html#a1e7bad45413ebb9560da6ee2975401c5">operator()</a>(const Waypoint &amp;wp) const</td><td class="entry"><a class="el" href="a00579.html">core::world::Path::WaypointHash</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-</table></div><!-- contents -->
+<p>Representation and storage of the train track in the arena.  
+ <a href="a00576.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00188_source.html">Track.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a54699de7edb5ae901f2bafe8f46dad1f" id="r_a54699de7edb5ae901f2bafe8f46dad1f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00576.html#a54699de7edb5ae901f2bafe8f46dad1f">Track</a> ()</td></tr>
+<tr class="memdesc:a54699de7edb5ae901f2bafe8f46dad1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an empty track.  <br /></td></tr>
+<tr class="separator:a54699de7edb5ae901f2bafe8f46dad1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1afbc3234412fbbb35b40a9601b4dba1" id="r_a1afbc3234412fbbb35b40a9601b4dba1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00576.html#a1afbc3234412fbbb35b40a9601b4dba1">generate</a> (<a class="el" href="a00540.html">const</a> <a class="el" href="a00540.html">Terrain</a> &amp;terrain)</td></tr>
+<tr class="memdesc:a1afbc3234412fbbb35b40a9601b4dba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the track from the given terrain.  <br /></td></tr>
+<tr class="separator:a1afbc3234412fbbb35b40a9601b4dba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a766f3ef318a48f953054bb55a6960ec5" id="r_a766f3ef318a48f953054bb55a6960ec5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00576.html#a766f3ef318a48f953054bb55a6960ec5">getTrackLength</a> () <a class="el" href="a00540.html">const</a></td></tr>
+<tr class="memdesc:a766f3ef318a48f953054bb55a6960ec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the total length of the track.  <br /></td></tr>
+<tr class="separator:a766f3ef318a48f953054bb55a6960ec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4582702a95666d331664557c3e3c5b0e" id="r_a4582702a95666d331664557c3e3c5b0e"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00576.html#a4582702a95666d331664557c3e3c5b0e">getPositionAtDistance</a> (<a class="el" href="a00540.html">float</a> <a class="el" href="a00540.html">distance</a>) <a class="el" href="a00540.html">const</a></td></tr>
+<tr class="memdesc:a4582702a95666d331664557c3e3c5b0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the track position at the given distance.  <br /></td></tr>
+<tr class="separator:a4582702a95666d331664557c3e3c5b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a703acd97050c012daa6125ee351135d2" id="r_a703acd97050c012daa6125ee351135d2"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00576.html#a703acd97050c012daa6125ee351135d2">getDirectionAtDistance</a> (<a class="el" href="a00540.html">float</a> <a class="el" href="a00540.html">distance</a>) <a class="el" href="a00540.html">const</a></td></tr>
+<tr class="memdesc:a703acd97050c012daa6125ee351135d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the direction of the track at the given distance.  <br /></td></tr>
+<tr class="separator:a703acd97050c012daa6125ee351135d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9790ece37ecc346c25387ef9708fc489" id="r_a9790ece37ecc346c25387ef9708fc489"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00576.html#a9790ece37ecc346c25387ef9708fc489">getUpAtDistance</a> (<a class="el" href="a00540.html">float</a> <a class="el" href="a00540.html">distance</a>) <a class="el" href="a00540.html">const</a></td></tr>
+<tr class="memdesc:a9790ece37ecc346c25387ef9708fc489"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the up vector of the track at the given distance.  <br /></td></tr>
+<tr class="separator:a9790ece37ecc346c25387ef9708fc489"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace0ac0b8106e1fb12259d53feff6e0f6" id="r_ace0ac0b8106e1fb12259d53feff6e0f6"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00576.html#ace0ac0b8106e1fb12259d53feff6e0f6">getRightAtDistance</a> (<a class="el" href="a00540.html">float</a> <a class="el" href="a00540.html">distance</a>) <a class="el" href="a00540.html">const</a></td></tr>
+<tr class="memdesc:ace0ac0b8106e1fb12259d53feff6e0f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the right vector of the track at the given distance.  <br /></td></tr>
+<tr class="separator:ace0ac0b8106e1fb12259d53feff6e0f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb657854db72b2fd92e75716f394b1a6" id="r_aeb657854db72b2fd92e75716f394b1a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00576.html#aeb657854db72b2fd92e75716f394b1a6">findDistanceFromOffset</a> (<a class="el" href="a00540.html">float</a> <a class="el" href="a00540.html">startDistance</a>, <a class="el" href="a00540.html">float</a> <a class="el" href="a00540.html">worldOffset</a>, <a class="el" href="a00540.html">float</a> <a class="el" href="a00540.html">precision</a>=0.01<a class="el" href="a00540.html">f</a>) <a class="el" href="a00540.html">const</a></td></tr>
+<tr class="memdesc:aeb657854db72b2fd92e75716f394b1a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs a search and returns the distance along the track that is the given world coord offset from the starting distance along the track.  <br /></td></tr>
+<tr class="separator:aeb657854db72b2fd92e75716f394b1a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e7daaf57b3616bd5b327293915c03a2" id="r_a0e7daaf57b3616bd5b327293915c03a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">const</a> std::vector&lt; <a class="el" href="a00580.html">TrackNode</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00576.html#a0e7daaf57b3616bd5b327293915c03a2">getNodes</a> () <a class="el" href="a00540.html">const</a></td></tr>
+<tr class="memdesc:a0e7daaf57b3616bd5b327293915c03a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the nodes of the track.  <br /></td></tr>
+<tr class="separator:a0e7daaf57b3616bd5b327293915c03a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fa6153e40768c313ee85a765a236224" id="r_a8fa6153e40768c313ee85a765a236224"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00576.html#a8fa6153e40768c313ee85a765a236224">addToWorld</a> (bl::engine::World &amp;world, <a class="el" href="a00540.html">float</a> step)</td></tr>
+<tr class="memdesc:a8fa6153e40768c313ee85a765a236224"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates engine objects for the track and adds them to the world.  <br /></td></tr>
+<tr class="separator:a8fa6153e40768c313ee85a765a236224"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a155bc4c77cbbc917dad531a2a8941e97" id="r_a155bc4c77cbbc917dad531a2a8941e97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00576.html#a155bc4c77cbbc917dad531a2a8941e97">generateGeometry</a> ()</td></tr>
+<tr class="memdesc:a155bc4c77cbbc917dad531a2a8941e97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the geometry for the track.  <br /></td></tr>
+<tr class="separator:a155bc4c77cbbc917dad531a2a8941e97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Representation and storage of the train track in the arena. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00188_source.html#l00021">21</a> of file <a class="el" href="a00188_source.html">Track.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a54699de7edb5ae901f2bafe8f46dad1f" name="a54699de7edb5ae901f2bafe8f46dad1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54699de7edb5ae901f2bafe8f46dad1f">&#9670;&#160;</a></span>Track()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">core::arena::train::Track::Track </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates an empty track. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00359_source.html#l00084">84</a> of file <a class="el" href="a00359_source.html">Track.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8fa6153e40768c313ee85a765a236224" name="a8fa6153e40768c313ee85a765a236224"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fa6153e40768c313ee85a765a236224">&#9670;&#160;</a></span>addToWorld()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">void</a> core::arena::train::Track::addToWorld </td>
+          <td>(</td>
+          <td class="paramtype">bl::engine::World &amp;&#160;</td>
+          <td class="paramname"><em>world</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00540.html">float</a>&#160;</td>
+          <td class="paramname"><em>step</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates engine objects for the track and adds them to the world. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">world</td><td>The world to create the objects in </td></tr>
+    <tr><td class="paramname">step</td><td>The step size for the track </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00359_source.html#l00274">274</a> of file <a class="el" href="a00359_source.html">Track.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aeb657854db72b2fd92e75716f394b1a6" name="aeb657854db72b2fd92e75716f394b1a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb657854db72b2fd92e75716f394b1a6">&#9670;&#160;</a></span>findDistanceFromOffset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">float</a> core::arena::train::Track::findDistanceFromOffset </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00540.html">float</a>&#160;</td>
+          <td class="paramname"><em>startDistance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00540.html">float</a>&#160;</td>
+          <td class="paramname"><em>worldOffset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00540.html">float</a>&#160;</td>
+          <td class="paramname"><em>precision</em> = <code>0.01<a class="el" href="a00540.html">f</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Performs a search and returns the distance along the track that is the given world coord offset from the starting distance along the track. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">startDistance</td><td>The starting distance along the track </td></tr>
+    <tr><td class="paramname">worldOffset</td><td>The world distance to search for. Negative means search backwards </td></tr>
+    <tr><td class="paramname">precision</td><td>The threshold to stop the search at </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The distance along the track that is the given world distance from the start distance </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00359_source.html#l00268">268</a> of file <a class="el" href="a00359_source.html">Track.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a1afbc3234412fbbb35b40a9601b4dba1" name="a1afbc3234412fbbb35b40a9601b4dba1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1afbc3234412fbbb35b40a9601b4dba1">&#9670;&#160;</a></span>generate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">void</a> core::arena::train::Track::generate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00540.html">const</a> <a class="el" href="a00540.html">Terrain</a> &amp;&#160;</td>
+          <td class="paramname"><em>terrain</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generates the track from the given terrain. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">terrain</td><td>The terrain in the arena </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00359_source.html#l00086">86</a> of file <a class="el" href="a00359_source.html">Track.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a155bc4c77cbbc917dad531a2a8941e97" name="a155bc4c77cbbc917dad531a2a8941e97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a155bc4c77cbbc917dad531a2a8941e97">&#9670;&#160;</a></span>generateGeometry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">void</a> core::arena::train::Track::generateGeometry </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generates the geometry for the track. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00359_source.html#l00291">291</a> of file <a class="el" href="a00359_source.html">Track.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a703acd97050c012daa6125ee351135d2" name="a703acd97050c012daa6125ee351135d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a703acd97050c012daa6125ee351135d2">&#9670;&#160;</a></span>getDirectionAtDistance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::vec3 core::arena::train::Track::getDirectionAtDistance </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00540.html">float</a>&#160;</td>
+          <td class="paramname"><em>distance</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the direction of the track at the given distance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">distance</td><td>The distance along the track </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The direction of the track at the given distance </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00359_source.html#l00230">230</a> of file <a class="el" href="a00359_source.html">Track.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0e7daaf57b3616bd5b327293915c03a2" name="a0e7daaf57b3616bd5b327293915c03a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e7daaf57b3616bd5b327293915c03a2">&#9670;&#160;</a></span>getNodes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">const</a> std::vector&lt; <a class="el" href="a00580.html">TrackNode</a> &gt; &amp; core::arena::train::Track::getNodes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the nodes of the track. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00188_source.html#l00087">87</a> of file <a class="el" href="a00188_source.html">Track.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a4582702a95666d331664557c3e3c5b0e" name="a4582702a95666d331664557c3e3c5b0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4582702a95666d331664557c3e3c5b0e">&#9670;&#160;</a></span>getPositionAtDistance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::vec3 core::arena::train::Track::getPositionAtDistance </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00540.html">float</a>&#160;</td>
+          <td class="paramname"><em>distance</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the track position at the given distance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">distance</td><td>The distance along the track </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The position of the track at the given distance in world coordinates </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00359_source.html#l00220">220</a> of file <a class="el" href="a00359_source.html">Track.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ace0ac0b8106e1fb12259d53feff6e0f6" name="ace0ac0b8106e1fb12259d53feff6e0f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace0ac0b8106e1fb12259d53feff6e0f6">&#9670;&#160;</a></span>getRightAtDistance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::vec3 core::arena::train::Track::getRightAtDistance </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00540.html">float</a>&#160;</td>
+          <td class="paramname"><em>distance</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the right vector of the track at the given distance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">distance</td><td>The distance along the track </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The right vector of the track at the given distance </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00359_source.html#l00238">238</a> of file <a class="el" href="a00359_source.html">Track.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a766f3ef318a48f953054bb55a6960ec5" name="a766f3ef318a48f953054bb55a6960ec5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a766f3ef318a48f953054bb55a6960ec5">&#9670;&#160;</a></span>getTrackLength()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">float</a> core::arena::train::Track::getTrackLength </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the total length of the track. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00359_source.html#l00216">216</a> of file <a class="el" href="a00359_source.html">Track.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a9790ece37ecc346c25387ef9708fc489" name="a9790ece37ecc346c25387ef9708fc489"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9790ece37ecc346c25387ef9708fc489">&#9670;&#160;</a></span>getUpAtDistance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::vec3 core::arena::train::Track::getUpAtDistance </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00540.html">float</a>&#160;</td>
+          <td class="paramname"><em>distance</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the up vector of the track at the given distance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">distance</td><td>The distance along the track </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The up vector of the track at the given distance </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00359_source.html#l00245">245</a> of file <a class="el" href="a00359_source.html">Track.cpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>include/Core/Arena/Train/<a class="el" href="a00188_source.html">Track.hpp</a></li>
+<li>src/Core/Arena/<a class="el" href="a00359_source.html">Track.cpp</a></li>
+</ul>
+</div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

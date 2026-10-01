@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: Member List</title>
+<title>Outpost Engine: core::arena::Terrain::SampledBiome Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,29 +74,92 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00289.html">core</a></li><li class="navelem"><a class="el" href="a00300.html">unit</a></li><li class="navelem"><a class="el" href="a00547.html">Squad</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00418.html">core</a></li><li class="navelem"><a class="el" href="a00419.html">arena</a></li><li class="navelem"><a class="el" href="a00540.html">Terrain</a></li><li class="navelem"><a class="el" href="a00544.html">SampledBiome</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">core::unit::Squad Member List</div></div>
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00541.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">core::arena::Terrain::SampledBiome Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00547.html">core::unit::Squad</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00547.html#a17a55c099d51a8b9258c8067fac54515">addUnit</a>(com::Unit *unit)</td><td class="entry"><a class="el" href="a00547.html">core::unit::Squad</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00547.html#a89cb1e4de285eec761881bc2a296470a">clearUnits</a>()</td><td class="entry"><a class="el" href="a00547.html">core::unit::Squad</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00547.html#ab241ae351d8d6bf561eb94021bc37dfc">CommandQueueSize</a></td><td class="entry"><a class="el" href="a00547.html">core::unit::Squad</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00547.html#a028b0575ff3a69ad181881c6ff544532">getFaction</a>() const</td><td class="entry"><a class="el" href="a00547.html">core::unit::Squad</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00547.html#aad238f3d3a01bd68ca9647f229f6919f">queueCommand</a>(const cmd::SquadCommandHandle &amp;command, cmd::AddMode addMode=cmd::AddMode::QueueEnd)</td><td class="entry"><a class="el" href="a00547.html">core::unit::Squad</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00547.html#a84bd50e6c76617bd4fc9a5e44e432ac4">removeUnit</a>(com::Unit *unit)</td><td class="entry"><a class="el" href="a00547.html">core::unit::Squad</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00547.html#aa3936f698db4218e3433a103f7ab516b">Squad</a>(fcn::FactionId faction)</td><td class="entry"><a class="el" href="a00547.html">core::unit::Squad</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00547.html#a0705547392ae662c3fdb258c2d0f3902">SquadManager</a></td><td class="entry"><a class="el" href="a00547.html">core::unit::Squad</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
-</table></div><!-- contents -->
+<p>Represents a biome sampled from the terrain with its weight.  
+ <a href="a00544.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00191_source.html">Terrain.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a1088ec7375a0f419d66f62cc51907ae2" id="r_a1088ec7375a0f419d66f62cc51907ae2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00407.html#gae80a70a999356090fd444a80e3594f1a">gen::Biome</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00544.html#a1088ec7375a0f419d66f62cc51907ae2">biome</a></td></tr>
+<tr class="separator:a1088ec7375a0f419d66f62cc51907ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac842c3e2cd654061b203eaab33db6fb5" id="r_ac842c3e2cd654061b203eaab33db6fb5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00544.html#ac842c3e2cd654061b203eaab33db6fb5">height</a></td></tr>
+<tr class="separator:ac842c3e2cd654061b203eaab33db6fb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8174b187df4171a4664b05b6c57bb28" id="r_aa8174b187df4171a4664b05b6c57bb28"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00544.html#aa8174b187df4171a4664b05b6c57bb28">weight</a></td></tr>
+<tr class="separator:aa8174b187df4171a4664b05b6c57bb28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a biome sampled from the terrain with its weight. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00191_source.html#l00030">30</a> of file <a class="el" href="a00191_source.html">Terrain.hpp</a>.</p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="a1088ec7375a0f419d66f62cc51907ae2" name="a1088ec7375a0f419d66f62cc51907ae2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1088ec7375a0f419d66f62cc51907ae2">&#9670;&#160;</a></span>biome</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00407.html#gae80a70a999356090fd444a80e3594f1a">gen::Biome</a> core::arena::Terrain::SampledBiome::biome</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00191_source.html#l00031">31</a> of file <a class="el" href="a00191_source.html">Terrain.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac842c3e2cd654061b203eaab33db6fb5" name="ac842c3e2cd654061b203eaab33db6fb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac842c3e2cd654061b203eaab33db6fb5">&#9670;&#160;</a></span>height</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">float</a> core::arena::Terrain::SampledBiome::height</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00191_source.html#l00032">32</a> of file <a class="el" href="a00191_source.html">Terrain.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa8174b187df4171a4664b05b6c57bb28" name="aa8174b187df4171a4664b05b6c57bb28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8174b187df4171a4664b05b6c57bb28">&#9670;&#160;</a></span>weight</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">float</a> core::arena::Terrain::SampledBiome::weight</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00191_source.html#l00033">33</a> of file <a class="el" href="a00191_source.html">Terrain.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/Core/Arena/<a class="el" href="a00191_source.html">Terrain.hpp</a></li>
+</ul>
+</div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

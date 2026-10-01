@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['game_2ecpp_0',['game.cpp',['../a00796.html',1,'(Global Namespace)'],['../a00799.html',1,'(Global Namespace)']]],
-  ['game_2ehpp_1',['game.hpp',['../a00685.html',1,'(Global Namespace)'],['../a00688.html',1,'(Global Namespace)']]]
+  ['faction_2ecpp_0',['Faction.cpp',['../a00389.html',1,'']]],
+  ['faction_2ehpp_1',['Faction.hpp',['../a00242.html',1,'']]],
+  ['factionid_2ehpp_2',['FactionId.hpp',['../a00245.html',1,'']]],
+  ['factions_2ecpp_3',['Factions.cpp',['../a00392.html',1,'']]],
+  ['factions_2ehpp_4',['Factions.hpp',['../a00239.html',1,'']]],
+  ['filter_2ehpp_5',['Filter.hpp',['../a00248.html',1,'']]]
 ];

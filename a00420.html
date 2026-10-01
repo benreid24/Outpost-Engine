@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: Member List</title>
+<title>Outpost Engine: core::arena::gen Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,26 +74,85 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00289.html">core</a></li><li class="navelem"><a class="el" href="a00298.html">player</a></li><li class="navelem"><a class="el" href="a00423.html">HUD</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00418.html">core</a></li><li class="navelem"><a class="el" href="a00419.html">arena</a></li><li class="navelem"><a class="el" href="a00420.html">gen</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">core::player::HUD Member List</div></div>
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
+  <div class="headertitle"><div class="title">core::arena::gen Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00423.html">core::player::HUD</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00423.html#aeee864dcd45f8f3fbfaeefc1d45ac9b4">addToOverlay</a>()</td><td class="entry"><a class="el" href="a00423.html">core::player::HUD</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00423.html#ac343a0830003afdf04602d2dc4b83e3d">HUD</a>(Player &amp;owner)</td><td class="entry"><a class="el" href="a00423.html">core::player::HUD</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00423.html#aeb88b1503ccb418c4a139a7cc2c9a6ae">removeFromOverlay</a>()</td><td class="entry"><a class="el" href="a00423.html">core::player::HUD</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00423.html#a06d1dcabb9f1dedb67c9ec6d077d1315">toggleDebugMenu</a>()</td><td class="entry"><a class="el" href="a00423.html">core::player::HUD</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00423.html#a808093ab7ee69b9dfe48b316c6f74d4d">update</a>(float dt)</td><td class="entry"><a class="el" href="a00423.html">core::player::HUD</a></td><td class="entry"></td></tr>
-</table></div><!-- contents -->
+<p>Contains methods and classes for arena generation.  
+<a href="a00420.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00468.html">AdjacencyBonus</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a bonus to a biomes weight based on the biome of an adjacent node.  <a href="a00468.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00472.html">AdjacencyBonusProxy</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Proxy object for quickly updating adjacency bonuses for a node.  <a href="a00472.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00476.html">Domain</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the domain of possible biomes for a node.  <a href="a00476.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00480.html">Environment</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the environment of the arena and its biomes.  <a href="a00480.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00484.html">Generator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a00540.html" title="Representation of the terrain in an arena.">Terrain</a> and arena generator.  <a href="a00484.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00488.html">Parameters</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a00464.html" title="Represents a single arena in game with terrain, units, tracks, and other data.">Arena</a> and terrain generation parameters.  <a href="a00488.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00496.html">PerlinSampler</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper class to encode perlin parameters for easy sampling.  <a href="a00496.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00500.html">ProtoTerrain</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents transient terrain during arena generation.  <a href="a00500.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00512.html">RuledBiome</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a ruleset that determines where a biome can be present in the terrain.  <a href="a00512.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00520.html">Seed</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Random number generator for world generation.  <a href="a00520.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00524.html">SuperpositionedNode</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a node being generated with its possible states and constraints.  <a href="a00524.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00532.html">WeightedBiome</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a possible biome and its weight for a node.  <a href="a00532.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:gae80a70a999356090fd444a80e3594f1a" id="r_gae80a70a999356090fd444a80e3594f1a"><td class="memItemLeft" align="right" valign="top">enum struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00407.html#gae80a70a999356090fd444a80e3594f1a">Biome</a> { <br />
+&#160;&#160;<a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa000c016d34ff41e245b69c67f22c83ff">Biome::Desert</a> = 0
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aaac12ee4aedb176eb73ce3f6c0d1e9036">Biome::Forest</a> = 1
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aad4e3b74fb352a9f0977f9b86258daddb">Biome::Grassland</a> = 2
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aaec9903c79dd510ffa43f69ee867a9002">Biome::Mountain</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aab46d3c8ee8032551c011745d587705cc">Biome::Snow</a> = 4
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa1e7f72cb01415f5e800f3e1e32f91ee9">Biome::Beach</a> = 5
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa27634ff8002b12e75d98e07ccd005d18">Biome::Water</a> = 6
+, <a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa149529f6dcbcc198787e69a11235422e">Biome::River</a> = 7
+, <br />
+&#160;&#160;<a class="el" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa4905ac9d6a22bdfc1ae096094ce6248d">Biome::COUNT</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:gae80a70a999356090fd444a80e3594f1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the biome of a node.  <a href="a00407.html#gae80a70a999356090fd444a80e3594f1a">More...</a><br /></td></tr>
+<tr class="separator:gae80a70a999356090fd444a80e3594f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Contains methods and classes for arena generation. </p>
+</div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

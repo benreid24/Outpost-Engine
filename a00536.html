@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: Member List</title>
+<title>Outpost Engine: core::arena::Node Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,22 +74,155 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00289.html">core</a></li><li class="navelem"><a class="el" href="a00300.html">unit</a></li><li class="navelem"><a class="el" href="a00302.html">able</a></li><li class="navelem"><a class="el" href="a00539.html">SingleStorage</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00418.html">core</a></li><li class="navelem"><a class="el" href="a00419.html">arena</a></li><li class="navelem"><a class="el" href="a00536.html">Node</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">core::unit::able::SingleStorage&lt; C &gt; Member List</div></div>
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00533.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">core::arena::Node Struct Reference<div class="ingroups"><a class="el" href="a00404.html">Core</a> &raquo; <a class="el" href="a00407.html">Arena</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00539.html">core::unit::able::SingleStorage&lt; C &gt;</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00539.html#addc72fa689e8d14853fb8e05a00a90c4">info</a></td><td class="entry"><a class="el" href="a00539.html">core::unit::able::SingleStorage&lt; C &gt;</a></td><td class="entry"></td></tr>
-</table></div><!-- contents -->
+<p>Represents a single node in the arena terrain.  
+ <a href="a00536.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a01004_source.html">Node.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a844fb4d36fbd41d78eff9402baf8e6a0" id="r_a844fb4d36fbd41d78eff9402baf8e6a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00536.html#a844fb4d36fbd41d78eff9402baf8e6a0">operator==</a> (<a class="el" href="a00540.html">const</a> <a class="el" href="a00536.html">Node</a> &amp;<a class="el" href="a00540.html">other</a>) <a class="el" href="a00540.html">const</a></td></tr>
+<tr class="memdesc:a844fb4d36fbd41d78eff9402baf8e6a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Equality operator for track path finding.  <br /></td></tr>
+<tr class="separator:a844fb4d36fbd41d78eff9402baf8e6a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ab27bc8a00cdf10d6e1964973deab1e9c" id="r_ab27bc8a00cdf10d6e1964973deab1e9c"><td class="memItemLeft" align="right" valign="top">glm::u32vec2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00536.html#ab27bc8a00cdf10d6e1964973deab1e9c">index</a></td></tr>
+<tr class="separator:ab27bc8a00cdf10d6e1964973deab1e9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50ed5cd8145267368fd777a879939c3d" id="r_a50ed5cd8145267368fd777a879939c3d"><td class="memItemLeft" align="right" valign="top">glm::vec2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00536.html#a50ed5cd8145267368fd777a879939c3d">worldPos</a></td></tr>
+<tr class="separator:a50ed5cd8145267368fd777a879939c3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd0018f02e29ad4dbc5bf564396ea44f" id="r_acd0018f02e29ad4dbc5bf564396ea44f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00540.html">float</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00536.html#acd0018f02e29ad4dbc5bf564396ea44f">height</a></td></tr>
+<tr class="separator:acd0018f02e29ad4dbc5bf564396ea44f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2e88c35dc1d35979d8b5f7db7ec8489" id="r_aa2e88c35dc1d35979d8b5f7db7ec8489"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00407.html#gae80a70a999356090fd444a80e3594f1a">gen::Biome</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00536.html#aa2e88c35dc1d35979d8b5f7db7ec8489">biome</a></td></tr>
+<tr class="separator:aa2e88c35dc1d35979d8b5f7db7ec8489"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a single node in the arena terrain. </p>
+
+<p class="definition">Definition at line <a class="el" href="a01004_source.html#l00016">16</a> of file <a class="el" href="a01004_source.html">Node.hpp</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a844fb4d36fbd41d78eff9402baf8e6a0" name="a844fb4d36fbd41d78eff9402baf8e6a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a844fb4d36fbd41d78eff9402baf8e6a0">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">bool</a> core::arena::Node::operator== </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00540.html">const</a> <a class="el" href="a00536.html">Node</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Equality operator for track path finding. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>The other node to compare to </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the nodes are equal, false otherwise </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a01004_source.html#l00028">28</a> of file <a class="el" href="a01004_source.html">Node.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa2e88c35dc1d35979d8b5f7db7ec8489" name="aa2e88c35dc1d35979d8b5f7db7ec8489"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2e88c35dc1d35979d8b5f7db7ec8489">&#9670;&#160;</a></span>biome</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00407.html#gae80a70a999356090fd444a80e3594f1a">gen::Biome</a> core::arena::Node::biome</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a01004_source.html#l00020">20</a> of file <a class="el" href="a01004_source.html">Node.hpp</a>.</p>
+
+</div>
+</div>
+<a id="acd0018f02e29ad4dbc5bf564396ea44f" name="acd0018f02e29ad4dbc5bf564396ea44f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd0018f02e29ad4dbc5bf564396ea44f">&#9670;&#160;</a></span>height</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00540.html">float</a> core::arena::Node::height</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a01004_source.html#l00019">19</a> of file <a class="el" href="a01004_source.html">Node.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab27bc8a00cdf10d6e1964973deab1e9c" name="ab27bc8a00cdf10d6e1964973deab1e9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab27bc8a00cdf10d6e1964973deab1e9c">&#9670;&#160;</a></span>index</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::u32vec2 core::arena::Node::index</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a01004_source.html#l00017">17</a> of file <a class="el" href="a01004_source.html">Node.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a50ed5cd8145267368fd777a879939c3d" name="a50ed5cd8145267368fd777a879939c3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50ed5cd8145267368fd777a879939c3d">&#9670;&#160;</a></span>worldPos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">glm::vec2 core::arena::Node::worldPos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a01004_source.html#l00018">18</a> of file <a class="el" href="a01004_source.html">Node.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/Core/Arena/<a class="el" href="a01004_source.html">Node.hpp</a></li>
+</ul>
+</div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

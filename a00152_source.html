@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: include/Core/Events/EntityDamaged.hpp Source File</title>
+<title>Outpost Engine: include/Core/Rendering/TerrainDescriptors.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,42 +79,91 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_7d40579ff302046f2f9f8f8501b8cf30.html">Events</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8213943ce0b792be39d34390845932ae.html">Core</a></li><li class="navelem"><a class="el" href="dir_5fe219fbf3be7bd7577f75f8a622550c.html">Rendering</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">EntityDamaged.hpp</div></div>
+  <div class="headertitle"><div class="title">TerrainDescriptors.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="a00152.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_EVENTS_ENTITYDAMAGED_HPP</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_EVENTS_ENTITYDAMAGED_HPP</span></div>
+<a href="a00152.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CORE_RENDERING_TERRAINDESCRIPTORS_HPP</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CORE_RENDERING_TERRAINDESCRIPTORS_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;BLIB/ECS/Entity.hpp&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00289.html">core</a></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>{</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span>event</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
-<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="a00395.html">   15</a></span><span class="keyword">struct </span><a class="code hl_struct" href="a00395.html">EntityDamaged</a> {</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="a00395.html#af4ec9dab8d91f7c16814b486a8d4da27">   16</a></span>    bl::ecs::Entity <a class="code hl_variable" href="a00395.html#af4ec9dab8d91f7c16814b486a8d4da27">victim</a>;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="a00395.html#a11f3d5d2894858980c792108335eac14">   17</a></span>    bl::ecs::Entity <a class="code hl_variable" href="a00395.html#a11f3d5d2894858980c792108335eac14">damager</a>;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>};</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;BLIB/Render/Buffers/BufferSingleDeviceLocalSourced.hpp&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;BLIB/Render/Descriptors/Generic/BufferBinding.hpp&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;BLIB/Render/Descriptors/GenericDescriptorSetFactory.hpp&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;BLIB/Render/Descriptors/GenericDescriptorSetInstance.hpp&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;BLIB/Render/ShaderResources/BufferShaderResource.hpp&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;<a class="code" href="a00230.html">Core/Arena/Generation/Biome.hpp</a>&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00418.html">core</a></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span>render</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
+<div class="foldopen" id="foldopen00018" data-start="{" data-end="}">
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="a00437.html">   18</a></span><span class="keyword">namespace </span>terrain</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>{</div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="a00736.html">   25</a></span><span class="keyword">struct </span><a class="code hl_struct" href="a00736.html">BiomeInfo</a> {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="a00736.html#ae0ed7367a09b2ed3458a4ba64cc23bff">   26</a></span>    std::uint32_t <a class="code hl_variable" href="a00736.html#ae0ed7367a09b2ed3458a4ba64cc23bff">materialIndex</a>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>};</div>
 </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>} <span class="comment">// namespace event</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>} <span class="comment">// namespace core</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aa00289_html"><div class="ttname"><a href="a00289.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00107_source.html#l00004">AddMode.hpp:5</a></div></div>
-<div class="ttc" id="aa00395_html"><div class="ttname"><a href="a00395.html">core::event::EntityDamaged</a></div><div class="ttdoc">Fired when an entity is damaged.</div><div class="ttdef"><b>Definition</b> <a href="a00152_source.html#l00015">EntityDamaged.hpp:15</a></div></div>
-<div class="ttc" id="aa00395_html_a11f3d5d2894858980c792108335eac14"><div class="ttname"><a href="a00395.html#a11f3d5d2894858980c792108335eac14">core::event::EntityDamaged::damager</a></div><div class="ttdeci">bl::ecs::Entity damager</div><div class="ttdef"><b>Definition</b> <a href="a00152_source.html#l00017">EntityDamaged.hpp:17</a></div></div>
-<div class="ttc" id="aa00395_html_af4ec9dab8d91f7c16814b486a8d4da27"><div class="ttname"><a href="a00395.html#af4ec9dab8d91f7c16814b486a8d4da27">core::event::EntityDamaged::victim</a></div><div class="ttdeci">bl::ecs::Entity victim</div><div class="ttdef"><b>Definition</b> <a href="a00152_source.html#l00016">EntityDamaged.hpp:16</a></div></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="}">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="a00438.html">   29</a></span><span class="keyword">namespace </span>detail</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>{</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="a00438.html#a249a0c825188256db9c9ed5548080cf9">   31</a></span><span class="keyword">using </span><a class="code hl_typedef" href="a00438.html#a249a0c825188256db9c9ed5548080cf9">BiomeInfoShaderResource</a> = bl::rc::sr::BufferShaderResource&lt;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    bl::rc::buf::BufferSingleDeviceLocalSourced&lt;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        std::array&lt;BiomeInfo, static_cast&lt;std::size_t&gt;(<a class="code hl_enumvalue" href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa4905ac9d6a22bdfc1ae096094ce6248d">arena::gen::Biome::COUNT</a>)&gt;,</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        bl::rc::buf::Role::UBO&gt;,</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    1&gt;;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>}</div>
+</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="};">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="a00415.html#ga8a605a7a5c1574a4e7f9a866cacbd37d">   43</a></span><span class="keyword">constexpr</span> bl::rc::sr::Key&lt;detail::BiomeInfoShaderResource&gt; <a class="code hl_variable" href="a00415.html#ga8a605a7a5c1574a4e7f9a866cacbd37d">BiomeInfoShaderResourceKey</a>{</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="stringliteral">&quot;core_BiomeInfoShaderResource&quot;</span>};</div>
+</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">namespace </span>detail</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>{</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="a00438.html#a97d27ea6500921709464637c00261e8e">   49</a></span><span class="keyword">using </span><a class="code hl_typedef" href="a00438.html#a97d27ea6500921709464637c00261e8e">BiomeInfoBinding</a> =</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    bl::rc::ds::BufferBinding&lt;<a class="code hl_typedef" href="a00438.html#a249a0c825188256db9c9ed5548080cf9">BiomeInfoShaderResource</a>, <a class="code hl_variable" href="a00415.html#ga8a605a7a5c1574a4e7f9a866cacbd37d">BiomeInfoShaderResourceKey</a>,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                              bl::rc::sr::StoreKey::Global, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER&gt;;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="a00438.html#a2daf4b10d924691e49e8677c277b4c8c">   53</a></span><span class="keyword">using </span><a class="code hl_typedef" href="a00438.html#a2daf4b10d924691e49e8677c277b4c8c">BiomeInfoDescriptorSetBindings</a> = bl::rc::ds::Bindings&lt;BiomeInfoBinding&gt;;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>} <span class="comment">// namespace detail</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="a00415.html#ga25f83da82d3dc4fb3419b1cb92783387">   61</a></span><span class="keyword">using </span><a class="code hl_typedef" href="a00415.html#ga25f83da82d3dc4fb3419b1cb92783387">BiomeInfoDescriptorSetInstance</a> =</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    bl::rc::ds::GenericDescriptorSetInstance&lt;detail::BiomeInfoDescriptorSetBindings&gt;;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="a00415.html#gac52fe92e2858befc9baf4d0b6201cfaf">   69</a></span><span class="keyword">using </span><a class="code hl_typedef" href="a00415.html#gac52fe92e2858befc9baf4d0b6201cfaf">BiomeInfoDescriptorSetFactory</a> =</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    bl::rc::ds::GenericDescriptorSetFactory&lt;<a class="code hl_typedef" href="a00438.html#a2daf4b10d924691e49e8677c277b4c8c">detail::BiomeInfoDescriptorSetBindings</a>,</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                                            VK_SHADER_STAGE_FRAGMENT_BIT&gt;;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>} <span class="comment">// namespace terrain</span></div>
+</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>} <span class="comment">// namespace render</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>} <span class="comment">// namespace core</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aa00230_html"><div class="ttname"><a href="a00230.html">Biome.hpp</a></div></div>
+<div class="ttc" id="aa00407_html_ggae80a70a999356090fd444a80e3594f1aa4905ac9d6a22bdfc1ae096094ce6248d"><div class="ttname"><a href="a00407.html#ggae80a70a999356090fd444a80e3594f1aa4905ac9d6a22bdfc1ae096094ce6248d">core::arena::gen::Biome::COUNT</a></div><div class="ttdeci">@ COUNT</div></div>
+<div class="ttc" id="aa00415_html_ga25f83da82d3dc4fb3419b1cb92783387"><div class="ttname"><a href="a00415.html#ga25f83da82d3dc4fb3419b1cb92783387">core::render::terrain::BiomeInfoDescriptorSetInstance</a></div><div class="ttdeci">bl::rc::ds::GenericDescriptorSetInstance&lt; detail::BiomeInfoDescriptorSetBindings &gt; BiomeInfoDescriptorSetInstance</div><div class="ttdoc">The descriptor set instance for terrain biome information.</div><div class="ttdef"><b>Definition</b> <a href="a00152_source.html#l00061">TerrainDescriptors.hpp:62</a></div></div>
+<div class="ttc" id="aa00415_html_ga8a605a7a5c1574a4e7f9a866cacbd37d"><div class="ttname"><a href="a00415.html#ga8a605a7a5c1574a4e7f9a866cacbd37d">core::render::terrain::BiomeInfoShaderResourceKey</a></div><div class="ttdeci">constexpr bl::rc::sr::Key&lt; detail::BiomeInfoShaderResource &gt; BiomeInfoShaderResourceKey</div><div class="ttdoc">The resource key to access the biome info buffer.</div><div class="ttdef"><b>Definition</b> <a href="a00152_source.html#l00043">TerrainDescriptors.hpp:43</a></div></div>
+<div class="ttc" id="aa00415_html_gac52fe92e2858befc9baf4d0b6201cfaf"><div class="ttname"><a href="a00415.html#gac52fe92e2858befc9baf4d0b6201cfaf">core::render::terrain::BiomeInfoDescriptorSetFactory</a></div><div class="ttdeci">bl::rc::ds::GenericDescriptorSetFactory&lt; detail::BiomeInfoDescriptorSetBindings, VK_SHADER_STAGE_FRAGMENT_BIT &gt; BiomeInfoDescriptorSetFactory</div><div class="ttdoc">The descriptor set factory for terrain biome information.</div><div class="ttdef"><b>Definition</b> <a href="a00152_source.html#l00069">TerrainDescriptors.hpp:71</a></div></div>
+<div class="ttc" id="aa00418_html"><div class="ttname"><a href="a00418.html">core</a></div><div class="ttdoc">Contains everything shared between the game and editor.</div><div class="ttdef"><b>Definition</b> <a href="a00236_source.html#l00014">Arena.hpp:15</a></div></div>
+<div class="ttc" id="aa00438_html_a249a0c825188256db9c9ed5548080cf9"><div class="ttname"><a href="a00438.html#a249a0c825188256db9c9ed5548080cf9">core::render::terrain::detail::BiomeInfoShaderResource</a></div><div class="ttdeci">bl::rc::sr::BufferShaderResource&lt; bl::rc::buf::BufferSingleDeviceLocalSourced&lt; std::array&lt; BiomeInfo, static_cast&lt; std::size_t &gt;(arena::gen::Biome::COUNT)&gt;, bl::rc::buf::Role::UBO &gt;, 1 &gt; BiomeInfoShaderResource</div><div class="ttdef"><b>Definition</b> <a href="a00152_source.html#l00031">TerrainDescriptors.hpp:35</a></div></div>
+<div class="ttc" id="aa00438_html_a2daf4b10d924691e49e8677c277b4c8c"><div class="ttname"><a href="a00438.html#a2daf4b10d924691e49e8677c277b4c8c">core::render::terrain::detail::BiomeInfoDescriptorSetBindings</a></div><div class="ttdeci">bl::rc::ds::Bindings&lt; BiomeInfoBinding &gt; BiomeInfoDescriptorSetBindings</div><div class="ttdef"><b>Definition</b> <a href="a00152_source.html#l00053">TerrainDescriptors.hpp:53</a></div></div>
+<div class="ttc" id="aa00438_html_a97d27ea6500921709464637c00261e8e"><div class="ttname"><a href="a00438.html#a97d27ea6500921709464637c00261e8e">core::render::terrain::detail::BiomeInfoBinding</a></div><div class="ttdeci">bl::rc::ds::BufferBinding&lt; BiomeInfoShaderResource, BiomeInfoShaderResourceKey, bl::rc::sr::StoreKey::Global, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER &gt; BiomeInfoBinding</div><div class="ttdef"><b>Definition</b> <a href="a00152_source.html#l00049">TerrainDescriptors.hpp:51</a></div></div>
+<div class="ttc" id="aa00736_html"><div class="ttname"><a href="a00736.html">core::render::terrain::BiomeInfo</a></div><div class="ttdoc">Information for a biome used by the terrain shaders.</div><div class="ttdef"><b>Definition</b> <a href="a00152_source.html#l00025">TerrainDescriptors.hpp:25</a></div></div>
+<div class="ttc" id="aa00736_html_ae0ed7367a09b2ed3458a4ba64cc23bff"><div class="ttname"><a href="a00736.html#ae0ed7367a09b2ed3458a4ba64cc23bff">core::render::terrain::BiomeInfo::materialIndex</a></div><div class="ttdeci">std::uint32_t materialIndex</div><div class="ttdef"><b>Definition</b> <a href="a00152_source.html#l00026">TerrainDescriptors.hpp:26</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>

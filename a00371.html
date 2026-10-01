@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Outpost Engine: core::com::Unit Class Reference</title>
+<title>Outpost Engine: src/Core/Arena/Generation/ProtoTerrain.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,273 +74,38 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00289.html">core</a></li><li class="navelem"><a class="el" href="a00291.html">com</a></li><li class="navelem"><a class="el" href="a00371.html">Unit</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a2f0e5642e47e7ed59fe0f0829eafb5f.html">Core</a></li><li class="navelem"><a class="el" href="dir_a52cbea13e02fcef2f1d2009c043ae51.html">Arena</a></li><li class="navelem"><a class="el" href="dir_271f30c28be8ab620275452b5496fb2b.html">Generation</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#friends">Friends</a> &#124;
-<a href="a00368.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">core::com::Unit Class Reference<div class="ingroups"><a class="el" href="a00278.html">Core</a> &raquo; <a class="el" href="a00282.html">Unit</a></div></div></div>
+<a href="#namespaces">Namespaces</a>  </div>
+  <div class="headertitle"><div class="title">ProtoTerrain.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Component and data storage for in game units.  
- <a href="a00371.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="a00679_source.html">Unit.hpp</a>&gt;</code></p>
+<div class="textblock"><code>#include &lt;<a class="el" href="a00212_source.html">Core/Arena/Generation/ProtoTerrain.hpp</a>&gt;</code><br />
+<code>#include &lt;BLIB/Logging.hpp&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00218_source.html">Core/Arena/Generation/Environment.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00200_source.html">Core/Arena/Generation/Generator.hpp</a>&gt;</code><br />
+</div>
+<p><a href="a00371_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a8c531af8ccc1e957566a59ace6a399fd" id="r_a8c531af8ccc1e957566a59ace6a399fd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00371.html#a8c531af8ccc1e957566a59ace6a399fd">Unit</a> (<a class="el" href="a00407.html">fcn::FactionId</a> faction, bl::com::Physics2D &amp;physics)</td></tr>
-<tr class="memdesc:a8c531af8ccc1e957566a59ace6a399fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a unit that cannot move or shoot.  <br /></td></tr>
-<tr class="separator:a8c531af8ccc1e957566a59ace6a399fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e7e13620e0eaebd130f73263b5d5034" id="r_a1e7e13620e0eaebd130f73263b5d5034"><td class="memItemLeft" align="right" valign="top">bl::ecs::Entity&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00371.html#a1e7e13620e0eaebd130f73263b5d5034">getId</a> () const</td></tr>
-<tr class="memdesc:a1e7e13620e0eaebd130f73263b5d5034"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the entity id of this unit.  <br /></td></tr>
-<tr class="separator:a1e7e13620e0eaebd130f73263b5d5034"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0670d031597d05248f079a6667337192" id="r_a0670d031597d05248f079a6667337192"><td class="memItemLeft" align="right" valign="top">glm::vec2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00371.html#a0670d031597d05248f079a6667337192">getPosition</a> () const</td></tr>
-<tr class="memdesc:a0670d031597d05248f079a6667337192"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the position of the unit in world coordinates.  <br /></td></tr>
-<tr class="separator:a0670d031597d05248f079a6667337192"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac823e0b2733693266fb0b001d2cf8ea" id="r_aac823e0b2733693266fb0b001d2cf8ea"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00371.html#aac823e0b2733693266fb0b001d2cf8ea">getRotation</a> () const</td></tr>
-<tr class="memdesc:aac823e0b2733693266fb0b001d2cf8ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the rotation of the unit in degrees.  <br /></td></tr>
-<tr class="separator:aac823e0b2733693266fb0b001d2cf8ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2eeb7b3c9e2258d53efd46698b64c2b" id="r_ac2eeb7b3c9e2258d53efd46698b64c2b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00407.html">fcn::FactionId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00371.html#ac2eeb7b3c9e2258d53efd46698b64c2b">getFaction</a> () const</td></tr>
-<tr class="memdesc:ac2eeb7b3c9e2258d53efd46698b64c2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the id of the faction the unit belongs to.  <br /></td></tr>
-<tr class="separator:ac2eeb7b3c9e2258d53efd46698b64c2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acceef2d28eb803ee676c0b04aa8ce360" id="r_acceef2d28eb803ee676c0b04aa8ce360"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00282.html#ga17bb1f8b45c39692bb407bf24d200a61">unit::Capabilities</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00371.html#acceef2d28eb803ee676c0b04aa8ce360">capabilities</a> ()</td></tr>
-<tr class="memdesc:acceef2d28eb803ee676c0b04aa8ce360"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the units capabilities.  <br /></td></tr>
-<tr class="separator:acceef2d28eb803ee676c0b04aa8ce360"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:a646fd60d6dfff097f2b04ae23c9b9c67" id="r_a646fd60d6dfff097f2b04ae23c9b9c67"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00371.html#a646fd60d6dfff097f2b04ae23c9b9c67">sys::Unit</a></td></tr>
-<tr class="separator:a646fd60d6dfff097f2b04ae23c9b9c67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a00418" id="r_a00418"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00418.html">core</a></td></tr>
+<tr class="memdesc:a00418"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains everything shared between the game and editor. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00419" id="r_a00419"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00419.html">core::arena</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00420" id="r_a00420"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00420.html">core::arena::gen</a></td></tr>
+<tr class="memdesc:a00420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains methods and classes for arena generation. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Component and data storage for in game units. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00679_source.html#l00030">30</a> of file <a class="el" href="a00679_source.html">Unit.hpp</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a8c531af8ccc1e957566a59ace6a399fd" name="a8c531af8ccc1e957566a59ace6a399fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c531af8ccc1e957566a59ace6a399fd">&#9670;&#160;</a></span>Unit()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00371.html#a646fd60d6dfff097f2b04ae23c9b9c67">core::com::Unit::Unit</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00407.html">fcn::FactionId</a>&#160;</td>
-          <td class="paramname"><em>faction</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bl::com::Physics2D &amp;&#160;</td>
-          <td class="paramname"><em>physics</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Creates a unit that cannot move or shoot. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">faction</td><td>The id of the faction that this unit belongs to </td></tr>
-    <tr><td class="paramname">physics</td><td>The physics component of the unit </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="a00790_source.html#l00007">7</a> of file <a class="el" href="a00790_source.html">Unit.cpp</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="acceef2d28eb803ee676c0b04aa8ce360" name="acceef2d28eb803ee676c0b04aa8ce360"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acceef2d28eb803ee676c0b04aa8ce360">&#9670;&#160;</a></span>capabilities()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00282.html#ga17bb1f8b45c39692bb407bf24d200a61">unit::Capabilities</a> &amp; core::com::Unit::capabilities </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the units capabilities. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00679_source.html#l00063">63</a> of file <a class="el" href="a00679_source.html">Unit.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ac2eeb7b3c9e2258d53efd46698b64c2b" name="ac2eeb7b3c9e2258d53efd46698b64c2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2eeb7b3c9e2258d53efd46698b64c2b">&#9670;&#160;</a></span>getFaction()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00407.html">fcn::FactionId</a> core::com::Unit::getFaction </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the id of the faction the unit belongs to. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00679_source.html#l00058">58</a> of file <a class="el" href="a00679_source.html">Unit.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a1e7e13620e0eaebd130f73263b5d5034" name="a1e7e13620e0eaebd130f73263b5d5034"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e7e13620e0eaebd130f73263b5d5034">&#9670;&#160;</a></span>getId()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bl::ecs::Entity core::com::Unit::getId </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the entity id of this unit. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00679_source.html#l00043">43</a> of file <a class="el" href="a00679_source.html">Unit.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a0670d031597d05248f079a6667337192" name="a0670d031597d05248f079a6667337192"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0670d031597d05248f079a6667337192">&#9670;&#160;</a></span>getPosition()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">glm::vec2 core::com::Unit::getPosition </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the position of the unit in world coordinates. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00679_source.html#l00048">48</a> of file <a class="el" href="a00679_source.html">Unit.hpp</a>.</p>
-
-</div>
-</div>
-<a id="aac823e0b2733693266fb0b001d2cf8ea" name="aac823e0b2733693266fb0b001d2cf8ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac823e0b2733693266fb0b001d2cf8ea">&#9670;&#160;</a></span>getRotation()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float core::com::Unit::getRotation </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the rotation of the unit in degrees. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00679_source.html#l00053">53</a> of file <a class="el" href="a00679_source.html">Unit.hpp</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Friends And Related Symbol Documentation</h2>
-<a id="a646fd60d6dfff097f2b04ae23c9b9c67" name="a646fd60d6dfff097f2b04ae23c9b9c67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a646fd60d6dfff097f2b04ae23c9b9c67">&#9670;&#160;</a></span>sys::Unit</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">friend class <a class="el" href="a00471.html">sys::Unit</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00679_source.html#l00072">72</a> of file <a class="el" href="a00679_source.html">Unit.hpp</a>.</p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following files:<ul>
-<li>include/Core/Components/<a class="el" href="a00679_source.html">Unit.hpp</a></li>
-<li>src/Core/Components/<a class="el" href="a00790_source.html">Unit.cpp</a></li>
-</ul>
 </div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.15-->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 30 2025 00:49:41 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 1 2026 23:02:43 for Outpost Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.9.8
 </small></address>
