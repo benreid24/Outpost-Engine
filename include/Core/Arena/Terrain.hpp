@@ -24,6 +24,8 @@ class Generator;
  */
 class Terrain {
 public:
+    static constexpr unsigned int HeightmapRate = 4;
+
     /**
      * @brief Represents a biome sampled from the terrain with its weight
      */
@@ -96,11 +98,12 @@ private:
     glm::vec2 worldSize;
     float maxHeight;
     bl::ctr::Vector2D<Node> nodes;
-    gen::PerlinSampler heightSampler;
+    bl::ctr::Vector2D<float> heightmap;
     bl::gfx::Terrain<com::TerrainMesh> terrainDrawable;
     float step;
 
-    std::array<std::pair<glm::u32vec2, float>, 4> getPositionWeights(const glm::vec2& pos) const;
+    std::array<std::pair<glm::u32vec2, float>, 4> getPositionWeights(
+        const glm::vec2& pos, const glm::u32vec2& gridSize) const;
 
     friend class gen::Generator;
 };

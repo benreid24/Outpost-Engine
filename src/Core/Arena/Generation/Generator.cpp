@@ -114,7 +114,8 @@ void Generator::generate(Arena& output) {
 
     // write to terrain
     output.terrain.nodes.setSize(heightmap.getWidth(), heightmap.getHeight());
-    output.terrain.heightSampler = heightSampler;
+    output.terrain.heightmap.setSize(heightmap.getWidth() * Terrain::HeightmapRate,
+                                     heightmap.getHeight() * Terrain::HeightmapRate);
     for (unsigned int x = 0; x < output.terrain.nodes.getWidth(); ++x) {
         for (unsigned int y = 0; y < output.terrain.nodes.getHeight(); ++y) {
             Node& node    = output.terrain.nodes(x, y);
@@ -122,6 +123,21 @@ void Generator::generate(Arena& output) {
             node.worldPos = glm::vec2(node.index) * params.worldStep - params.worldSize * 0.5f;
             node.height   = heightmap(x, y) * params.maxHeight;
             node.biome    = terrain.getNode(x, y).selectedBiome;
+
+            for (unsigned int ox = 0; ox < Terrain::HeightmapRate; ++ox) {
+                for (unsigned int oy = 0; oy < Terrain::HeightmapRate; ++oy) {
+                    const unsigned int hx = x * Terrain::HeightmapRate + ox;
+                    const unsigned int hy = y * Terrain::HeightmapRate + oy;
+                    if (node.biome != Biome::Water) {
+                        const float xf =
+                            static_cast<float>(hx) * params.worldStep / Terrain::HeightmapRate;
+                        const float yf =
+                            static_cast<float>(hy) * params.worldStep / Terrain::HeightmapRate;
+                        output.terrain.heightmap(hx, hy) = heightSampler.sample({xf, yf});
+                    }
+                    else { output.terrain.heightmap(hx, hy) = heightmap(x, y); }
+                }
+            }
         }
     }
 }

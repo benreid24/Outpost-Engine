@@ -28,12 +28,18 @@ float Terrain::sampleHeight(const glm::vec2& pos) const {
     for (const auto& n : nodes) {
         if (n.biome == gen::Biome::Water) { waterHeight = n.height; }
     }
-    const float h = std::max(heightSampler.sample(pos + worldSize * 0.5f), waterHeight);
+
+    const auto weightedPositions =
+        getPositionWeights(pos, {heightmap.getWidth(), heightmap.getHeight()});
+    float h = 0.f;
+    for (const auto& wp : weightedPositions) { h += heightmap(wp.first.x, wp.first.y) * wp.second; }
+
+    h = std::max(h, waterHeight);
     return h * maxHeight;
 }
 
 bl::ctr::StaticVector<Terrain::SampledBiome, 4> Terrain::sampleBiomes(const glm::vec2& pos) const {
-    const auto weightedPositions = getPositionWeights(pos);
+    const auto weightedPositions = getPositionWeights(pos, {nodes.getWidth(), nodes.getHeight()});
     bl::ctr::StaticVector<SampledBiome, 4> result;
     for (const auto& wp : weightedPositions) {
         const Node& node = nodes(wp.first.x, wp.first.y);
@@ -52,17 +58,17 @@ bl::ctr::StaticVector<Terrain::SampledBiome, 4> Terrain::sampleBiomes(const glm:
 }
 
 std::array<std::pair<glm::u32vec2, float>, 4> Terrain::getPositionWeights(
-    const glm::vec2& pos) const {
+    const glm::vec2& pos, const glm::u32vec2& gridSize) const {
     const glm::vec2 normalPos = pos / worldSize + glm::vec2(0.5f);
     if (normalPos.x < 0.f || normalPos.x > 1.f || normalPos.y < 0.f || normalPos.y > 1.f) {
         return {};
     }
-    const float xi        = normalPos.x * static_cast<float>(nodes.getWidth() - 1);
-    const float yi        = normalPos.y * static_cast<float>(nodes.getHeight() - 1);
+    const float xi        = normalPos.x * static_cast<float>(gridSize.x - 1);
+    const float yi        = normalPos.y * static_cast<float>(gridSize.y - 1);
     const unsigned int x0 = static_cast<unsigned int>(std::floor(xi));
     const unsigned int y0 = static_cast<unsigned int>(std::floor(yi));
-    const unsigned int x1 = std::min(x0 + 1, nodes.getWidth() - 1);
-    const unsigned int y1 = std::min(y0 + 1, nodes.getHeight() - 1);
+    const unsigned int x1 = std::min(x0 + 1, gridSize.x - 1);
+    const unsigned int y1 = std::min(y0 + 1, gridSize.y - 1);
     const float xn        = xi - static_cast<float>(x0);
     const float yn        = yi - static_cast<float>(y0);
     const float w00       = (1.f - xn) * (1.f - yn);
