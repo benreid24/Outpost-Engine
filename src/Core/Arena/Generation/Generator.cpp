@@ -103,12 +103,6 @@ void Generator::generate(Arena& output) {
     // TODO - resample noise based on biome
     // TODO - scale heightmap based on biome
 
-    // Select and modify locations for train stops
-    // TODO
-
-    // route train via modified A*
-    // TODO
-
     // Poisson disk sampling for trees and rocks
     // TODO
 
@@ -121,7 +115,6 @@ void Generator::generate(Arena& output) {
             Node& node    = output.terrain.nodes(x, y);
             node.index    = {x, y};
             node.worldPos = glm::vec2(node.index) * params.worldStep - params.worldSize * 0.5f;
-            node.height   = heightmap(x, y) * params.maxHeight;
             node.biome    = terrain.getNode(x, y).selectedBiome;
 
             for (unsigned int ox = 0; ox < Terrain::HeightmapRate; ++ox) {
@@ -140,6 +133,15 @@ void Generator::generate(Arena& output) {
             }
         }
     }
+
+    // route train via modified A*
+    output.track.generate(output.terrain);
+
+    // select and modify locations for train stop
+    identifyTrainStop(output);
+
+    // modify terrain for train stops
+    // TODO
 }
 
 void Generator::raiseLakes(ProtoTerrain& source) {
@@ -199,6 +201,173 @@ void Generator::raiseLakes(ProtoTerrain& source) {
             }
         }
     }
+}
+
+void Generator::identifyTrainStop(Arena& output) {
+    const auto checkSlope = [this, &output](const glm::vec3& start, const glm::vec3& end) -> bool {
+        const float slope = std::abs((end.y - start.y) / glm::distance(glm::vec2(start.x, start.z),
+                                                                       glm::vec2(end.x, end.z)));
+        return slope <= params.stationParams.maxSlope;
+    };
+
+    // search the middle 50% of the track for a flat area to create a stop at
+    const unsigned int startIndex = output.track.getNodes().size() / 4;
+    const unsigned int endIndex   = output.track.getNodes().size() * 3 / 4;
+
+    unsigned int bestStartIndex   = startIndex;
+    unsigned int stationNodeCount = 0;
+    float bestHeightDiff          = std::numeric_limits<float>::max();
+    for (unsigned int i = startIndex; i < endIndex; ++i) {
+        float minHeight        = std::numeric_limits<float>::max();
+        float maxHeight        = std::numeric_limits<float>::lowest();
+        float length           = 0.f;
+        unsigned int nodeCount = 0;
+
+        for (unsigned int j = i + 1; j < endIndex && length <= params.stationParams.trackLength;
+             ++j) {
+            const auto& node     = output.track.getNodes()[j];
+            const auto& prevNode = output.track.getNodes()[j - 1];
+            if (!checkSlope(prevNode.position, node.position)) { break; }
+
+            minHeight = std::min(minHeight, node.position.y);
+            maxHeight = std::max(maxHeight, node.position.y);
+            length += node.length;
+            ++nodeCount;
+        }
+        if (nodeCount == 0 || length < params.stationParams.trackLength) { continue; }
+
+        float heightDiff = maxHeight - minHeight;
+        if (heightDiff < bestHeightDiff) {
+            bestHeightDiff   = heightDiff;
+            bestStartIndex   = i;
+            stationNodeCount = nodeCount;
+        }
+    }
+
+    // determine which side of the track to put the station and how big to make it
+    bl::ctr::Vector2D<std::uint8_t> visited(
+        output.terrain.nodes.getWidth(), output.terrain.nodes.getHeight(), 0);
+    std::vector<glm::u32vec2> stationNodes;
+    std::stack<glm::u32vec2, std::vector<glm::u32vec2>> toVisit;
+
+    const auto getNodeIndex = [&output](const train::TrackNode& node) {
+        return output.getTerrain().worldPosToIndex(glm::vec2(node.position.x, node.position.z));
+    };
+
+    const auto validateTrackDistance =
+        [this, &output, bestStartIndex, stationNodeCount](const glm::vec3& position) -> bool {
+        for (unsigned int i = bestStartIndex; i < bestStartIndex + stationNodeCount; ++i) {
+            const auto& node = output.track.getNodes()[i];
+            const float dist = glm::distance(glm::vec2(position.x, position.z),
+                                             glm::vec2(node.position.x, node.position.z));
+            if (dist <= params.stationParams.maxDistanceFromTrack) { return true; }
+        }
+        return false;
+    };
+
+    const auto isTrack = [&output](const glm::u32vec2& index) -> bool {
+        for (const auto& node : output.track.getNodes()) {
+            const glm::u32vec2 nodeIndex =
+                output.getTerrain().worldPosToIndex(glm::vec2(node.position.x, node.position.z));
+            if (nodeIndex == index) { return true; }
+        }
+        return false;
+    };
+
+    const auto doBfsStationSide = [this,
+                                   &getNodeIndex,
+                                   &validateTrackDistance,
+                                   &checkSlope,
+                                   &isTrack,
+                                   &output,
+                                   &visited,
+                                   &toVisit,
+                                   &stationNodes,
+                                   bestStartIndex,
+                                   stationNodeCount](float side) {
+        std::vector<glm::u32vec2> nodeGroup;
+        visited.fill(0);
+
+        // add and mark visited all nodes next to the track
+        for (unsigned int i = bestStartIndex; i < bestStartIndex + stationNodeCount; ++i) {
+            const train::TrackNode& node = output.track.getNodes()[i];
+            const glm::u32vec2 nodeIndex = getNodeIndex(node);
+            const glm::vec3 right =
+                output.track.getRightAtDistance(node.accumulatedDistance) * side;
+            const glm::vec2 rightFlat = glm::normalize(glm::vec2(right.x, right.z));
+            const glm::u32vec2 offset(rightFlat + glm::vec2(0.5f));
+
+            const glm::u32vec2 stationIndex = nodeIndex + offset;
+            nodeGroup.push_back(stationIndex);
+            visited(stationIndex.x, stationIndex.y) = 1;
+            toVisit.push(stationIndex);
+        }
+
+        // search for the station bounds
+        while (!toVisit.empty()) {
+            const glm::u32vec2 current = toVisit.top();
+            toVisit.pop();
+
+            const Node& currentNode = output.terrain.nodes(current.x, current.y);
+            const glm::vec3 currentPos(currentNode.worldPos.x,
+                                       output.terrain.sampleHeight(currentNode.worldPos),
+                                       currentNode.worldPos.y);
+
+            for (int ox = -1; ox <= 1; ++ox) {
+                for (int oy = -1; oy <= 1; ++oy) {
+                    if (ox == 0 && oy == 0) { continue; }
+
+                    const glm::u32vec2 neighbor(current.x + ox, current.y + oy);
+                    if (neighbor.x >= output.terrain.nodes.getWidth() ||
+                        neighbor.y >= output.terrain.nodes.getHeight()) {
+                        continue;
+                    }
+
+                    const Node& neighborNode = output.terrain.nodes(neighbor.x, neighbor.y);
+                    if (visited(neighbor.x, neighbor.y) != 0) { continue; }
+
+                    const glm::vec3 neighborPos(neighborNode.worldPos.x,
+                                                output.terrain.sampleHeight(neighborNode.worldPos),
+                                                neighborNode.worldPos.y);
+                    if (!validateTrackDistance(neighborPos)) {
+                        visited(neighbor.x, neighbor.y) = 1;
+                        continue;
+                    }
+
+                    if (!checkSlope(currentPos, neighborPos)) { continue; }
+
+                    visited(neighbor.x, neighbor.y) = 1;
+                    nodeGroup.push_back(neighbor);
+                    toVisit.push(neighbor);
+                }
+            }
+        }
+
+        if (nodeGroup.size() > stationNodes.size()) { stationNodes = std::move(nodeGroup); }
+    };
+
+    // check both sides
+    // TODO - this won't actually limit to one side. either we don't care and can do one search, or
+    // we need to fix the wall
+    doBfsStationSide(1.f);
+    doBfsStationSide(-1.f);
+
+    BL_LOG_INFO << "Selected " << stationNodes.size()
+                << " nodes for train station with track length of " << stationNodeCount << " nodes";
+
+    // TODO - store this result somehow. need a representation
+
+    float averageHeight = 0.f;
+    const float weight  = 1.f / static_cast<float>(stationNodes.size());
+    for (const auto& index : stationNodes) {
+        const glm::vec2 worldPos = output.terrain.getNodes()(index.x, index.y).worldPos;
+        const float height       = output.terrain.sampleHeight(worldPos);
+        averageHeight += height * weight;
+    }
+
+    // TODO - may want a different terrain modification approach
+    for (const auto& index : stationNodes) { output.terrain.modifyHeight(index, averageHeight); }
+    output.track.remapToTerrain(output.terrain);
 }
 
 } // namespace gen

@@ -16,7 +16,6 @@ namespace arena
 struct Node {
     glm::u32vec2 index;
     glm::vec2 worldPos;
-    float height;
     gen::Biome biome;
 
     /**

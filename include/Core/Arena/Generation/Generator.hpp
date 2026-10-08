@@ -63,6 +63,7 @@ private:
     bl::ctr::Vector2D<float> moistureMap;
 
     void raiseLakes(ProtoTerrain& source);
+    void identifyTrainStop(Arena& output);
 };
 
 } // namespace gen

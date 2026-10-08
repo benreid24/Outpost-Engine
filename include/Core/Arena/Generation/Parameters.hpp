@@ -35,6 +35,25 @@ struct Parameters {
         , persistence(0.5f) {}
     };
 
+    /**
+     * @brief Parameters specific to train station generation
+     */
+    struct StationParameters {
+        float trackLength;
+        float maxHeightDiff;
+        float maxSlope;
+        float maxDistanceFromTrack;
+
+        /**
+         * @brief Sets sane defaults
+         */
+        StationParameters()
+        : trackLength(100.f)
+        , maxHeightDiff(20.f)
+        , maxSlope(0.3f)
+        , maxDistanceFromTrack(75.f) {}
+    };
+
     glm::vec2 worldSize;
     float worldStep;
     float maxHeight;
@@ -42,6 +61,7 @@ struct Parameters {
     PerlinParameters terrainPerlin;
     PerlinParameters moisturePerlin;
     std::vector<RuledBiome> biomes;
+    StationParameters stationParams;
 
     /**
      * @brief Initializes the parameters with sane defaults

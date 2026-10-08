@@ -99,6 +99,13 @@ public:
      */
     void generateGeometry();
 
+    /**
+     * @brief Maintains the same path but adjusts based on new terrain heights
+     *
+     * @param terrain The terrain to contour to
+     */
+    void remapToTerrain(const Terrain& terrain);
+
 private:
     std::vector<TrackNode> nodes;
     bl::gfx::IndexBuffer3D railsDrawable;
@@ -107,6 +114,8 @@ private:
     float step;
 
     const TrackNode& getNodeAtDistance(float d) const;
+    void populateTrackNodeInfo();
+
     void generateRail(float offset, std::uint32_t& vertexOffset, std::uint32_t& indexOffset);
     void generateTies();
     void generateMound();

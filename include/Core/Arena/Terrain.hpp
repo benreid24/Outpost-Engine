@@ -31,7 +31,6 @@ public:
      */
     struct SampledBiome {
         gen::Biome biome;
-        float height;
         float weight;
     };
 
@@ -104,6 +103,7 @@ private:
 
     std::array<std::pair<glm::u32vec2, float>, 4> getPositionWeights(
         const glm::vec2& pos, const glm::u32vec2& gridSize) const;
+    void modifyHeight(const glm::u32vec2& index, float height);
 
     friend class gen::Generator;
 };

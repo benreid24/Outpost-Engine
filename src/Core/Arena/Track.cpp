@@ -96,7 +96,9 @@ void Track::generate(const Terrain& terrain) {
             const unsigned int y = from.index.y + i * ySign;
             const Node& node     = terrain.getNodes()(x, y);
 
-            const float heightDiff = std::abs(node.height - prev->height);
+            const float currentHeight = terrain.sampleHeight(node.worldPos);
+            const float prevHeight    = terrain.sampleHeight(prev->worldPos);
+            const float heightDiff    = std::abs(currentHeight - prevHeight);
             if (heightDiff >= glm::distance(from.worldPos, to.worldPos) * MaxSlope) { return -1; }
             totalHeight += heightDiff;
             prev = &node;
@@ -136,7 +138,9 @@ void Track::generate(const Terrain& terrain) {
                     const float distance = glm::distance(node.worldPos, neighbor.worldPos);
 
                     // TODO - adjust cost and do bridges or tunnels
-                    if (std::abs(neighbor.height - node.height) >= distance * MaxSlope) {
+                    const float currentHeight  = terrain.sampleHeight(node.worldPos);
+                    const float neighborHeight = terrain.sampleHeight(neighbor.worldPos);
+                    if (std::abs(neighborHeight - currentHeight) >= distance * MaxSlope) {
                         continue;
                     }
 
@@ -188,23 +192,22 @@ void Track::generate(const Terrain& terrain) {
     for (const glm::vec2& terrainNode : expandedPath) {
         auto& node    = nodes.emplace_back();
         node.position = glm::vec3(terrainNode.x, terrain.sampleHeight(terrainNode), terrainNode.y);
+    }
+    populateTrackNodeInfo();
+}
+
+void Track::populateTrackNodeInfo() {
+    float accumulatedDistance = 0.f;
+    for (auto& node : nodes) {
+        const unsigned int idx = &node - &nodes[0];
 
         glm::vec3 prevNodePos = node.position - glm::vec3(-IdealNodeGap, 0.f, 0.f);
-        if (nodes.size() > 1) {
-            auto& prev  = nodes[nodes.size() - 2];
-            prevNodePos = prev.position;
-        }
+        if (idx > 0) { prevNodePos = nodes[idx - 1].position; }
 
         glm::vec3 nextNodePos     = node.position + glm::vec3(IdealNodeGap, 0.f, 0.f);
         glm::vec3 nextNextNodePos = nextNodePos + glm::vec3(IdealNodeGap, 0.f, 0.f);
-        if (nodes.size() < expandedPath.size()) {
-            const auto& next = expandedPath[nodes.size()];
-            nextNodePos      = glm::vec3(next.x, terrain.sampleHeight(next), next.y);
-        }
-        if (nodes.size() < expandedPath.size() - 1) {
-            const auto& nextNext = expandedPath[nodes.size() + 1];
-            nextNextNodePos = glm::vec3(nextNext.x, terrain.sampleHeight(nextNext), nextNext.y);
-        }
+        if (idx < nodes.size() - 1) { nextNodePos = nodes[idx + 1].position; }
+        if (idx < nodes.size() - 2) { nextNextNodePos = nodes[idx + 2].position; }
 
         node.length              = glm::distance(node.position, nextNodePos);
         node.accumulatedDistance = accumulatedDistance;
@@ -213,8 +216,16 @@ void Track::generate(const Terrain& terrain) {
     }
 }
 
+void Track::remapToTerrain(const Terrain& terrain) {
+    for (TrackNode& node : nodes) {
+        node.position.y =
+            terrain.sampleHeight(glm::vec2(node.position.x, node.position.z)) + TrackHeight;
+    }
+    populateTrackNodeInfo();
+}
+
 float Track::getTrackLength() const {
-    return nodes.empty() ? 0.f : nodes.back().accumulatedDistance;
+    return nodes.empty() ? 0.f : nodes.back().accumulatedDistance + nodes.back().length;
 }
 
 glm::vec3 Track::getPositionAtDistance(float distance) const {

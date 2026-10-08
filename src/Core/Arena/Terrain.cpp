@@ -23,18 +23,13 @@ Terrain::Terrain()
 : step(1.f) {}
 
 float Terrain::sampleHeight(const glm::vec2& pos) const {
-    const auto nodes  = sampleBiomes(pos);
-    float waterHeight = 0.f;
-    for (const auto& n : nodes) {
-        if (n.biome == gen::Biome::Water) { waterHeight = n.height; }
-    }
+    const auto nodes = sampleBiomes(pos);
 
     const auto weightedPositions =
         getPositionWeights(pos, {heightmap.getWidth(), heightmap.getHeight()});
     float h = 0.f;
     for (const auto& wp : weightedPositions) { h += heightmap(wp.first.x, wp.first.y) * wp.second; }
 
-    h = std::max(h, waterHeight);
     return h * maxHeight;
 }
 
@@ -45,13 +40,11 @@ bl::ctr::StaticVector<Terrain::SampledBiome, 4> Terrain::sampleBiomes(const glm:
         const Node& node = nodes(wp.first.x, wp.first.y);
         for (auto& sample : result) {
             if (sample.biome == node.biome) {
-                const float tw = sample.weight + wp.second;
-                sample.height  = sample.height * sample.weight / tw + node.height * wp.second / tw;
                 sample.weight += wp.second;
                 goto next;
             }
         }
-        result.emplace_back(SampledBiome{node.biome, node.height, wp.second});
+        result.emplace_back(SampledBiome{node.biome, wp.second});
     next:;
     }
     return result;
@@ -131,6 +124,18 @@ void Terrain::generateGeometry(bl::util::ThreadPool& threadPool) {
     for (auto& f : futures) { f.wait(); }
 
     terrainDrawable.commitUpdate();
+}
+
+void Terrain::modifyHeight(const glm::u32vec2& index, float height) {
+    // TODO - ease?
+    height /= maxHeight;
+    for (unsigned int ox = 0; ox < HeightmapRate; ++ox) {
+        for (unsigned int oy = 0; oy < HeightmapRate; ++oy) {
+            const glm::u32vec2 hIndex(index.x * HeightmapRate + ox, index.y * HeightmapRate + oy);
+            if (hIndex.x >= heightmap.getWidth() || hIndex.y >= heightmap.getHeight()) { continue; }
+            heightmap(hIndex.x, hIndex.y) = height;
+        }
+    }
 }
 
 } // namespace arena
