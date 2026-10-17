@@ -1,7 +1,7 @@
 #ifndef CORE_ARENA_TRACK_HPP
 #define CORE_ARENA_TRACK_HPP
 
-#include <BLIB/Objects/3D/IndexBuffer.hpp>
+#include <BLIB/Objects/3D/Mesh.hpp>
 #include <Core/Arena/Train/TrackNode.hpp>
 #include <vector>
 
@@ -108,9 +108,9 @@ public:
 
 private:
     std::vector<TrackNode> nodes;
-    bl::obj::o3d::IndexBuffer3D railsDrawable;
-    bl::obj::o3d::IndexBuffer3D tiesDrawable;
-    bl::obj::o3d::IndexBuffer3D moundDrawable;
+    bl::obj::o3d::BasicMesh railsDrawable;
+    bl::obj::o3d::BasicMesh tiesDrawable;
+    bl::obj::o3d::BasicMesh moundDrawable;
     float step;
 
     const TrackNode& getNodeAtDistance(float d) const;
