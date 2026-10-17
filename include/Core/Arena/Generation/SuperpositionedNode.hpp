@@ -2,6 +2,7 @@
 #define CORE_ARENA_GENERATION_SUPERPOSITIONEDNODE_HPP
 
 #include <BLIB/Containers/PriorityQueue.hpp>
+#include <BLIB/Random/Seed.hpp>
 #include <Core/Arena/Generation/AdjacencyBonusProxy.hpp>
 #include <Core/Arena/Generation/Domain.hpp>
 #include <array>
@@ -58,7 +59,7 @@ struct SuperpositionedNode {
      * @param seed The random seed to use
      * @param terrain The terrain being generated
      */
-    void collapse(Seed& seed, ProtoTerrain& terrain);
+    void collapse(bl::rand::Seed& seed, ProtoTerrain& terrain);
 
     /**
      * @brief Initializes the proxy objects used to speed up terrain generation

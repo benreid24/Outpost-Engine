@@ -5,6 +5,5 @@ target_sources(Core PRIVATE
     PerlinSampler.cpp
     ProtoTerrain.cpp
     RuledBiome.cpp
-    Seed.cpp
     SuperpositionedNode.cpp
 )

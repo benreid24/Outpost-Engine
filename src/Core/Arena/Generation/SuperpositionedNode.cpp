@@ -3,7 +3,6 @@
 #include <BLIB/Logging.hpp>
 #include <Core/Arena/Generation/Environment.hpp>
 #include <Core/Arena/Generation/ProtoTerrain.hpp>
-#include <Core/Arena/Generation/Seed.hpp>
 
 namespace core
 {
@@ -27,7 +26,7 @@ SuperpositionedNode::SuperpositionedNode(const glm::u32vec2& position, float hei
 , selectedBiome(Biome::COUNT)
 , priorityQueueRef() {}
 
-void SuperpositionedNode::collapse(Seed& seed, ProtoTerrain& terrain) {
+void SuperpositionedNode::collapse(bl::rand::Seed& seed, ProtoTerrain& terrain) {
     if (domain.biomes.empty()) {
         BL_LOG_WARN << "Node has empty domain. Selecting neighbor node biome";
         bl::ctr::StaticVector<Biome, 8> neighborBiomes;
@@ -37,12 +36,13 @@ void SuperpositionedNode::collapse(Seed& seed, ProtoTerrain& terrain) {
             }
         }
         if (!neighborBiomes.empty()) {
-            selectedBiome = neighborBiomes[seed.getUint64(0, neighborBiomes.size() - 1)];
+            selectedBiome =
+                neighborBiomes[seed.getInt<std::uint64_t>(0, neighborBiomes.size() - 1)];
         }
         else {
             BL_LOG_WARN << "No valid neighbors to select biome from. Selecting random biome";
-            selectedBiome =
-                static_cast<Biome>(seed.getUint64(0, static_cast<int>(Biome::COUNT) - 1));
+            selectedBiome = static_cast<Biome>(
+                seed.getInt<std::uint64_t>(0, static_cast<int>(Biome::COUNT) - 1));
         }
     }
     else { selectedBiome = domain.select(seed); }

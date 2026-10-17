@@ -2,8 +2,8 @@
 #define CORE_ARENA_GENERATION_GENERATOR_HPP
 
 #include <BLIB/Containers/Vector2d.hpp>
+#include <BLIB/Random/Seed.hpp>
 #include <Core/Arena/Generation/Parameters.hpp>
-#include <Core/Arena/Generation/Seed.hpp>
 
 namespace core
 {
@@ -33,7 +33,7 @@ public:
     /**
      * @brief Returns the seed being used
      */
-    const Seed& getSeed() const { return seed; }
+    const bl::rand::Seed& getSeed() const { return seed; }
 
     /**
      * @brief Returns the generation parameters being used
@@ -57,7 +57,7 @@ public:
     void generate(Arena& output);
 
 private:
-    Seed seed;
+    bl::rand::Seed seed;
     Parameters params;
     bl::ctr::Vector2D<float> heightmap;
     bl::ctr::Vector2D<float> moistureMap;

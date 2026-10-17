@@ -1,6 +1,7 @@
 #ifndef CORE_ARENA_ARENA_HPP
 #define CORE_ARENA_ARENA_HPP
 
+#include <BLIB/Random/Seed.hpp>
 #include <Core/Arena/Terrain.hpp>
 #include <Core/Arena/Train/Track.hpp>
 #include <Core/Arena/Train/Train.hpp>
@@ -66,7 +67,7 @@ public:
     void update(float dt);
 
 private:
-    gen::Seed generator;
+    bl::rand::Seed seed;
     Terrain terrain;
     train::Track track;
     train::Train train;

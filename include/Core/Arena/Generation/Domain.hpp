@@ -2,6 +2,7 @@
 #define CORE_ARENA_GENERATION_DOMAIN_HPP
 
 #include <BLIB/Containers/StaticVector.hpp>
+#include <BLIB/Random/Seed.hpp>
 #include <Core/Arena/Generation/WeightedBiome.hpp>
 
 namespace core
@@ -31,7 +32,7 @@ struct Domain {
      * @param gen The seeded random number generator to use for selection
      * @return The selected biome
      */
-    Biome select(Seed& gen) const;
+    Biome select(bl::rand::Seed& gen) const;
 
     /**
      * @brief Returns the sum of weights

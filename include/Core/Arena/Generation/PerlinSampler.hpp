@@ -2,6 +2,7 @@
 #define CORE_ARENA_GENERATION_PERLINSAMPLER_HPP
 
 #include <BLIB/Random/Perlin.hpp>
+#include <BLIB/Random/Seed.hpp>
 #include <Core/Arena/Generation/Parameters.hpp>
 #include <glm/glm.hpp>
 
@@ -34,7 +35,7 @@ public:
      * @param id The perlin noise id to use
      */
     PerlinSampler(const Parameters::PerlinParameters& params, const glm::vec2& origin,
-                  const Seed& seed, std::uint64_t id = 0);
+                  const bl::rand::Seed& seed, std::uint64_t id = 0);
 
     /**
      * @brief Copies the sampler

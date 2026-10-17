@@ -1,7 +1,5 @@
 #include <Core/Arena/Generation/Domain.hpp>
 
-#include <Core/Arena/Generation/Seed.hpp>
-
 namespace core
 {
 namespace arena
@@ -17,8 +15,8 @@ std::uint64_t Domain::totalWeight() const {
     return total;
 }
 
-Biome Domain::select(Seed& gen) const {
-    const float selection = gen.getFloat(0.f, totalWeight());
+Biome Domain::select(bl::rand::Seed& gen) const {
+    const float selection = gen.getFloat<float>(0.f, totalWeight());
     float currentWeight   = 0.f;
     for (const auto& wb : biomes) {
         currentWeight += wb.weight;

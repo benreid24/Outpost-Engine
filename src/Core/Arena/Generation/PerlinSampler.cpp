@@ -1,7 +1,5 @@
 #include <Core/Arena/Generation/PerlinSampler.hpp>
 
-#include <Core/Arena/Generation/Seed.hpp>
-
 namespace core
 {
 namespace arena
@@ -9,7 +7,7 @@ namespace arena
 namespace gen
 {
 PerlinSampler::PerlinSampler(const Parameters::PerlinParameters& params, const glm::vec2& origin,
-                             const Seed& seed, std::uint64_t id)
+                             const bl::rand::Seed& seed, std::uint64_t id)
 : perlin(seed.getPerlin(id))
 , origin(origin)
 , params(params) {}
