@@ -1,9 +1,9 @@
 #include <Core/Systems/Render.hpp>
 
 #include <BLIB/Components/Shape2D.hpp>
-#include <BLIB/Graphics/Circle.hpp>
-#include <BLIB/Graphics/Rectangle.hpp>
-#include <BLIB/Graphics/VertexBuffer2D.hpp>
+#include <BLIB/Objects/Circle.hpp>
+#include <BLIB/Objects/Rectangle.hpp>
+#include <BLIB/Objects/VertexBuffer2D.hpp>
 #include <BLIB/Render/Config/ShaderIds.hpp>
 #include <BLIB/Render/Descriptors/Builtin/GlobalDataFactory.hpp>
 #include <BLIB/Render/Descriptors/Builtin/Object2DFactory.hpp>
@@ -24,7 +24,7 @@ Render::Render()
 , terrainBiomeMaterials{} {}
 
 void Render::addTestGraphicsToEntity(bl::ecs::Entity entity, glm::vec2 size, bl::rc::Color color) {
-    bl::gfx::Rectangle box;
+    bl::obj::Rectangle box;
     box.deleteEntityOnDestroy(false);
     box.create(*engine->getWorld(entity.getWorldIndex()), entity, size);
     box.setFillColor(color);
@@ -36,7 +36,7 @@ void Render::addTestGraphicsToEntity(bl::ecs::Entity entity, glm::vec2 size, bl:
 }
 
 void Render::addTestGraphicsToEntity(bl::ecs::Entity entity, float radius, bl::rc::Color color) {
-    bl::gfx::Circle circle;
+    bl::obj::Circle circle;
     circle.deleteEntityOnDestroy(false);
     circle.create(*engine->getWorld(entity.getWorldIndex()), entity, radius);
     circle.setFillColor(color);

@@ -3,7 +3,7 @@
 
 #include <BLIB/Cameras/2D/Camera2D.hpp>
 #include <BLIB/Engine/Engine.hpp>
-#include <BLIB/Graphics.hpp>
+#include <BLIB/Objects.hpp>
 
 namespace core
 {
@@ -44,7 +44,7 @@ public:
     }
 
 private:
-    bl::gfx::Triangle triangle;
+    bl::obj::Triangle triangle;
 
     DemoEngineState()
     : State(bl::engine::StateMask::Running) {}

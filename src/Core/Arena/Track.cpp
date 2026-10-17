@@ -186,7 +186,6 @@ void Track::generate(const Terrain& terrain) {
         }
     }
 
-    float accumulatedDistance = 0.f;
     nodes.clear();
     nodes.reserve(expandedPath.size());
     for (const glm::vec2& terrainNode : expandedPath) {

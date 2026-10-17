@@ -2,7 +2,7 @@
 #define GAME_STATES_ARENASTATE_HPP
 
 #include <BLIB/Engine/State.hpp>
-#include <BLIB/Graphics/Terrain.hpp>
+#include <BLIB/Objects/Terrain.hpp>
 #include <BLIB/Signals.hpp>
 #include <Core/Arena/Arena.hpp>
 #include <SFML/Window/Event.hpp>

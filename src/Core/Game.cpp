@@ -23,8 +23,6 @@ struct WindowSizePersister : public bl::sig::Listener<bl::rc::event::WindowResiz
 bool Game::performSharedEarlyStartup(const char* configFilename) {
     if (!Properties.load(configFilename)) { return false; }
 
-    // TODO - SETUP_TASK - setup resource loaders for custom resource types
-
     windowSizePersister.configFilename = configFilename;
 
     Properties.save(configFilename);

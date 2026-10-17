@@ -3,7 +3,7 @@
 
 #include <BLIB/Containers/StaticVector.hpp>
 #include <BLIB/Containers/Vector2d.hpp>
-#include <BLIB/Graphics/Terrain.hpp>
+#include <BLIB/Objects/Terrain.hpp>
 #include <Core/Arena/Generation/PerlinSampler.hpp>
 #include <Core/Arena/Generation/Seed.hpp>
 #include <Core/Arena/Node.hpp>
@@ -98,7 +98,7 @@ private:
     float maxHeight;
     bl::ctr::Vector2D<Node> nodes;
     bl::ctr::Vector2D<float> heightmap;
-    bl::gfx::Terrain<com::TerrainMesh> terrainDrawable;
+    bl::obj::Terrain<com::TerrainMesh> terrainDrawable;
     float step;
 
     std::array<std::pair<glm::u32vec2, float>, 4> getPositionWeights(
