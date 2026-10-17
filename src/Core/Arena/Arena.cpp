@@ -112,7 +112,7 @@ void Arena::generate(std::uint64_t seed, const glm::vec2& size, float maxHeight)
     generator.generate(*this);
 
     if (threadPool) {
-        terrain.generateGeometry(*threadPool);
+        terrain.generateGeometry();
         track.generateGeometry();
 
         train.addCar(train::Car::DefaultPassengerConfig);

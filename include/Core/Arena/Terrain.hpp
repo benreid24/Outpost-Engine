@@ -3,11 +3,12 @@
 
 #include <BLIB/Containers/StaticVector.hpp>
 #include <BLIB/Containers/Vector2d.hpp>
-#include <BLIB/Objects/3D/Terrain.hpp>
+#include <BLIB/Objects/3D/HeightmapTerrain.hpp>
 #include <Core/Arena/Generation/PerlinSampler.hpp>
 #include <Core/Arena/Generation/Seed.hpp>
 #include <Core/Arena/Node.hpp>
-#include <Core/Components/TerrainMesh.hpp>
+#include <Core/Rendering/PipelineIds.hpp>
+#include <Core/Rendering/TerrainVertex.hpp>
 
 namespace core
 {
@@ -49,10 +50,8 @@ public:
 
     /**
      * @brief Generates the geometry for the terrain
-     *
-     * @param threadPool The thread pool to use for generating the geometry
      */
-    void generateGeometry(bl::util::ThreadPool& threadPool);
+    void generateGeometry();
 
     /**
      * @brief Returns the height of the terrain at the given position
@@ -98,7 +97,8 @@ private:
     float maxHeight;
     bl::ctr::Vector2D<Node> nodes;
     bl::ctr::Vector2D<float> heightmap;
-    bl::obj::o3d::Terrain<com::TerrainMesh> terrainDrawable;
+    bl::obj::o3d::HeightmapTerrain<render::TerrainVertex, render::MaterialPipelineIds::SolidTerrain>
+        terrainDrawable;
     float step;
 
     std::array<std::pair<glm::u32vec2, float>, 4> getPositionWeights(

@@ -80,50 +80,33 @@ glm::u32vec2 Terrain::worldPosToIndex(const glm::vec2& pos) const {
 
 void Terrain::addToWorld(bl::engine::World& world, float s) {
     step = s;
-    terrainDrawable.createEmptyGrid(world,
-                                    glm::vec2(-worldSize.x * 0.5f, -worldSize.y * 0.5f),
-                                    worldSize,
-                                    step,
-                                    {},
-                                    render::MaterialPipelineIds::SolidTerrain);
-    generateGeometry(world.engine().engineLoopThreadpool());
+    terrainDrawable.createEmptyGrid(
+        world, -worldSize * 0.5f, worldSize, step, {}, render::MaterialPipelineIds::SolidTerrain);
+    generateGeometry();
     terrainDrawable.addToScene(world.scene(), bl::rc::UpdateSpeed::Static);
 }
 
-void Terrain::generateGeometry(bl::util::ThreadPool& threadPool) {
+void Terrain::generateGeometry() {
     if (!terrainDrawable.exists()) { return; }
 
-    auto& verts = terrainDrawable.component().gpuBuffer.vertices();
-    std::list<std::future<void>> futures;
-    const unsigned int chunkSize = verts.size() / threadPool.threadCount();
-    const unsigned int chunks = verts.size() / chunkSize + (verts.size() % chunkSize != 0 ? 1 : 0);
-    for (unsigned int i = 0; i < chunks; ++i) {
-        futures.emplace_back(threadPool.queueTask([this, &verts, i, chunkSize] {
-            const unsigned int start = i * chunkSize;
-            const unsigned int end =
-                std::min(start + chunkSize, static_cast<unsigned int>(verts.size()));
-            for (unsigned int j = start; j < end; ++j) {
-                auto& v        = verts[j];
-                v.pos.y        = sampleHeight({v.pos.x, v.pos.z});
-                v.texCoord.x   = v.pos.x / step / 4.f;
-                v.texCoord.y   = v.pos.z / step / 4.f;
-                v.color        = bl::rc::Color(1.f, 1.f, 1.f);
-                v.biomeIndices = glm::u32vec4(0);
-                v.biomeWeights = glm::vec4(0.f);
-                auto biomes    = sampleBiomes({v.pos.x, v.pos.z});
-                unsigned int i = 0;
-                for (const auto& b : biomes) {
-                    v.biomeIndices[i] = static_cast<std::uint32_t>(b.biome);
-                    v.biomeWeights[i] = b.weight;
-                    ++i;
-                }
-            }
-        }));
-    }
+    const auto populateVertex = [this](const glm::vec3& pos, render::TerrainVertex& v) {
+        v.pos          = pos;
+        v.pos.y        = sampleHeight({v.pos.x, v.pos.z});
+        v.texCoord.x   = v.pos.x / step / 4.f;
+        v.texCoord.y   = v.pos.z / step / 4.f;
+        v.color        = bl::rc::Color(1.f, 1.f, 1.f);
+        v.biomeIndices = glm::u32vec4(0);
+        v.biomeWeights = glm::vec4(0.f);
+        auto biomes    = sampleBiomes({v.pos.x, v.pos.z});
+        unsigned int i = 0;
+        for (const auto& b : biomes) {
+            v.biomeIndices[i] = static_cast<std::uint32_t>(b.biome);
+            v.biomeWeights[i] = b.weight;
+            ++i;
+        }
+    };
 
-    for (auto& f : futures) { f.wait(); }
-
-    terrainDrawable.commitUpdate();
+    terrainDrawable.updateFromHeightmap(heightmap, -worldSize * 0.5f, worldSize, populateVertex);
 }
 
 void Terrain::modifyHeight(const glm::u32vec2& index, float height) {
