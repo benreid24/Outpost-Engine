@@ -2,8 +2,8 @@
 #define CORE_PLAYER_HUD_TEMPUNITCONTROLLER_HPP
 
 #include <BLIB/ECS/Events.hpp>
-#include <BLIB/Objects/Rectangle.hpp>
-#include <BLIB/Objects/Text.hpp>
+#include <BLIB/Objects/2D/Rectangle.hpp>
+#include <BLIB/Objects/2D/Text.hpp>
 #include <BLIB/Signals.hpp>
 #include <Core/Components/UnitAI.hpp>
 #include <Core/Player/HUD/Event.hpp>
@@ -28,8 +28,8 @@ public:
 
 private:
     Player& owner;
-    bl::obj::Rectangle background;
-    bl::obj::Text hint;
+    bl::obj::o2d::Rectangle background;
+    bl::obj::o2d::Text hint;
     com::UnitAI* controlling;
     com::Combatant* self;
 

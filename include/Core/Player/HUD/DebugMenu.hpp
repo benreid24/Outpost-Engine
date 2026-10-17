@@ -1,7 +1,7 @@
 #ifndef CORE_PLAYER_HUD_DEBUGMENU_HPP
 #define CORE_PLAYER_HUD_DEBUGMENU_HPP
 
-#include <BLIB/Objects/Rectangle.hpp>
+#include <BLIB/Objects/2D/Rectangle.hpp>
 #include <BLIB/Interfaces/GUI.hpp>
 #include <Core/Components/Unit.hpp>
 #include <Core/Factions/Faction.hpp>
@@ -112,7 +112,7 @@ private:
             unit   = nullptr;
         }
     } controlling;
-    bl::obj::Rectangle dragBox;
+    bl::obj::o2d::Rectangle dragBox;
     glm::vec2 clickStart;
 
     bl::gui::Element::Ptr createConsoleTab();

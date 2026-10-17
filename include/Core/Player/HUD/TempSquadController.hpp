@@ -1,8 +1,8 @@
 #ifndef CORE_PLAYER_HUD_TEMPSQUADCONTROLLER_HPP
 #define CORE_PLAYER_HUD_TEMPSQUADCONTROLLER_HPP
 
-#include <BLIB/Objects/Rectangle.hpp>
-#include <BLIB/Objects/Text.hpp>
+#include <BLIB/Objects/2D/Rectangle.hpp>
+#include <BLIB/Objects/2D/Text.hpp>
 #include <Core/Player/HUD/Event.hpp>
 #include <Core/Unit/Squad.hpp>
 #include <Core/Unit/SquadManager.hpp>
@@ -34,9 +34,9 @@ private:
     glm::vec2 dragStart;
     glm::vec2 dragEnd;
 
-    bl::obj::Rectangle background;
-    bl::obj::Text controlLabel;
-    bl::obj::Rectangle selectRect;
+    bl::obj::o2d::Rectangle background;
+    bl::obj::o2d::Text controlLabel;
+    bl::obj::o2d::Rectangle selectRect;
 
     void makeEmptyState();
     void makeMoveState();

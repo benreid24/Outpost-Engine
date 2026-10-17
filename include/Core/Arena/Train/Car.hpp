@@ -3,8 +3,8 @@
 
 #include <BLIB/Components/Transform3D.hpp>
 #include <BLIB/Engine/World.hpp>
-#include <BLIB/Objects/Cylinder.hpp>
-#include <BLIB/Objects/RectangularPrism.hpp>
+#include <BLIB/Objects/3D/Cylinder.hpp>
+#include <BLIB/Objects/3D/RectangularPrism.hpp>
 #include <BLIB/Reflection/ReflectedObject.hpp>
 
 namespace core
@@ -139,9 +139,9 @@ private:
     Config config;
     State state;
 
-    bl::obj::RectangularPrism carBody;
-    bl::obj::Cylinder frontWheel;
-    bl::obj::Cylinder rearWheel;
+    bl::obj::o3d::RectangularPrism carBody;
+    bl::obj::o3d::Cylinder frontWheel;
+    bl::obj::o3d::Cylinder rearWheel;
 
     void updateSpatialState(const Track& track);
 

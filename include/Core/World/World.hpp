@@ -2,7 +2,7 @@
 #define CORE_WORLD_WORLD_HPP
 
 #include <BLIB/Engine/Worlds/World2D.hpp>
-#include <BLIB/Objects/VertexBuffer2D.hpp>
+#include <BLIB/Objects/2D/VertexBuffer.hpp>
 #include <Core/Components/Unit.hpp>
 #include <Core/World/Cover.hpp>
 #include <Core/World/Node.hpp>
@@ -192,8 +192,8 @@ private:
     // TODO - spatial partitions?
 
     // debug data
-    bl::obj::VertexBuffer2D debugNodes;
-    bl::obj::VertexBuffer2D debugNodeEdges;
+    bl::obj::o2d::VertexBuffer debugNodes;
+    bl::obj::o2d::VertexBuffer debugNodeEdges;
 
     void addDebugGraphicsToNode(Node& node);
     void recomputeNodeDistances();

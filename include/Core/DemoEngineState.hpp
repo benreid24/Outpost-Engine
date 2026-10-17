@@ -44,7 +44,7 @@ public:
     }
 
 private:
-    bl::obj::Triangle triangle;
+    bl::obj::o2d::Triangle triangle;
 
     DemoEngineState()
     : State(bl::engine::StateMask::Running) {}
