@@ -1,6 +1,7 @@
 #ifndef CORE_ARENA_GENERATION_PARAMETERS_HPP
 #define CORE_ARENA_GENERATION_PARAMETERS_HPP
 
+#include <BLIB/Random/PerlinParameters.hpp>
 #include <Core/Arena/Generation/RuledBiome.hpp>
 #include <glm/glm.hpp>
 #include <vector>
@@ -18,23 +19,6 @@ namespace gen
  * @ingroup Arena
  */
 struct Parameters {
-    /**
-     * @brief Parameters specific to the Perlin noise generator
-     */
-    struct PerlinParameters {
-        float frequency;
-        unsigned int octaves;
-        float persistence;
-
-        /**
-         * @brief Sets sane defaults
-         */
-        PerlinParameters()
-        : frequency(0.01f)
-        , octaves(16)
-        , persistence(0.5f) {}
-    };
-
     /**
      * @brief Parameters specific to train station generation
      */
@@ -58,8 +42,8 @@ struct Parameters {
     float worldStep;
     float maxHeight;
     float waterHeight;
-    PerlinParameters terrainPerlin;
-    PerlinParameters moisturePerlin;
+    bl::rand::PerlinParameters terrainPerlin;
+    bl::rand::PerlinParameters moisturePerlin;
     std::vector<RuledBiome> biomes;
     StationParameters stationParams;
 

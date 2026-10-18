@@ -1,5 +1,6 @@
 #include <Core/Arena/Generation/Generator.hpp>
 
+#include <BLIB/Random/PerlinSampler.hpp>
 #include <Core/Arena/Arena.hpp>
 #include <Core/Arena/Generation/Environment.hpp>
 #include <Core/Arena/Generation/ProtoTerrain.hpp>
@@ -41,7 +42,7 @@ namespace gen
 {
 namespace
 {
-void samplePerlin(glm::vec2 worldSize, float step, PerlinSampler& sampler,
+void samplePerlin(glm::vec2 worldSize, float step, bl::rand::PerlinSampler& sampler,
                   bl::ctr::Vector2D<float>& output) {
     const unsigned int xCount = static_cast<unsigned int>(std::ceil(worldSize.x / step) + 0.1f);
     const unsigned int yCount = static_cast<unsigned int>(std::ceil(worldSize.y / step) + 0.1f);
@@ -66,8 +67,9 @@ void Generator::generate(Arena& output) {
     output.terrain.worldSize = params.worldSize;
 
     // generate perlin noise to seed proto terrain
-    PerlinSampler heightSampler(params.terrainPerlin, params.worldSize * 0.5f, seed, 0);
-    PerlinSampler moistureSampler(params.moisturePerlin, params.worldSize * 0.5f, seed, 1);
+    bl::rand::PerlinSampler heightSampler(params.terrainPerlin, params.worldSize * 0.5f, seed, 0);
+    bl::rand::PerlinSampler moistureSampler(
+        params.moisturePerlin, params.worldSize * 0.5f, seed, 1);
     samplePerlin(params.worldSize, params.worldStep, heightSampler, heightmap);
     samplePerlin(params.worldSize, params.worldStep, moistureSampler, moistureMap);
 

@@ -4,7 +4,6 @@
 #include <BLIB/Containers/StaticVector.hpp>
 #include <BLIB/Containers/Vector2d.hpp>
 #include <BLIB/Objects/3D/HeightmapTerrain.hpp>
-#include <Core/Arena/Generation/PerlinSampler.hpp>
 #include <Core/Arena/Node.hpp>
 #include <Core/Rendering/PipelineIds.hpp>
 #include <Core/Rendering/TerrainVertex.hpp>
