@@ -20,7 +20,8 @@ namespace core
 namespace sys
 {
 Render::Render()
-: engine(nullptr)
+: System(bl::engine::FrameStage::RendererDataSync, bl::engine::StateMask::All)
+, engine(nullptr)
 , terrainBiomeMaterials{} {}
 
 void Render::addTestGraphicsToEntity(bl::ecs::Entity entity, glm::vec2 size, bl::rc::Color color) {

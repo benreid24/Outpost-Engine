@@ -37,13 +37,13 @@ bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
     using Stage = bl::engine::FrameStage;
     using Mask  = bl::engine::StateMask::V;
     enginePtr   = &engine;
-    render      = &engine.systems().registerSystem<sys::Render>(Stage::RendererDataSync, Mask::All);
+    render      = &engine.systems().registerSystem<sys::Render>();
     damage.init(engine);
     physics  = &engine.systems().getSystem<bl::sys::Physics2D>();
-    units    = &engine.systems().registerSystem<sys::Unit>(Stage::Update1, Mask::Running);
-    movement = &engine.systems().registerSystem<sys::Movement>(Stage::Update2, Mask::Running);
-    squads   = &engine.systems().registerSystem<unit::SquadManager>(Stage::Update0, Mask::Running);
-    ai       = &engine.systems().registerSystem<sys::AI>(Stage::Update0, Mask::Running);
+    units    = &engine.systems().registerSystem<sys::Unit>();
+    movement = &engine.systems().registerSystem<sys::Movement>();
+    squads   = &engine.systems().registerSystem<unit::SquadManager>();
+    ai       = &engine.systems().registerSystem<sys::AI>();
 
     font = engine.assets().getAssetFromSourcePath<bl::asi::FontPayload>("Resources/font.ttf");
 

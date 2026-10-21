@@ -20,6 +20,11 @@ class Movement
 , public bl::sig::Listener<bl::sys::Physics2D::SensorEntered, bl::sys::Physics2D::SensorExited> {
 public:
     /**
+     * @brief Creates the system
+     */
+    Movement();
+
+    /**
      * @brief Destroys the system
      */
     virtual ~Movement();

@@ -50,6 +50,9 @@ unit::able::Rotate::RotateDirection getRotateDirection(float angle, float target
 
 } // namespace
 
+Unit::Unit()
+: System(bl::engine::FrameStage::Update1, bl::engine::StateMask::Running) {}
+
 void Unit::init(bl::engine::Engine& e) {
     engine = &e;
     units  = &e.ecs().getAllComponents<com::Unit>();

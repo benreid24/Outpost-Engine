@@ -18,6 +18,11 @@ namespace sys
 class Unit : public bl::engine::System {
 public:
     /**
+     * @brief Creates the system
+     */
+    Unit();
+
+    /**
      * @brief Destroys the system
      */
     virtual ~Unit() = default;

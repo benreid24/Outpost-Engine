@@ -16,6 +16,11 @@ namespace sys
 class AI : public bl::engine::System {
 public:
     /**
+     * @brief Creates the system
+     */
+    AI();
+
+    /**
      * @brief Destroys the system
      */
     virtual ~AI() = default;

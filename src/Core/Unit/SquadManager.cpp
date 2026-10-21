@@ -6,7 +6,10 @@ namespace core
 {
 namespace unit
 {
-SquadManager::SquadManager() { internalRefs.reserve(64); }
+SquadManager::SquadManager()
+: System(bl::engine::FrameStage::Update0, bl::engine::StateMask::Running) {
+    internalRefs.reserve(64);
+}
 
 SquadManager::Ref SquadManager::makeSquad(fcn::FactionId faction) {
     Ref squad = squads.emplace(faction);

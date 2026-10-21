@@ -8,6 +8,9 @@ namespace core
 {
 namespace sys
 {
+AI::AI()
+: System(bl::engine::FrameStage::Update0, bl::engine::StateMask::Running) {}
+
 void AI::init(bl::engine::Engine& e) {
     engine  = &e;
     unitAIs = &e.ecs().getAllComponents<com::UnitAI>();

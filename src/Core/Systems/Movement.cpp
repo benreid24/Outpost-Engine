@@ -6,6 +6,9 @@ namespace core
 {
 namespace sys
 {
+Movement::Movement()
+: System(bl::engine::FrameStage::Update2, bl::engine::StateMask::Running) {}
+
 Movement::~Movement() {}
 
 void Movement::init(bl::engine::Engine& e) {
