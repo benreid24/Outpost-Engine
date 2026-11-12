@@ -19,8 +19,6 @@ namespace core
  */
 class PropertiesStore {
 public:
-    BLIB_PROPERTY(DataDirectory, std::string, "app.config.data_dir", "");
-
     BLIB_PROPERTY(MusicPath, std::string, "blib.playlist.song_path", Constants::DefaultMusicPath);
 
     BLIB_PROPERTY(SpritesheetPath, std::string, "blib.animation.spritesheet_path",
@@ -57,18 +55,16 @@ public:
     /**
      * @brief Loads the properties from the config file
      *
-     * @param configFilename Base filename of the config file in Properties.DataDirectory
      * @return True if the properties could be initialized properly
      */
-    bool load(const char* configFilename);
+    bool load();
 
     /**
      * @brief Writes the properties to the config file
      *
-     * @param configFilename Base filename of the config file in Properties.DataDirectory
      * @return True if the file could be written, false on error
      */
-    bool save(const char* configFilename);
+    bool save();
 };
 
 extern PropertiesStore Properties;

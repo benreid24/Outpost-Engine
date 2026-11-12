@@ -6,18 +6,11 @@ namespace core
 {
 PropertiesStore Properties;
 
-bool PropertiesStore::load(const char* configFile) {
-    if (DataDirectory.get().empty()) {
-        DataDirectory.set(bl::util::FileUtil::getDataDirectory(Constants::AppName));
-    }
-
-    if (!bl::engine::Configuration::load(
-            bl::util::FileUtil::joinPath(DataDirectory.get(), configFile))) {
+bool PropertiesStore::load() {
+    if (!bl::engine::Configuration::load()) {
         BL_LOG_WARN << "Properties file not found, using defaults";
     }
     bl::engine::Properties::syncFromConfig();
-
-    DataDirectory.syncToConfig();
     bl::engine::Configuration::log();
 
     // TODO - SETUP_TASK: validate state here
@@ -25,10 +18,9 @@ bool PropertiesStore::load(const char* configFile) {
     return true;
 }
 
-bool PropertiesStore::save(const char* configFile) {
+bool PropertiesStore::save() {
     bl::engine::Properties::syncToConfig();
-    return bl::engine::Configuration::save(
-        bl::util::FileUtil::joinPath(DataDirectory.get(), configFile));
+    return bl::engine::Configuration::save();
 }
 
 } // namespace core

@@ -10,22 +10,19 @@ namespace core
 namespace
 {
 struct WindowSizePersister : public bl::sig::Listener<bl::rc::event::WindowResized> {
-    const char* configFilename;
-
     virtual void process(const bl::rc::event::WindowResized& event) override {
         core::Properties.WindowWidth.set(event.window.getSfWindow().getSize().x);
         core::Properties.WindowHeight.set(event.window.getSfWindow().getSize().y);
-        core::Properties.save(configFilename);
+        core::Properties.save();
     }
 } windowSizePersister;
 } // namespace
 
 bool Game::performSharedEarlyStartup(const char* configFilename) {
-    if (!Properties.load(configFilename)) { return false; }
+    bl::engine::Configuration::setFixedConfig(Constants::AppName, configFilename);
 
-    windowSizePersister.configFilename = configFilename;
-
-    Properties.save(configFilename);
+    if (!Properties.load()) { return false; }
+    Properties.save();
 
     return true;
 }
