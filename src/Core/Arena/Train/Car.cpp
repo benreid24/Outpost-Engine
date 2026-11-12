@@ -63,13 +63,17 @@ void Car::updateSpatialState(const Track& track) {
     const glm::vec3 frontAxleUp  = track.getUpAtDistance(state.frontAxleTrackPosition);
     state.frontWheelWorldTransform.setPosition(frontAxlePos +
                                                frontAxleUp * config.wheelHeight * 0.5f);
-    state.frontWheelWorldTransform.setForwardDir(frontAxleDir, frontAxleUp);
+    state.frontWheelWorldTransform.getOrientationForChange().setForwardDirection(frontAxleDir,
+                                                                                 frontAxleUp);
+    state.frontWheelWorldTransform.getOrientationForChange().setPitch(90.f);
 
     const glm::vec3 rearAxlePos = track.getPositionAtDistance(state.rearAxleTrackPosition);
     const glm::vec3 rearAxleDir = track.getRightAtDistance(state.rearAxleTrackPosition);
     const glm::vec3 rearAxleUp  = track.getUpAtDistance(state.rearAxleTrackPosition);
-    state.rearWheelWorldTransform.setForwardDir(rearAxleDir, rearAxleUp);
+    state.rearWheelWorldTransform.getOrientationForChange().setForwardDirection(rearAxleDir,
+                                                                                rearAxleUp);
     state.rearWheelWorldTransform.setPosition(rearAxlePos + rearAxleUp * config.wheelHeight * 0.5f);
+    state.rearWheelWorldTransform.getOrientationForChange().setPitch(90.f);
 
     const glm::vec3 rearWheelAttachPos =
         rearAxlePos + rearAxleUp * config.wheelHeight * WheelEmbedFactor;
@@ -82,7 +86,8 @@ void Car::updateSpatialState(const Track& track) {
     glm::vec3 carWorldPos       = rearAxlePos + rearToFront * config.rearAxleOffset;
     carWorldPos += carUp * carHeight;
     state.carWorldTransform.setPosition(carWorldPos);
-    state.carWorldTransform.setForwardDir(frontAxlePos - rearAxlePos, carUp);
+    state.carWorldTransform.getOrientationForChange().setForwardDirection(
+        frontAxlePos - rearAxlePos, carUp);
 
     if (carBody.exists()) {
         carBody.getTransform()    = state.carWorldTransform;

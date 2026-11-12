@@ -6,6 +6,14 @@
 #include <Core/Arena/Arena.hpp>
 #include <SFML/Window/Event.hpp>
 
+namespace bl
+{
+namespace input
+{
+class InputSystem;
+}
+}
+
 namespace game
 {
 namespace state
@@ -30,7 +38,7 @@ public:
     virtual ~ArenaState() = default;
 
 private:
-    sf::WindowBase* window;
+    bl::input::InputSystem* inputSystem;
     core::arena::Arena arena;
 
     const char* name() const override;

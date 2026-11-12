@@ -155,7 +155,7 @@ void Unit::doCapabilities(float dt) {
                     shapeDef.filter          = world::Collisions::getBulletFilter();
                     ecs.emplaceComponentWithTx<bl::com::Hitbox2D>(
                         bullet, tx, bulletTransform, Size);
-                    game.physicsSystem().addPhysicsToEntity(bullet, bodyDef, shapeDef);
+                    // game.physicsSystem().addPhysicsToEntity(bullet, bodyDef, shapeDef);
                 }
             }
         }

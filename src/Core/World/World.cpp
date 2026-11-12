@@ -62,7 +62,7 @@ void World::addNode(Node::Type type, glm::vec2 pos) {
     auto* transform    = engine().ecs().emplaceComponent<bl::com::Transform2D>(entity, pos);
     engine().ecs().emplaceComponent<bl::com::Hitbox2D>(entity, transform, radius);
     game.renderSystem().addTestGraphicsToEntity(entity, radius, NodeFreeColor);
-    game.physicsSystem().createSensorForEntity(entity, Collisions::getSensorFilter());
+    // game.physicsSystem().createSensorForEntity(entity, Collisions::getSensorFilter());
     node.sensorEntity = entity;
     engine().ecs().emplaceComponent<com::WorldNode>(entity, this, nodes.size() - 1);
 }
@@ -81,7 +81,7 @@ void World::addCover(glm::vec2 pos, glm::vec2 size, float angle) {
     shapeDef.filter   = Collisions::getTallCoverFilter(); // TODO - parameterize
     shapeDef.friction = 0.f;
     engine().ecs().emplaceComponent<bl::com::Hitbox2D>(entity, transform, size);
-    game.physicsSystem().addPhysicsToEntity(entity, bodyDef, shapeDef);
+    // game.physicsSystem().addPhysicsToEntity(entity, bodyDef, shapeDef);
 
     recomputeNodeDistances();
     repopulateAllNodeEdges();
@@ -113,19 +113,19 @@ bool World::removeNodeAtPosition(const glm::vec2& pos, float thresh) {
 }
 
 bool World::removeCoverAtPosition(const glm::vec2& pos) {
-    Game& game = Game::getInstance<Game>();
-    bl::com::Physics2D* phys =
-        game.physicsSystem().findEntityAtPosition(*this, pos, Collisions::getCoverQueryFilter());
-    if (phys) {
-        for (auto it = covers.begin(); it != covers.end(); ++it) {
-            if (it->entity == phys->getOwner()) {
-                covers.erase(it);
-                break;
-            }
-        }
-        game.engine().ecs().destroyEntity(phys->getOwner());
-        return true;
-    }
+    // Game& game = Game::getInstance<Game>();
+    // bl::com::Physics2D* phys =
+    //     game.physicsSystem().findEntityAtPosition(*this, pos, Collisions::getCoverQueryFilter());
+    // if (phys) {
+    //     for (auto it = covers.begin(); it != covers.end(); ++it) {
+    //         if (it->entity == phys->getOwner()) {
+    //             covers.erase(it);
+    //             break;
+    //         }
+    //     }
+    //     game.engine().ecs().destroyEntity(phys->getOwner());
+    //     return true;
+    // }
     return false;
 }
 
@@ -400,7 +400,7 @@ bool World::pathToPositionIsClear(const glm::vec2& start, const glm::vec2& end) 
     const auto result    = b2World_CastRayClosest(getBox2dWorldId(),
                                                   {start.x * s, start.y * s},
                                                   {diff.x, diff.y},
-                                               Collisions::getUnitMovementQueryFilter());
+                                                  Collisions::getUnitMovementQueryFilter());
     return !result.hit;
 }
 
@@ -410,7 +410,7 @@ com::Combatant* World::lineOfSightIsClear(const glm::vec2& pos, com::Combatant* 
     const auto result    = b2World_CastRayClosest(getBox2dWorldId(),
                                                   {pos.x * s, pos.y * s},
                                                   {diff.x, diff.y},
-                                               Collisions::getLineOfSightQueryFilter());
+                                                  Collisions::getLineOfSightQueryFilter());
     if (!result.hit) { return target; }
     auto* phys = bl::sys::Physics2D::getPhysicsComponentFromShape(result.shapeId);
     return engine().ecs().getComponent<com::Combatant>(phys->getOwner());
@@ -421,18 +421,21 @@ bool World::pathToNodeIsClear(const glm::vec2& pos, const Node& node) const {
 }
 
 com::Combatant* World::getTargetAtPosition(const glm::vec2& pos) const {
-    auto& game = bl::game::Game::getInstance<Game>();
-    auto* phys =
-        game.physicsSystem().findEntityAtPosition(*this, pos, Collisions::getTargetQueryFilter());
-    return phys != nullptr ? engine().ecs().getComponent<com::Combatant>(phys->getOwner()) :
-                             nullptr;
+    // auto& game = bl::game::Game::getInstance<Game>();
+    // auto* phys =
+    //     game.physicsSystem().findEntityAtPosition(*this, pos,
+    //     Collisions::getTargetQueryFilter());
+    // return phys != nullptr ? engine().ecs().getComponent<com::Combatant>(phys->getOwner()) :
+    //                          nullptr;
+    return nullptr;
 }
 
 com::Unit* World::getUnitAtPosition(const glm::vec2& pos) const {
-    auto& game = bl::game::Game::getInstance<Game>();
-    auto* phys =
-        game.physicsSystem().findEntityAtPosition(*this, pos, Collisions::getUnitQueryFilter());
-    return phys != nullptr ? engine().ecs().getComponent<com::Unit>(phys->getOwner()) : nullptr;
+    // auto& game = bl::game::Game::getInstance<Game>();
+    // auto* phys =
+    //     game.physicsSystem().findEntityAtPosition(*this, pos, Collisions::getUnitQueryFilter());
+    // return phys != nullptr ? engine().ecs().getComponent<com::Unit>(phys->getOwner()) : nullptr;
+    return nullptr;
 }
 
 const Node* World::getNodeAtPosition(const glm::vec2& pos, float thresh) const {

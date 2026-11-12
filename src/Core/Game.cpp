@@ -39,7 +39,7 @@ bool Game::performSharedStartupCompletion(bl::engine::Engine& engine) {
     enginePtr   = &engine;
     render      = &engine.systems().registerSystem<sys::Render>();
     damage.init(engine);
-    physics  = &engine.systems().getSystem<bl::sys::Physics2D>();
+    physics  = &engine.systems().registerSystemIfNotExists<bl::sys::Physics3D>();
     units    = &engine.systems().registerSystem<sys::Unit>();
     movement = &engine.systems().registerSystem<sys::Movement>();
     squads   = &engine.systems().registerSystem<unit::SquadManager>();

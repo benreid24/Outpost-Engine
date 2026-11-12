@@ -44,8 +44,11 @@ bool Game::performEarlyStartup(int, char**) {
 }
 
 bl::engine::Settings Game::createStartupParameters() {
-    return bl::engine::Settings().fromConfig().withRenderer(
-        bl::rc::CreationSettings().withWindowSettings(
+    return bl::engine::Settings()
+        .fromConfig()
+        .withAppName(core::Constants::AppName)
+        .withConfigFile(ConstantsGame::ConfigFilePath)
+        .withRenderer(bl::rc::CreationSettings().withWindowSettings(
             bl::rc::WindowSettings()
                 .fromConfig("game")
                 .withVideoMode(sf::VideoMode(

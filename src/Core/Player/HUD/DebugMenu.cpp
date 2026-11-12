@@ -196,14 +196,14 @@ bool DebugMenu::processEvent(const Event& event) {
         shapeDef.filter       = core::world::Collisions::getUnitFilter();
 
         ecs.emplaceComponent<bl::com::Hitbox2D>(newEntity, transform, Radius);
-        auto physics = game.physicsSystem().addPhysicsToEntity(newEntity, bodyDef, shapeDef);
-        game.damageSystem().makeMortal(newEntity, factions[fi]->getId(), *physics, 100.f);
+        // auto physics = game.physicsSystem().addPhysicsToEntity(newEntity, bodyDef, shapeDef);
+        // game.damageSystem().makeMortal(newEntity, factions[fi]->getId(), *physics, 100.f);
 
-        controlling.unit =
-            ecs.emplaceComponent<core::com::Unit>(newEntity, factions[fi]->getId(), *physics);
-        controlling.unit->capabilities().add<unit::Capability::Move>();
-        controlling.unit->capabilities().add<unit::Capability::Rotate>();
-        controlling.unit->capabilities().add<unit::Capability::Shoot>();
+        // controlling.unit =
+        //     ecs.emplaceComponent<core::com::Unit>(newEntity, factions[fi]->getId(), *physics);
+        // controlling.unit->capabilities().add<unit::Capability::Move>();
+        // controlling.unit->capabilities().add<unit::Capability::Rotate>();
+        // controlling.unit->capabilities().add<unit::Capability::Shoot>();
 
         ecs.emplaceComponent<core::com::UnitAI>(newEntity, *controlling.unit);
 
@@ -267,9 +267,9 @@ bool DebugMenu::processEvent(const Event& event) {
 
     // update hover entity
     if (event.source().is<sf::Event::MouseMoved>()) {
-        const auto* phys = game.physicsSystem().findEntityAtPosition(world, event.worldPosition());
-        if (phys) { hoverIdLabel->setText(phys->getOwner().toString()); }
-        else { hoverIdLabel->setText("<none>"); }
+        // const auto* phys = game.physicsSystem().findEntityAtPosition(world,
+        // event.worldPosition()); if (phys) { hoverIdLabel->setText(phys->getOwner().toString()); }
+        // else { hoverIdLabel->setText("<none>"); }
     }
 
     // process tools

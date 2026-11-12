@@ -4,7 +4,7 @@
 #include <BLIB/Game.hpp>
 
 #include <BLIB/Assets/Builtin/FontPayload.hpp>
-#include <BLIB/Systems/Physics2D.hpp>
+#include <BLIB/Systems/Physics3D.hpp>
 #include <Core/Commands/CommandStore.hpp>
 #include <Core/Factions/Factions.hpp>
 #include <Core/Systems/AI.hpp>
@@ -47,7 +47,7 @@ public:
     /**
      * @brief Returns the physics system
      */
-    bl::sys::Physics2D& physicsSystem() { return *physics; }
+    bl::sys::Physics3D& physicsSystem() { return *physics; }
 
     /**
      * @brief Returns the entity actions system
@@ -121,7 +121,7 @@ private:
     bl::sig::Channel gameChannel;
     sys::Damage damage;
     sys::Render* render;
-    bl::sys::Physics2D* physics;
+    bl::sys::Physics3D* physics;
     sys::Unit* units;
     sys::Movement* movement;
     bl::as::TypedRef<bl::asi::FontPayload> font;

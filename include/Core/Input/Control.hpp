@@ -24,14 +24,14 @@ namespace Control
  */
 enum EntityControl : unsigned int {
     // TODO - SETUP_TASK - define the controls for the game
-    MoveUp    = 0,
-    MoveRight = 1,
-    MoveDown  = 2,
-    MoveLeft  = 3,
-    Sprint    = 4,
-    Interact  = 5,
-    Pause     = 6,
-    Back      = 7,
+    Movement  = 0,
+    Raise     = 1,
+    Lower     = 2,
+    Sprint    = 3,
+    Interact  = 4,
+    Pause     = 5,
+    Back      = 6,
+    CameraAim = 7,
     Count,
     None = Count
 };
